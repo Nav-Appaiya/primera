@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="col-md-6 col-xs-6 price">
                                         <h3>
-                                            <label>${{$product->price}}</label></h3>
+                                            <label>&euro;{{$product->price}}</label></h3>
                                     </div>
                                 </div>
                                 <p>{{$product->description}}</p>
