@@ -16,7 +16,10 @@ class CreateTableOrders extends Migration
         {
             $table->increments('id');
             $table->integer('user_id');
-            $table->float('total_paid');
+            $table->float('shipping_address');
+            $table->float('billing_address');
+            $table->float('amount');
+            $table->float('status');
             $table->timestamps();
         });
     }
