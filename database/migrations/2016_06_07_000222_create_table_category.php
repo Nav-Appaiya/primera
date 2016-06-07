@@ -1,31 +1,33 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nav
- * Date: 05-06-16
- * Time: 08:53
- */
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableProducts extends Migration
+class CreateTableCategory extends Migration
 {
-
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('categoryID');
             $table->string('title');
-            $table->string('description');
-            $table->string('status');
+            $table->string('image');
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
-        Schema::drop('products');
+        //
     }
 }
