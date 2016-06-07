@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         for ($x = 0; $x <= 10; $x++) {
             $this->call(UsersTableSeeder::class);
+            $this->call(ProductsTableSeeder::class);
          }
     }
 }

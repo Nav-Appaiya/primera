@@ -20,6 +20,7 @@ class CreateTableProducts extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('status');
+            $table->string('price'); // TODO: Stond niet in ERD, neem aan dat die wel erbij moet?
             $table->timestamps();
         });
     }

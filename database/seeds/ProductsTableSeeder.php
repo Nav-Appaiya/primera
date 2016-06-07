@@ -12,10 +12,11 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         DB::table('products')->insert([
-            'name' => (string)file_get_contents('http://loripsum.net/api/1/short/headers'),
-            'description' => (string)file_get_contents('http://loripsum.net/api/1/short'),
+            'categoryID' => (string)file_get_contents('http://loripsum.net/api/1/short/headers'),
+            'title' => (string)file_get_contents('http://loripsum.net/api/1/short'),
             'price' => (mt_rand (10*10, 1000*10) / 10),
-            'imageurl' => 'http://lorempixel.com/400/200/'
+            'status' => 'http://lorempixel.com/400/200/'
+            'description' => 'http://lorempixel.com/400/200/'
         ]);
     }
 }
