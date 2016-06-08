@@ -28,12 +28,13 @@ Route::get('/admin', 'A@newProduct');
 Route::get('/admin/product/new', 'ProductController@newProduct');
 Route::get('/admin/products', 'ProductController@index');
 Route::get('/admin/product/destroy/{id}', 'ProductController@destroy');
-Route::resource('product', 'ProductController');
+Route::resource('orders', 'OrderController');
 
 Route::get('/admin/product/{id}', 'ProductController@index');
 Route::get('/admin/product/{product}/edit/', 'ProductController@edit');
 
 Route::post('/admin/product/save', 'ProductController@add');
+
 
 // Winkelwagen
 

@@ -16,7 +16,7 @@ class ProductsTableSeeder extends Seeder
             'name' => (string)file_get_contents('http://loripsum.net/api/1/short'),
             'description' => (mt_rand (10*10, 1000*10) / 10),
             'price' => 'http://lorempixel.com/400/200/',
-            'imageurl' => 'http://lorempixel.com/400/200/'
+            'imageurl' => 'https://www.esigaret.nl/media/catalog/product/cache/9/image/308x308/0dc2d03fe217f8c83829496872af24a0/k/a/kangertech-e-smart-alle-kleuren.jpg'
         ]);
     }
 }

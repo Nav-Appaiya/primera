@@ -12,7 +12,7 @@ class CreateTableOrderedProducts extends Migration
      */
     public function up()
     {
-        Schema::create('ordered_products', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('orderID')->unique();
             $table->string('productID');
