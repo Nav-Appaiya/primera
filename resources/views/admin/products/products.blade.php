@@ -9,20 +9,21 @@
 @section('content')
 
     <div class="container">
-        @if (Session::has('message'))
+            @if (Session::has('message'))
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="alert alert-info">
+
+                            {{ Session::get('message') }}
+
+                        </div>
+                    </div>
+
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <div class="alert alert-info">
-
-                        {{ Session::get('message') }}
-
-                    </div>
-                </div>
-
-            </div>
-        @endif
-            <div class="row">
-            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">Dashboard</div>
 
@@ -47,10 +48,9 @@
                                     <td class="btn-block">
                                         <a href="/admin/product/destroy/{{$product->id}}"
                                            onclick="confirm('Weet je zeker dat je dit product wilt verwijderen?')">
-                                            <button class="btn btn-success">Verwijderen</button>
+                                            <button class="btn btn-success btn-block">Verwijderen</button>
                                         </a>
-                                        <br>
-                                        <br>
+                                        <div style="margin-top: 10px"></div>
                                         <a href="/admin/product/{{$product->id}}/edit" style="display: block">
                                             <button class="btn btn-block btn-warning">Aanpassen</button>
                                         </a>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
     </div>
 
 @endsection
