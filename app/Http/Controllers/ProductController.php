@@ -11,13 +11,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
+use Symfony\Component\DomCrawler\Form;
 
 class ProductController extends Controller
 {
 
     public function index(){
         $products = Product::all();
-        return view('admin.products',['products' => $products]);
+
+        return view('admin.products.products',[
+            'products' => $products
+        ]);
     }
 
     public function destroy($id){
@@ -25,20 +31,36 @@ class ProductController extends Controller
         return redirect('/admin/products');
     }
 
-    public function newProduct(){
-        return view('admin.new');
+    public function edit($id){
+
+        $product = Product::find($id);
+        if (!$product) {
+            $product = new Product();
+        }
+        // show the edit form and pass the nerd
+        return view('admin.products.new', [
+            'product' => $product
+        ]);
+
     }
 
-    public function add(Request $request) {
+    public function newProduct(){
+        return view('admin.products.new');
+    }
 
-        $product  = new Product();
-        $product->name = $request->get('name');
-        $product->description = $request->get('description');
-        $product->price = $request->get('price');
-        $product->imageurl = $request->get('imageurl');
+    public function add(Product $id) {
+
+        $product = Product::find($id);
+        if(!$product){
+            $product = new Product();
+        }
+        $product->name = Input::get('name');
+        $product->description = Input::get('description');
+        $product->price = Input::get('price');
+        $product->imageurl = Input::get('imageurl');
 
         $product->save();
-
+        Session::flash('message', 'Successfully updated product!');
         return redirect('/admin/products');
 
     }

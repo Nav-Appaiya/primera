@@ -16,11 +16,10 @@ class CreateTableProducts extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('categoryID');
-            $table->string('title');
+            $table->string('name');
             $table->string('description');
-            $table->string('status');
-            $table->string('price'); // TODO: Stond niet in ERD, neem aan dat die wel erbij moet?
+            $table->float('price');
+            $table->string('imageurl');
             $table->timestamps();
         });
     }

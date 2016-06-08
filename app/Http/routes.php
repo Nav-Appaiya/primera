@@ -27,9 +27,15 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('/admin/product/new', 'ProductController@newProduct');
 Route::get('/admin/products', 'ProductController@index');
 Route::get('/admin/product/destroy/{id}', 'ProductController@destroy');
+Route::resource('product', 'ProductController');
+
+Route::get('/admin/product/{id}', 'ProductController@index');
+Route::get('/admin/product/{product}/edit/', 'ProductController@edit');
+
 Route::post('/admin/product/save', 'ProductController@add');
 
 // Winkelwagen
-Route::get('/addProduct/{productId}', 'CartController@addItem');
-Route::get('/removeItem/{productId}', 'CartController@removeItem');
-Route::get('/cart', 'CartController@showCart');
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
