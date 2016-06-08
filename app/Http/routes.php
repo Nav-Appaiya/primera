@@ -24,6 +24,7 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // Product routes
+Route::get('/admin', 'A@newProduct');
 Route::get('/admin/product/new', 'ProductController@newProduct');
 Route::get('/admin/products', 'ProductController@index');
 Route::get('/admin/product/destroy/{id}', 'ProductController@destroy');
@@ -38,4 +39,5 @@ Route::post('/admin/product/save', 'ProductController@add');
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'MainController@index');
+Route::get('/admin', 'AdminController@index');

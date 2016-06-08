@@ -50,8 +50,7 @@ class ProductController extends Controller
 
     public function add(Product $id) {
 
-        $product = Product::find($id);
-        if(!$product){
+        if(!isset($id->name)){
             $product = new Product();
         }
         $product->name = Input::get('name');
@@ -59,7 +58,6 @@ class ProductController extends Controller
         $product->price = Input::get('price');
         $product->imageurl = Input::get('imageurl');
 
-        $product->save();
         Session::flash('message', 'Successfully updated product!');
         return redirect('/admin/products');
 
