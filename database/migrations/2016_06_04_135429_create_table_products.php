@@ -20,6 +20,7 @@ class CreateTableProducts extends Migration
             $table->string('description');
             $table->float('price');
             $table->string('imageurl');
+            $table->string('category_id');
             $table->timestamps();
         });
     }

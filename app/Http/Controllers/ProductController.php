@@ -22,7 +22,8 @@ class ProductController extends Controller
         $products = Product::all();
 
         return view('admin.products.products',[
-            'products' => $products
+            'products' => $products,
+            'meta' => array('meta1', 'meta2', 'meta3')
         ]);
     }
 

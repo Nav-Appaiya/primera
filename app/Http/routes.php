@@ -37,6 +37,10 @@ Route::post('/admin/product/save', 'ProductController@add');
 
 // Product routes site
 Route::get('/product/{id}', 'ProductController@detail');
+Route::get('/category/{id}', 'MainController@category');
+
+// Pages routes
+Route::get('/pages/{pageId}', 'MainController@page');
 
 
 // Winkelwagen
