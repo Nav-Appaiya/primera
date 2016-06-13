@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-12">
                 <span>
-                    {{ $page->content }}
+{!! $page->content !!}
                 </span>
             </div>
         </div>
