@@ -23,7 +23,7 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-// Product routes
+// Product admin routes
 Route::get('/admin', 'A@newProduct');
 Route::get('/admin/product/new', 'ProductController@newProduct');
 Route::get('/admin/products', 'ProductController@index');
@@ -34,6 +34,9 @@ Route::get('/admin/product/{id}', 'ProductController@index');
 Route::get('/admin/product/{product}/edit/', 'ProductController@edit');
 
 Route::post('/admin/product/save', 'ProductController@add');
+
+// Product routes site
+Route::get('/product/{id}', 'ProductController@detail');
 
 
 // Winkelwagen

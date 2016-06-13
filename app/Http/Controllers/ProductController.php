@@ -62,5 +62,14 @@ class ProductController extends Controller
         return redirect('/admin/products');
 
     }
+
+    public function detail(Product $id)
+    {
+        $related = Product::all();
+        return view('products.detail', [
+            'product' => $id,
+            'related' => $related
+        ]);
+    }
 }
 
