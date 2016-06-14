@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Pages;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Http\Requests;
@@ -66,10 +68,12 @@ class ProductController extends Controller
     public function detail(Product $id)
     {
         $related = Product::all();
-        
+
         return view('products.detail', [
             'product' => $id,
-            'related' => $related
+            'related' => $related,
+            'categories' => Category::all(),
+            'pages' => Pages::all()
         ]);
     }
 }

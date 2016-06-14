@@ -43,10 +43,10 @@
     </div>
 
     <div class="row">
-        <h2 class="text-center">Andere aanbiedingen</h2>
+        <h4 class="text-center">Andere aanbiedingen</h4>
         <br>
         @foreach ($related as $relate)
-        <div class="col-xs-12 col-sm-6 col-md-3 rwrapper">
+        <div class="col-xs-12 col-sm-6 col-md-3 wrapper">
             <div class="rlisting">
                 <div class="col-md-12 nopad">
                     <img src="{{ $relate->imageurl }}" class="img-responsive">
