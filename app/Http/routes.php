@@ -24,7 +24,7 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // Product admin routes
-Route::get('/admin', 'A@newProduct');
+Route::get('/admin', 'ProductController@newProduct');
 Route::get('/admin/product/new', 'ProductController@newProduct');
 Route::get('/admin/products', 'ProductController@index');
 Route::get('/admin/product/destroy/{id}', 'ProductController@destroy');

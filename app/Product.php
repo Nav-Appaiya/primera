@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    //
+
+    /**
+     * Product constructor.
+     */
+    public function __construct()
+    {
+    }
 }

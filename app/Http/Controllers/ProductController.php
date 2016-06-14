@@ -34,12 +34,10 @@ class ProductController extends Controller
 
     public function edit($id){
 
-        $product = Product::find($id);
-        if (!$product) {
-            $product = new Product();
-        }
+        $product = Product::findOrFail($id);
+
         // show the edit form and pass the nerd
-        return view('admin.products.new', [
+        return view('admin.products.edit', [
             'product' => $product
         ]);
 
@@ -50,15 +48,16 @@ class ProductController extends Controller
     }
 
     public function add(Product $id) {
-
         if(!isset($id->name)){
             $product = new Product();
+            $product->save();
+            Session::flash('message', 'Creating new product');
         }
         $product->name = Input::get('name');
         $product->description = Input::get('description');
         $product->price = Input::get('price');
         $product->imageurl = Input::get('imageurl');
-
+        $product->save();
         Session::flash('message', 'Successfully updated product!');
         return redirect('/admin/products');
 
@@ -67,6 +66,7 @@ class ProductController extends Controller
     public function detail(Product $id)
     {
         $related = Product::all();
+        
         return view('products.detail', [
             'product' => $id,
             'related' => $related

@@ -28,6 +28,6 @@ class CreateTableProductProperty extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('product_property');
     }
 }

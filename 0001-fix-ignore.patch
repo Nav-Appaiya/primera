@@ -1,0 +1,23 @@
+From 77106403436a538c1fa902a3cd9254ff5759ba30 Mon Sep 17 00:00:00 2001
+From: Nav Appaiya <navarajh@gmail.com>
+Date: Mon, 13 Jun 2016 19:44:48 +0200
+Subject: [PATCH] fix ignore
+
+---
+ .gitignore | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/.gitignore b/.gitignore
+index 22f1da5..10c0f49 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,4 +1,5 @@
+-#/config/database.php
++
++/config/database.php
+ .idea
+ /vendor
+ /node_modules
+-- 
+2.7.4 (Apple Git-66)
+

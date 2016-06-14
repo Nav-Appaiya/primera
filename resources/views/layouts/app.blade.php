@@ -40,14 +40,14 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    eSigarett.nl <small style="font-size: 10px">admin</small>
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/home') }}">Homepage bezoeken</a></li>
                     <li><a href="{{ url('/admin/products') }}">Producten</a></li>
                     <li><a href="{{ url('/orders') }}">Orders</a></li>
                 </ul>

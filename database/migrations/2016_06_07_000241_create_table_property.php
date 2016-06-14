@@ -25,6 +25,6 @@ class CreateTableProperty extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('property');
     }
 }

@@ -29,6 +29,6 @@ class CreateTableReview extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('review');
     }
 }
