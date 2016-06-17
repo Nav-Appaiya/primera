@@ -47,9 +47,9 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Homepage bezoeken</a></li>
-                    <li><a href="{{ url('/admin/products') }}">Producten</a></li>
-                    <li><a href="{{ url('/orders') }}">Orders</a></li>
+                    <li><a href="{{ URL::route('homepage') }}">Admin home</a></li>
+                    <li><a href="{{ URL::route('admin_product_index') }}">Producten</a></li>
+                    <li><a href="{{ URL::route('admin_orders_index') }}">Orders</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

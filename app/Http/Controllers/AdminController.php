@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $products = Product::all();
+        $orders = Order::all();
+        
+        return view('admin.index', [
+            'products' => $products,
+            'orders' => $orders,
+        ]);
     }
 
     public function products()

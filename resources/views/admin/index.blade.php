@@ -4,21 +4,108 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="panel">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <a href="#"><img src="http://lorempixel.com/200/200/city/2/" class="img-responsive"></a>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Dashboard producten
+                            <a class="btn btn-xs btn-success pull-right" href="/admin/product/new">
+                                Nieuw product toevoegen</a></div>
+
+                        <div class="panel-body">
+
+                            <table class="table table-striped">
+                                <thead>
+                                <td>Naam</td>
+                                <td>Prijs</td>
+                                <td>Omschrijving</td>
+                                <td>Afbeelding</td>
+                                <td></td>
+                                </thead>
+                                <tbody>
+                                @foreach ($products as $product)
+                                    <tr>
+                                        <td>{{$product->name}}</td>
+                                        <td>&euro;{{$product->price}}</td>
+                                        <td>{{$product->description}}</td>
+                                        <td>
+                                            <img src="{{$product->imageurl}}" alt="" width="75px">
+                                        </td>
+                                        <td class="btn-block">
+                                            <a href="/admin/product/destroy/{{$product->id}}"
+                                               onclick="confirm('Weet je zeker dat je dit product wilt verwijderen?')">
+                                                <button class="btn btn-success btn-block">Verwijderen</button>
+                                            </a>
+                                            <div style="margin-top: 10px"></div>
+                                            <a href="/admin/product/{{$product->id}}/edit" style="display: block">
+                                                <button class="btn btn-block btn-warning">Aanpassen</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="col-sm-7">
-                            <h4 class="title-real-estates">
-                                <strong><a href="#">Property 1</a></strong> <span class="pull-right">$12,990</span>
-                            </h4>
-                            <hr>
-                            <p>Iki kie mung omah lodong dadiine rodo murah tur yo ra awet wong karang mung murah, nek pingin awet yo tuku omah-omahan wae sing ra iso rusak.</p>
-                            <p><span class="label label-danger">1,292 SqFt</span> | <span class="label label-danger">3 Beds</span> | <span class="label label-danger">4 Baths</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Order lijst
+                            <a href="{{ route('orders.create') }}" class="btn btn-success btn-xs">Order toevoegen</a>
+                        </div>
+                        <div class="panel-body">
+                            @if (count($orders))
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>User</th>
+                                            <th>Verzendadres</th>
+                                            <th>Last Updated</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($orders as $order)
+                                            <tr>
+                                                <td>{{ $order->user->email }}</td>
+                                                <td>{{ $order->user_id }}</td>
+                                                <td>{{ $order->shipping_address }}</td>
+                                                <td>{{ $order->updated_at }}</td>
+                                                <td>
+                                                    <a href="{{ route('orders.edit', $order->id) }}"
+                                                       class="btn btn-success btn-xs">Edit</a>
+                                                    <a href="{{ route('orders.show', $order->id) }}"
+                                                       class="btn btn-info btn-xs">View</a>
+                                                    <form action="{{ route('orders.destroy', $order->id) }}" method="POST"
+                                                          style="display:inline-block">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                        <button class="btn btn-danger btn-xs">
+                                                            <span>DELETE</span>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-center">
+                                    {{--{{ $orders->links() }}--}}
+                                </div>
+                            @else
+                                <p class="alert alert-info">
+                                    No Listing Found
+                                </p>
+                            @endif
                         </div>
                     </div>
                 </div>

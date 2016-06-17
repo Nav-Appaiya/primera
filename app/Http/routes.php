@@ -38,9 +38,9 @@ Route::get('auth/register', [
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // admin
-Route::get('/admin', [
+Route::get('admin', [
     'as' => 'admin',
-    'uses' => 'ProductController@newProduct'
+    'uses' => 'AdminController@index'
 ]);
 
 // admin_product_new
@@ -94,8 +94,30 @@ Route::get('/category/{id}', [
 // Pages routes
 Route::get('/pages/{pageId}', 'MainController@page');
 
-Route::resource('orders', 'OrderController');
-
+Route::get('/admin/orders', [
+    'as' => 'admin_orders_index',
+    'uses' => 'OrderController@index'
+]);
+Route::get('/admin/orders/new', [
+    'as' => 'orders.create',
+    'uses' => 'OrderController@create'
+]);
+Route::post('/admin/orders/store', [
+    'as' => 'orders.store',
+    'uses' => 'OrderController@store'
+]);
+Route::get('/admin/orders/{order}/edit/', [
+    'as' => 'orders.edit',
+    'uses' => 'OrdersController@edit'
+]);
+Route::get('/admin/orders/{order}/show/', [
+    'as' => 'orders.show',
+    'uses' => 'OrdersController@show'
+]);
+Route::get('/admin/orders/{order}/destroy/', [
+    'as' => 'orders.destroy',
+    'uses' => 'OrdersController@destroy'
+]);
 // Winkelwagen
 
 Route::auth();
