@@ -11,37 +11,90 @@
 |
 */
 
-// Default route for homepage {or testing authed stuff}
-Route::get('/', 'MainController@index');
+// homepage
+Route::get('/', [
+    'as' => 'homepage',
+    'uses'=>'MainController@index'
+]);
 
-// Authentication routes
-Route::get('auth/login', 'Auth\AuthController@getLogin');
+// login
+Route::get('auth/login', [
+    'as'=>'login',
+    'uses'=>'Auth\AuthController@getLogin'
+]);
 Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-// Registration routes
-Route::get('auth/register', 'Auth\AuthController@getRegister');
+// logout
+Route::get('auth/logout', [
+    'as'=>'logout',
+    'uses'=>'Auth\AuthController@getLogout'
+]);
+
+// register
+Route::get('auth/register', [
+    'as' => 'logout',
+    'uses' => 'Auth\AuthController@getRegister'
+]);
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-// Product admin routes
-Route::get('/admin', 'ProductController@newProduct');
-Route::get('/admin/product/new', 'ProductController@newProduct');
-Route::get('/admin/products', 'ProductController@index');
-Route::get('/admin/product/destroy/{id}', 'ProductController@destroy');
-Route::resource('orders', 'OrderController');
+// admin
+Route::get('/admin', [
+    'as' => 'admin',
+    'uses' => 'ProductController@newProduct'
+]);
 
-Route::get('/admin/product/{id}', 'ProductController@index');
-Route::get('/admin/product/{product}/edit/', 'ProductController@edit');
+// admin_product_new
+Route::get('/admin/product/new', [
+    'as' => 'admin_product_new',
+    'uses' => 'ProductController@newProduct'
+]);
 
-Route::post('/admin/product/save', 'ProductController@add');
+// admin_product_index
+Route::get('/admin/products', [
+    'as' => 'admin_product_index',
+    'uses' => 'ProductController@index'
+]);
 
-// Product routes site
-Route::get('/product/{id}', 'ProductController@detail');
-Route::get('/category/{id}', 'MainController@category');
+// admin_product_destroy
+Route::get('/admin/product/destroy/{id}', [
+    'as'=>'admin_product_destroy',
+    'uses'=>'ProductController@destroy'
+]);
+// admin_product_detail
+Route::get('/admin/product/{id}', [
+    'as' => 'admin_product_detail',
+    'uses' => 'ProductController@index'
+]);
+// admin_product_edit
+Route::get('/admin/product/{product}/edit/', [
+    'as' => 'admin_product_edit',
+    'uses' => 'ProductController@edit'
+]);
+// admin_product_save
+Route::post('/admin/product/save', [
+    'as' => 'admin_product_save',
+    'uses' => 'ProductController@add'
+]);
+// product_detail
+Route::get('/product/{id}', [
+    'as' => 'product_detail',
+    'uses' => 'ProductController@detail'
+]);
+// product_add
+Route::get('/product/{id}/add', [
+    'as' => 'product_add',
+    'uses' => 'ProductController@add'
+]);
+// category_detail
+Route::get('/category/{id}', [
+    'as' => 'category_detail',
+    'uses' => 'MainController@category'
+]);
 
 // Pages routes
 Route::get('/pages/{pageId}', 'MainController@page');
 
+Route::resource('orders', 'OrderController');
 
 // Winkelwagen
 

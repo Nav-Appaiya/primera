@@ -13,7 +13,6 @@
 
         <div class="row">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
 
@@ -126,12 +125,12 @@
                                 <p>{{$product->description}}</p>
                                 <div class="row center-block">
                                     <div class="btn-group cart">
-                                        <a href="/product/details/{{$product->id}}" class="btn btn-warning btn-product">
+                                        <a href="{{ URL::route('product_detail', $product->id) }}" class="btn btn-info btn-product">
                                             Meer weten <span class="fa fa-question-circle"></span>
                                         </a>
                                     </div>
                                     <div class="btn-group wishlist">
-                                        <a href="/addProduct/{{$product->id}}" class="btn btn-success btn-product">
+                                        <a href="{{ URL::route('product_add', $product->id) }}" class="btn btn-success btn-product">
                                             In winkelwagen<span class="fa fa-shopping-cart"></span>
                                         </a>
                                     </div>
