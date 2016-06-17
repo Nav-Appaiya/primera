@@ -46,7 +46,8 @@ class MainController extends Controller
         return view('main.page', [
             'page' => $page,
             'categories' => Category::all(),
-            'pages' => Pages::all()
+            'pages' => Pages::all(),
+            'products' => Product::all()
         ]);
     }
 }
