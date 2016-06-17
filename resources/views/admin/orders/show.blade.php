@@ -13,7 +13,7 @@
                 <a href="{{ route('orders.create') }}" class="btn btn-success btn-xs">Order toevoegen</a>
             </div>
             <div class="panel-body">
-                @if (count($orders))
+                @if (isset($order))
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -26,7 +26,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($orders as $order)
+
                                 <tr>
                                     <td>{{ $order->user->email }}</td>
                                     <td>{{ $order->user_id }}</td>
@@ -44,7 +44,6 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -95,7 +95,7 @@ Route::get('/category/{id}', [
 Route::get('/pages/{pageId}', 'MainController@page');
 
 Route::get('/admin/orders', [
-    'as' => 'admin_orders_index',
+    'as' => 'orders.index',
     'uses' => 'OrderController@index'
 ]);
 Route::get('/admin/orders/new', [
@@ -108,15 +108,15 @@ Route::post('/admin/orders/store', [
 ]);
 Route::get('/admin/orders/{order}/edit/', [
     'as' => 'orders.edit',
-    'uses' => 'OrdersController@edit'
+    'uses' => 'OrderController@edit'
 ]);
 Route::get('/admin/orders/{order}/show/', [
     'as' => 'orders.show',
-    'uses' => 'OrdersController@show'
+    'uses' => 'OrderController@show'
 ]);
 Route::get('/admin/orders/{order}/destroy/', [
     'as' => 'orders.destroy',
-    'uses' => 'OrdersController@destroy'
+    'uses' => 'OrderController@destroy'
 ]);
 // Winkelwagen
 

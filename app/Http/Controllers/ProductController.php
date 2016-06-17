@@ -17,9 +17,24 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\DomCrawler\Form;
 
+/**
+ * Class ProductController
+ * @package App\Http\Controllers
+ */
 class ProductController extends Controller
 {
 
+    /**
+     * ProductController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(){
         $products = Product::all();
 
@@ -29,11 +44,19 @@ class ProductController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function destroy($id){
         Product::destroy($id);
         return redirect('/admin/products');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id){
 
         $product = Product::findOrFail($id);
@@ -45,10 +68,17 @@ class ProductController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function newProduct(){
         return view('admin.products.new');
     }
 
+    /**
+     * @param Product $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function add(Product $id) {
         if(!isset($id->name)){
             $product = new Product();
@@ -65,6 +95,10 @@ class ProductController extends Controller
 
     }
 
+    /**
+     * @param Product $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function detail(Product $id)
     {
         $related = Product::all();
