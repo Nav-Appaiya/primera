@@ -52,7 +52,7 @@ Route::get('/admin/product/new', [
 // admin_product_index
 Route::get('/admin/products', [
     'as' => 'admin_product_index',
-    'uses' => 'ProductController@index'
+    'uses' => 'AdminController@products'
 ]);
 
 // admin_product_destroy
