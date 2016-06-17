@@ -38,7 +38,7 @@ Route::get('auth/register', [
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // admin
-Route::get('admin', [
+Route::get('/admin', [
     'as' => 'admin',
     'uses' => 'AdminController@index'
 ]);
@@ -121,6 +121,4 @@ Route::get('/admin/orders/{order}/destroy/', [
 // Winkelwagen
 
 Route::auth();
-
-Route::get('/home', 'MainController@index');
 Route::get('/admin', 'AdminController@index');
