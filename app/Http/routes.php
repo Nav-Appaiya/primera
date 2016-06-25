@@ -122,3 +122,5 @@ Route::get('/admin/orders/{order}/destroy/', [
 
 Route::auth();
 Route::get('/admin', 'AdminController@index');
+
+Route::resource('/admin/customers', 'CustomerController');

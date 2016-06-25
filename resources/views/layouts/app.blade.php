@@ -50,6 +50,7 @@
                     <li><a href="{{ URL::route('homepage') }}">Admin home</a></li>
                     <li><a href="{{ URL::route('admin_product_index') }}">Producten</a></li>
                     <li><a href="{{ URL::route('orders.index') }}">Orders</a></li>
+                    <li><a href="{{ URL::route('admin.customers.index') }}">Klanten</a></li>
                     {{-- TODO: Pagina's + Menu's beheerbaar maken --}}
                     <li><a href="#">Paginas</a></li>
                     <li><a href="#">Menu's</a></li>
