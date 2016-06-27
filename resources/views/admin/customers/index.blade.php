@@ -10,7 +10,6 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 Order lijst
-                <a href="{{ route('orders.create') }}" class="btn btn-success btn-xs">Order toevoegen</a>
             </div>
             <div class="panel-body">
                 @if (count($customers))
@@ -40,10 +39,10 @@
                                         <!-- we will add this later since its a little more complicated than the other two buttons -->
 
                                         <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                                        <a class="btn btn-small btn-success" href="{{ URL::to('admin/customers/' . $value->id) }}">Bekijk klant</a>
+                                        <a class="btn btn-small btn-success" href="{{ URL::route('admin.customers.show' , $value->id) }}">Bekijk klant</a>
 
                                         <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-                                        <a class="btn btn-small btn-info" href="{{ URL::to('admin/customers/' . $value->id . '/edit') }}">Bewerk klant</a>
+                                        <a class="btn btn-small btn-info" href="{{ URL::route('admin.customers.edit', $value->id) }}">Bewerk klant</a>
 
                                     </td>
                                 </tr>
