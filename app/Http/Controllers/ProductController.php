@@ -29,7 +29,8 @@ class ProductController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // Turned this off, because product userviews are here also used.
+        // $this->middleware('auth');
     }
 
     /**

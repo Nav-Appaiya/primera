@@ -31,16 +31,16 @@
                     @else
                         <li><a href="/order">Mijn bestellingen <span class="fa fa-briefcase"></span></a></li>
                         <li><a href="/cart">Winkelwagen <span class="fa fa-shopping-cart"></span></a></li>
-                        <li><a href="/auth/logout">Uitloggen {{ Auth::user()->name}}</a></li>
+                            <li><a href="/auth/logout">{{ Auth::user()->name }}, Uitloggen {{ Auth::user()->name}}</a></li>
                     @endif
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="{{ URL::route('homepage') }}">Home <span class="sr-only">(current)</span></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorieen <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach($categories as $cat)
-                                <li><a href="/category/{{ $cat->id }}">{{ $cat->title }}</a></li>
+                                <li><a href="{{ URL::route('category_detail', $cat->id ) }}">{{ $cat->title }}</a></li>
                             @endforeach
 
                         </ul>
@@ -72,30 +72,20 @@
 </footer>
 
 <style>
-    /* Sticky footer styles
--------------------------------------------------- */
     html {
         position: relative;
         min-height: 100%;
     }
     body {
-        /* Margin bottom by footer height */
         margin-bottom: 60px;
     }
     .footer {
         position: absolute;
         bottom: 0;
         width: 100%;
-        /* Set the fixed height of the footer here */
         height: 60px;
         background-color: #f5f5f5;
     }
-
-
-    /* Custom page CSS
-    -------------------------------------------------- */
-    /* Not required for template or sticky footer method. */
-
     footer .text-muted {
         margin: 20px 0;
     }

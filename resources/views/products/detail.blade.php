@@ -25,13 +25,9 @@
                     </div>
                     <div class="pull-right">
                         <div class="row center-block">
-                            <div class="btn-group cart">
-                                <a href="/product/details/1" class="btn btn-warning btn-product">
-                                    Meer weten <span class="fa fa-question-circle"></span>
-                                </a>
-                            </div>
                             <div class="btn-group wishlist">
-                                <a href="/addProduct/1" class="btn btn-success btn-product">
+                                {{-- TODO: Add to shoppingcart button ajax --}}
+                                <a href="#" class="btn btn-success btn-product">
                                     In winkelwagen<span class="fa fa-shopping-cart"></span>
                                 </a>
                             </div>
