@@ -60,6 +60,46 @@
 <div class="container" style="margin-top: 75px">
     @yield('content')
 </div>
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted pull-left">
+            Esigarett.nl - {{ date('Y') }}
+        </span>
+        <p class="text-muted pull-right">
+            <img src="{{ asset('/assets/img/NIX18-cmyk-payoff-fc.png') }}" alt="nix18" width="75em">
+        </p>
+    </div>
+</footer>
+
+<style>
+    /* Sticky footer styles
+-------------------------------------------------- */
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+    body {
+        /* Margin bottom by footer height */
+        margin-bottom: 60px;
+    }
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 60px;
+        background-color: #f5f5f5;
+    }
+
+
+    /* Custom page CSS
+    -------------------------------------------------- */
+    /* Not required for template or sticky footer method. */
+
+    footer .text-muted {
+        margin: 20px 0;
+    }
+</style>
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
