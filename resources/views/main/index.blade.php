@@ -1,8 +1,9 @@
 
 
-@extends('layouts.master')
+@extends('layouts.mastermenu')
 
 @section('titel', 'Primera shop')
+@section('seotags', 'seotags')
 
 @section('sidebar')
     @parent

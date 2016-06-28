@@ -17,6 +17,11 @@ Route::get('/', [
     'uses'=>'MainController@index'
 ]);
 
+Route::get('/test', [
+    'as' => 'testing',
+    'uses'=>'MainController@testing'
+]);
+
 // login
 Route::get('auth/login', [
     'as'=>'login',
@@ -89,6 +94,10 @@ Route::get('/product/{id}/add', [
 Route::get('/category/{id}', [
     'as' => 'category_detail',
     'uses' => 'MainController@category'
+]);
+Route::get('/categories', [
+    'as' => 'categories_all',
+    'uses' => 'ProductController@add'
 ]);
 
 // Pages routes

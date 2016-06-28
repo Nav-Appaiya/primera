@@ -21,16 +21,19 @@
                                 <th>ID</th>
                                 <th>User</th>
                                 <th>Verzendadres</th>
+                                <th>Status</th>
                                 <th>Last Updated</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($orders as $order)
+
                                 <tr>
                                     <td>{{ $order->user->email }}</td>
                                     <td>{{ $order->user_id }}</td>
                                     <td>{{ $order->shipping_address }}</td>
+                                    <td>{{ $order->status }}</td>
                                     <td>{{ $order->updated_at }}</td>
                                     <td>
                                         <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-success btn-xs">Edit</a>

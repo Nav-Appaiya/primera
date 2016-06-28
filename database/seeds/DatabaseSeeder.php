@@ -16,9 +16,13 @@ class DatabaseSeeder extends Seeder
         $updatedAt = new DateTime();
 
         // Users seeder
+        DB::table('users')->delete();
+        
+        $userId = 1;
         DB::table('users')->insert([
+            'id' => $userId,
             'nickname' => 'admin',
-            'email' => 'navarajh'.mt_rand(0,200).'@gmail.com',
+            'email' => 'navarajh@gmail.com',
             'password' => bcrypt('admin'),
             'voorletters' => 'N.',
             'achternaam' => 'Appaiya',
@@ -36,7 +40,7 @@ class DatabaseSeeder extends Seeder
 
         // Orders seeder
         DB::table('orders')->insert([
-            'user_id' => mt_rand(0,1200),
+            'user_id' => $userId,
             'shipping_address' => 'rijnvoorde 42, 3085TJ Rotterdam',
             'billing_address' => 'rijnvoorde 42, 3085TJ Rotterdam',
             'amount' => '18,95',
