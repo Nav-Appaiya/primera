@@ -124,3 +124,5 @@ Route::auth();
 Route::get('/admin', 'AdminController@index');
 
 Route::resource('/admin/customers', 'CustomerController');
+
+Route::get('/cart', 'MainController@cart');

@@ -50,4 +50,13 @@ class MainController extends Controller
             'products' => Product::all()
         ]);
     }
+
+    public function cart()
+    {
+        return view('main.cart', [
+            'categories' => Category::all(),
+            'pages' => Pages::all(),
+            'products' => Product::all()
+        ]);
+    }
 }
