@@ -46,17 +46,37 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Product seeder
+        $productId = mt_rand(0,2000);
+        $productBeschrijving = 'Beschrijving bij product ' . $productId;
         DB::table('products')->insert([
-            'name' => 'product ' . mt_rand(0, 200),
-            'description' => 'Beschrijving bij product',
+            'id' => $productId,
+            'name' => 'product ' . $productId,
+            'description' => $productBeschrijving,
             'price' => '19,95',
             'imageurl' => $productImage,
             'category_id' => '1',
             'created_at' => $createdAt,
             'updated_at' => $updatedAt
         ]);
+        
+        DB::table('product_property')->insert([
+            'id' => mt_rand(0,200),
+            'productID' => $productId,
+            'propertyID' => 'kleur',
+            'value' => 'rood',
+            'created_at' => $createdAt,
+            'updated_at' => $updatedAt
+        ]);
+        DB::table('seotags')->insert([
+            'id' => mt_rand(0,200),
+            'product_id' => $productId,
+            'seotag' => $productBeschrijving,
+            'created_at' => $createdAt,
+            'updated_at' => $updatedAt
+        ]);
 
         // Category seeder
+        DB::table('categories')->delete();
         DB::table('categories')->insert([
             'categoryID'=>'1',
             'title'=>'Category' . mt_rand(0,15),
@@ -66,6 +86,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Pages seeder
+        DB::table('pages')->delete();
         DB::table('pages')->insert([
             'name' => 'Over',
             'content' => 'Wij vinden het altijd leuk om reacties te krijgen. Onze voorkeur is per 

@@ -11,8 +11,10 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        $productId = mt_rand(0,1000);
+
         DB::table('products')->insert([
-            'id' => (string)file_get_contents('http://loripsum.net/api/1/short/headers'),
+            'id' => $productId,
             'name' => (string)file_get_contents('http://loripsum.net/api/1/short'),
             'description' => (mt_rand (10*10, 1000*10) / 10),
             'price' => 'http://lorempixel.com/400/200/',

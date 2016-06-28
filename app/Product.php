@@ -13,4 +13,9 @@ class Product extends Model
     public function __construct()
     {
     }
+
+    public function seotags()
+    {
+        return $this->hasMany('App\Seotags');
+    }
 }

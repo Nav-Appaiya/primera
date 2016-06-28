@@ -23,6 +23,16 @@
                             <h1 class="pull-right"><span class="daysago"></span>&euro;{{ $product->price }}</h1>
                         </span>
                     </div>
+                    @if(count($seotags))
+                        <div class="pull-left">
+                            <ul>
+                                <strong>Seotags: </strong><br>
+                                @foreach($seotags as $seotag)
+                                    <li>{{ $seotag->seotag }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="pull-right">
                         <div class="row center-block">
                             <div class="btn-group wishlist">
