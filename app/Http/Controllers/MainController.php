@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Mollie\Laravel\Facades\Mollie;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class MainController extends Controller
@@ -52,12 +53,29 @@ class MainController extends Controller
         ]);
     }
 
-    public function cart()
+    public function cart(Request $request)
     {
+        $session = \Illuminate\Support\Facades\Session::get('cart');
+
         return view('main.cart', [
             'categories' => Category::all(),
             'pages' => Pages::all(),
-            'products' => Product::all()
+            'products' => Product::all(),
+            'cart' => $session
+        ]);
+    }
+
+    public function addCart(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $cart = \Illuminate\Support\Facades\Session::push('cart.item', $product);
+        $stuff = \Illuminate\Support\Facades\Session::get('cart');
+
+        return view('main.cart', [
+            'categories' => Category::all(),
+            'pages' => Pages::all(),
+            'products' => Product::all(),
+            'cart' => $stuff
         ]);
     }
 

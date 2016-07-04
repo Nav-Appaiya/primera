@@ -135,3 +135,4 @@ Route::get('/admin', 'AdminController@index');
 Route::resource('/admin/customers', 'CustomerController');
 
 Route::get('/cart', 'MainController@cart');
+Route::get('/cart/add/{id}', 'MainController@addCart');
