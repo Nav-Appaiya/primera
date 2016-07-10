@@ -26,14 +26,14 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     @if(!Auth::user())
-                        <li><a href="/auth/login">Inloggen</a></li>
+                        <li><a href="{{ URL::route('login') }}">Inloggen</a></li>
                         <li><a href="/auth/register">Registreren</a></li>
                         <li><a href="/cart">Winkelwagen <span class="fa fa-shopping-cart"></span></a></li>
 
                     @else
                         <li><a href="/order">Mijn bestellingen <span class="fa fa-briefcase"></span></a></li>
                         <li><a href="/cart">Winkelwagen <span class="fa fa-shopping-cart"></span></a></li>
-                            <li><a href="/auth/logout">{{ Auth::user()->name }}, Uitloggen {{ Auth::user()->name}}</a></li>
+                            <li><a href="{{ URL::route('logout') }}">Hoi {{ Auth::user()->voornaam }}, {{ Auth::user()->name}} uitloggen?</a></li>
                     @endif
                 </ul>
                 <ul class="nav navbar-nav">
