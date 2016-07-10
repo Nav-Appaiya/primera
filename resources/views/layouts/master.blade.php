@@ -47,9 +47,12 @@
 
                         </ul>
                     </li>
+
                     @foreach( $pages as $page)
                         <li><a href="/pages/{{ strtolower($page->name) }}">{{ $page->name }}</a></li>
                     @endforeach
+
+                    <li><a href="{{ URL::route('contact') }}">Contact</a></li>
 
                 </ul>
 

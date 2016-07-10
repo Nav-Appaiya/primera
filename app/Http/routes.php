@@ -17,6 +17,15 @@
         'uses' => 'MainController@index'
     ]);
 
+    Route::get('/contact', [
+        'as' => 'contact',
+        'uses' => 'ContactController@index'
+    ]);
+
+    Route::post('/contact', [
+        'uses' => 'ContactController@index'
+    ]);
+
     Route::get('/test', [
         'as' => 'testing',
         'uses' => 'MainController@testing'
