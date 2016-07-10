@@ -53,12 +53,12 @@
                         </tbody>
                         <tfoot>
                         <tr class="visible-xs">
-                            <td class="text-center"><strong>Total 1.99</strong></td>
+                            <td class="text-center"><strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong></td>
                         </tr>
                         <tr>
-                            <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Nog meer winkelen</a></td>
+                            <td><a href="{{ URL::route('homepage') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Nog meer winkelen</a></td>
                             <td colspan="2" class="hidden-xs"></td>
-                            <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                            <td class="hidden-xs text-center"><strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong></td>
                             <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
                         </tr>
                         </tfoot>

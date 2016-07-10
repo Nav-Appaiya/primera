@@ -105,7 +105,7 @@
                                         </a>
                                     </div>
                                     <div class="btn-group wishlist">
-                                        <a href="{{ URL::route('product_add', $product) }}" class="btn btn-success btn-product cart-add" onclick="addCart(event, {{ $product }});">
+                                        <a href="{{ URL::route('cart.add', $product) }}" class="btn btn-success btn-product" onclick="">
                                             In winkelwagen<span class="fa fa-shopping-cart"></span>
                                         </a>
                                     </div>

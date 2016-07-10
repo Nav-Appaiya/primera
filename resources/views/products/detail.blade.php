@@ -37,7 +37,7 @@
                         <div class="row center-block">
                             <div class="btn-group wishlist">
                                 {{-- TODO: Add to shoppingcart button ajax --}}
-                                <a href="#" class="btn btn-success btn-product" onclick="addCart(event, {{ $product }} );">
+                                <a href="{{ URL::route('cart.add', $product) }}" class="btn btn-success btn-product" onclick="">
                                     In winkelwagen<span class="fa fa-shopping-cart"></span>
                                 </a>
                             </div>
@@ -68,7 +68,7 @@
                                 </a>
                             </div>
                             <div class="btn-group wishlist btn-block">
-                                <a href="/addProduct/{{ $relate->id }}" class="btn btn-success btn-product">
+                                <a href="{{ URL::route('cart.add', $relate) }}" class="btn btn-success btn-product">
                                     In winkelwagen<span class="fa fa-shopping-cart"></span>
                                 </a>
                             </div>
