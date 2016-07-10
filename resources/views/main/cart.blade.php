@@ -44,8 +44,7 @@
                                 </td>
                                 <td data-th="Subtotal" class="text-center">{{ $item->price }}</td>
                                 <td class="actions" data-th="">
-                                    <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                    <a href="{{ route('cart.remove', $item) }}" class="btn btn-danger btn-sm">Verwijderen uit winkelwagen <i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -59,7 +58,7 @@
                             <td><a href="{{ URL::route('homepage') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Nog meer winkelen</a></td>
                             <td colspan="2" class="hidden-xs"></td>
                             <td class="hidden-xs text-center"><strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong></td>
-                            <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                            <td><a href="{{ URL::route('checkout') }}" class="btn btn-success btn-block">Afrekenen <i class="fa fa-angle-right"></i></a></td>
                         </tr>
                         </tfoot>
                     </table>

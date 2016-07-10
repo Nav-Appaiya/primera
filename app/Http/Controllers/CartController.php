@@ -22,10 +22,11 @@ class CartController extends Controller
         header('Content-Type: text/plain');
 
         $total = 0;
-        foreach ($session['item'] as $item) {
-            $total += $item->price;
+        if (isset($session['item'])) {
+            foreach ($session['item'] as $item) {
+                $total += $item->price;
+            }
         }
-
 
         return view('main.cart', [
             'categories' => Category::all(),
@@ -53,12 +54,32 @@ class CartController extends Controller
             $total += $item->price;
         }
 
+        return Redirect::to('cart');
+    }
+
+    public function removeCart(Request $request, $id)
+    {
+        $session = $request->getSession()->get('cart');
+        $total = 0;
+        foreach ($session['item'] as $item) {
+            $total += $item->price;
+        }
         return view('main.cart', [
             'categories' => Category::all(),
             'pages' => Pages::all(),
             'products' => Product::all(),
-            'cart' => $cart,
+            'cart' => $session,
             'total' => $total
         ]);
+    }
+
+    public function clearCart(Request $request)
+    {
+        $session = $request->session()->get('cart');
+        $request->session()->clear();
+        $request->session()->flush();
+        $request->session()->forget('cart');
+
+        return Redirect::to('cart');
     }
 }

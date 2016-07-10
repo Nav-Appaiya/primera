@@ -12,72 +12,87 @@
 */
 
 
-Route::get('/', [
-    'as' => 'homepage',
-    'uses' => 'MainController@index'
-]);
+    Route::get('/', [
+        'as' => 'homepage',
+        'uses' => 'MainController@index'
+    ]);
 
-Route::get('/test', [
-    'as' => 'testing',
-    'uses' => 'MainController@testing'
-]);
+    Route::get('/test', [
+        'as' => 'testing',
+        'uses' => 'MainController@testing'
+    ]);
 
-Route::get('auth/login', [
-    'as' => 'login',
-    'uses' => 'Auth\AuthController@getLogin'
-]);
+    Route::get('auth/login', [
+        'as' => 'login',
+        'uses' => 'Auth\AuthController@getLogin'
+    ]);
 
-Route::post('auth/login', 'Auth\AuthController@postLogin');
+    Route::post('auth/login', 'Auth\AuthController@postLogin');
 
-Route::get('auth/logout', [
-    'as' => 'logout',
-    'uses' => 'Auth\AuthController@getLogout'
-]);
+    Route::get('auth/logout', [
+        'as' => 'logout',
+        'uses' => 'Auth\AuthController@getLogout'
+    ]);
 
-Route::get('auth/register', [
-    'as' => 'logout',
-    'uses' => 'Auth\AuthController@getRegister'
-]);
+    Route::get('auth/register', [
+        'as' => 'logout',
+        'uses' => 'Auth\AuthController@getRegister'
+    ]);
 
-Route::post('auth/register', 'Auth\AuthController@postRegister');
-
-
-Route::get('/product/{id}', [
-    'as' => 'product_detail',
-    'uses' => 'ProductController@detail'
-]);
-
-Route::get('/product/{id}/add', [
-    'as' => 'product_add',
-    'uses' => 'ProductController@add'
-]);
-
-Route::get('/category/{id}', [
-    'as' => 'category_detail',
-    'uses' => 'MainController@category'
-]);
-Route::get('/categories', [
-    'as' => 'categories_all',
-    'uses' => 'ProductController@add'
-]);
+    Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
-Route::get('/pages/{pageId}', 'MainController@page');
+    Route::get('/product/{id}', [
+        'as' => 'product_detail',
+        'uses' => 'ProductController@detail'
+    ]);
+
+    Route::get('/product/{id}/add', [
+        'as' => 'product_add',
+        'uses' => 'ProductController@add'
+    ]);
+
+    Route::get('/category/{id}', [
+        'as' => 'category_detail',
+        'uses' => 'MainController@category'
+    ]);
+    Route::get('/categories', [
+        'as' => 'categories_all',
+        'uses' => 'ProductController@add'
+    ]);
 
 
-Route::get('/admin', 'AdminController@index');
+    Route::get('/pages/{pageId}', 'MainController@page');
 
+    Route::get('/checkout', [
+        'as' => 'checkout',
+        'uses' => 'CheckoutController@index'
+    ]);
 
-Route::get('/cart', [
-    'as' => 'cart',
-    'uses' => 'CartController@index'
-]);
+    Route::get('/admin', 'AdminController@index');
 
-Route::get('/cart/add/{id}', [
-    'as' => 'cart.add',
-    'uses' => 'CartController@addCart'
-]);
+    /**
+     * CART ROUTES
+     */
+    Route::get('/cart', [
+        'as' => 'cart',
+        'uses' => 'CartController@index'
+    ]);
 
+    Route::get('/cart/add/{id}', [
+        'as' => 'cart.add',
+        'uses' => 'CartController@addCart'
+    ]);
+
+    Route::get('/cart/remove/{id}', [
+        'as' => 'cart.remove',
+        'uses' => 'CartController@removeCart'
+    ]);
+
+    Route::get('/cart/clear', [
+        'as' => 'cart.clear',
+        'uses' => 'CartController@clearCart'
+    ]);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/orders', [
