@@ -11,6 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call('ProductsTableSeeder');
+        $this->call('UsersTableSeeder');
+
         $productImage = 'http://www.esigaretervaring.nl/wp-content/uploads/2014/04/Elektrische-sigaret-voorbeeld-300x225.jpg';
         $createdAt = new DateTime();
         $updatedAt = new DateTime();
@@ -52,25 +55,7 @@ class DatabaseSeeder extends Seeder
         // Product seeder
         $productId = mt_rand(0,2000);
         $productBeschrijving = 'Beschrijving bij product ' . $productId;
-        DB::table('products')->insert([
-            'id' => $productId,
-            'name' => 'product ' . $productId,
-            'description' => $productBeschrijving,
-            'price' => '19,95',
-            'imageurl' => $productImage,
-            'category_id' => '1',
-            'created_at' => $createdAt,
-            'updated_at' => $updatedAt
-        ]);
-        
-        DB::table('product_property')->insert([
-            'id' => mt_rand(0,200),
-            'productID' => $productId,
-            'propertyID' => 'kleur',
-            'value' => 'rood',
-            'created_at' => $createdAt,
-            'updated_at' => $updatedAt
-        ]);
+
         DB::table('seotags')->insert([
             'id' => mt_rand(0,200),
             'product_id' => $productId,

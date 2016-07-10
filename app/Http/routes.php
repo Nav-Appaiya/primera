@@ -77,6 +77,10 @@ Route::get('/cart/add/{id}', [
     'as' => 'cart.add',
     'uses' => 'CartController@addCart'
 ]);
+Route::get('/cart/remove/{id}', [
+    'as' => 'cart.remove',
+    'uses' => 'CartController@removeCart'
+]);
 
 
 Route::group(['middleware' => 'auth'], function () {
