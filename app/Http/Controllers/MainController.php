@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Pages;
-use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mollie\Laravel\Facades\Mollie;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class MainController extends Controller
@@ -58,9 +56,24 @@ class MainController extends Controller
 
     
 
-    public function testing()
+    public function testing(Request $request)
     {
         header('Content-Type: text/plain');
+        $products = Product::find(1124);
+        $sessionCart = $request->getSession()->get('cart.items');
+
+//        $request->session()->forget('cart.items', $products);
+        exit;
+        $session = $request->session();
+        $cart = $session->get('cart.items');
+        $count = count($session->get('cart.items'));
+
+
+        foreach ($cart as $item) {
+            $session->forget('cart.items', $item);
+        }
+
+        var_dump($cart);
 
         $user = Auth::check();
         print_r($user);

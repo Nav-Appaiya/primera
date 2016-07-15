@@ -93,10 +93,21 @@
         'uses' => 'CartController@addCart'
     ]);
 
+<<<<<<< HEAD
     Route::get('/cart/remove/{id}', [
         'as' => 'cart.remove',
         'uses' => 'CartController@removeCart'
     ]);
+=======
+Route::get('/cart/add/{id}', [
+    'as' => 'cart.add',
+    'uses' => 'CartController@addCart'
+]);
+Route::get('/cart/remove/{id}', [
+    'as' => 'cart.remove',
+    'uses' => 'CartController@removeCart'
+]);
+>>>>>>> 133ccbe2147ca08cbc5c70c6d5f4b0d7f43f32af
 
     Route::get('/cart/clear', [
         'as' => 'cart.clear',

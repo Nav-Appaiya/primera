@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        @if(isset(session('cart')['item']))
+        @if(isset(session('cart')['items']))
             <div class="row">
                 <div class="col-md-12">
                     <table id="cart" class="table table-hover table-condensed">
@@ -25,7 +25,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach(session('cart')['item'] as $item)
+                        @foreach(session('cart')['items'] as $item)
                             <tr>
                                 <td data-th="Product">
                                     <div class="row">
@@ -44,7 +44,11 @@
                                 </td>
                                 <td data-th="Subtotal" class="text-center">{{ $item->price }}</td>
                                 <td class="actions" data-th="">
+<<<<<<< HEAD
                                     <a href="{{ route('cart.remove', $item) }}" class="btn btn-danger btn-sm">Verwijderen uit winkelwagen <i class="fa fa-trash-o"></i></a>
+=======
+                                    <a href="{{ URL::route('cart.remove', $item) }}" class="btn btn-danger btn-sm" role="button">Verwijderen uit winkelwagen <i class="fa fa-trash-o"></i></a>
+>>>>>>> 133ccbe2147ca08cbc5c70c6d5f4b0d7f43f32af
                                 </td>
                             </tr>
                         @endforeach
