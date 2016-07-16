@@ -17,9 +17,9 @@ Route::get('/', [
     'uses' => 'MainController@index'
 ]);
 
-Route::get('/test', [
-    'as' => 'testing',
-    'uses' => 'MainController@testing'
+Route::get('/contact', [
+    'as' => 'contact',
+    'uses' => 'ContactController@index'
 ]);
 
 Route::get('auth/login', [

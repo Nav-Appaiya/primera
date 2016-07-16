@@ -41,15 +41,15 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorieen <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            @foreach($categories as $cat)
-                                <li><a href="{{ URL::route('category_detail', $cat->id ) }}">{{ $cat->title }}</a></li>
-                            @endforeach
+                            {{--@foreach($categories as $cat)--}}
+                                {{--<li><a href="{{ URL::route('category_detail', $cat->id ) }}">{{ $cat->title }}</a></li>--}}
+                            {{--@endforeach--}}
 
                         </ul>
                     </li>
-                    @foreach( $pages as $page)
-                        <li><a href="/pages/{{ strtolower($page->name) }}">{{ $page->name }}</a></li>
-                    @endforeach
+                    {{--@foreach( $pages as $page)--}}
+                        {{--<li><a href="/pages/{{ strtolower($page->name) }}">{{ $page->name }}</a></li>--}}
+                    {{--@endforeach--}}
 
                 </ul>
 

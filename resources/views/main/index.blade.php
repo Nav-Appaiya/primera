@@ -91,7 +91,7 @@
                             <div class="caption">
                                 <div class="row">
                                     <div class="col-md-6 col-xs-6">
-                                        <h4>{{$product->name}}</h4>
+                                        <h4>{!! $product->name !!}</h4>
                                     </div>
                                     <div class="col-md-6 col-xs-6 price">
                                         <h3 class="pull-right"><label>&euro;{{number_format($product->price, 2, '.', ',')}}</label></h3>
