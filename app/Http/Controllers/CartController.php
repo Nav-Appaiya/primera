@@ -48,19 +48,14 @@ class CartController extends Controller
 
     public function removeCart(Request $request, $id)
     {
-        header('Content-Type: text/plain');
         $session = $request->session();
         $cartItems = $session->get('cart.items');
 
-        $collect = array();
-        foreach ($cartItems as $item) {
-            if ($item == $id){
-                $session->forget('cart.items', $item);
+        foreach ($cartItems as $key => $cartItem) {
+            if($cartItem->id == $id){
+                $session->forget('cart.items.'.$key);
             }
-            $collect[] = $item->id;
         }
-
-
 
         return redirect()->action('CartController@index', [
             'categories' => Category::all(),

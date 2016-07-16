@@ -11,6 +11,11 @@
 |
 */
 
+Route::get('/test', [
+    'as' => 'test',
+    'uses' => 'MainController@carting'
+]);
+
 
 Route::get('/', [
     'as' => 'homepage',

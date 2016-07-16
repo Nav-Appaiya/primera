@@ -135,4 +135,22 @@ class MainController extends Controller
         header('Content-Type: text/plain');
         print_r($request->all());exit;
     }
+
+    public function carting(Request $request){
+        header('Content-Type: text/plain');
+        echo 'Products in session: ' .  count($request->session()->get('cart.items')) . PHP_EOL . PHP_EOL;
+        $session = $request->session();
+        $items = $request->session()->get('cart.items');
+
+        $remove = 869;
+
+        foreach ($items as $item) {
+            if($item->id === $remove){
+                $pulled = $session->pull('cart.items', '312');
+                var_dump($pulled);exit;
+            }
+        }
+
+        exit;
+    }
 }
