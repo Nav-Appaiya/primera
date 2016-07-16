@@ -47,6 +47,10 @@ Route::get('/privacy-policy', [
     'as' => 'policy',
     'uses' => 'MainController@policy'
 ]);
+Route::get('/verzending', [
+    'as' => 'verzending',
+    'uses' => 'MainController@verzending'
+]);
 // End of contact routes
 
 Route::get('/payment', [

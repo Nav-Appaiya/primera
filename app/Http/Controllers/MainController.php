@@ -168,4 +168,9 @@ class MainController extends Controller
     {
         return view('main.policy');
     }
+
+    public function verzending()
+    {
+        return view('main.verzending');
+    }
 }
