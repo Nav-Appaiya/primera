@@ -153,4 +153,9 @@ class MainController extends Controller
 
         exit;
     }
+
+    public function voorwaarde()
+    {
+        return view('main.voorwaarde');
+    }
 }

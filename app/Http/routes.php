@@ -34,6 +34,11 @@ Route::post('contact', [
     'uses' => 'ContactController@store'
 ]);
 
+// algemene-voorwaarde
+Route::get('/algemene-voorwaarde', [
+    'as' => 'voorwaarde',
+    'uses' => 'MainController@voorwaarde'
+]);
 // End of contact routes
 
 Route::get('/payment', [
