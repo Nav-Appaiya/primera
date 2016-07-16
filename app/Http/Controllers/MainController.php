@@ -163,4 +163,9 @@ class MainController extends Controller
     {
         return view('main.about');
     }
+
+    public function policy()
+    {
+        return view('main.policy');
+    }
 }

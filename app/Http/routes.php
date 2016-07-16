@@ -43,6 +43,10 @@ Route::get('/over-ons', [
     'as' => 'about',
     'uses' => 'MainController@about'
 ]);
+Route::get('/privacy-policy', [
+    'as' => 'policy',
+    'uses' => 'MainController@policy'
+]);
 // End of contact routes
 
 Route::get('/payment', [
