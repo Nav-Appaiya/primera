@@ -17,6 +17,7 @@ class CreateTableCategories extends Migration
             $table->string('categoryID');
             $table->string('title');
             $table->string('image');
+            $table->integer('level');
             $table->timestamps();
         });
     }

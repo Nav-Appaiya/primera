@@ -118,6 +118,21 @@ class MainController extends Controller
             $total += $item->price;
         }
 
-        echo('please pay: &euro;' . number_format($total, 2));exit;
+        $payment = Mollie::api()->payments()->create([
+            "amount"      => $total,
+            "description" => "e-sigarett Primera",
+            "redirectUrl" => "http://localhost:8000/order/payment",
+        ]);
+
+        $payment = Mollie::api()->payments()->get($payment->id);
+
+        return redirect($payment->getPaymentUrl());
+
+    }
+
+    public function payed(Request $request)
+    {
+        header('Content-Type: text/plain');
+        print_r($request->all());exit;
     }
 }
