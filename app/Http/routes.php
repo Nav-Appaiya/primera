@@ -51,6 +51,10 @@ Route::get('/verzending', [
     'as' => 'verzending',
     'uses' => 'MainController@verzending'
 ]);
+Route::get('/cookies', [
+    'as' => 'cookies',
+    'uses' => 'MainController@cookie'
+]);
 // End of contact routes
 
 Route::get('/payment', [

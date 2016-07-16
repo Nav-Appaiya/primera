@@ -173,4 +173,9 @@ class MainController extends Controller
     {
         return view('main.verzending');
     }
+
+    public function cookie()
+    {
+        return view('main.cookie');
+    }
 }
