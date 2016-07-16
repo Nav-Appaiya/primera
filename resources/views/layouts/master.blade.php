@@ -1,5 +1,3 @@
-
-
 <html>
 <head>
     <title>Primera e-Sigarets - @yield('titel')</title>
@@ -15,7 +13,8 @@
     <nav class="navbar navbar-default  navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -25,30 +24,36 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ URL::route('contact') }}">Contact</a></li>
                     @if(!Auth::user())
                         <li><a href="{{ URL::route('login') }}">Inloggen</a></li>
                         <li><a href="/auth/register">Registreren</a></li>
-                        <li><a href="/cart">Winkelwagen ({{ count(Session::get('cart.items')) }}) <span class="fa fa-shopping-cart"></span></a></li>
+                        <li><a href="/cart">Winkelwagen ({{ count(Session::get('cart.items')) }})
+                                <span class="fa fa-shopping-cart"></span></a>
+                        </li>
 
                     @else
                         <li><a href="/order">Mijn bestellingen <span class="fa fa-briefcase"></span></a></li>
                         <li><a href="/cart">Winkelwagen <span class="fa fa-shopping-cart"></span></a></li>
-                            <li><a href="{{ URL::route('logout') }}">Hoi {{ Auth::user()->voornaam }}, {{ Auth::user()->name}} uitloggen?</a></li>
+                        <li><a href="{{ URL::route('logout') }}">Hoi {{ Auth::user()->voornaam }}
+                                , {{ Auth::user()->name}} uitloggen?</a></li>
                     @endif
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ URL::route('homepage') }}">Home <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="{{ URL::route('homepage') }}">Home <span
+                                    class="sr-only">(current)</span></a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorieen <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Categorieen <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             {{--@foreach($categories as $cat)--}}
-                                {{--<li><a href="{{ URL::route('category_detail', $cat->id ) }}">{{ $cat->title }}</a></li>--}}
+                            {{--<li><a href="{{ URL::route('category_detail', $cat->id ) }}">{{ $cat->title }}</a></li>--}}
                             {{--@endforeach--}}
 
                         </ul>
                     </li>
                     {{--@foreach( $pages as $page)--}}
-                        {{--<li><a href="/pages/{{ strtolower($page->name) }}">{{ $page->name }}</a></li>--}}
+                    {{--<li><a href="/pages/{{ strtolower($page->name) }}">{{ $page->name }}</a></li>--}}
                     {{--@endforeach--}}
 
                 </ul>
@@ -78,9 +83,11 @@
         position: relative;
         min-height: 100%;
     }
+
     body {
         margin-bottom: 60px;
     }
+
     .footer {
         position: absolute;
         bottom: 0;
@@ -88,6 +95,7 @@
         height: 60px;
         background-color: #f5f5f5;
     }
+
     footer .text-muted {
         margin: 20px 0;
     }

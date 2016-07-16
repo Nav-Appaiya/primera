@@ -22,10 +22,19 @@ Route::get('/', [
     'uses' => 'MainController@index'
 ]);
 
+
+// Start of contact routes
 Route::get('/contact', [
     'as' => 'contact',
     'uses' => 'ContactController@index'
 ]);
+
+Route::post('contact', [
+    'as' => 'contact_store',
+    'uses' => 'ContactController@store'
+]);
+
+// End of contact routes
 
 Route::get('/payment', [
     'as' => 'payment',
