@@ -21,6 +21,10 @@ Route::get('/contact', [
     'as' => 'contact',
     'uses' => 'ContactController@index'
 ]);
+Route::get('/payment', [
+    'as' => 'payment',
+    'uses' => 'MainController@payment'
+]);
 
 Route::get('auth/login', [
     'as' => 'login',

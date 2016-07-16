@@ -28,7 +28,7 @@
                     @if(!Auth::user())
                         <li><a href="{{ URL::route('login') }}">Inloggen</a></li>
                         <li><a href="/auth/register">Registreren</a></li>
-                        <li><a href="/cart">Winkelwagen <span class="fa fa-shopping-cart"></span></a></li>
+                        <li><a href="/cart">Winkelwagen ({{ count(Session::get('cart.items')) }}) <span class="fa fa-shopping-cart"></span></a></li>
 
                     @else
                         <li><a href="/order">Mijn bestellingen <span class="fa fa-briefcase"></span></a></li>

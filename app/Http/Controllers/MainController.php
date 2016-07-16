@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Mollie\Laravel\Facades\Mollie;
 
 
@@ -107,5 +108,16 @@ class MainController extends Controller
         return view('main.category', [
             'category' => Category::find(1)
         ]);
+    }
+
+    public function payment()
+    {
+        $items = Session::get('cart.items');
+        $total = 0.00;
+        foreach ($items as $item) {
+            $total += $item->price;
+        }
+
+        echo('please pay: &euro;' . number_format($total, 2));exit;
     }
 }
