@@ -39,6 +39,10 @@ Route::get('/algemene-voorwaarde', [
     'as' => 'voorwaarde',
     'uses' => 'MainController@voorwaarde'
 ]);
+Route::get('/over-ons', [
+    'as' => 'about',
+    'uses' => 'MainController@about'
+]);
 // End of contact routes
 
 Route::get('/payment', [

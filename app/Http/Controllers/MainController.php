@@ -158,4 +158,9 @@ class MainController extends Controller
     {
         return view('main.voorwaarde');
     }
+
+    public function about()
+    {
+        return view('main.about');
+    }
 }

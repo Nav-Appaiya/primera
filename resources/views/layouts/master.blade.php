@@ -24,7 +24,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ URL::route('contact') }}">Contact</a></li>
+
                     @if(!Auth::user())
                         <li><a href="{{ URL::route('login') }}">Inloggen</a></li>
                         <li><a href="/auth/register">Registreren</a></li>
@@ -38,6 +38,8 @@
                         <li><a href="{{ URL::route('logout') }}">Hoi {{ Auth::user()->voornaam }}
                                 , {{ Auth::user()->name}} uitloggen?</a></li>
                     @endif
+                        <li><a href="{{ URL::route('about') }}">Over ons</a></li>
+                        <li><a href="{{ URL::route('contact') }}">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ URL::route('homepage') }}">Home <span
