@@ -22,6 +22,11 @@ Route::get('/', [
     'uses' => 'MainController@index'
 ]);
 
+Route::get('/home', [
+    'as' => 'home',
+    'uses' => 'MainController@index'
+]);
+
 
 // Start of contact routes
 Route::get('/contact', [
@@ -65,6 +70,11 @@ Route::get('/payment', [
 Route::get('/order/payment', [
     'as' => 'order.payment',
     'uses' => 'MainController@payed'
+]);
+
+Route::get('/profile/orders', [
+    'as' => 'profile.orders',
+    'uses' => 'ProfileController@orders'
 ]);
 
 
@@ -201,3 +211,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/admin/customers', 'CustomerController');
 
 });
+
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
+
