@@ -16,7 +16,6 @@ class CreateTableOrderedProducts extends Migration
             $table->increments('id');
             $table->string('orderID')->unique();
             $table->string('productID');
-            $table->string('nickname');
             $table->string('voorletters');
             $table->string('achternaam');
             $table->string('voornaam');

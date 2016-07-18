@@ -20,6 +20,7 @@ class CreateTableOrders extends Migration
             $table->string('billing_address');
             $table->decimal('amount');
             $table->string('status');
+            $table->string('payment_id');
             $table->timestamps();
         });
     }

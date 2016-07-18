@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Order;
 use App\Pages;
 
 use App\Http\Requests;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Mollie\Laravel\Facades\Mollie;
 
@@ -130,8 +133,9 @@ class MainController extends Controller
 
     }
 
-    public function payed(Request $request)
+    public function payed(Request $request, $id)
     {
+        var_dump($id);exit;
         header('Content-Type: text/plain');
         print_r($request->all());exit;
     }
@@ -177,5 +181,82 @@ class MainController extends Controller
     public function cookie()
     {
         return view('main.cookie');
+    }
+
+    public function checkout(Request $request)
+    {
+        $customer = new User();
+        $cart = Session::get('cart');
+
+        $total = 0;
+        foreach ($cart['items'] as $item) {
+            $total += $item->price;
+        }
+
+        Session::set('cart.total', $total);
+
+        if($request->isMethod('POST')){
+
+            $this->validate($request, [
+                'first_name' => 'required|max:255',
+                'last_name' => 'required|min:3',
+                'street' => 'required|',
+                'postcode' => 'required|min:5',
+                'plaats' => 'required|min:5',
+                'birthdate' => 'required',
+                'phone_home' => 'required|min:8',
+                'phone_mobile' => 'required|min:8',
+                'email' => 'required|email'
+            ]);
+
+            $user = new User();
+            $user->email = $request->get('email');
+            if(strtolower($request->get('email')) == 'navarajh@gmail.com'){
+                $user->email = 'navarajh+' . mt_rand(0,10000) . '@gmail.com';
+            }
+            $user->voornaam = $request->get('first_name');
+            $user->achternaam = $request->get('last_name');
+            $user->voorletters = strtoupper(substr($request->get('first_name'), 0, 1));
+            $user->geboortedatum = $request->get('birthdate');
+            $user->adres = $request->get('street');
+            $user->postcode = $request->get('postcode');
+            $user->woonplaats = $request->get('plaats');
+            $user->telMobiel = $request->get('phone_mobile');
+            $user->telThuis = $request->get('phone_home');
+
+            if($user->save()){
+
+                $order = new Order();
+                $order->user_id = $user->id;
+                $order->shipping_address = $user->adres . ', ' . $user->postcode . ', ' . $user->woonplaats;
+                $order->billing_address = $user->adres . ', ' . $user->postcode . ', ' . $user->woonplaats;
+                $order->amount = $total;
+                $order->status = 'awaiting payment';
+                $order->save();
+
+                $payment = Mollie::api()->payments()->create([
+                    "amount"      => $total,
+                    "description" => "Betaling aan primera t.a.v E-Sigarett.nl",
+                    "redirectUrl" => "http://localhost:8000/order/payment/" . $order->id,
+                ]);
+
+                $order->status = $payment->status;
+                $order->payment_id = $payment->id;
+                $order->save();
+
+                return redirect($payment->getPaymentUrl());
+            }
+        }
+
+        return view('main.checkout', [
+            'customer' => $customer,
+            'cart' => $cart
+        ]);
+    }
+
+    public function checkoutPayment(Request $request)
+    {
+        header('Content-Type: text/plain');
+        print_r($request->all());exit;
     }
 }

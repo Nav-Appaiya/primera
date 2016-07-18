@@ -9,7 +9,7 @@
         @endif
         <div class="panel panel-default">
             <div class="panel-heading">
-                Klant: {{ $customer->nickname }} <small>({{ $customer->adres }}, {{ $customer->postcode }} {{ $customer->woonplaats }})</small>
+                Klant: {{ $customer->voornaam }} <small>({{ $customer->adres }}, {{ $customer->postcode }} {{ $customer->woonplaats }})</small>
             </div>
             <div class="panel-body">
                 @if (isset($customer))

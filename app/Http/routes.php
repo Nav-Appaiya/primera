@@ -60,14 +60,22 @@ Route::get('/cookies', [
     'as' => 'cookies',
     'uses' => 'MainController@cookie'
 ]);
-// End of contact routes
+
+Route::post('/checkout', [
+    'as' => 'checkout',
+    'uses' => 'MainController@checkout'
+]);
+Route::get('/checkout', [
+    'as' => 'checkout',
+    'uses' => 'MainController@checkout'
+]);
 
 Route::get('/payment', [
     'as' => 'payment',
     'uses' => 'MainController@payment'
 ]);
 
-Route::get('/order/payment', [
+Route::get('/order/payment/{id}', [
     'as' => 'order.payment',
     'uses' => 'MainController@payed'
 ]);

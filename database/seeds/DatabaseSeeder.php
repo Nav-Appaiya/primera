@@ -24,12 +24,10 @@ class DatabaseSeeder extends Seeder
         $userId = 1;
         DB::table('users')->insert([
             'id' => $userId,
-            'nickname' => 'admin',
             'email' => 'navarajh@gmail.com',
             'password' => bcrypt('admin'),
             'voorletters' => 'N.',
             'achternaam' => 'Appaiya',
-            'geslacht' => 'man',
             'geboortedatum' => '24-01-1992',
             'voornaam' => 'Nav',
             'adres' => 'Rijnvoorde 42',

@@ -13,7 +13,7 @@
             </div>
             <div class="panel-body">
                 @if (isset($customer))
-                    <h1>Bewerk <strong>{{ $customer->nickname }}</strong> </h1>
+                    <h1>Bewerk <strong>{{ $customer->voornaam }}</strong> </h1>
 
 
                 <!-- if there are creation errors, they will show here -->

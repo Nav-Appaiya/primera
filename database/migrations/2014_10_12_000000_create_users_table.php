@@ -16,11 +16,9 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('nickname');
             $table->string('voorletters');
             $table->string('achternaam');
             $table->string('voornaam');
-            $table->string('geslacht');
             $table->string('geboortedatum');
             $table->string('adres');
             $table->string('postcode');

@@ -1,0 +1,131 @@
+
+
+
+@extends('layouts.master')
+
+@section('titel', 'Primera shop')
+@section('seotags', 'seotags')
+
+@section('sidebar')
+    @parent
+@endsection
+
+@section('content')
+    <div class="container wrapper">
+        <div class="row cart-head">
+            <h3 class="text-center">Betaalgegevens invullen</h3>
+            <p>
+                <br>
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <p>Controleer het formulier of je alle velden hebt ingevuld: </p>
+            <br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            </p>
+        </div>
+        <div class="row cart-body">
+            <form class="form-horizontal" method="POST" action="{{ URL::route('checkout') }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Jouw bestelling <div class="pull-right"><small><a class="afix-1" href="{{ url('cart') }}">Terug naar de winkelwagen</a></small></div>
+                        </div>
+                        <div class="panel-body">
+                            @foreach($cart['items'] as $item)
+                                <div class="form-group">
+                                    <div class="col-sm-3 col-xs-3">
+                                        <img class="img-responsive" src="{{ $item->imageurl }}" />
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <div class="col-xs-12">{{ $item->name }}</div>
+                                        <div class="col-xs-12"><small>Quantity:<span>1</span></small></div>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-3 text-right">
+                                        <h6><span>&euro;</span>{{ $item->price }}</h6>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Jouw gegevens</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <h4>Factuuradres</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-xs-12">
+                                    <strong>Voornaam:</strong>
+                                    <input type="text" name="first_name" class="form-control" value="" />
+                                </div>
+                                <div class="span1"></div>
+                                <div class="col-md-6 col-xs-12">
+                                    <strong>Achternaam:</strong>
+                                    <input type="text" name="last_name" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Straat + huisnummer:</strong></div>
+                                <div class="col-md-12">
+                                    <input type="text" name="street" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-xs-12">
+                                    <strong>Postcode:</strong>
+                                    <input type="text" name="postcode" class="form-control" value="" />
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <strong>Plaats:</strong>
+                                    <input type="text" name="plaats" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Geboortedatum:</strong></div>
+                                <div class="col-md-12">
+                                    <input type="date" name="birthdate" value="1992-01-24" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Telefoonnummer (vast):</strong></div>
+                                <div class="col-md-12">
+                                    <input type="text" name="phone_home" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Telefoonnummer (mobiel):</strong></div>
+                                <div class="col-md-12"><input type="text" name="phone_mobile" class="form-control" value="" /></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Emailadres:</strong></div>
+                                <div class="col-md-12"><input type="text" name="email" class="form-control" value="" /></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="submit" value="Valideren en Verdergaan" class="btn btn-success pull-right">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="row cart-footer">
+
+        </div>
+    </div>
+@endsection
+
