@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use Mollie\Laravel\Facades\Mollie;
 
 
@@ -131,19 +132,46 @@ class MainController extends Controller
 
     public function payed(Request $request, $id)
     {
-        $order = Order::findOrFail($id);
+        /** @var Order $order */
+        $order = Order::find($id);
 
-        if(!$order){
-            throw new \Exception("No order or payment for this ID found.");
+        if($order == null){
+            return view('main.please-pay', [
+                'message' => 'Order not found, please check your link or fill up contactform.'
+            ]);
+        }
+
+        if(!$order->payment_id){
+            return view('main.please-pay', [
+                'message' => 'Je hebt nog niet uitgecheckt met je winkelwagen, ga naar de checkout pagina om verder te gaan en een betaling aan te vragen. ',
+                'url' => URL::route('checkout'),
+                'info' => 'Checkout pagina'
+            ]);
         }
 
         $payment = Mollie::api()->payments()->get($order->payment_id);
-
-
         $items = OrderItem::where('order_id', $order->id)->get();
 
-        if($payment->isPaid() && count($items) >= 1){
+        if(!$payment->isPaid()){
+            return view('main.please-pay', [
+                'message' => 'Je hebt je order nog niet betaald, je kunt dit alsnog doen via deze link: ',
+                'url' => $payment->getPaymentUrl(),
+                'info' => 'Deze order veilig betalen met iDeal'
+            ]);
+        }
 
+        if($payment->isPaid()){
+            $order->status = $payment->status;
+            $order->notification = 1;
+            $order->save();
+            $user = $order->user()->getResults();
+            if($order->notification == 0 && isset($user)){
+                $order->mailUserPayedOrder($user);
+                    if ($order->mailUserPayedOrder($user)){
+                        $order->notification = true;
+                        $order->save();
+                    }
+            }
             return view('main.thankyou', [
                 'order' => $order,
                 'payment' => $payment,
@@ -152,7 +180,8 @@ class MainController extends Controller
                 'total' => $payment->amount,
                 'verzendkosten' => '4,95'
             ]);
-
+        }else{
+            return view('main.please-pay');
         }
     }
 
@@ -269,7 +298,7 @@ class MainController extends Controller
                     "redirectUrl" => "http://localhost:8000/order/payment/" . $order->id,
                 ]);
 
-                $order->status = $payment->status;
+                $order->status = 'Waiting for payment';
                 $order->payment_id = $payment->id;
                 $order->save();
 
@@ -287,5 +316,12 @@ class MainController extends Controller
     {
         header('Content-Type: text/plain');
         print_r($request->all());exit;
+    }
+
+    public function paymentStatus(Request $request, $paymentId)
+    {
+        $payment = Mollie::api()->payments()->get($paymentId);
+
+        dd($payment);
     }
 }

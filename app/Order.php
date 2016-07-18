@@ -15,4 +15,10 @@ class Order extends Model
     {
         return $this->hasMany('App\OrderItem');
     }
+
+    public function mailUserPayedOrder($user)
+    {
+        $mail = mail($user->email, 'Order is betaald!', 'Bedankt voor betalen!');
+        var_dump($mail);
+    }
 }

@@ -17,7 +17,10 @@
 
                 <div class="col-lg-12">
 
-                    <h4><b>{{ $user->voorletters }}. {{  $user->achternaam }}</b></h4>
+                    <h3>
+                        <strong>{{ $user->voorletters }} {{  $user->achternaam }}</strong>
+                        <small>Betaald met {{ $payment->method }} op {{ date('F d, Y', strtotime($payment->paidDatetime)) }}</small>
+                    </h3>
                     <hr />
 
                     <div>
@@ -44,7 +47,12 @@
 
                             </div>
                             <div class="col-xs-6 text-right">
-                                <h1><span class="glyphicon glyphicon glyphicon-cloud-download" aria-hidden="true"></span></h1>
+                                Betaald op <strong>{{ date('F d, Y', strtotime($payment->paidDatetime)) }}</strong> met <strong>{{ $payment->method }}</strong>.
+                                <br><i>Rekeninghouder: <strong>{{ $payment->details->consumerName }}</strong></i><br>
+                                Rekeningnummer: {{ substr_replace($payment->details->consumerAccount, 'xxx', -5) }}
+                                <br>
+                                Onder vermelding van: <br>{{ $payment->description }}
+
                             </div>
                         </div>
                     </div>

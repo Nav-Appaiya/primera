@@ -80,6 +80,11 @@ Route::get('/order/payment/{id}', [
     'uses' => 'MainController@payed'
 ]);
 
+Route::get('mollie/status/{paymentid}', [
+    'as' => 'payment.status',
+    'uses' => 'MainController@paymentStatus'
+]);
+
 Route::get('/profile/orders', [
     'as' => 'profile.orders',
     'uses' => 'ProfileController@orders'

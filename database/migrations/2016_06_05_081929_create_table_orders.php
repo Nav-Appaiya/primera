@@ -21,6 +21,7 @@ class CreateTableOrders extends Migration
             $table->decimal('amount');
             $table->string('status');
             $table->string('payment_id');
+            $table->boolean('notification');
             $table->timestamps();
         });
     }
