@@ -17,7 +17,6 @@ class UsersTableSeeder extends Seeder
             'voorletters' => str_random(10),
             'achternaam' => str_random(10),
             'voornaam' => str_random(10),
-            'geslacht' => str_random(10),
             'geboortedatum' => str_random(10),
             'adres' => str_random(10),
             'postcode' => str_random(10),

@@ -14,18 +14,13 @@ class CreateTableOrderedProducts extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('orderID')->unique();
-            $table->string('productID');
-            $table->string('voorletters');
-            $table->string('achternaam');
-            $table->string('voornaam');
-            $table->string('geslacht');
-            $table->string('geboortedatum');
-            $table->string('adres');
-            $table->string('postcode');
-            $table->string('woonplaats');
-            $table->string('telMobiel');
-            $table->string('telThuis');
+            $table->string('item_name');
+            $table->string('item_info');
+            $table->string('user_id');
+            $table->string('order_id');
+            $table->string('product_id');
+            $table->string('quantity');
+            $table->string('price');
             $table->rememberToken();
             $table->timestamps();
         });

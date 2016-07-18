@@ -58,7 +58,7 @@
                             <td><a href="{{ URL::route('homepage') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Nog meer winkelen</a></td>
                             <td colspan="2" class="hidden-xs"></td>
                             <td class="hidden-xs text-center"><strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong></td>
-                            <td><a href="{{ URL::route('payment') }}" class="btn btn-success btn-block">Bestelling afronden <i class="fa fa-angle-right"></i></a></td>
+                        <td><a href="{{ URL::route('checkout') }}" class="btn btn-success btn-block">Bestelling afronden <i class="fa fa-angle-right"></i></a></td>
                         </tr>
                         </tfoot>
                     </table>

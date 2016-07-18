@@ -6,9 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
 {
+
+    public function order()
+    {
+        return $this->hasOne('App\Order');
+    }
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasOne('App\Product');
     }
 
     public function file()

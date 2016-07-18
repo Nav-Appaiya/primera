@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Order;
+use App\OrderItem;
 use App\Pages;
 
 use App\Http\Requests;
@@ -96,12 +97,7 @@ class MainController extends Controller
             "redirectUrl" => "http://localhost:8000/test",
         ]);
 
-        $payment = Mollie::api()->payments()->get($payment->id);
 
-        if ($payment->isPaid())
-        {
-            echo "Payment received.";
-        }
         header('Content-Type: text/plain');
         print_r($payment->getPaymentUrl());exit;
     }
@@ -135,9 +131,29 @@ class MainController extends Controller
 
     public function payed(Request $request, $id)
     {
-        var_dump($id);exit;
-        header('Content-Type: text/plain');
-        print_r($request->all());exit;
+        $order = Order::findOrFail($id);
+
+        if(!$order){
+            throw new \Exception("No order or payment for this ID found.");
+        }
+
+        $payment = Mollie::api()->payments()->get($order->payment_id);
+
+
+        $items = OrderItem::where('order_id', $order->id)->get();
+
+        if($payment->isPaid() && count($items) >= 1){
+
+            return view('main.thankyou', [
+                'order' => $order,
+                'payment' => $payment,
+                'user' => Auth::user(),
+                'items' => $items,
+                'total' => $payment->amount,
+                'verzendkosten' => '4,95'
+            ]);
+
+        }
     }
 
     public function carting(Request $request){
@@ -225,7 +241,7 @@ class MainController extends Controller
             $user->telThuis = $request->get('phone_home');
 
             if($user->save()){
-
+                $items = Session::get('cart.items');
                 $order = new Order();
                 $order->user_id = $user->id;
                 $order->shipping_address = $user->adres . ', ' . $user->postcode . ', ' . $user->woonplaats;
@@ -233,6 +249,19 @@ class MainController extends Controller
                 $order->amount = $total;
                 $order->status = 'awaiting payment';
                 $order->save();
+
+                header('Content-Type: text/plain');
+                foreach ($items as $item) {
+                    $orderedProduct = new OrderItem();
+                    $orderedProduct->user_id = $user->id;
+                    $orderedProduct->product_id = $item->id;
+                    $orderedProduct->order_id = $order->id;
+                    $orderedProduct->quantity = 1;
+                    $orderedProduct->price = $item->price;
+                    $orderedProduct->item_name = $item->name;
+                    $orderedProduct->item_info = $item->description;
+                    $orderedProduct->save();
+                }
 
                 $payment = Mollie::api()->payments()->create([
                     "amount"      => $total,
