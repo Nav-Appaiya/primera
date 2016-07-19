@@ -241,18 +241,38 @@ class MainController extends Controller
 
     public function checkout(Request $request)
     {
-        $customer = new User();
-        $cart = Session::get('cart');
+        $user = Auth::user();
+        $session = $request->session();
+        $cart = $session->get('cart');
+        $cartItems = $session->get('cart.items');
 
-        $total = 0;
-        foreach ($cart['items'] as $item) {
-            $total += $item->price;
+
+        if(!$user){
+            $loginOrRegister = 'Je moet je registreren of inloggen om verder te kunnen gaan. ';
+            return view('main.please-pay', [
+                'message' => $loginOrRegister,
+                'url' => URL::route('register'),
+                'info' => 'Verder winkelen'
+            ]);
         }
 
-        Session::set('cart.total', $total);
+        if(!$session->has('cart.items')){
+            // Geen items om uit te checken.
+            return view('main.please-pay', [
+                'message' => 'Helaas heb je nog geen producten in je winkelwagentje zitten, ' . '<br />' .' ' .
+                    'ga terug en kom terug als je items in je winkelwagentje hebt.',
+                'url' => URL::route('homepage'),
+                'info' => 'Verder winkelen'
+            ]);
+        }
+    
+        $total = 0;
+        foreach ($cartItems as $item) {
+            $total += $item->price;
+        }
+        $session->set('cart.total', $total);
 
         if($request->isMethod('POST')){
-
             $this->validate($request, [
                 'first_name' => 'required|max:255',
                 'last_name' => 'required|min:3',
@@ -264,7 +284,7 @@ class MainController extends Controller
                 'phone_mobile' => 'required|min:8',
                 'email' => 'required|email'
             ]);
-            $user = Auth::user();
+            
             if(!$user){
                 $user = new User();
             }
@@ -321,7 +341,7 @@ class MainController extends Controller
         }
 
         return view('main.checkout', [
-            'customer' => $customer,
+            'customer' => $user,
             'cart' => $cart
         ]);
     }

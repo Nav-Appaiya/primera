@@ -25,9 +25,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
 
-                    @if(!Auth::user())
-                        <li><a href="{{ URL::route('login') }}">Inloggen</a></li>
-                        <li><a href="/auth/register">Registreren</a></li>
+                    @if(Auth::check())
+                        <li><a href="{{ route('login') }}">Inloggen</a></li>
+                        <li><a href="{{ route('register') }}">Registreren</a></li>
                         <li><a href="/cart">Winkelwagen ({{ count(Session::get('cart.items')) }})
                                 <span class="fa fa-shopping-cart"></span></a>
                         </li>
@@ -35,7 +35,7 @@
                     @else
                         <li><a href="/order">Mijn bestellingen <span class="fa fa-briefcase"></span></a></li>
                         <li><a href="/cart">Winkelwagen <span class="fa fa-shopping-cart"></span></a></li>
-                        <li><a href="{{ URL::route('logout') }}">Hoi {{ Auth::user()->voornaam }}
+                        <li><a href="{{ route('logout') }}">Hoi {{ Auth::user()->voornaam }}
                                 , {{ Auth::user()->name}} uitloggen?</a></li>
                     @endif
                         <li><a href="{{ URL::route('about') }}">Over ons</a></li>

@@ -21,10 +21,12 @@ class Order extends Model
     public function mailUserPayedOrder($user, $order, $payment, $items)
     {
 
-        Mail::send('emails.payment', [
+        return Mail::send('emails.payment', [
             'user' => $user,
             'order' => $order,
-            'payment' => $payment, 'items' => $items, 'total' => Session::get('cart.total')
+            'payment' => $payment,
+            'items' => $items,
+            'total' => Session::get('cart.total')
         ], function ($m) use ($user) {
             $m->from('info@esigarett.nl', 'Primera Eindhoven(esigarett.nl)');
 

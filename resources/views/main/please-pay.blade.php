@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-12">
                 @if(isset($message))
-                    <h3 class="text-center">{{ $message }}</h3>
+                    <h3 class="text-center">{!! $message !!} </h3>
                     <br>
                     @if(isset($url) and isset($info))
                         <div class="text-center">
