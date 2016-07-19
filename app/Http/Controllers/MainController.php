@@ -25,7 +25,7 @@ class MainController extends Controller
         $products = Product::all();
         $categories = Category::all();
         $pages = Pages::all();
-
+        
         return view('main.index',[
             'products' => $products,
             'categories' => $categories,

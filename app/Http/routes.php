@@ -16,7 +16,6 @@ Route::get('/test', [
     'uses' => 'MainController@carting'
 ]);
 
-
 Route::get('/', [
     'as' => 'homepage',
     'uses' => 'MainController@index'
@@ -87,6 +86,8 @@ Route::get('/profile/orders', [
 
 // User authentication routes... Nav Appaiya 19 July 21:55
 Route::get('auth/login', ['as'=>'login', 'uses' => 'Auth\AuthController@getLogin']);
+Route::get('/login', ['uses' => 'Auth\AuthController@getLogin']);
+
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
@@ -221,3 +222,7 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

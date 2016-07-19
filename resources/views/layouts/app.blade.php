@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>esigarett.nl Admin</title>
+    <title>Laravel</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -40,23 +40,15 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    eSigarett.nl <small style="font-size: 10px">admin</small>
+                    Laravel
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                @if(Auth::check())
-                    <ul class="nav navbar-nav">
-                        <li><a href="{{ URL::route('homepage') }}">Admin home</a></li>
-                        <li><a href="{{ URL::route('admin_product_index') }}">Producten</a></li>
-                        <li><a href="{{ URL::route('orders.index') }}">Orders</a></li>
-                        <li><a href="{{ URL::route('admin.customers.index') }}">Klanten</a></li>
-                        {{-- TODO: Pagina's + Menu's beheerbaar maken --}}
-                        <li><a href="#">Paginas</a></li>
-                        <li><a href="#">Menu's</a></li>
-                    </ul>
-                @endif
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/home') }}">Home</a></li>
+                </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

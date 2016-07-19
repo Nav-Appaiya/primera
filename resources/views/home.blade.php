@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    Beheren van <a href="{{ url('/admin/products') }}">producten</a> of <a href="{{ url('/admin/orders') }}">Orders</a>.
+                    You are logged in!
                 </div>
             </div>
         </div>
