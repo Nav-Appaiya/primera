@@ -35,7 +35,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            Jouw bestelling <div class="pull-right"><small><a class="afix-1" href="{{ url('cart') }}">Terug naar de winkelwagen</a></small></div>
+                            Jouw bestelling <div class="pull-right"><small><a class="afix-1" href="{{ url('cart') }}">Terug naar je winkelwagentje</a></small></div>
                         </div>
                         <div class="panel-body">
                             @foreach($cart['items'] as $item)
@@ -57,58 +57,58 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
                     <div class="panel panel-info">
-                        <div class="panel-heading">Jouw gegevens</div>
+                        <div class="panel-heading">Je persoonlijke gegevens invullen</div>
                         <div class="panel-body">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <h4>Factuuradres</h4>
+                                    <h5>Waar kunnen we je bestelling naartoe sturen?</h5>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-xs-12">
-                                    <strong>Voornaam:</strong>
-                                    <input type="text" name="first_name" class="form-control" value="" />
+                                    <strong>Voornaam: <span style="color: red;"> * </span></strong>
+                                    <input type="text" name="first_name" class="form-control" value="" required="required"/>
                                 </div>
                                 <div class="span1"></div>
                                 <div class="col-md-6 col-xs-12">
-                                    <strong>Achternaam:</strong>
+                                    <strong>Achternaam: <span style="color: red;"> * </span></strong>
                                     <input type="text" name="last_name" class="form-control" value="" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12"><strong>Straat + huisnummer:</strong></div>
+                                <div class="col-md-12"><strong>Straat + huisnummer: <span style="color: red;"> * </span></strong></div>
                                 <div class="col-md-12">
                                     <input type="text" name="street" class="form-control" value="" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-xs-12">
-                                    <strong>Postcode:</strong>
+                                    <strong>Postcode: <span style="color: red;"> * </span></strong>
                                     <input type="text" name="postcode" class="form-control" value="" />
                                 </div>
                                 <div class="col-md-6 col-xs-12">
-                                    <strong>Plaats:</strong>
+                                    <strong>Plaats: <span style="color: red;"> * </span></strong>
                                     <input type="text" name="plaats" class="form-control" value="" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12"><strong>Geboortedatum:</strong></div>
+                                <div class="col-md-12"><strong>Geboortedatum: <span style="color: red;"> * </span></strong></div>
                                 <div class="col-md-12">
                                     <input type="date" name="birthdate" value="1992-01-24" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12"><strong>Telefoonnummer (vast):</strong></div>
+                                <div class="col-md-12"><strong>Telefoonnummer (vast): </strong></div>
                                 <div class="col-md-12">
                                     <input type="text" name="phone_home" class="form-control" value="" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12"><strong>Telefoonnummer (mobiel):</strong></div>
+                                <div class="col-md-12"><strong>Telefoonnummer (mobiel): <span style="color: red;"> * </span></strong></div>
                                 <div class="col-md-12"><input type="text" name="phone_mobile" class="form-control" value="" /></div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12"><strong>Emailadres:</strong></div>
+                                <div class="col-md-12"><strong>Emailadres: <span style="color: red;"> * </span></strong></div>
                                 <div class="col-md-12"><input type="text" name="email" class="form-control" value="" /></div>
                             </div>
 

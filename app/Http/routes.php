@@ -75,11 +75,6 @@ Route::get('/payment', [
     'uses' => 'MainController@payment'
 ]);
 
-Route::get('/order/payment/{id}', [
-    'as' => 'order.payment',
-    'uses' => 'MainController@payed'
-]);
-
 Route::get('mollie/status/{paymentid}', [
     'as' => 'payment.status',
     'uses' => 'MainController@paymentStatus'
@@ -90,7 +85,9 @@ Route::get('/profile/orders', [
     'uses' => 'ProfileController@orders'
 ]);
 
-
+Route::get('login', [
+    'uses' => 'Auth\AuthController@getLogin'
+]);
 Route::get('auth/login', [
     'as' => 'login',
     'uses' => 'Auth\AuthController@getLogin'
@@ -152,78 +149,84 @@ Route::get('/cart/remove/{id}', [
 ]);
 
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/admin/orders', [
-        'as' => 'orders.index',
-        'uses' => 'OrderController@index'
-    ]);
+    Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/admin/orders/new', [
-        'as' => 'orders.create',
-        'uses' => 'OrderController@create'
-    ]);
+        Route::get('/order/payment/{id}', [
+            'as' => 'order.payment',
+            'uses' => 'MainController@payed'
+        ]);
 
-    Route::post('/admin/orders/store', [
-        'as' => 'orders.store',
-        'uses' => 'OrderController@store'
-    ]);
+        Route::get('/admin/orders', [
+            'as' => 'orders.index',
+            'uses' => 'OrderController@index'
+        ]);
 
-    Route::get('/admin/orders/{order}/edit/', [
-        'as' => 'orders.edit',
-        'uses' => 'OrderController@edit'
-    ]);
+        Route::get('/admin/orders/new', [
+            'as' => 'orders.create',
+            'uses' => 'OrderController@create'
+        ]);
 
-    Route::get('/admin/orders/{order}/show/', [
-        'as' => 'orders.show',
-        'uses' => 'OrderController@show'
-    ]);
+        Route::post('/admin/orders/store', [
+            'as' => 'orders.store',
+            'uses' => 'OrderController@store'
+        ]);
 
-    Route::get('/admin/orders/{order}/destroy/', [
-        'as' => 'orders.destroy',
-        'uses' => 'OrderController@destroy'
-    ]);
+        Route::get('/admin/orders/{order}/edit/', [
+            'as' => 'orders.edit',
+            'uses' => 'OrderController@edit'
+        ]);
 
-    Route::get('/admin', [
-        'as' => 'admin',
-        'uses' => 'AdminController@index'
-    ]);
+        Route::get('/admin/orders/{order}/show/', [
+            'as' => 'orders.show',
+            'uses' => 'OrderController@show'
+        ]);
 
+        Route::get('/admin/orders/{order}/destroy/', [
+            'as' => 'orders.destroy',
+            'uses' => 'OrderController@destroy'
+        ]);
 
-    Route::get('/admin/product/new', [
-        'as' => 'admin_product_new',
-        'uses' => 'ProductController@newProduct'
-    ]);
-
-
-    Route::get('/admin/products', [
-        'as' => 'admin_product_index',
-        'uses' => 'AdminController@products'
-    ]);
+        Route::get('/admin', [
+            'as' => 'admin',
+            'uses' => 'AdminController@index'
+        ]);
 
 
-    Route::get('/admin/product/destroy/{id}', [
-        'as' => 'admin_product_destroy',
-        'uses' => 'ProductController@destroy'
-    ]);
+        Route::get('/admin/product/new', [
+            'as' => 'admin_product_new',
+            'uses' => 'ProductController@newProduct'
+        ]);
 
-    Route::get('/admin/product/{id}', [
-        'as' => 'admin_product_detail',
-        'uses' => 'ProductController@index'
-    ]);
 
-    Route::get('/admin/product/{product}/edit/', [
-        'as' => 'admin_product_edit',
-        'uses' => 'ProductController@edit'
-    ]);
+        Route::get('/admin/products', [
+            'as' => 'admin_product_index',
+            'uses' => 'AdminController@products'
+        ]);
 
-    Route::post('/admin/product/save', [
-        'as' => 'admin_product_save',
-        'uses' => 'ProductController@add'
-    ]);
 
-    Route::resource('/admin/customers', 'CustomerController');
+        Route::get('/admin/product/destroy/{id}', [
+            'as' => 'admin_product_destroy',
+            'uses' => 'ProductController@destroy'
+        ]);
 
-});
+        Route::get('/admin/product/{id}', [
+            'as' => 'admin_product_detail',
+            'uses' => 'ProductController@index'
+        ]);
+
+        Route::get('/admin/product/{product}/edit/', [
+            'as' => 'admin_product_edit',
+            'uses' => 'ProductController@edit'
+        ]);
+
+        Route::post('/admin/product/save', [
+            'as' => 'admin_product_save',
+            'uses' => 'ProductController@add'
+        ]);
+
+        Route::resource('/admin/customers', 'CustomerController');
+
+    }); // End of authed route group.
 
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');

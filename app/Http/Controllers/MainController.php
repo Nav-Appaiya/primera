@@ -133,17 +133,23 @@ class MainController extends Controller
     public function payed(Request $request, $id)
     {
         /** @var Order $order */
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
 
-        if($order == null){
+        // We dont have a payment so send him to checkout.
+        if(!$order->payment_id){
             return view('main.please-pay', [
-                'message' => 'Order not found, please check your link or fill up contactform.'
+                'message' => 'Je hebt nog niet uitgecheckt ' .
+                    'met je winkelwagen, ga naar de checkout' .
+                    ' pagina om verder te gaan en een betaling ' .
+                    'aan te vragen. ',
+                'url' => URL::route('checkout'),
+                'info' => 'Checkout pagina'
             ]);
         }
 
-        if(!$order->payment_id){
+        if($order->notification == 1){
             return view('main.please-pay', [
-                'message' => 'Je hebt nog niet uitgecheckt met je winkelwagen, ga naar de checkout pagina om verder te gaan en een betaling aan te vragen. ',
+                'message' => 'Helaas kun je deze factuur niet meer inzien, maar gelukkig hebben we hem ook naar je gemaild. Check je inbox om deze factuur in te zien. ',
                 'url' => URL::route('checkout'),
                 'info' => 'Checkout pagina'
             ]);
@@ -152,26 +158,19 @@ class MainController extends Controller
         $payment = Mollie::api()->payments()->get($order->payment_id);
         $items = OrderItem::where('order_id', $order->id)->get();
 
-        if(!$payment->isPaid()){
-            return view('main.please-pay', [
-                'message' => 'Je hebt je order nog niet betaald, je kunt dit alsnog doen via deze link: ',
-                'url' => $payment->getPaymentUrl(),
-                'info' => 'Deze order veilig betalen met iDeal'
-            ]);
-        }
-
         if($payment->isPaid()){
+            $request->session()->clear();
             $order->status = $payment->status;
-            $order->notification = 1;
             $order->save();
             $user = $order->user()->getResults();
+            dd($user);
             if($order->notification == 0 && isset($user)){
-                $order->mailUserPayedOrder($user);
-                    if ($order->mailUserPayedOrder($user)){
-                        $order->notification = true;
+                    if ($order->mailUserPayedOrder($user, $order)){
+                        $order->notification = 1;
                         $order->save();
                     }
             }
+
             return view('main.thankyou', [
                 'order' => $order,
                 'payment' => $payment,
@@ -181,7 +180,20 @@ class MainController extends Controller
                 'verzendkosten' => '4,95'
             ]);
         }else{
-            return view('main.please-pay');
+            // Payment not paid, you could pay if its not expired..
+            if ($payment->isExpired()) {
+                $message = 'Je betaling is mislukt, als je nog
+                geen bevestigings email hebt gehad moet je opnieuw je bestelling plaatsen. ';
+            } elseif($payment->isOpen()) {
+                $message = 'Je hebt je order nog niet betaald,
+                je kunt dit alsnog doen via deze link: ';
+            }
+
+            return view('main.please-pay', [
+                'message' => $message,
+                'url' => $payment->getPaymentUrl(),
+                'info' => 'Deze order veilig betalen met iDeal'
+            ]);
         }
     }
 
@@ -253,8 +265,10 @@ class MainController extends Controller
                 'phone_mobile' => 'required|min:8',
                 'email' => 'required|email'
             ]);
-
-            $user = new User();
+            $user = Auth::user();
+            if(!$user){
+                $user = new User();
+            }
             $user->email = $request->get('email');
             if(strtolower($request->get('email')) == 'navarajh@gmail.com'){
                 $user->email = 'navarajh+' . mt_rand(0,10000) . '@gmail.com';
@@ -270,6 +284,7 @@ class MainController extends Controller
             $user->telThuis = $request->get('phone_home');
 
             if($user->save()){
+                Auth::login($user);
                 $items = Session::get('cart.items');
                 $order = new Order();
                 $order->user_id = $user->id;
@@ -277,9 +292,9 @@ class MainController extends Controller
                 $order->billing_address = $user->adres . ', ' . $user->postcode . ', ' . $user->woonplaats;
                 $order->amount = $total;
                 $order->status = 'awaiting payment';
+                $order->notification = 0;
                 $order->save();
 
-                header('Content-Type: text/plain');
                 foreach ($items as $item) {
                     $orderedProduct = new OrderItem();
                     $orderedProduct->user_id = $user->id;
@@ -295,7 +310,7 @@ class MainController extends Controller
                 $payment = Mollie::api()->payments()->create([
                     "amount"      => $total,
                     "description" => "Betaling aan primera t.a.v E-Sigarett.nl",
-                    "redirectUrl" => "http://localhost:8000/order/payment/" . $order->id,
+                    "redirectUrl" => route('order.payment', ['id' => $order->id])
                 ]);
 
                 $order->status = 'Waiting for payment';

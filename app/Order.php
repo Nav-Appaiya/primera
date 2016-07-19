@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Order extends Model
 {
@@ -16,9 +17,17 @@ class Order extends Model
         return $this->hasMany('App\OrderItem');
     }
 
-    public function mailUserPayedOrder($user)
+    public function mailUserPayedOrder($user, $order)
     {
-        $mail = mail($user->email, 'Order is betaald!', 'Bedankt voor betalen!');
-        var_dump($mail);
+        Mail::send('emails.payment', [
+            'user' => $user,
+            'order' => $order->toJson()
+        ], function ($m) use ($user) {
+            $m->from('info@esigarett.nl', 'Primera Eindhoven(esigarett.nl)');
+
+            $m->to($user->email, $user->voornaam)
+                ->subject('Betaling gelukt!');
+        });
+
     }
 }
