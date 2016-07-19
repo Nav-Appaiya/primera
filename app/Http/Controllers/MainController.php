@@ -163,9 +163,8 @@ class MainController extends Controller
             $order->status = $payment->status;
             $order->save();
             $user = $order->user()->getResults();
-            dd($user);
             if($order->notification == 0 && isset($user)){
-                    if ($order->mailUserPayedOrder($user, $order)){
+                    if ($order->mailUserPayedOrder($user, $order, $payment, $items)){
                         $order->notification = 1;
                         $order->save();
                     }

@@ -88,6 +88,7 @@ Route::get('/profile/orders', [
 Route::get('login', [
     'uses' => 'Auth\AuthController@getLogin'
 ]);
+
 Route::get('auth/login', [
     'as' => 'login',
     'uses' => 'Auth\AuthController@getLogin'
