@@ -21,6 +21,7 @@ class CreateTableProducts extends Migration
             $table->decimal('price');
             $table->string('imageurl');
             $table->string('category_id');
+            $table->integer('stock');
             $table->timestamps();
         });
     }
