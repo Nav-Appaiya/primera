@@ -12,10 +12,22 @@ class ProfileController extends Controller
 {
     public function orders()
     {
-        $orders = Order::where('user_id', 1)->get();
+        $orders = Order::where('user_id', Auth::user()->id)->get();
 
         return view('profile.orders', [
             'orders' => $orders
+        ]);
+    }
+
+    public function index()
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect('login');
+        }
+
+        return view('profile.index', [
+            'user' => $user
         ]);
     }
 }

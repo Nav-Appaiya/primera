@@ -83,6 +83,11 @@ Route::get('/profile/orders', [
     'as' => 'profile.orders',
     'uses' => 'ProfileController@orders'
 ]);
+Route::get('/profile', [
+    'as' => 'profile.index',
+    'uses' => 'ProfileController@index',
+    'middleware' => 'auth'
+]);
 
 // User authentication routes... Nav Appaiya 19 July 21:55
 Route::get('auth/login', ['as'=>'login', 'uses' => 'Auth\AuthController@getLogin']);
