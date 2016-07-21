@@ -30,7 +30,7 @@
                             <li><a href="/cart">Winkelwagen ({{ count(Session::get('cart.items')) }})<span class="fa fa-shopping-cart"></span></a></li>
                         @else
                             <li><a href="/cart">Winkelwagen <span class="fa fa-shopping-cart"></span></a></li>
-                            <li><a href="{{ route('logout') }}"> {{ Auth::user()->voornaam}} uitloggen</a></li>
+                            <li><a href="/logout"> {{ Auth::user()->voornaam}} uitloggen</a></li>
                         @endif
                     </ul>
                     <ul class="nav navbar-nav">

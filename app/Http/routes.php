@@ -89,7 +89,7 @@ Route::get('auth/login', ['as'=>'login', 'uses' => 'Auth\AuthController@getLogin
 Route::get('/login', ['uses' => 'Auth\AuthController@getLogin']);
 
 Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+Route::get('auth/logout', ['as' => 'logoff', 'uses' => 'Auth\AuthController@getLogout']);
 
 // Registration routes...
 Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
@@ -222,6 +222,8 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+
+Route::get('/home', 'HomeController@index');
 
 Route::auth();
 

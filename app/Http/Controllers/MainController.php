@@ -251,8 +251,8 @@ class MainController extends Controller
             $loginOrRegister = 'Je moet je registreren of inloggen om verder te kunnen gaan. ';
             return view('main.please-pay', [
                 'message' => $loginOrRegister,
-                'url' => URL::route('register'),
-                'info' => 'Verder winkelen'
+                'url' => URL::route('login'),
+                'info' => 'Inloggen'
             ]);
         }
 
