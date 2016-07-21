@@ -75,10 +75,10 @@
                                         <tbody>
                                         @foreach($orders as $order)
                                             <tr>
-                                                <td>{{ $order->user->email }}</td>
-                                                <td>{{ $order->user_id }}</td>
-                                                <td>{{ $order->shipping_address }}</td>
-                                                <td>{{ $order->updated_at }}</td>
+                                                <td>{{ $order->user->email or ''}}</td>
+                                                <td>{{ $order->user_id or ''}}</td>
+                                                <td>{{ $order->shipping_address or ''}}</td>
+                                                <td>{{ $order->updated_at or ''}}</td>
                                                 <td>
                                                     <a href="{{ route('orders.edit', $order->id) }}"
                                                        class="btn btn-success btn-xs">Edit</a>
