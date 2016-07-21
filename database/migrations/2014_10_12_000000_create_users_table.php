@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('woonplaats');
             $table->string('telMobiel');
             $table->string('telThuis');
+            $table->boolean('is_admin');
             $table->rememberToken();
             $table->timestamps();
         });
