@@ -248,12 +248,7 @@ class MainController extends Controller
 
 
         if(!$user){
-            $loginOrRegister = 'Je moet je registreren of inloggen om verder te kunnen gaan. ';
-            return view('main.please-pay', [
-                'message' => $loginOrRegister,
-                'url' => URL::route('login'),
-                'info' => 'Inloggen'
-            ]);
+            return redirect('login');
         }
 
         if(!$session->has('cart.items')){
@@ -341,7 +336,7 @@ class MainController extends Controller
         }
 
         return view('main.checkout', [
-            'customer' => $user,
+            'user' => $user,
             'cart' => $cart
         ]);
     }

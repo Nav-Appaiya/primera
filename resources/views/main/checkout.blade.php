@@ -67,7 +67,8 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-xs-12">
                                     <strong>Voornaam: <span style="color: red;"> * </span></strong>
-                                    <input type="text" name="first_name" class="form-control" value="" required="required"/>
+                                    <input type="text" name="first_name" class="form-control" value="{{ $user->voornaam }}
+                                            " required="required"/>
                                 </div>
                                 <div class="span1"></div>
                                 <div class="col-md-6 col-xs-12">
@@ -78,38 +79,38 @@
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Straat + huisnummer: <span style="color: red;"> * </span></strong></div>
                                 <div class="col-md-12">
-                                    <input type="text" name="street" class="form-control" value="" />
+                                    <input type="text" name="street" class="form-control" value="{{ $user->adres or 'Straat' }}" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-xs-12">
                                     <strong>Postcode: <span style="color: red;"> * </span></strong>
-                                    <input type="text" name="postcode" class="form-control" value="" />
+                                    <input type="text" name="postcode" class="form-control" value="{{ $user->postcode or '1234 AB' }}" />
                                 </div>
                                 <div class="col-md-6 col-xs-12">
                                     <strong>Plaats: <span style="color: red;"> * </span></strong>
-                                    <input type="text" name="plaats" class="form-control" value="" />
+                                    <input type="text" name="plaats" class="form-control" value="{{ $user->woonplaats or 'Amsterdam' }}" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Geboortedatum: <span style="color: red;"> * </span></strong></div>
                                 <div class="col-md-12">
-                                    <input type="date" name="birthdate" value="1992-01-24" class="form-control">
+                                    <input type="date" name="birthdate" value="{{ $user->geboortedatum or '1992-01-24' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Telefoonnummer (vast): </strong></div>
                                 <div class="col-md-12">
-                                    <input type="text" name="phone_home" class="form-control" value="" />
+                                    <input type="text" name="phone_home" class="form-control" value="{{ $user->telThuis or '0101231232' }}" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Telefoonnummer (mobiel): <span style="color: red;"> * </span></strong></div>
-                                <div class="col-md-12"><input type="text" name="phone_mobile" class="form-control" value="" /></div>
+                                <div class="col-md-12"><input type="text" name="phone_mobile" class="form-control" value="{{ $user->telMobiel or '0101231232' }}" /></div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Emailadres: <span style="color: red;"> * </span></strong></div>
-                                <div class="col-md-12"><input type="text" name="email" class="form-control" value="" /></div>
+                                <div class="col-md-12"><input type="text" name="email" class="form-control" value="{{ $user->email }}" /></div>
                             </div>
 
                             <div class="form-group">
