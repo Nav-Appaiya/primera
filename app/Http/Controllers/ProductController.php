@@ -81,7 +81,14 @@ class ProductController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function newProduct(){
-        return view('admin.products.new');
+        $categories = Category::all();
+        foreach ($categories as $category) {
+            $cats[$category->id] = $category->title;
+        }
+
+        return view('admin.products.new', [
+            'categories' => $cats
+        ]);
     }
 
     /**
@@ -122,6 +129,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->imageurl = '/uploads/img/' . $filename;
         $product->description = $request->description;
+        $product->category_id = $request->category;
 
         $product->save();
 

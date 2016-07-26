@@ -34,6 +34,11 @@
                                 {!! Form::textarea('description', NULL, array('class' => 'form-control')) !!}
                             </div>
 
+                            <div class="form-group">
+                                {!! Form::label('category', 'category') !!}
+                                {!! Form::select('category', $categories) !!}
+                            </div>
+
                             {!! Form::file('images[]', array('multiple' => true)) !!}
 
                             {!! Form::submit('submit', array('class' => 'btn btn-default'))!!}
