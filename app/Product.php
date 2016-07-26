@@ -18,4 +18,9 @@ class Product extends Model
     {
         return $this->hasMany('App\Seotags');
     }
+
+    public function productimages()
+    {
+        return $this->hasMany('App\ProductImages');
+    }
 }
