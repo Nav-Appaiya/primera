@@ -112,53 +112,15 @@ class ProductController extends Controller
 
         if (!empty($files)){
             foreach ($files as $file){
-//                Storage::put($file->getClientOriginalName(), file_get_contents($file));
-//                $validator = Validator::make(array('file'=> $file), $rules);
-
-//                if($validator->passes()){
-    //                $destinationPath = 'uploads';
-    //                $filename = $file->getClientOriginalName();
-    //                Storage::disk('local')->put(str_random(10).'.png', $filename);
-    //
-    //                $upload_success = $file->move($destinationPath, $filename);
-    //                $uploadcount ++
-                    $filename = $file->getClientOriginalName();
-                    $file->move(base_path().'/public/uploads/img', str_random(10).$filename);
-//                }
-
+                $filename = str_random(10).$file->getClientOriginalName();
+                $file->move(base_path().'/public/uploads/img', $filename);
             }
         }
 
-
-//        $files = Input::file('images');
-        // Making counting of uploaded images
-//        $file_count = count($files);
-        // start count how many uploaded
-//        $uploadcount = 0;
-//        foreach($files as $file){
-//
-//            Storage::put($file->getClientOriginalName(), file_get_contents($file));
-//
-//            $validator = Validator::make(array('file'=> $file), $rules);
-
-//            if($validator->passes()){
-//                $destinationPath = 'uploads';
-//                $filename = $file->getClientOriginalName();
-//                Storage::disk('local')->put(str_random(10).'.png', $filename);
-//
-//                $upload_success = $file->move($destinationPath, $filename);
-//                $uploadcount ++;
-//            }
-//        }
-//        if($uploadcount == $file_count){
-//            Session::flash('success', 'Upload successfully');
-////            return Redirect::to('upload');
-//        }
-
         $product = $this->product;
-
         $product->name = $request->name;
         $product->price = $request->price;
+        $product->imageurl = '/uploads/img/' . $filename;
         $product->description = $request->description;
 
         $product->save();
