@@ -80,9 +80,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/product/{id}', ['as' => 'admin_product_detail', 'uses' => 'ProductController@index']);
     Route::get('/admin/product/{product}/edit/', ['as' => 'admin_product_edit', 'uses' => 'ProductController@edit']);
     Route::post('/admin/product/save', ['as' => 'admin_product_save', 'uses' => 'ProductController@add']);
+
+    //admin categories controller
+    Route::get('/admin/categories', ['as' => 'admin_category_index', 'uses' => 'CategoryController@index']);
+    Route::get('/admin/categories/{category}/edit', ['as' => 'admin_category_edit', 'uses' => 'CategoryController@edit']);
+    Route::get('/admin/categories/create', ['as' => 'admin_category_create', 'uses' => 'CategoryController@create']);
+    Route::post('/admin/categories', ['as' => 'admin_category_store', 'uses' => 'CategoryController@store']);
+    Route::patch('/admin/categories', ['as' => 'admin_category_update', 'uses' => 'CategoryController@update']);
 //    Route::resource('/admin/product', 'ProductController', ['only' => [
 //        'add',
 //    ]]);
+    Route::get('/admin/property', ['as' => 'admin_property_index', 'uses' => 'PropertyController@index']);
+    Route::get('/admin/property/{id}/edit', ['as' => 'admin_property_edit', 'uses' => 'PropertyController@edit']);
+    Route::get('/admin/property/create', ['as' => 'admin_property_create', 'uses' => 'PropertyController@create']);
+    Route::post('/admin/property', ['as' => 'admin_property_store', 'uses' => 'PropertyController@store']);
+    Route::patch('/admin/property', ['as' => 'admin_property_update', 'uses' => 'PropertyController@update']);
+
 //    Route::resource('/admin/product', 'ProductController');
 //    Route::resource('/admin/customers', 'CustomerController');
 //}); // End of authed route group.

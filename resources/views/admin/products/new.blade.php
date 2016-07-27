@@ -35,9 +35,32 @@
                             </div>
 
                             <div class="form-group">
-                                {!! Form::label('category', 'category') !!}
-                                {!! Form::select('category', $categories) !!}
+                                {!! Form::label('category', 'merk') !!}
+                                {!! Form::select('category', App\Category::lists('name', 'cate_id'), null, array('class' => 'form-control')) !!}
+                                {{--<select class="form-control" name="category_id">--}}
+                                    {{--<option value="0">main</option>--}}
+                                    {{--@foreach($categories as $category)--}}
+                                        {{--@if($category->cate_id == 0)--}}
+                                            {{--{{$category->name}}--}}
+                                            {{--@foreach($categories->where('id', $category) as $cate)--}}
+                                                {{--{{$cate}}--}}
+                                                {{--<option value="{{$cate->id}}"> {{$cate->name}}</option>--}}
+
+                                            {{--@endforeach--}}
+                                        {{--@endif--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
                             </div>
+
+                            {{--<div class="form-group">--}}
+                                {{--{!! Form::label('merk', 'merk') !!}--}}
+                                {{--{!! Form::select('category', $categories) !!}--}}
+                            {{--</div>--}}
+
+                            {{--<div class="form-group">--}}
+                                {{--{!! Form::label('merk', 'merk') !!}--}}
+                                {{--{!! Form::select('category', $categories) !!}--}}
+                            {{--</div>--}}
 
                             {!! Form::file('images[]', array('multiple' => true)) !!}
 

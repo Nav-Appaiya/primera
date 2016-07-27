@@ -27,9 +27,12 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
+
                     <div class="panel-heading">Dashboard producten
-                        <a class="btn btn-xs btn-success pull-right" href="/admin/product/new">
-                            Nieuw product toevoegen</a></div>
+                        <a class="btn btn-xs btn-success pull-right" href="/admin/product/new">Nieuw product toevoegen</a>
+                        <a class="btn btn-xs btn-success pull-right" href="{{route('admin_category_index')}}">Nieuw category toevoegen</a>
+                        <a class="btn btn-xs btn-success pull-right" href="{{route('admin_property_index')}}">Nieuw property toevoegen</a>
+                    </div>
 
                     <div class="panel-body">
 
@@ -48,7 +51,10 @@
                                     <td>&euro;{{$product->price}}</td>
                                     <td>{{$product->description}}</td>
                                     <td>
-                                        <img src="{{$product->imageurl}}" alt="" width="75px">
+                                    @if(!empty($product->productimages->first()))
+                                        {{$product->productimages->first()->imagePath}}
+                                        <img src="{{asset('/public/uploads/img/'.$product->productimages->first()->imagePath)}}" alt="" width="75px">
+                                    @endif
                                     </td>
                                     <td class="btn-block">
                                         <a href="/admin/product/destroy/{{$product->id}}"

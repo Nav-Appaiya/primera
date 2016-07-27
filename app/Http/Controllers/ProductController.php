@@ -14,6 +14,7 @@ use App\Pages;
 use App\Seotags;
 use Illuminate\Http\Request;
 use App\Product;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use Storage;
 use Session;
@@ -30,13 +31,16 @@ class ProductController extends Controller
 {
 
     private $product;
-
+    private $category;
+    private $image;
     /**
      * ProductController constructor.
      */
     public function __construct()
     {
+        $this->image = new ProductImage();
         $this->product = new Product();
+        $this->category = new Category();
         // Turned this off, because product userviews are here also used.
         // $this->middleware('auth');
     }
@@ -80,15 +84,9 @@ class ProductController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function newProduct(){
-        $categories = Category::all();
-        foreach ($categories as $category) {
-            $cats[$category->id] = $category->title;
-        }
-
-        return view('admin.products.new', [
-            'categories' => $cats
-        ]);
+    public function newProduct()
+    {
+        return view('admin.products.new')->with('categories', $this->category->get());
     }
 
     /**
@@ -115,23 +113,32 @@ class ProductController extends Controller
                 ->withInput();
         }
 
-        $files = $request->file('images');
-
-        if (!empty($files)){
-            foreach ($files as $file){
-                $filename = str_random(10).$file->getClientOriginalName();
-                $file->move(base_path().'/public/uploads/img', $filename);
-            }
-        }
 
         $product = $this->product;
+
         $product->name = $request->name;
         $product->price = $request->price;
-        $product->imageurl = '/uploads/img/' . $filename;
         $product->description = $request->description;
         $product->category_id = $request->category;
 
         $product->save();
+
+        $files = $request->file('images');
+
+        $data = array();
+
+        if (!empty($files)){
+            foreach ($files as $file => $value){
+//                $image = $this->image;
+                $filename = str_random(10).'.'.$value->getClientOriginalExtension();
+                $value->move(base_path().'/public/uploads/img', $filename);
+
+                $data[] = array('imagePath' => $filename, 'productID'=> $product->id);
+
+            }
+        }
+
+        ProductImage::insert($data); // Eloquent
 
         \Session::flash('succes_message','successfully.');
 
