@@ -9,6 +9,13 @@
 @section('content')
 
     <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">{{ $product->categories()->first()->title }}</a></li>
+                <li class="breadcrumb-item active">{{ strtolower($product->name) }}</li>
+            </ol>
+        </div>
         <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="artist-data pull-left panel">
                 <div class="artst-pic pull-left">
@@ -18,7 +25,7 @@
                 </div>
                 <div class="artst-prfle pull-right col-md-12 col-xs-12 col-sm-12">
                     <div class="art-title">
-                        {{ $product->name }}
+                        {{ $product->name }} ({{$product->categories()->first()->title}})
                         <span class="artst-sub"><span class="byname">{{ $product->description }}</span>
                             <h1 class="pull-right"><span class="daysago"></span>&euro;{{ $product->price }}</h1>
                         </span>
