@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
 }); // End of authed route group.
 
 // Admin authorisation only for admins, not authed users!
-//Route::group(['middleware' => 'admin'], function () {
+Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/orders', ['as' => 'orders.index', 'uses' => 'OrderController@index']);
     Route::get('/admin/orders/new', ['as' => 'orders.create', 'uses' => 'OrderController@create']);
     Route::post('/admin/orders/store', ['as' => 'orders.store', 'uses' => 'OrderController@store']);
@@ -98,7 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 //    Route::resource('/admin/product', 'ProductController');
 //    Route::resource('/admin/customers', 'CustomerController');
-//}); // End of authed route group.
+}); // End of authed route group.
 
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
