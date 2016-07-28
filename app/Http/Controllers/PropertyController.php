@@ -16,7 +16,7 @@ class PropertyController extends Controller
     public function __construct()
     {
         $this->property = new Property();
-        $this->product_property = new ProductProperty();
+        $this->product_property = new ProductProperty();// replace with eloquent
     }
 
     /**

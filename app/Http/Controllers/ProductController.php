@@ -136,9 +136,8 @@ class ProductController extends Controller
                 $data[] = array('imagePath' => $filename, 'productID'=> $product->id);
 
             }
+            ProductImage::insert($data); // Eloquent
         }
-
-        ProductImage::insert($data); // Eloquent
 
         \Session::flash('succes_message','successfully.');
 
