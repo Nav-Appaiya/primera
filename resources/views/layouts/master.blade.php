@@ -36,22 +36,23 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="{{ URL::route('homepage') }}">Home <span
                         class="sr-only">(current)</span></a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                aria-expanded="false">Categorieen <span class="caret"></span></a>
+
+                        @foreach($main_categories as $category)
+                            <li class="dropdown">
+                                <a href="/home" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                   aria-expanded="false">{{$category->name}} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    {{--@foreach($categories as $cat)--}}
-                                    {{--<li><a href="{{ URL::route('category_detail', $cat->id ) }}">{{ $cat->title }}</a></li>--}}
-                                    {{--@endforeach--}}
+                                    @foreach($category->children as $child)
+                                        <li><a href="">{{ $child->name }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
-                            {{--@foreach( $pages as $page)--}}
-                            {{--<li><a href="/pages/{{ strtolower($page->name) }}">{{ $page->name }}</a></li>--}}
-                            {{--@endforeach--}}
-                        </ul>
-                        </div><!-- /.navbar-collapse -->
-                        </div><!-- /.container-fluid -->
-                    </nav>
+                        @endforeach
+
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
                     @show
                     <div class="container" style="margin-top: 75px">
                         @yield('content')

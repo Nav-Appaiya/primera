@@ -13,7 +13,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ URL::route('homepage') }}">Home</a></li>
                 <li class="breadcrumb-item"><a
-                            href="{{ URL::route('category_detail', $product->categories()->first()->id) }}">{{ $product->categories()->first()->title }}</a>
+                            {{--href="{{ URL::route('category_detail', $product->categories()->first()->id) }}">{{ $product->categories()->first()->title }}</a>--}}
                 </li>
                 <li class="breadcrumb-item active">{{ strtolower($product->name) }}</li>
             </ol>
@@ -28,7 +28,7 @@
                 <div class="artst-prfle pull-right col-md-12 col-xs-12 col-sm-12">
 
                     <div class="art-title">
-                        {{ $product->name }} ({{$product->categories()->first()->title}})
+                        {{--{{ $product->name }} ({{$product->categories()->first()->title}})--}}
                         <br><span class="artst-sub">
                             <span class="byname">{{ $product->description }}</span>
                             <h1 class="pull-right"><span class="daysago"></span>
@@ -41,16 +41,16 @@
 
                         </span>
                     </div>
-                    @if(count($seotags))
-                        <div class="pull-left">
-                            <ul>
-                                <strong>Seotags: </strong><br>
-                                @foreach($seotags as $seotag)
-                                    <li>{{ $seotag->seotag }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    {{--@if(count($seotags))--}}
+                        {{--<div class="pull-left">--}}
+                            {{--<ul>--}}
+                                {{--<strong>Seotags: </strong><br>--}}
+                                {{--@foreach($seotags as $seotag)--}}
+                                    {{--<li>{{ $seotag->seotag }}</li>--}}
+                                {{--@endforeach--}}
+                            {{--</ul>--}}
+                        {{--</div>--}}
+                    {{--@endif--}}
                     <div class="pull-right">
                         <div class="row center-block">
                             <div class="btn-group wishlist">
@@ -70,33 +70,33 @@
     <div class="row">
         <h4 class="text-center">Andere aanbiedingen</h4>
         <br>
-        @foreach ($related as $relate)
-            <div class="col-xs-12 col-sm-6 col-md-3 wrapper">
-                <div class="rlisting">
-                    <div class="col-md-12 nopad">
-                        <img src="{{ $relate->imageurl }}" class="img-responsive">
-                    </div>
-                    <div class="col-md-12 nopad">
-                        <h5>{{ $relate->name }}</h5>
-                        <p>{{ $relate->description }}</p>
-                        <div class="rfooter">
-                            <div class="row center-block">
-                                <div class="btn-group cart btn-block">
-                                    <a href="/product/{{  $relate->id }}" class="btn btn-warning btn-product">
-                                        Meer weten <span class="fa fa-question-circle"></span>
-                                    </a>
-                                </div>
-                                <div class="btn-group wishlist btn-block">
-                                    <a href="{{ URL::route('cart.add', $relate) }}" class="btn btn-success btn-product">
-                                        In winkelwagen<span class="fa fa-shopping-cart"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
+        {{--@foreach ($related as $relate)--}}
+            {{--<div class="col-xs-12 col-sm-6 col-md-3 wrapper">--}}
+                {{--<div class="rlisting">--}}
+                    {{--<div class="col-md-12 nopad">--}}
+                        {{--<img src="{{ $relate->imageurl }}" class="img-responsive">--}}
+                    {{--</div>--}}
+                    {{--<div class="col-md-12 nopad">--}}
+                        {{--<h5>{{ $relate->name }}</h5>--}}
+                        {{--<p>{{ $relate->description }}</p>--}}
+                        {{--<div class="rfooter">--}}
+                            {{--<div class="row center-block">--}}
+                                {{--<div class="btn-group cart btn-block">--}}
+                                    {{--<a href="/product/{{  $relate->id }}" class="btn btn-warning btn-product">--}}
+                                        {{--Meer weten <span class="fa fa-question-circle"></span>--}}
+                                    {{--</a>--}}
+                                {{--</div>--}}
+                                {{--<div class="btn-group wishlist btn-block">--}}
+                                    {{--<a href="{{ URL::route('cart.add', $relate) }}" class="btn btn-success btn-product">--}}
+                                        {{--In winkelwagen<span class="fa fa-shopping-cart"></span>--}}
+                                    {{--</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--@endforeach--}}
     </div>
 
 

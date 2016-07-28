@@ -170,10 +170,11 @@ class ProductController extends Controller
 
         return view('products.detail', [
             'product' => $id,
-            'seotags' => $id->seotags()->getResults(),
-            'related' => Product::all(),
-            'categories' => Category::all(),
-            'pages' => Pages::all()
+//            'seotags' => $id->seotags()->getResults(),
+//            'seotags' => $id->seotags()->getResults(),
+//            'related' => Product::all(),
+//            'categories' => Category::all(),
+//            'pages' => Pages::all()
         ]);
     }
 }
