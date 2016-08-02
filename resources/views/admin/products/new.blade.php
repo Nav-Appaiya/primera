@@ -36,7 +36,7 @@
 
                             <div class="form-group">
                                 {!! Form::label('category', 'merk') !!}
-                                {!! Form::select('category', App\Category::lists('name', 'cate_id'), null, array('class' => 'form-control')) !!}
+                                {!! Form::select('category', App\Category::lists('title', 'cate_id'), null, array('class' => 'form-control')) !!}
                                 {{--<select class="form-control" name="category_id">--}}
                                     {{--<option value="0">main</option>--}}
                                     {{--@foreach($categories as $category)--}}
