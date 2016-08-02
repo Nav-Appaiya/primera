@@ -5,7 +5,6 @@
 @section('sidebar')
     @parent
 @endsection
-
 @section('content')
 
     <div class="container">
@@ -61,7 +60,21 @@
                                 {{--{!! Form::label('merk', 'merk') !!}--}}
                                 {{--{!! Form::select('category', $categories) !!}--}}
                             {{--</div>--}}
-
+                            <div class="contacts">
+                                <label>Voer seotags voor dit product in:</label>
+                                <div class="form-group multiple-form-group input-group">
+                                    <div class="input-group-btn input-group-select">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span class="concept">Seotags</span>
+                                        </button>
+                                    </div>
+                                    <input type="text" name="seotags[]" class="form-control">
+                                    <span class="input-group-btn">
+                            <button type="button" class="btn btn-success btn-add">+</button>
+                        </span>
+                                </div>
+                            </div>
+                    </div>
                             {!! Form::file('images[]', array('multiple' => true)) !!}
 
                             {!! Form::submit('submit', array('class' => 'btn btn-default'))!!}
@@ -116,4 +129,69 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        (function ($) {
+            $(function () {
+
+                var addFormGroup = function (event) {
+                    event.preventDefault();
+
+                    var $formGroup = $(this).closest('.form-group');
+                    var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+                    var $formGroupClone = $formGroup.clone();
+
+                    $(this)
+                            .toggleClass('btn-success btn-add btn-danger btn-remove')
+                            .html('–');
+
+                    $formGroupClone.find('input').val('');
+                    $formGroupClone.find('.concept').text('Seotags');
+                    $formGroupClone.insertAfter($formGroup);
+
+                    var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+                    if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
+                        $lastFormGroupLast.find('.btn-add').attr('disabled', true);
+                    }
+                };
+
+                var removeFormGroup = function (event) {
+                    event.preventDefault();
+
+                    var $formGroup = $(this).closest('.form-group');
+                    var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+
+                    var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+                    if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
+                        $lastFormGroupLast.find('.btn-add').attr('disabled', false);
+                    }
+
+                    $formGroup.remove();
+                };
+
+                var selectFormGroup = function (event) {
+                    event.preventDefault();
+
+                    var $selectGroup = $(this).closest('.input-group-select');
+                    var param = $(this).attr("href").replace("#","");
+                    var concept = $(this).text();
+
+                    $selectGroup.find('.concept').text(concept);
+                    $selectGroup.find('.input-group-select-val').val(param);
+
+                }
+
+                var countFormGroup = function ($form) {
+                    return $form.find('.form-group').length;
+                };
+
+                $(document).on('click', '.btn-add', addFormGroup);
+                $(document).on('click', '.btn-remove', removeFormGroup);
+                $(document).on('click', '.dropdown-menu a', selectFormGroup);
+
+            });
+        })(jQuery);
+    </script>
 @endsection

@@ -122,6 +122,13 @@ class ProductController extends Controller
         $product->category_id = $request->category;
 
         $product->save();
+        foreach ($request->seotags as $seotag) {
+            $newSeo = new Seotags();
+            $newSeo->product_id = $product->id;
+            $newSeo->seotag = $seotag;
+            $newSeo->created_at = new \DateTime();
+            $newSeo->save();
+        }
 
         $files = $request->file('images');
 
