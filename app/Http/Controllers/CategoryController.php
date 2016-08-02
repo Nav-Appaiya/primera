@@ -12,7 +12,7 @@ use App\Http\Requests;
 
 class CategoryController extends Controller
 {
-    public $category;
+    private $category;
 
     public function __construct()
     {
@@ -56,6 +56,7 @@ class CategoryController extends Controller
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
+
         if ($validator->fails()) {
             return redirect()
                 ->route('admin_category_create')

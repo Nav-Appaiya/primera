@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center">
-                    {{ $category->title }}
+                    {{--{{ $category->name }}--}}
                 </h1>
             </div>
         </div>

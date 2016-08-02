@@ -33,11 +33,11 @@ class MainController extends Controller
         ]);
     }
 
-    public function category($id)
+    public function category($name)
     {
         $categories = Category::all();
         $pages = Pages::all();
-        $category = Category::find($id);
+        $category = Category::where('name', $name)->get();
 
         return view('main.category', [
             'category' => $category,

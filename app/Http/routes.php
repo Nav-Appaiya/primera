@@ -52,7 +52,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/product/{id}', ['as' => 'product_detail', 'uses' => 'ProductController@detail']);
 Route::get('/product/{id}/add', ['as' => 'product_add', 'uses' => 'ProductController@add']);
-Route::get('/category/{id}', ['as' => 'category_detail', 'uses' => 'MainController@category']);
+Route::get('/category/{name}', ['as' => 'category_detail', 'uses' => 'MainController@category']);
 Route::get('/categories', ['as' => 'categories_all', 'uses' => 'ProductController@add']);
 Route::get('/pages/{pageId}', 'MainController@page');
 Route::get('/admin', 'AdminController@index');
