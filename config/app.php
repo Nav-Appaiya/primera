@@ -156,7 +156,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
     ],
 
     /*
@@ -205,6 +205,8 @@ return [
         'Form' => \Collective\Html\FormFacade::class,
         'Html' => \Collective\Html\HtmlFacade::class,
         'Mollie' => \Mollie\Laravel\Facades\Mollie::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+
     ],
 
 ];

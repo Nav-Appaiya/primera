@@ -10,13 +10,12 @@
 
     <div class="row">
         <div class="col-md-12">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ URL::route('homepage') }}">Home</a></li>
-                <li class="breadcrumb-item"><a
-                            {{--href="{{ URL::route('category_detail', $product->categories()->first()->id) }}">{{ $product->categories()->first()->title }}</a>--}}
-                </li>
-                <li class="breadcrumb-item active">{{ strtolower($product->name) }}</li>
-            </ol>
+            @if($product->category_id)
+                {!! Breadcrumbs::render('product_detail_with_category', $product) !!}
+
+            @else
+                {!! Breadcrumbs::render('product_detail_with_category', $product) !!}
+            @endif
         </div>
         <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="artist-data pull-left panel">
