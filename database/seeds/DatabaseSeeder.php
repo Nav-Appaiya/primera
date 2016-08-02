@@ -66,8 +66,10 @@ class DatabaseSeeder extends Seeder
         DB::table('categories')->delete();
         DB::table('categories')->insert([
             'id'=>'1',
-            'title'=>'Category' . mt_rand(0,15),
-            'image'=>'http://www.esigaretervaring.nl/wp-content/uploads/2014/04/Elektrische-sigaret-voorbeeld-300x225.jpg',
+            'title'=>'e-Leaf',
+            'categoryID' => 1,
+            'cate_id' => 0,
+            'image'=>'/uploads/img/eleaf_logo.png',
             'created_at' => $createdAt,
             'updated_at' => $updatedAt
         ]);
