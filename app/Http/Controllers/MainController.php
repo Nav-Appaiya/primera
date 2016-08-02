@@ -39,10 +39,13 @@ class MainController extends Controller
         $pages = Pages::all();
         $category = Category::where('name', $name)->get();
 
+        $products = $category->product;
+
         return view('main.category', [
             'category' => $category,
             'categories' => $categories,
-            'pages' => $pages
+            'pages' => $pages,
+            'products' => $products
         ]);
     }
 
