@@ -92,9 +92,11 @@ Route::group(['middleware' => 'admin'], function () {
 //    ]]);
     Route::get('/admin/property', ['as' => 'admin_property_index', 'uses' => 'PropertyController@index']);
     Route::get('/admin/property/{id}/edit', ['as' => 'admin_property_edit', 'uses' => 'PropertyController@edit']);
+    Route::get('/admin/property/{id}', ['as' => 'admin_property_show', 'uses' => 'PropertyController@show']);
     Route::get('/admin/property/create', ['as' => 'admin_property_create', 'uses' => 'PropertyController@create']);
     Route::post('/admin/property', ['as' => 'admin_property_store', 'uses' => 'PropertyController@store']);
     Route::patch('/admin/property', ['as' => 'admin_property_update', 'uses' => 'PropertyController@update']);
+    Route::get('/admin/property/destroy/{id}', ['as' => 'admin_property_destroy', 'uses' => 'PropertyController@destroy']);
 
 //    Route::resource('/admin/product', 'ProductController');
 //    Route::resource('/admin/customers', 'CustomerController');

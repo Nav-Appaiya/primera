@@ -15,8 +15,6 @@ class PropertyController extends Controller
 
     public function __construct()
     {
-        $this->property = new Property();
-        $this->product_property = new ProductProperty();// replace with eloquent
     }
 
     /**
@@ -26,7 +24,9 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        return view('admin.properties.index')->with('properties', $this->product_property->get());
+        return view('admin.properties.index', [
+            'properties' => Property::all()
+        ]);
     }
 
     /**
@@ -36,7 +36,11 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        $prop = new Property();
+
+        return view('admin.properties.create', [
+            'property' => $prop
+        ]);
     }
 
     /**
@@ -47,18 +51,16 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $p = new Property();
+        $p->name = $request->name;
+        $p->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $request->session()->flash('status', 'Task was successful!');
+
+        return view('admin.properties.index', [
+            'properties' => Property::all()
+        ]);
+
     }
 
     /**
@@ -69,7 +71,11 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $prop = Property::find($id);
+
+        return view('admin.properties.edit', [
+            'property' => $prop
+        ]);
     }
 
     /**
@@ -79,9 +85,17 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $p = Property::find($request->id);
+        $p->name = $request->name;
+        $p->save();
+
+        $request->session()->flash('status', 'property aangepast');
+
+        return view('admin.properties.index', [
+            'properties' => Property::all()
+        ]);
     }
 
     /**
@@ -90,8 +104,13 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        Property::destroy($id);
+        $request->session()->flash('status', 'Property verwijderd');
+
+        return view('admin.properties.index', [
+            'properties' => Property::all()
+        ]);
     }
 }

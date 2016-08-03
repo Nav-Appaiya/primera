@@ -17,7 +17,7 @@
 
                         @include('errors.message')
 
-                        {!! Form::open(['route' => 'admin_category_store']) !!}
+                        {!! Form::open(['route' => 'admin_property_store']) !!}
 
                             <!-- created_at -->
                             <div class="form-group">

@@ -63,7 +63,7 @@ class CategoryController extends Controller
                 ->withInput();
         }
 
-        $this->category->name = $request->name;
+        $this->category->title = $request->name;
         $this->category->cate_id = $request->category_id;
 
         $this->category->save();
@@ -79,7 +79,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::where('title', $id)->get()->first();
+
+        return view('admin.categories.edit', [
+            'cate'=>$category
+        ]);
     }
 
     /**
@@ -89,9 +93,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $cat = Category::find($request->id);
+        $cat->title = $request->name;
+        $cat->cate_id = $request->category;
+
+        dd($cat);
     }
 
     /**

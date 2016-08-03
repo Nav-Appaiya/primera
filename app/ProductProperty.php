@@ -9,7 +9,7 @@ class ProductProperty extends Model
     protected $table = 'product_property';
 
     protected $fillable = [
-        'name', 'created_at', 'updated_at',
+        'name'
     ];
     public function property()
     {

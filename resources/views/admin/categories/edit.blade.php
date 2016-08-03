@@ -18,13 +18,16 @@
                     @include('errors.message')
 
                     {!! Form::model($cate, array('route' => 'admin_category_update', 'method' => 'patch')) !!}
-
                     {!! Form::hidden('id', $cate->id) !!}
 
                     <!-- name -->
                         <div class="form-group">
                             {!! Form::label('name', 'name') !!}
-                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => $cate->title]) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::select('category', App\Category::lists('title', 'cate_id'), null, array('class' => 'form-control')) !!}
                         </div>
 
                         {!! Form::submit('edit', ['class' => 'btn btn-primary pull-right'])!!}

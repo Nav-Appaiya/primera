@@ -17,14 +17,14 @@
 
                     @include('errors.message')
 
-                    {!! Form::model($cate, array('route' => 'admin_category_update', 'method' => 'patch')) !!}
+                    {!! Form::model($property, array('route' => 'admin_property_update', 'method' => 'patch')) !!}
 
-                    {!! Form::hidden('id', $cate->id) !!}
+                    {!! Form::hidden('id', $property->id) !!}
 
                     <!-- name -->
                         <div class="form-group">
                             {!! Form::label('name', 'name') !!}
-                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                            {!! Form::text('name', null, ['class' => 'form-control', 'value' => $property->name]) !!}
                         </div>
 
                         {!! Form::submit('edit', ['class' => 'btn btn-primary pull-right'])!!}
