@@ -72,13 +72,21 @@ class ProductController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id){
+    public function edit(Request $request, $id){
 
         $product = Product::findOrFail($id);
+        $properties = ProductProperty::where('productID', $product->id)->get();
+        $categories = Category::all();
+
+        foreach ($categories as $category) {
+            $c[$category->categoryID] = $category->title;
+        }
 
         // show the edit form and pass the nerd
         return view('admin.products.edit', [
-            'product' => $product
+            'product' => $product,
+            'properties'=>$properties,
+            'categories' => $c
         ]);
 
     }
@@ -113,37 +121,45 @@ class ProductController extends Controller
                 ->withInput();
         }
 
-
-        $product = $this->product;
+        if(isset($request->id)){
+            $product = Product::find($request->id);
+            $request->session()->flash('status', 'Product bijgewerkt');
+        }else{
+            $product = $this->product;
+            $request->session()->flash('status', 'Product aangemaakt');
+        }
 
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $request->description;
         $product->category_id = $request->category;
-
         $product->save();
-        foreach ($request->seotags as $seotag) {
-            $newSeo = new Seotags();
-            $newSeo->product_id = $product->id;
-            $newSeo->seotag = $seotag;
-            $newSeo->created_at = new \DateTime();
-            $newSeo->save();
+
+
+        if($request->seotags){
+            foreach ($request->seotags as $seotag) {
+                $newSeo = new Seotags();
+                $newSeo->product_id = $product->id;
+                $newSeo->seotag = $seotag;
+                $newSeo->created_at = new \DateTime();
+                $newSeo->save();
+            }
         }
 
-        foreach ($request->property as $key => $val) {
-            $foundProp = Property::find($key);
-            $productProperty = new ProductProperty();
-            $productProperty->productID = $product->id;
-            $productProperty->propertyID = $foundProp->id;
-            $productProperty->value = $val;
-            $productProperty->save();
+        if($request->property){
+            foreach ($request->property as $key => $val) {
+                $foundProp = Property::find($key);
+                $productProperty = new ProductProperty();
+                $productProperty->productID = $product->id;
+                $productProperty->propertyID = $foundProp->id;
+                $productProperty->value = $val;
+                $productProperty->save();
+            }
         }
 
         $files = $request->file('images');
-
         $data = array();
-
-        if (!isset($files)){
+        if (isset($files)){
             foreach ($files as $file => $value){
 //                $image = $this->image;
                 $filename = str_random(10).'.'.$value->getClientOriginalExtension();
@@ -155,27 +171,11 @@ class ProductController extends Controller
             ProductImage::insert($data); // Eloquent
         }
 
-        \Session::flash('succes_message','successfully.');
-
-        return redirect()->route('admin_product_save');
+        \Session::flash('status','successfully.');
+        $request->session()->flash('status', 'Success');
+        return redirect()->route('admin_product_index');
 
     }
-
-//   public function add(Product $id) {
-//        if(!isset($id->name)){
-//            $product = new Product();
-//            $product->save();
-//            Session::flash('message', 'Creating new product');
-//        }
-//        $product->name = Input::get('name');
-//        $product->description = Input::get('description');
-//        $product->price = Input::get('price');
-//        $product->imageurl = Input::get('imageurl');
-//        $product->save();
-//        Session::flash('message', 'Successfully updated product!');
-//        return redirect('/admin/products');
-//
-//    }
 
     /**
      * @param Product $id

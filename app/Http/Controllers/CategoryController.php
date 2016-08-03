@@ -36,7 +36,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create')->with('categories', $this->category->where('cate_id', 0)->get());
+        $categories = Category::all();
+
+        return view('admin.categories.create', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -62,11 +66,12 @@ class CategoryController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
         $this->category->title = $request->name;
-        $this->category->cate_id = $request->category_id;
+        $this->category->categoryID = $request->category_id;
 
         $this->category->save();
+
+        $request->session()->flash('status', 'Category aangemaakt!');
 
         return redirect()->route('admin_category_index');
     }
@@ -98,8 +103,7 @@ class CategoryController extends Controller
         $cat = Category::find($request->id);
         $cat->title = $request->name;
         $cat->cate_id = $request->category;
-
-        dd($cat);
+        dd($request);
     }
 
     /**

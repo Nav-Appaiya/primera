@@ -16,8 +16,11 @@
                         <div class="panel-title">Bewerk Product</div>
                     </div>
                     <div class="panel-body" >
-                        <form method="POST" action="/admin/product/save" class="form-horizontal" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('admin_product_save') }}" class="form-horizontal" enctype="multipart/form-data" role="form">
                             {!! csrf_field() !!}
+                            @if(isset($product->id))
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                            @endif
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="form-group">
@@ -39,6 +42,30 @@
 
                                     </div>
                                 </div>
+
+                                @foreach($properties as $property)
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="price">
+                                            {{ \App\Property::find($property->propertyID)->name }}
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input id="property[{{ $property->propertyID }}]" name="property[{{ $property->propertyID }}]" type="text" placeholder="Product Prijs"
+                                                   class="form-control input-md" value="{{ $property->value }}">
+
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                <div class="form-group">
+                                    <div class="col-md-3 control-label">
+                                        {!! Form::label('category', 'Categorie') !!}
+                                    </div>
+                                    <div class="col-md-9">
+                                        {!! Form::select('category', $categories, null, array('class' => 'form-control')) !!}
+                                    </div>
+                                </div>
+
+
                                 <div class="form-group">
                                     <label class="col-md-3 control-label" for="imageurl">Afbeeldings url</label>
                                     <div class="col-md-9">
@@ -53,6 +80,9 @@
                                         </button>
                                     </div>
                                 </div>
+
+
+
 
                             </fieldset>
 

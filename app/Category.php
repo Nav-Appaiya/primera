@@ -20,11 +20,11 @@ class Category extends Model
 
     public function parent()
     {
-        return $this->belongsTo('App\Category', 'cate_id');
+        return $this->belongsTo('App\Category', 'categoryID');
     }
 
     public function children()
     {
-        return $this->hasMany('App\Category', 'cate_id');
+        return $this->hasMany('App\Category', 'categoryID');
     }
 }

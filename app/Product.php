@@ -33,4 +33,9 @@ class Product extends Model
     {
         return $this->hasOne('App\Category', 'categoryID');
     }
+
+    public function properties()
+    {
+        return $this->hasMany('App\ProductProperty', 'ProductID');
+    }
 }
