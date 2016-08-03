@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'adres' => str_random(10),
             'postcode' => str_random(10),
             'woonplaats' => str_random(10),
+            'is_admin' => '1',
             'telMobiel' => str_random(10).'@gmail.com',
             'telThuis' => bcrypt('secret'),
         ]);

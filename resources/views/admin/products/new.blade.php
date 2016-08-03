@@ -36,30 +36,18 @@
                             <div class="form-group">
                                 {!! Form::label('category', 'merk') !!}
                                 {!! Form::select('category', App\Category::lists('title', 'cate_id'), null, array('class' => 'form-control')) !!}
-                                {{--<select class="form-control" name="category_id">--}}
-                                    {{--<option value="0">main</option>--}}
-                                    {{--@foreach($categories as $category)--}}
-                                        {{--@if($category->cate_id == 0)--}}
-                                            {{--{{$category->name}}--}}
-                                            {{--@foreach($categories->where('id', $category) as $cate)--}}
-                                                {{--{{$cate}}--}}
-                                                {{--<option value="{{$cate->id}}"> {{$cate->name}}</option>--}}
-
-                                            {{--@endforeach--}}
-                                        {{--@endif--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
                             </div>
 
-                            {{--<div class="form-group">--}}
-                                {{--{!! Form::label('merk', 'merk') !!}--}}
-                                {{--{!! Form::select('category', $categories) !!}--}}
-                            {{--</div>--}}
+                            @foreach(\App\Property::all() as $property)
+                                <div class="form-group">
+                                    <label for="validate-text">{{ $property->name }}</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="property[{{ $property->id }}]" id="{{ $property->id }}" >
+                                        <span class="input-group-addon danger"><span class="glyphicon glyphicon-check"></span></span>
+                                    </div>
+                                </div>
+                            @endforeach
 
-                            {{--<div class="form-group">--}}
-                                {{--{!! Form::label('merk', 'merk') !!}--}}
-                                {{--{!! Form::select('category', $categories) !!}--}}
-                            {{--</div>--}}
                             <div class="contacts">
                                 <label>Voer seotags voor dit product in:</label>
                                 <div class="form-group multiple-form-group input-group">

@@ -40,7 +40,10 @@ class ProductsTableSeeder extends Seeder
             'created_at' => date('Y-m-d h:i:s'),
             'updated_at' => date('Y-m-d h:i:s')
         ]);
-
+        DB::table('property')->insert([
+            'id' => 999,
+            'name' => 'voorraad'
+        ]);
         DB::table('property')->insert([
             'id' => $prop1Id,
             'name' => 'kleur'
@@ -56,6 +59,12 @@ class ProductsTableSeeder extends Seeder
         DB::table('property')->insert([
             'id' => $prop4Id,
             'name' => 'Aansluiting'
+        ]);
+
+        DB::table('product_property')->insert([
+            'productID'=>$productId,
+            'propertyID'=>999,
+            'value'=> 150
         ]);
 
         DB::table('product_property')->insert([
