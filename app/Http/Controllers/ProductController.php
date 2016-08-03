@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\ProductImage;
 use App\Pages;
+use App\ProductProperty;
+use App\Property;
 use App\Seotags;
 use Illuminate\Http\Request;
 use App\Product;
@@ -95,9 +97,7 @@ class ProductController extends Controller
      */
     public function add(Request $request)
     {
-        $messages = [
-//            'description.max' => 'something is wrong with the description',
-        ];
+        $messages = [];
         $rules = [
             'file' => 'mimes:png,gif,jpeg,jpg',
             'description' => 'required|max:255',
@@ -130,11 +130,20 @@ class ProductController extends Controller
             $newSeo->save();
         }
 
+        foreach ($request->property as $key => $val) {
+            $foundProp = Property::find($key);
+            $productProperty = new ProductProperty();
+            $productProperty->productID = $product->id;
+            $productProperty->propertyID = $foundProp->id;
+            $productProperty->value = $val;
+            $productProperty->save();
+        }
+
         $files = $request->file('images');
 
         $data = array();
 
-        if (!empty($files)){
+        if (!isset($files)){
             foreach ($files as $file => $value){
 //                $image = $this->image;
                 $filename = str_random(10).'.'.$value->getClientOriginalExtension();

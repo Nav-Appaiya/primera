@@ -37,9 +37,16 @@ class PropertyController extends Controller
     public function create()
     {
         $prop = new Property();
-
+        dd($prop);
         return view('admin.properties.create', [
             'property' => $prop
+        ]);
+    }
+
+    public function show($id)
+    {
+        return view('admin.properties.create', [
+            'property'=> Property::find($id)
         ]);
     }
 
@@ -55,7 +62,7 @@ class PropertyController extends Controller
         $p->name = $request->name;
         $p->save();
 
-        $request->session()->flash('status', 'Task was successful!');
+        $request->session()->flash('status', 'Property is successvol aangemaakt.');
 
         return view('admin.properties.index', [
             'properties' => Property::all()

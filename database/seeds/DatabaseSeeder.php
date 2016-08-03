@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'woonplaats' => 'Rotterdam',
             'telMobiel' => '0645705721',
             'telThuis' => '0645705721',
+            'is_admin' => '1',
             'created_at' => $createdAt,
             'updated_at' => $updatedAt
         ]);
