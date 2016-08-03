@@ -21,18 +21,17 @@
 
                             <!-- created_at -->
                             <div class="form-group">
-                                {!! Form::label('name', 'name') !!}
+                                {!! Form::label('name', 'Naam') !!}
                                 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                             </div>
 
                             <!-- category id -->
                             <div class="form-group">
-                                {!! Form::label('cate_id', 'category') !!}
-{{--                                {!! Form::select('category_id', array_merge(array('' => '----- select -----', '0' => 'main'), \App\Category::where('cate_id', 0)->pluck('name', 'id')->toArray()), null, ['class' => 'form-control'] ) !!}--}}
+                                {!! Form::label('category', 'category') !!}
                                 <select class="form-control" name="category_id">
                                     <option value="0">main</option>
                                     @foreach($categories as $category)
-                                        <option value="{{$category->id}}"> {{$category->name}}</option>
+                                        <option value="{{$category->id}}"> {{$category->title}}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -30,9 +30,12 @@
                                         <ul>
                                             @foreach ($category->children as $child)
 
-                                                <li>{{ $category->id }} - {{ $child->title }} <a class="pull-right"
-                                                                                                 href="{{ URL::route('admin_category_edit', str_replace(' ', '-', $child->name)) }}"><span
-                                                                class="label label-default">edit</span></a></li>
+                                                <li>
+                                                    {{ $child->title }}
+                                                    <a class="pull-right" href="{{ URL::route('admin_category_edit', str_replace(' ', '-', $child->name)) }}">
+                                                        <span class="label label-default">edit</span>
+                                                    </a>
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </ul>
