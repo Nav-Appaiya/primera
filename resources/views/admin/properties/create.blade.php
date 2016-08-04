@@ -13,8 +13,17 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Nieuw property toevoegen</div>
                         <div class="panel-body" >
-                        @include('errors.message')
-                        {!! Form::open(['route' => 'admin_property_store']) !!}
+                            @if (count($errors) > 0)
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            {!! Form::open(['route' => 'admin_property_store']) !!}
 
                             <!-- created_at -->
                             <div class="form-group">
