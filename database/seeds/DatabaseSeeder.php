@@ -68,12 +68,19 @@ class DatabaseSeeder extends Seeder
         DB::table('categories')->insert([
             'id'=>'1',
             'title'=>'e-Leaf',
-            'categoryID' => 1,
-            'cate_id' => 0,
+            'categoryID' => 0,
             'image'=>'/uploads/img/eleaf_logo.png',
             'created_at' => $createdAt,
             'updated_at' => $updatedAt
         ]);
+        DB::table('categories')->insert([
+            'title'=>'Shisha-Time',
+            'categoryID' => 0,
+            'image'=>'/uploads/img/Shisha_Time.jpg',
+            'created_at' => $createdAt,
+            'updated_at' => $updatedAt
+        ]);
+
 
         // Pages seeder
         DB::table('pages')->delete();

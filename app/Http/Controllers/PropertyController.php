@@ -7,6 +7,7 @@ use App\Property;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Validator;
 
 class PropertyController extends Controller
 {
@@ -58,6 +59,16 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
+        /** @var \Illuminate\Validation\Validator $validator */
+        $validator = Validator::make($request->all(), [
+            'name' => 'min:3|required|unique:property'
+        ]);
+
+        if($validator->fails()){
+            return view('admin.properties.create', [
+                'errors' => $validator->errors()
+            ]);
+        }
         $p = new Property();
         $p->name = $request->name;
         $p->save();

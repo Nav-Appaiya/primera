@@ -87,9 +87,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/categories/create', ['as' => 'admin_category_create', 'uses' => 'CategoryController@create']);
     Route::post('/admin/categories', ['as' => 'admin_category_store', 'uses' => 'CategoryController@store']);
     Route::patch('/admin/categories', ['as' => 'admin_category_update', 'uses' => 'CategoryController@update']);
-//    Route::resource('/admin/product', 'ProductController', ['only' => [
-//        'add',
-//    ]]);
+
     Route::get('/admin/property', ['as' => 'admin_property_index', 'uses' => 'PropertyController@index']);
     Route::get('/admin/property/{id}/edit', ['as' => 'admin_property_edit', 'uses' => 'PropertyController@edit']);
     Route::get('/admin/property/{id}', ['as' => 'admin_property_show', 'uses' => 'PropertyController@show']);

@@ -23,8 +23,7 @@ class ProductsTableSeeder extends Seeder
         DB::table('categories')->insert([
             'id'=>'1',
             'title'=>'e-Leaf',
-            'categoryID' => 1,
-            'cate_id' => 0,
+            'categoryID' => 0,
             'image'=>'/uploads/img/eleaf_logo.png',
             'created_at' => date('Y-m-d h:i:s'),
             'updated_at' => date('Y-m-d h:i:s')
@@ -34,7 +33,7 @@ class ProductsTableSeeder extends Seeder
             'name' => 'ELEAF INANO KIT BLACK',
             'description' => 'De eLeaf iNano is een buitengewoon compacte all-in-one eLeaf starterset. De ingebouwde batterij heeft een capaciteit van 650 mAh en ook de iNano clearomizer bevindt zich, door middel van een magnetisch koppelsysteem, binnenin de body. Hierdoor is de iNano gemakkelijk mee te dragen. De clearomizer heeft een tankinhoud van 0,8 ml en een coil met een weerstand van 1.2 Ohm. De coil is niet verwisselbaar dus wanneer deze versleten is, kan deze vervangen worden door een nieuwe iNano clearomizer.',
             'price' => '19,95',
-            'category_id' => 1,
+            'category_id' => 0,
             'imageurl' => '/assets/img/eleaf.jpg',
             'stock' => $stocklevel,
             'created_at' => date('Y-m-d h:i:s'),
@@ -98,10 +97,6 @@ class ProductsTableSeeder extends Seeder
             'value' => '510',
             'created_at' => date('Y-m-d h:i:s'),
             'updated_at' => date('Y-m-d h:i:s')
-        ]);
-
-        DB::table('categories')->insert([
-
         ]);
 
     }
