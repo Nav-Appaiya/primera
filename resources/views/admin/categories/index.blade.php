@@ -25,14 +25,13 @@
                                     <ul>
                                         <li style="margin-bottom: 7px;">
                                             <span style="font-weight: bold">{{$category->title}} </span>
-                                            <a class="pull-right" href="{{ URL::route('admin_category_edit', str_replace(' ', '-', $category->title)) }}"><span
+                                            <a class="pull-right" href="{{ URL::route('admin_category_edit', $category->id) }}"><span
                                                         class="label label-default ">edit</span></a></li>
                                         <ul>
                                             @foreach ($category->children as $child)
-
                                                 <li>
                                                     {{ $child->title }}
-                                                    <a class="pull-right" href="{{ URL::route('admin_category_edit', str_replace(' ', '-', $child->name)) }}">
+                                                    <a class="pull-right" href="{{ URL::route('admin_category_edit', $child->id) }}">
                                                         <span class="label label-default">edit</span>
                                                     </a>
                                                 </li>

@@ -27,7 +27,8 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::select('category', App\Category::lists('title', 'categoryID'), null, array('class' => 'form-control')) !!}
+
+                            {!! Form::select('category', App\Category::lists('title', 'title'), $cate->categoryiD, array('class' => 'form-control')) !!}
                         </div>
 
                         {!! Form::submit('edit', ['class' => 'btn btn-primary pull-right'])!!}

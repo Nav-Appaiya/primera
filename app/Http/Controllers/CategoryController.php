@@ -26,7 +26,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categories.index')->with('categories', $this->category->get());
+        return view('admin.categories.index')
+            ->with('categories', $this->category->where('categoryID',0)->get());
     }
 
     /**
@@ -51,15 +52,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            'image.required' => 'Select a profile image',
-        ];
         $rules = [
             'name'     => 'required|max:25',
             'category_id'     => 'required|max:20',
         ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
+
         if ($validator->fails()) {
             return redirect()
                 ->route('admin_category_create')
@@ -84,7 +83,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::where('title', $id)->get()->first();
+        $category = Category::where('id', $id)->get()->first();
 
         return view('admin.categories.edit', [
             'cate'=>$category
@@ -102,7 +101,7 @@ class CategoryController extends Controller
     {
         $cat = Category::find($request->id);
         $cat->title = $request->name;
-        $cat->cate_id = $request->category;
+        $cat->categoryID = $request->category;
         dd($request);
     }
 
