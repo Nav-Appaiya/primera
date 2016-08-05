@@ -149,7 +149,11 @@ class ProductController extends Controller
         if($request->property){
             foreach ($request->property as $key => $val) {
                 $foundProp = Property::find($key);
-                $productProperty = new ProductProperty();
+                $matches = ['productID'=>$product->id, 'propertyID'=>$foundProp->id];
+                $productProperty = ProductProperty::where($matches)->get()->first();
+                if(!$productProperty){
+                    $productProperty = new ProductProperty();
+                }
                 $productProperty->productID = $product->id;
                 $productProperty->propertyID = $foundProp->id;
                 $productProperty->value = $val;
