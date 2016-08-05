@@ -15,7 +15,15 @@
                     <div class="panel-heading">Nieuw categorie toevoegen</div>
                     <div class="panel-body" >
 
-                        @include('errors.message')
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
                         {!! Form::open(['route' => 'admin_category_store']) !!}
 

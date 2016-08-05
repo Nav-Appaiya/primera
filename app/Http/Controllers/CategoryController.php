@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-
-use Validator;
-
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -60,10 +56,11 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect()
-                ->route('admin_category_create')
-                ->withErrors($validator)
-                ->withInput();
+            return view('admin.categories.create', [
+                'errors' => $validator->errors(),
+                'categories' => Category::all()
+            ]);
+
         }
         $this->category->title = $request->name;
         $this->category->categoryID = $request->category_id;
@@ -83,7 +80,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::where('id', $id)->get()->first();
+        $category = Category::find($id);
 
         return view('admin.categories.edit', [
             'cate'=>$category
@@ -96,13 +93,55 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     *
      */
     public function update(Request $request)
     {
-        $cat = Category::find($request->id);
-        $cat->title = $request->name;
-        $cat->categoryID = $request->category;
-        dd($request);
+        /** @var $validator \Illuminate\Validation\Validator */
+
+        if($request->isMethod('patch')){
+            $category = Category::find($request->id);
+
+            $validator = Validator::make($request->all(), [
+                'title' => 'required',
+                'id' => 'required'
+            ]);
+
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator);
+            }
+
+            $category->title = $request->title;
+            $category->categoryID = $request->id;
+            if($category->save()){
+                $request->session()->flash('status', 'saved changes!');
+                return view('admin.categories.index', [
+                    'categories' => Category::all()
+                ]);
+            }
+
+        }
+
+
+        if($request->isMethod('patch')){
+            if($validator->fails()){
+                return view('admin.categories.edit', [
+                    'errors' => $validator->errors(),
+                    'cate' => $this->category
+                ]);
+            } else{
+                $category = Category::find($request->id);
+                $category->title = $request->name;
+                $category->categoryID = $request->id;
+                if($category->save()){
+                    dd($category);
+                }
+
+            }
+
+        }
+
+        return view('admin.categories.index');
     }
 
     /**
