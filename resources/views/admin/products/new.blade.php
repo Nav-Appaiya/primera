@@ -35,7 +35,7 @@
 
                             <div class="form-group">
                                 {!! Form::label('category', 'merk') !!}
-                                {!! Form::select('category', App\Category::lists('title', 'cate_id'), null, array('class' => 'form-control')) !!}
+                                {!! Form::select('category', App\Category::lists('title', 'categoryID'), null, array('class' => 'form-control')) !!}
                             </div>
 
                             @foreach(\App\Property::all() as $property)
