@@ -10,6 +10,7 @@
 @section('content')
     <div class="container">
 
+
         @if(Auth::check())
             <div class="row">
                 <h3 class="text-center">Goedenmiddag,  {{ $user->voornaam }} {{ $user->achternaam }}!</h3>

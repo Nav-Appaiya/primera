@@ -112,3 +112,7 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+
+// oAuth Routes for facebook
+Route::get('/redirect', 'SocialAuthController@redirect');
+Route::get('/callback', 'SocialAuthController@handleProviderCallback');
