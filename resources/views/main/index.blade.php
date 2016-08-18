@@ -28,7 +28,7 @@
                     <div class="item" style="max-height: 400px; height: 100%;">
                         <img src="{{ asset('/uploads/img/esigaret6.jpg') }}">
                         <div class="carousel-caption">
-                            <h2><span style="background-color: #2980b9;">Onze Producten</span></h2>
+                            <h2><span style="background-color: #2980b9;">OOOOnze Producten</span></h2>
                             <p>Een elektronische sigaret is een alternatief voor traditioneel roken. Er zijn e-sigaretten* met en zonder nicotine. De e-sigaret bevat een vloeibare vulling die wordt verdampt door middel van opwarming. De vloeistof wordt opgewarmd door een verwarmingselement met behulp van een batterij.
 
                             </p>
