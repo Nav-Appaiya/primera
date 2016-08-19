@@ -14,8 +14,9 @@ class CreateTableReview extends Migration
     {
         Schema::create('review', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('productID');
-            $table->string('userID');
+            $table->integer('productID')->unsigned();
+            $table->integer('userID')->unsigned();
+            $table->foreign('userID')->references('id')->on('users');
             $table->string('description');
             $table->string('rating');
             $table->timestamps();

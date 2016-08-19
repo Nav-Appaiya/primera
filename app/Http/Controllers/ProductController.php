@@ -181,7 +181,8 @@ class ProductController extends Controller
                 $pi->save();
             }
         }
-        if (isset($files)){
+
+        if (isset($files[0])){
             foreach ($files as $file => $value){
 //                $image = $this->image;
                 $filename = str_random(10).'.'.$value->getClientOriginalExtension();
