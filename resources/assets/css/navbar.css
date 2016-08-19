@@ -1,51 +1,78 @@
-.mega-dropdown {
-    position: static !important;
+body {
+    margin-bottom: 0px !important;
+    padding-top: 0px !important;
 }
-.mega-dropdown-menu {
-    padding: 20px 0px;
-    width: 100%;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-}
-.mega-dropdown-menu > li > ul {
-    padding: 0;
-    margin: 0;
-}
-.mega-dropdown-menu > li > ul > li {
-    list-style: none;
-}
-.mega-dropdown-menu > li > ul > li > a {
+
+input {
     display: block;
-    color: #222;
-    padding: 3px 5px;
-}
-.mega-dropdown-menu > li ul > li > a:hover,
-.mega-dropdown-menu > li ul > li > a:focus {
-    text-decoration: none;
-}
-.mega-dropdown-menu .dropdown-header {
-    font-size: 18px;
-    color: #ff3546;
-    padding: 5px 60px 5px 5px;
-    line-height: 30px;
-}
-
-.carousel-control {
-    width: 30px;
-    height: 30px;
-    top: -35px;
-
-}
-.left.carousel-control {
-    right: 30px;
-    left: inherit;
-}
-.carousel-control .glyphicon-chevron-left,
-.carousel-control .glyphicon-chevron-right {
+    width: 70%;
+    height: 38px;
+    margin: 6px 0px;
+    padding: .75em;
     font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: #000;
     background-color: #fff;
-    line-height: 30px;
-    text-shadow: none;
-    color: #333;
-    border: 1px solid #ddd;
+    background-image: none;
+    border: 1px solid #c6c6c6;
+    border-radius: 0;
+    box-sizing: border-box;
+    box-shadow: none;
+}
+
+.top {
+    height: 35px;
+    background: white;
+    border-bottom: #ECECEC 1px solid;
+    width: 100%;
+    line-height: 35px;
+    font-size: 12px;
+    font-family: Arial,Helvetica,sans-serif;
+}
+
+header {
+    background: white;
+    padding: 40px 0px;
+}
+
+.shopping-cart {
+      color:#FFF;
+      text-decoration:none;
+      font:900 12px Lato;
+      padding: 0 20px;
+      height: 35px;
+      line-height: 31px;
+      border:3px solid #999faf;
+      color:#999faf;
+      display:inline-block;
+      text-transform:uppercase;
+      letter-spacing:2px;
+      position:relative;
+      float: right;
+      top: 7.5px;
+}
+
+.number{
+        padding:3px 6px 4px 8px;
+        background:#999faf;
+        position:absolute;
+        border-radius:50px;
+        font:900 12px Lato;
+        color:#FFF;
+        top:-10px;
+        right:-13px;
+        border:3px solid #FFF;
+}
+
+.navigation {
+    width: 100%;
+    height: 45px;
+    background: #f6f6f6;
+}
+
+footer {
+    background: url(http://cdn.debijenkorf.nl/client-resources/v3.5.0/dist/images/gradient.png) repeat-x #fff;
+    padding-top: 30px;
+    margin-top: 45px;
 }

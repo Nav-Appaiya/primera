@@ -4,58 +4,42 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Lato:100,400,700,900' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/all.css">
     </head>
     <body>
-        @section('sidebar')
-        <nav class="navbar navbar-default  navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">eSigarett.nl</a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ URL::route('about') }}">Over ons</a></li>
-                            <li><a href="{{ URL::route('contact') }}">Contact</a></li>
+    <div class="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" style="text-align: left">Op werkdagen besteld voor 22:00, morgen in huis. Gratis retourneren</div>
+                <div class="col-md-6" style="text-align: right">Inloggen &nbsp; &nbsp; &nbsp; &nbsp; Nieuwe klant</div>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="container">
+        <div class="row">
+            <div class="header-logo col-xs-12 col-md-4">
+            <input type="text" placeholder="Zoeken" style="float: left"><i  style="float: left; margin-top: 17px; margin-left: -25px;" class="glyphicon glyphicon-search"></i>
+            </div>
+            <div class="col-xs-12 col-md-4" style="text-align: center">
+                                <img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png" height="50px">
+            </div>
+            <div class="col-md-4">
                         @if(Auth::check() == false)
-                            <li><a href="{{ route('login') }}">Inloggen</a></li>
-                            <li><a href="{{ route('register') }}">Registreren</a></li>
-                            <li><a href="/cart">Winkelwagen ({{ count(Session::get('cart.items')) }})<span class="fa fa-shopping-cart"></span></a></li>
-                        @else
-                            <li><a href="/cart">Winkelwagen <span class="fa fa-shopping-cart"></span></a></li>
-                            <li><a href="/logout"> {{ Auth::user()->voornaam}} uitloggen</a></li>
+            <div class="shopping-cart blue">
+                Winkelwagen
+                    <span class="number">{{ count(Session::get('cart.items')) }}</span>
                         @endif
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{ URL::route('homepage') }}">Home <span
-                        class="sr-only">(current)</span></a></li>
+            </div>
+            </div>
+        </div>
+        </div>
+    </header>
+        <div class="navigation"></div>
 
-                        @foreach($main_categories as $category)
-                            <li class="dropdown">
-                                <a href="/home" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                   aria-expanded="false">{{$category->name}} <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    @foreach($category->children as $child)
-                                        <li><a href="">{{ $child->name }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @endforeach
-
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
                     @show
-                    <div class="container" style="margin-top: 75px">
-                        @yield('content')
+                    <div class="container">
                     </div>
                     <footer class="footer">
                         <div class="container">
