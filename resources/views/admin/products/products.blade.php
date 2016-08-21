@@ -38,7 +38,7 @@
                                     <td>
                                     @if(!empty($product->productimages->first()))
                                         {{$product->productimages->first()->imagePath}}
-                                        <img src="{{asset('/public/uploads/img/'.$product->productimages->first()->imagePath)}}" alt="" width="75px">
+                                        <img src="{{asset('/uploads/img/'.$product->productimages->first()->imagePath)}}" alt="" width="75px">
                                     @endif
                                     </td>
                                     <td class="btn-block">

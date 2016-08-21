@@ -163,7 +163,26 @@ class ProductController extends Controller
 
         $files = $request->file('images');
         $data = array();
-        if (isset($files)){
+
+        if(NULL !== $request->get('images')){
+            header('Content-Type: text/plain');
+            $images = $request->get('images');
+            /** @var ProductImage $result */
+            foreach ($product->productimages()->getResults() as $result) {
+                $result->delete();
+            }
+
+            foreach ($images as $image) {
+                $pi = new ProductImage();
+                $pi->productID = $product->id;
+                $pi->imagePath = $image;
+                $pi->setCreatedAt(date('Y-m-d H:i:s'));
+                $pi->setUpdatedAt(date('Y-m-d H:i:s'));
+                $pi->save();
+            }
+        }
+
+        if (isset($files[0])){
             foreach ($files as $file => $value){
 //                $image = $this->image;
                 $filename = str_random(10).'.'.$value->getClientOriginalExtension();
@@ -174,7 +193,6 @@ class ProductController extends Controller
             }
             ProductImage::insert($data); // Eloquent
         }
-
         \Session::flash('status','successfully.');
         $request->session()->flash('status', 'Success');
         return redirect()->route('admin_product_index');

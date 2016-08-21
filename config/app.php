@@ -157,6 +157,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -206,6 +207,7 @@ return [
         'Html' => \Collective\Html\HtmlFacade::class,
         'Mollie' => \Mollie\Laravel\Facades\Mollie::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Socialize' => 'Laravel\Socialite\Facades\Socialite',
 
     ],
 
