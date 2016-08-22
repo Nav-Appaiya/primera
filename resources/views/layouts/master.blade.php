@@ -7,64 +7,63 @@
         <link rel="stylesheet" href="/css/all.css">
     </head>
     <body>
-        
-<div class="top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 align-left">
-                        Op werkdagen voor 22:00 uur besteld, morgen in huis.
-                    </div>
-                    <div class="col-md-6 col-sm-6 align-right">
-                        <a class="account-inf" data-toggle="modal" data-target="#myModal" href="">Mijn Account</a>
-                        <a class="account-inf" href="">Nog geen klant?</a>
+        <header class="head">
+            <div class="top-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 al-left">
+                            Op werkdagen voor 22:00 besteld, morgen in huis.
+                        </div>
+                        <div class="col-md-6 col-sm-6 al-right">
+                            <a class="r-20" data-toggle="modal" data-target="#account">Mijn account</a>
+                            <a class="r-20" href="">Geen account ?</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-2">
-                        <i style="font-size: 25px; margin-top: 17.5px" class="fa fa-search" aria-hidden="true"></i>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-8 align-center">
-        <img src="http://esigaret24.nl/wp-content/uploads/2015/11/damp-e-sigaret-webshop.jpg">
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-2">
-  @if(Auth::check() == false)
-                        <div style="float: right;">
-                            <i style="font-size: 25px; margin-top: 17.5px" class="fa fa-shopping-bag" aria-hidden="true"></i><span style="margin-top: -20px; margin-left: -8px;" class="badge">{{ count(Session::get('cart.items')) }}</span>
+            <div class="middle-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-2">
+                            <div class="search">
+                                <i class="fa fa-search font-25"></i>
+                            </div>
                         </div>
-                        @else
-                        <div style="float: right;">
-                            <i style="font-size: 25px; margin-top: 17.5px" class="fa fa-shopping-bag" aria-hidden="true"></i><span style="margin-top: -20px; margin-left: -8px;" class="badge">{{ count(Session::get('cart.items')) }}</span>
+                        <div class="col-md-4 col-sm-4 col-xs-8 al-center">
+                            <img src="http://esigaret24.nl/wp-content/uploads/2015/11/damp-e-sigaret-webshop.jpg">
                         </div>
-                        
-                        @endif
+                        <div class="col-md-4 col-sm-4 col-xs-2 al-right">
+                            <div class="shopping-cart">
+                            @if(Auth::check() == false)
+                                <i class="fa fa-shopping-bag font-25"></i>
+                                <span style="margin-top: -20px; margin-left: -8px;" class="badge">{{ count(Session::get('cart.items')) }}</span>
+                            @else
+                                <i class="fa fa-shopping-bag font-25"></i>
+                                <span style="margin-top: -20px; margin-left: -8px;" class="badge">{{ count(Session::get('cart.items')) }}</span>
+                            @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </header>  
-        <div class="navigation">
-            <div class="container">
-                <ul>
-                    <li>Homepagina</li>
-                    <li>categorieën</li>
-                    <li>Over ons</li>
-                    <li>Contact</li>
-                </ul>
+            <div class="navigation-bar">
+                <div class="container">
+                    <ul class="navigation-drop">
+                        <li><a href="{{ URL::route('about') }}">Over ons</a></li>
+                        <li><a href="{{ URL::route('about') }}">Over ons</a></li>
+                        <li><a href="{{ URL::route('about') }}">Over ons</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>    
+        </header>
 
                     @show
                     <div class="container" style="margin-top: 40px">
                         @yield('content')
                     </div>
-<div class="container">
-    
-</div>
 
-<div id="myModal" class="modal fade" role="dialog">
+
+<div id="account" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->

@@ -12,8 +12,9 @@
 @section('content')
 
         <div class="row">
+        <div class="col-md-3"><h1>Filter</h1></div>
             @foreach ($products as $product)
-                    <div class="col-sm-6 col-md-4">
+                    <div class="col-sm-4 col-md-3">
                         <div class="boxpanel">
                             <img src="{{$product->imageurl}}" class="img-responsive">
                             <div class="caption">
@@ -25,7 +26,6 @@
                                         <h3 class="pull-right"><label>&euro;{{number_format($product->price, 2, '.', ',')}}</label></h3>
                                     </div>
                                 </div>
-                                <p>{{$product->description}}</p>
                                 <div class="row center-block">
                                     <div class="btn-group cart">
                                         <a href="{{ URL::route('product_detail', $product->id) }}" class="btn btn-info btn-product">
