@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
 }); // End of authed route group.
 
 // Admin authorisation only for admins, not authed users!
-Route::group(['middleware' => 'web' ], function () {
+Route::group(['middleware' => 'admin' ], function () {
     Route::get('/admin/orders', ['as' => 'orders.index', 'uses' => 'OrderController@index']);
     Route::get('/admin/orders/new', ['as' => 'orders.create', 'uses' => 'OrderController@create']);
     Route::post('/admin/orders/store', ['as' => 'orders.store', 'uses' => 'OrderController@store']);
@@ -89,13 +89,23 @@ Route::group(['middleware' => 'web' ], function () {
     Route::post('/admin/categories', ['as' => 'admin_category_store', 'uses' => 'CategoryController@store']);
     Route::patch('/admin/categories', ['as' => 'admin_category_update', 'uses' => 'CategoryController@update']);
 
-    Route::get('/admin/property', ['as' => 'admin_property_index', 'uses' => 'PropertyController@index']);
-    Route::get('/admin/property/{id}/edit', ['as' => 'admin_property_edit', 'uses' => 'PropertyController@edit']);
-    Route::get('/admin/property/{id}', ['as' => 'admin_property_show', 'uses' => 'PropertyController@show']);
-    Route::get('/admin/property/create', ['as' => 'admin_property_create', 'uses' => 'PropertyController@create']);
-    Route::post('/admin/property', ['as' => 'admin_property_store', 'uses' => 'PropertyController@store']);
-    Route::patch('/admin/property', ['as' => 'admin_property_update', 'uses' => 'PropertyController@update']);
-    Route::get('/admin/property/destroy/{id}', ['as' => 'admin_property_destroy', 'uses' => 'PropertyController@destroy']);
+//    Route::get('/admin/property', ['as' => 'admin_property_index', 'uses' => 'PropertyController@index']);
+//    Route::get('/admin/property/{id}/edit', ['as' => 'admin_property_edit', 'uses' => 'PropertyController@edit']);
+//    Route::get('/admin/property/{id}', ['as' => 'admin_property_show', 'uses' => 'PropertyController@show']);
+//    Route::get('/admin/property/create', ['as' => 'admin_property_create', 'uses' => 'PropertyController@create']);
+//    Route::post('/admin/property', ['as' => 'admin_property_store', 'uses' => 'PropertyController@store']);
+//    Route::patch('/admin/property', ['as' => 'admin_property_update', 'uses' => 'PropertyController@update']);
+//    Route::get('/admin/property/destroy/{id}', ['as' => 'admin_property_destroy', 'uses' => 'PropertyController@destroy']);
+
+
+
+    Route::get('/admin/property', ['as' => 'admin_property_index', 'uses' => 'admin\PropertyController@index']);
+    Route::get('/admin/property/{id}/edit', ['as' => 'admin_property_edit', 'uses' => 'admin\PropertyController@edit']);
+    Route::get('/admin/property/{id}', ['as' => 'admin_property_show', 'uses' => 'admin\PropertyController@show']);
+    Route::get('/admin/property/create', ['as' => 'admin_property_create', 'uses' => 'admin\PropertyController@create']);
+    Route::post('/admin/property', ['as' => 'admin_property_store', 'uses' => 'admin\PropertyController@store']);
+    Route::patch('/admin/property', ['as' => 'admin_property_update', 'uses' => 'admin\PropertyController@update']);
+    Route::get('/admin/property/destroy/{id}', ['as' => 'admin_property_destroy', 'uses' => 'admin\PropertyController@destroy']);
 
 //    Route::resource('/admin/product', 'ProductController');
 //    Route::resource('/admin/customers', 'CustomerController');
