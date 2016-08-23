@@ -7,7 +7,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+            <div class="well">
                 <h1 class="text-center">Winkelwagen</h1>
+            </div>
             </div>
         </div>
 
@@ -58,7 +60,7 @@
                             <td><a href="{{ URL::route('homepage') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Nog meer winkelen</a></td>
                             <td colspan="2" class="hidden-xs"></td>
                             <td class="hidden-xs text-center"><strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong></td>
-                        <td><a href="{{ URL::route('checkout') }}" class="btn btn-success btn-block">Bestelling afronden <i class="fa fa-angle-right"></i></a></td>
+                        <td><a href="{{ URL::route('checkout') }}" class="button -green center">Bestelling afronden</a></td>
                         </tr>
                         </tfoot>
                     </table>
