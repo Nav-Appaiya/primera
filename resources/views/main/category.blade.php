@@ -4,9 +4,9 @@
 
 @section('titel', 'category')
 
-@section('sidebar')
-    @parent
-@endsection
+{{--@section('sidebar')--}}
+    {{--@parent--}}
+{{--@endsection--}}
 
 @section('content')
     <div class="container">
@@ -14,6 +14,11 @@
             <div class="col-md-12">
                 <h1 class="text-center">
                     {{--{{ $category->name }}--}}
+                    {{--{!! $product->children() !!}--}}
+                    {{--{{dd($product->product)}}--}}
+                    @foreach($product->product as $child)
+                        {{$child}}
+                    @endforeach
                 </h1>
             </div>
 

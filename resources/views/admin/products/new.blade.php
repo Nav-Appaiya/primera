@@ -16,8 +16,19 @@
 
                         @include('errors.message')
 
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+
                         {{--{!! Form::open(['route' => 'admin_product_save', 'method' => 'post'], 'files' => true) !!}--}}
-                        {!! Form::open(array('route' => array('admin_product_save'), 'files' => true )) !!}
+                        {!! Form::open(array('route' => 'admin_product_save', 'method' => 'post', 'files' => true )) !!}
                         <fieldset>
 
                             <div class="form-group">
@@ -35,34 +46,34 @@
 
                             <div class="form-group">
                                 {!! Form::label('category', 'merk') !!}
-                                {!! Form::select('category', App\Category::lists('title', 'categoryID'), null, array('class' => 'form-control')) !!}
+                                {!! Form::select('category', App\Category::where('categoryID', '!=', 0)->pluck('title', 'categoryID'), null, array('class' => 'form-control')) !!}
                             </div>
 
-                            @foreach(\App\Property::all() as $property)
-                                <div class="form-group">
-                                    <label for="validate-text">{{ $property->name }}</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="property[{{ $property->id }}]" id="{{ $property->id }}" >
-                                        <span class="input-group-addon danger"><span class="glyphicon glyphicon-check"></span></span>
-                                    </div>
-                                </div>
-                            @endforeach
+                            {{--@foreach(\App\Property::all() as $property)--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="validate-text">{{ $property->name }}</label>--}}
+                                    {{--<div class="input-group">--}}
+                                        {{--<input type="text" class="form-control" name="property[{{ $property->id }}]" id="{{ $property->id }}" >--}}
+                                        {{--<span class="input-group-addon danger"><span class="glyphicon glyphicon-check"></span></span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--@endforeach--}}
 
-                            <div class="contacts">
-                                <label>Voer seotags voor dit product in:</label>
-                                <div class="form-group multiple-form-group input-group">
-                                    <div class="input-group-btn input-group-select">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                            <span class="concept">Seotags</span>
-                                        </button>
-                                    </div>
-                                    <input type="text" name="seotags[]" class="form-control">
-                                    <span class="input-group-btn">
-                            <button type="button" class="btn btn-success btn-add">+</button>
-                        </span>
-                                </div>
-                            </div>
-                    </div>
+                            {{--<div class="contacts">--}}
+                                {{--<label>Voer seotags voor dit product in:</label>--}}
+                                {{--<div class="form-group multiple-form-group input-group">--}}
+                                    {{--<div class="input-group-btn input-group-select">--}}
+                                        {{--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">--}}
+                                            {{--<span class="concept">Seotags</span>--}}
+                                        {{--</button>--}}
+                                    {{--</div>--}}
+                                    {{--<input type="text" name="seotags[]" class="form-control">--}}
+                                    {{--<span class="input-group-btn">--}}
+                            {{--<button type="button" class="btn btn-success btn-add">+</button>--}}
+                        {{--</span>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                    {{--</div>--}}
                             {!! Form::file('images[]', array('multiple' => true)) !!}
 
                             {!! Form::submit('submit', array('class' => 'btn btn-default'))!!}

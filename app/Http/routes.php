@@ -66,20 +66,21 @@ Route::group(['middleware' => 'auth'], function () {
 }); // End of authed route group.
 
 // Admin authorisation only for admins, not authed users!
-Route::group(['middleware' => 'admin'], function () {
+Route::group(['middleware' => 'web' ], function () {
     Route::get('/admin/orders', ['as' => 'orders.index', 'uses' => 'OrderController@index']);
     Route::get('/admin/orders/new', ['as' => 'orders.create', 'uses' => 'OrderController@create']);
     Route::post('/admin/orders/store', ['as' => 'orders.store', 'uses' => 'OrderController@store']);
     Route::get('/admin/orders/{order}/edit/', ['as' => 'orders.edit', 'uses' => 'OrderController@edit']);
     Route::get('/admin/orders/{order}/show/', ['as' => 'orders.show', 'uses' => 'OrderController@show']);
     Route::get('/admin/orders/{order}/destroy/', ['as' => 'orders.destroy', 'uses' => 'OrderController@destroy']);
+
     Route::get('/admin', ['as' => 'admin', 'uses' => 'AdminController@index']);
     Route::get('/admin/product/new', ['as' => 'admin_product_new', 'uses' => 'ProductController@newProduct']);
     Route::get('/admin/products', ['as' => 'admin_product_index', 'uses' => 'AdminController@products']);
     Route::get('/admin/product/destroy/{id}', ['as' => 'admin_product_destroy', 'uses' => 'ProductController@destroy']);
     Route::get('/admin/product/{id}', ['as' => 'admin_product_detail', 'uses' => 'ProductController@index']);
     Route::get('/admin/product/{product}/edit/', ['as' => 'admin_product_edit', 'uses' => 'ProductController@edit']);
-    Route::post('/admin/product/save', ['as' => 'admin_product_save', 'uses' => 'ProductController@add']);
+    Route::post('/admin/product/save', ['as' => 'admin_product_save', 'uses' => 'admin\ProductController@store']);
 
     //admin categories controller
     Route::get('/admin/categories', ['as' => 'admin_category_index', 'uses' => 'CategoryController@index']);

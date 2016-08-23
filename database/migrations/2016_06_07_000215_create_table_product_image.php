@@ -15,9 +15,11 @@ class CreateTableProductImage extends Migration
     {
         Schema::create('product_image', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('productID');
-            $table->string('imagePath');
-            $table->string('rel');
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
+//            $table->string('productID');
+            $table->string('imagePath', 25);
+            $table->string('rel', 20);
             $table->timestamps();
         });
     }

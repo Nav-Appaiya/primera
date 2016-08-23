@@ -16,9 +16,9 @@ class CreateTableProductProperty extends Migration
             $table->increments('id');
             $table->integer('productID')->unsigned();
             $table->foreign('productiD')->references('id')->on('products');
-            $table->integer('propertyID');
-            $table->string('value');
-            $table->timestamps();
+            $table->string('stock');
+//            $table->string('value');
+//            $table->timestamps();
         });
     }
 

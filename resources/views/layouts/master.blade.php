@@ -43,7 +43,7 @@
                                    aria-expanded="false">{{$category->name}} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     @foreach($category->children as $child)
-                                        <li><a href="">{{ $child->name }}</a></li>
+                                        <li><a href="{{route('category_detail', str_replace(' ', '-', $child->name))}}">{{ $child->name }}</a></li>
                                     @endforeach
                                 </ul>
                             </li>

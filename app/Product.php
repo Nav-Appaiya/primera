@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 
-    /**
-     * Product constructor.
-     */
-    public function __construct()
-    {
-    }
+//    /**
+//     * Product constructor.
+//     */
+//    public function __construct()
+//    {
+//    }
 
     public function seotags()
     {
@@ -24,18 +24,28 @@ class Product extends Model
         return $this->hasMany('App\ProductImage', 'productID');
     }
 
-    public function categories()
-    {
-        return $this->hasMany('App\Category', 'id', 'category_id');
-    }
+//    public function categories()
+//    {
+//        return $this->hasMany('App\Category', 'id', 'category_id');
+//    }
+
+//    public function category()
+//    {
+//        return $this->hasMany('App\Category', 'categoryID');
+//    }
 
     public function category()
     {
-        return $this->hasOne('App\Category', 'categoryID');
+        return $this->belongsTo('App\Category');
     }
 
-    public function properties()
+//    public function properties()
+//    {
+//        return $this->hasMany('App\ProductProperty', 'ProductID');
+//    }
+
+    public function orderedproducts()
     {
-        return $this->hasMany('App\ProductProperty', 'ProductID');
+        return $this->hasMany('App\ProductProperty');
     }
 }

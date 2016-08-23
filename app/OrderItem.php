@@ -11,10 +11,12 @@ class OrderItem extends Model
     {
         return $this->hasOne('App\Order');
     }
+
     public function product()
     {
         return $this->hasOne('App\Product');
     }
+
 
     public function file()
     {

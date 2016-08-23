@@ -17,9 +17,11 @@ class CreateTableOrders extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('shipping_address');
-            $table->string('billing_address');
-            $table->decimal('amount');
+            $table->string('postcode');
+            $table->string('adres');
+            $table->string('huisnummer');
+            $table->string('woonplaats');
+//            $table->decimal('amount');
             $table->string('status');
             $table->string('payment_id');
             $table->boolean('notification');

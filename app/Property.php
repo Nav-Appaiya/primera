@@ -8,7 +8,7 @@ class Property extends Model
 {
     protected $table = 'property';
 
-    public function productproperty()
+    public function koppelproductproperty()
     {
         return $this->belongsTo('App\ProductProperty');
     }

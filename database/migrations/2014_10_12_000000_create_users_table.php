@@ -20,8 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('voorletters');
             $table->string('achternaam');
             $table->string('voornaam');
+            $table->string('geslacht');
             $table->string('geboortedatum');
             $table->string('adres');
+            $table->string('huisnummer');
             $table->string('postcode');
             $table->string('woonplaats');
             $table->string('telMobiel');

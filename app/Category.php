@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $table = 'categories';
+
     protected $guarded = ['id'];
+    
     protected $fillable = [
         'naam', 'image', 'categoryID',
     ];
+
     public $timestamps = false;
 
     public function product()
