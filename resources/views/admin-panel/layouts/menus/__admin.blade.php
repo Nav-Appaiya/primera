@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+        <a class="navbar-brand" href="{{route('admin_dashboard_index')}}">SB Admin v2.0</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -49,13 +49,22 @@
                     <a href="{{route('admin_dashboard_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_property_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> property</a>
+                    <a href="{{route('admin_property_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Property</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_product_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> product</a>
+                    <a href="{{route('admin_category_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Categorieen</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_category_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> category</a>
+                    <a href="{{route('admin_product_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Producten</a>
+                </li>
+                <li>
+                    <a href="{{route('admin_product_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Users</a>
+                </li>
+                <li>
+                    <a href="{{route('admin_product_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Orders</a>
+                </li>
+                <li>
+                    <a href="{{route('admin_product_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Reviews</a>
                 </li>
 
             </ul>
