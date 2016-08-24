@@ -10,12 +10,16 @@
 @endsection
 
 @section('content')
-
+<ol class="breadcrumb">
+  <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
+  <li class="active">Products</li>
+</ol>
+        <div class="card">
         <div class="row">
-        <div class="col-md-3"><h1>Filter</h1></div>
+            <div class="col-md-12">
             @foreach ($products as $product)
-                    <div class="col-sm-4 col-md-3">
-                        <div class="boxpanel">
+                    <div class="col-sm-3 col-md-3">
+                        <div class="card">
                             <img src="{{$product->imageurl}}" class="img-responsive">
                             <div class="caption">
                                 <div class="row">
@@ -43,6 +47,8 @@
                     </div>
 
                 @endforeach
+                </div>
+                </div>
         </div>
 
 @endsection
