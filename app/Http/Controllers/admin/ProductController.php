@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 use Validator;
 use Illuminate\Support\Facades\Input;
+use Session;
+
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -56,11 +58,13 @@ class ProductController extends Controller
         ];
 
         $rules = [
-            'name'          => 'required',
-            'price'          => 'required',
-            'category'          => 'required',
-            'description'          => 'required',
-            'images'     => 'mimes:jpg,jpeg',
+//            'name'          => 'required',
+//            'price'          => 'required',
+//            'discount'          => 'required',
+//            'status'          => 'required',
+//            'category_id'          => 'required',
+//            'description'          => 'required',
+//            'images'     => 'mimes:jpg,jpeg',
 //            'video'          => 'mimes:mp4,webm',
         ];
 
@@ -68,24 +72,11 @@ class ProductController extends Controller
 
         if ($validator->fails()) {
             return redirect()
-                ->route('admin_product_new')
+                ->route('admin_product_create')
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        $images = Input::file('images');
-
-        if(empty($images)) {
-            foreach ($images as $image){
-                $extension = $image->getClientOriginalExtension();
-                $new_filename = str_random(10) . '.' . $extension;
-                $image->move(public_path() . '/images/product/', $new_filename);
-
-                $img = $this->image;
-                $img->imagePath = $new_filename;
-                $img->save();
-            }
-        }
 
         $product = $this->product;
 
@@ -97,6 +88,23 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
 
         $product->save();
+
+
+        $images = Input::file('images');
+
+        if(empty($images)) {
+            foreach ($images as $image){
+                $extension = $image->getClientOriginalExtension();
+                $new_filename = str_random(10) . '.' . $extension;
+                $image->move(public_path() . '/images/product/', $new_filename);
+
+                $img = $this->image;
+                $img->imagePath = $new_filename;
+                $img->product_id = $product->id;
+                $img->save();
+            }
+        }
+
 
         \Session::flash('succes_message','successfully.');
 

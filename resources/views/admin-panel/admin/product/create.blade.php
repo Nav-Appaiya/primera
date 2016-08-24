@@ -8,6 +8,13 @@
     <div class="row">
         <div class="col-md-10">
 
+<pre>
+    {!! var_dump($errors) !!}
+    @foreach ($errors->all() as $error)
+        {{ $error }}
+    @endforeach
+</pre>
+
         @include('errors.message')
 
             {!! Form::open(array('route' => 'admin_product_store', 'method' => 'post', 'files' => true )) !!}

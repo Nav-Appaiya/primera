@@ -10,25 +10,22 @@
 
         @include('errors.message')
 
-        {{--{!! Form::open(['route' => 'admin_category_store']) !!}--}}
+
+        {!! Form::open(['route' => 'admin_property_store']) !!}
 
             <!-- created_at -->
+            <div class="form-group">
+                {!! Form::label('name', 'name') !!}
+                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+            </div>
 
+            {!! Form::submit('submit', ['class' => 'btn btn-primary pull-right'])!!}
 
-            {{--<!-- category id -->--}}
-            {{--<div class="form-group">--}}
-                {{--{!! Form::label('cate_id', 'category') !!}--}}
-                {{--{!! Form::select('category_id', array('' => '----- select -----', '0' => 'new main category', 'for sub categories' => \App\Category::where('cate_id', 0)->pluck('name', 'id')->toArray() ), null, ['class' => 'form-control'] ) !!}--}}
-            {{--</div>--}}
+            <div class="form-group">
+                <a class="btn btn-default pull-right" style="margin-right: 10px;">cancel</a>
+            </div>
 
-            {{--{!! Form::submit('submit', ['class' => 'btn btn-primary pull-right'])!!}--}}
-
-            {{--<div class="form-group">--}}
-                {{--<a class="btn btn-default pull-right" style="margin-right: 10px;">cancel</a>--}}
-            {{--</div>--}}
-
-        {{--{!! Form::close() !!}--}}
-
+            {!! Form::close() !!}
         </div>
 
 

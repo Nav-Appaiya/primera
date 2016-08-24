@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
-use App\Property;
+use App\Review;
+
 use Illuminate\Http\Request;
-use Validator;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class PropertyController extends Controller
+class ReviewController extends Controller
 {
-
-    protected $property;
+    protected $review;
 
     public function __construct()
     {
-        $this->property = new Property();
+        $this->review = Review::all();
     }
 
     /**
@@ -26,7 +25,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        return view('admin-panel.admin.property.index')->with('property', $this->property->all());
+        return view('admin.review.index')->with('reviews', $this->review);
     }
 
     /**
@@ -36,9 +35,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('admin-panel.admin.property.create');
-
-//        return'asdas';
+        //
     }
 
     /**
@@ -49,32 +46,7 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-//            'image.required' => 'Select a profile image',
-        ];
-
-        $rules = [
-            'name'     => 'required|max:25'
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-//            log::error('.');
-
-            return redirect()
-                ->route('admin_property_create')
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-
-            $this->property->name = $request->name;
-            $this->property->save();
-
-//            Log::info('made new category', ['name' => $request->name]);
-
-            return redirect()->route('admin_property_index');
-        }
+        //
     }
 
     /**
@@ -85,7 +57,9 @@ class PropertyController extends Controller
      */
     public function show($id)
     {
-        //
+        $review = Review::find($id)->first();
+        
+        return view('admin.review.show')->with('review', $review);
     }
 
     /**
@@ -96,7 +70,7 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        return view('admin-panel.admin.property.edit')->with('property', $this->property->find($id));
+        //
     }
 
     /**
@@ -108,7 +82,7 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return 'updated '.$id;
     }
 
     /**
@@ -119,6 +93,9 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $review = Review::findOrFail($id);
+        $review->delete();
+
+        return view()->route('admin_reviews_all');
     }
 }
