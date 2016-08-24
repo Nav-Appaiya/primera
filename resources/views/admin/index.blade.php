@@ -10,7 +10,7 @@
                 <div class="col-md-10 col-md-offset-1">
                     <div class="panel panel-default">
                         <div class="panel-heading">Dashboard producten
-                            <a class="btn btn-xs btn-success pull-right" style="margin-left: 5px" href="{{ route('admin_product_new') }}">Nieuw product toevoegen</a>
+                            <a class="btn btn-xs btn-success pull-right" style="margin-left: 5px" href="{{ route('admin_product_create') }}">Nieuw product toevoegen</a>
                             <a class="btn btn-xs btn-success pull-right" style="margin-left: 5px" href="{{ route('admin_category_index') }}">Nieuw category toevoegen</a>
                             <a class="btn btn-xs btn-success pull-right" style="margin-left: 5px" href="{{ route('admin_property_index') }}">Nieuw property toevoegen</a>
                         </div>

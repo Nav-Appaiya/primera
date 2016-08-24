@@ -1,6 +1,6 @@
 @extends('admin-panel.layouts.admin')
 
-@section('title', 'categories')
+@section('title', 'product')
 {{--@section('breadcrumb', Breadcrumbs::render('dashboard.category'))--}}
 
 @section('content')
@@ -16,10 +16,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                     @foreach ($property as $prop)
-                        <tr class="table-row" data-href="{{route('admin_property_edit', $prop->id)}}">
-                            <td>{{$prop->id}}</td>
-                            <td>{{$prop->name}}</td>
+                     @foreach ($products as $product)
+                        <tr class="table-row" data-href="{{route('admin_product_edit', $product->id)}}">
+                            <td>{{$product->id}}</td>
+                            <td>{{$product->name}}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -30,7 +30,7 @@
 
         <div class="col-md-2">
             <ul class="list-group">
-                <li class="list-group-item"><a href="{{route('admin_property_create')}}">new</a></li>
+                <li class="list-group-item"><a href="{{route('admin_product_create')}}">new</a></li>
                 {{--<li class="list-group-item"><a href="{{route('admin_property_create')}}">new</a></li>--}}
             </ul>
         </div>
