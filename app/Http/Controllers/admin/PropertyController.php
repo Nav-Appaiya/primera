@@ -25,7 +25,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        return view('admin-panel.admin.property.index');
+        return view('admin-panel.admin.property.index')->with('property', $this->property->all());
     }
 
     /**
@@ -35,7 +35,9 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+//        return view('admin-panel.admin.property.create');
+
+        return'asdas';
     }
 
     /**
@@ -68,7 +70,7 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin-panel.admin.property.edit')->with('property', $this->property->find($id));
     }
 
     /**

@@ -30,7 +30,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin-panel.admin.product.index')->with('products', $this->product->all());
     }
 
     /**
@@ -40,7 +40,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin-panel.admin.product.create');
     }
 
     /**
@@ -54,6 +54,7 @@ class ProductController extends Controller
         $messages = [
 
         ];
+
         $rules = [
             'name'          => 'required',
             'price'          => 'required',
@@ -89,7 +90,11 @@ class ProductController extends Controller
         $product = $this->product;
 
         $product->name = $request->name;
-        $product->category = $request->category;
+        $product->description = $request->description;
+        $product->status = $request->status;
+        $product->discount = $request->discount;
+        $product->price = $request->price;
+        $product->category_id = $request->category_id;
 
         $product->save();
 
