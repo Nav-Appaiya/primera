@@ -7,7 +7,11 @@
 @endsection
 
 @section('content')
-
+<ol class="breadcrumb">
+  <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
+  <li>Products</li>
+  <li class="active">Product name</li>
+</ol>
     <div class="row">
         <div class="col-md-12">
 
