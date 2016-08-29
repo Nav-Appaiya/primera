@@ -58,13 +58,13 @@
                     <a href="{{route('admin_product_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Producten</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_product_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Users</a>
+                    <a href="{{route('admin_user_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Users</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_product_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Orders</a>
+                    <a href="{{route('admin_order_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Orders</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_product_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Reviews</a>
+                    <a href="{{route('admin_review_index')}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Reviews</a>
                 </li>
 
             </ul>

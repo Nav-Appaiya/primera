@@ -1,6 +1,6 @@
 @extends('admin-panel.layouts.admin')
 
-@section('title', 'videos')
+@section('title', 'Product details wijzigen')
 {{--@section('breadcrumb', Breadcrumbs::render('dashboard.category.edit'))--}}
 
 @section('content')
@@ -15,15 +15,22 @@
 
                         @include('errors.message')
 
-                        {!! Form::model($property, array('route' => array('admin_property_update', $property->id), 'method' => 'patch')) !!}
+                        {!! Form::model($property, array('route' => array('admin_property_update'), 'method' => 'patch')) !!}
 
-                        {{--{!! Form::hidden('id', $cate->id) !!}--}}
+                        {!! Form::hidden('id', $property->id) !!}
 
-                        <!-- name -->
                         <div class="form-group">
-                            {!! Form::label('name', 'name') !!}
-                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                            {!! Form::label('value', 'waarden') !!}
+                            {!! Form::text('value', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                         </div>
+
+                        <div class="form-group">
+                            {!! Form::label('type', 'type') !!}
+                            {{--{!! Form::select('name', null, ['class' => 'form-control', 'placeholder' => '']) !!}--}}
+                            {{ Form::select('type', ['color' => 'kleur', 'battery' => 'battery', 'nicotine' => 'nicotine'], null, ['class' => 'form-control']) }}
+
+                        </div>
+
 
                         {!! Form::submit('edit', ['class' => 'btn btn-primary pull-right'])!!}
 

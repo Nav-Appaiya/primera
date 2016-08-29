@@ -34,7 +34,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index')->with('users', $this->users);
+//        return view('admin.users.index')
+        return view('admin-panel.admin.users.index')->with('users', $this->users);
+
     }
 
     /**

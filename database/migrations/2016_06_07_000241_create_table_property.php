@@ -14,7 +14,13 @@ class CreateTableProperty extends Migration
     {
         Schema::create('property', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 20);
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->string('stock');
+            $table->string('serialNumber');
+            $table->string('color');
+            $table->string('nicotine');
+            $table->string('mah');
 //            $table->timestamps();
         });
     }

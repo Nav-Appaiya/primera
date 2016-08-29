@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin-panel.admin.category.index')->with('categories', $this->category->all());
+        return view('admin-panel.admin.category.index')->with('categories', $this->category->where('category_id', '0')->get());
     }
 
     /**
@@ -71,7 +71,7 @@ class CategoryController extends Controller
         } else {
 
             $this->category->title = $request->name;
-            $this->category->categoryID = $request->category_id;
+            $this->category->category_id = $request->category_id;
             $this->category->save();
 
 //            Log::info('made new category', ['name' => $request->name]);

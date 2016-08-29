@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('layouts.master', function($view)
         {
-            $view->with('main_categories', Category::where('categoryID', 0)->get());
+            $view->with('main_categories', Category::where('category_id', 0)->get());
         });
     }
 

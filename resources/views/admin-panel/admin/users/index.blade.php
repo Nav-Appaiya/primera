@@ -1,7 +1,7 @@
-@extends('layouts.admin')
+@extends('admin-panel.layouts.admin')
 
 @section('title', 'categories')
-@section('breadcrumb', Breadcrumbs::render('dashboard.user'))
+{{--@section('breadcrumb', Breadcrumbs::render('dashboard.user'))--}}
 
 @section('content')
 
@@ -15,8 +15,8 @@
                         <th>username</th>
                         <th>email</th>
                         <th>role</th>
-                        <th>credits</th>
                         <th>joined at</th>
+                        <th>updated at</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,8 +25,8 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->role }}</td>
-                            <td>{{ $user->credits }}</td>
+                            <td>{{ $user->is_admin }}</td>
+                            <td>{{ $user->updated_at }}</td>
                             <td>{{ $user->created_at }}</td>
                         </tr>
                     @endforeach

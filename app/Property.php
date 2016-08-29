@@ -10,8 +10,8 @@ class Property extends Model
 
     public $timestamps = false;
 
-    public function koppelproductproperty()
+    public function product()
     {
-        return $this->belongsTo('App\ProductProperty');
+        return $this->belongsTo('App\Product', 'product_id');
     }
 }

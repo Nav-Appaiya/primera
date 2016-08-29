@@ -1,6 +1,6 @@
 @extends('admin-panel.layouts.admin')
 
-@section('title', 'categories')
+@section('title', 'Categorieën')
 {{--@section('breadcrumb', Breadcrumbs::render('dashboard.category'))--}}
 
 @section('content')
@@ -8,20 +8,24 @@
     <div class="row">
         <div class="col-lg-10">
             <div class="table-responsive">
-                @foreach ($categories as $category)
-                    <div class="col-lg-4">
-                        <div class="thumbnail">
-                            <ul>
-                                <li style="margin-bottom: 7px;"><span style="font-weight: bold">{{$category->title}} </span><a class="pull-right " href="{{ URL::route('admin_category_edit', $category->id) }}"><span class="label label-default ">edit</span></a></li>
+                @if(count($categories) >= 1)
+                    @foreach ($categories as $category)
+                        <div class="col-lg-4">
+                            <div class="thumbnail">
                                 <ul>
-                                    @foreach ($category->children as $child)
-                                        <li>{{ $category->id }} - {{ $child->title }} <a class="pull-right" href="{{ URL::route('admin_category_edit', str_replace(' ', '-', $child->title)) }}"><span class="label label-default">edit</span></a></li>
-                                    @endforeach
+                                    <li style="margin-bottom: 7px;"><span style="font-weight: bold">{{$category->title}} </span><a class="pull-right " href="{{ URL::route('admin_category_edit', $category->id) }}"><span class="label label-default ">edit</span></a></li>
+                                    <ul>
+                                        @foreach ($category->children as $child)
+                                            <li>{{ $category->id }} - {{ $child->title }} <a class="pull-right" href="{{ URL::route('admin_category_edit', str_replace(' ', '-', $child->title)) }}"><span class="label label-default">edit</span></a></li>
+                                        @endforeach
+                                    </ul>
                                 </ul>
-                            </ul>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @else
+                    <p>Er zijn nog geen categorieen aangemaakt</p>
+                @endif
 
             </div>
         </div>

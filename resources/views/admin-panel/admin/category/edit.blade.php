@@ -1,6 +1,6 @@
 @extends('admin-panel.layouts.admin')
 
-@section('title', 'videos')
+@section('title', 'Categorie wijzigen')
 {{--@section('breadcrumb', Breadcrumbs::render('dashboard.category.edit'))--}}
 
 @section('content')

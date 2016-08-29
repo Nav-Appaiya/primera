@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $table = 'products';
+
+    protected $guarded = ['id'];
+
+    protected $fillable = [
+//        'naam', 'image', 'categoryID',
+    ];
 
 //    /**
 //     * Product constructor.
@@ -21,7 +28,7 @@ class Product extends Model
 
     public function productimages()
     {
-        return $this->hasMany('App\ProductImage', 'productID');
+        return $this->hasMany('App\ProductImage', 'product_id', 'id');
     }
 
 //    public function categories()
@@ -36,13 +43,13 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo('App\Category', 'category_id', 'id');
     }
 
-//    public function properties()
-//    {
-//        return $this->hasMany('App\ProductProperty', 'ProductID');
-//    }
+    public function property()
+    {
+        return $this->hasMany('App\Property', 'product_id');
+    }
 
     public function orderedproducts()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Category;
 use App\Product;
 use App\ProductImage;
 use Illuminate\Http\Request;
@@ -10,7 +11,6 @@ use Validator;
 use Illuminate\Support\Facades\Input;
 use Session;
 
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -18,11 +18,13 @@ class ProductController extends Controller
 {
     protected $product;
     protected $image;
+    protected $category;
 
     public function __construct()
     {
         $this->product = new Product();
         $this->image = new ProductImage();
+        $this->category = new Category();
     }
 
     /**
@@ -42,7 +44,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin-panel.admin.product.create');
+        return view('admin-panel.admin.product.create')->with('category', $this->category->all());;
     }
 
     /**
@@ -53,20 +55,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
+        $messages = [];
 
-        ];
-
-        $rules = [
-//            'name'          => 'required',
-//            'price'          => 'required',
-//            'discount'          => 'required',
-//            'status'          => 'required',
-//            'category_id'          => 'required',
-//            'description'          => 'required',
-//            'images'     => 'mimes:jpg,jpeg',
-//            'video'          => 'mimes:mp4,webm',
-        ];
+        $rules = [];
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
@@ -76,7 +67,6 @@ class ProductController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
 
         $product = $this->product;
 
@@ -89,7 +79,6 @@ class ProductController extends Controller
 
         $product->save();
 
-
         $images = Input::file('images');
 
         if(empty($images)) {
@@ -100,26 +89,14 @@ class ProductController extends Controller
 
                 $img = $this->image;
                 $img->imagePath = $new_filename;
-                $img->product_id = $product->id;
+                $img->product_id = $product->id;;
                 $img->save();
             }
         }
 
-
         \Session::flash('succes_message','successfully.');
 
         return redirect()->route('admin_product_index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -130,7 +107,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin-panel.admin.product.edit')->with('product', $this->product->find($id));
     }
 
     /**
@@ -140,9 +117,50 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $messages = [];
+
+        $rules = [];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('admin_product_edit', $request->_id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $product = $this->product->find($request->_id);
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->status = $request->status;
+        $product->discount = $request->discount;
+        $product->price = $request->price;
+        $product->category_id = $request->category_id;
+
+        $product->save();
+
+//        $images = Input::file('images');
+//
+//        if(empty($images)) {
+//            foreach ($images as $image){
+//                $extension = $image->getClientOriginalExtension();
+//                $new_filename = str_random(10) . '.' . $extension;
+//                $image->move(public_path() . '/images/product/', $new_filename);
+//
+//                $img = $this->image;
+//                $img->imagePath = $new_filename;
+//                $img->product_id = $product->id;
+//                $img->save();
+//            }
+//        }
+
+        \Session::flash('succes_message','successfully.');
+
+        return redirect()->route('admin_product_edit', $request->_id);
     }
 
     /**

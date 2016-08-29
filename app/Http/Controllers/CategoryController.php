@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.categories.index')
-            ->with('categories', $this->category->where('categoryID',0)->get());
+            ->with('categories', $this->category->where('category_id',0)->get());
     }
 
     /**
@@ -63,7 +63,7 @@ class CategoryController extends Controller
 
         }
         $this->category->title = $request->name;
-        $this->category->categoryID = $request->category_id;
+        $this->category->category_id = $request->category_id;
 
         $this->category->save();
 
@@ -112,7 +112,7 @@ class CategoryController extends Controller
             }
 
             $category->title = $request->title;
-            $category->categoryID = $request->id;
+            $category->category_id = $request->id;
             if($category->save()){
                 $request->session()->flash('status', 'saved changes!');
                 return view('admin.categories.index', [
@@ -132,7 +132,7 @@ class CategoryController extends Controller
             } else{
                 $category = Category::find($request->id);
                 $category->title = $request->name;
-                $category->categoryID = $request->id;
+                $category->category_id = $request->id;
                 if($category->save()){
                     dd($category);
                 }

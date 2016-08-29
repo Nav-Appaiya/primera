@@ -79,7 +79,7 @@ class ProductController extends Controller
         $categories = Category::all();
 
         foreach ($categories as $category) {
-            $c[$category->categoryID] = $category->title;
+            $c[$category->category_id] = $category->title;
         }
 
         // show the edit form and pass the nerd

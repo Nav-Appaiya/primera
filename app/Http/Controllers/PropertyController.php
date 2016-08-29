@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PropertyController extends Controller
 {
-    public $product_property;
+//    public $product_property;
     public $property;
 
     public function __construct()

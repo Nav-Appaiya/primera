@@ -21,7 +21,6 @@
     <!-- Custom Fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -59,35 +58,34 @@
 
 </div>
 <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    @yield('javascript')
 
-@yield('javascript')
-
-<script type="text/javascript">
-    $(document).ready(function($) {
-        $( "#datepicker" ).datepicker();
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function($) {
-        $(".table-row").click(function() {
-            window.document.location = $(this).data("href");
+    <script type="text/javascript">
+        $(document).ready(function($) {
+            $( "#datepicker" ).datepicker();
         });
-    });
-</script>
+    </script>
 
-<!-- Morris Charts JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function($) {
+            $(".table-row").click(function() {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
 </body>
 

@@ -1,6 +1,6 @@
 @extends('admin-panel.layouts.admin')
 
-@section('title', 'new category')
+@section('title', 'Nieuwe categorie')
 {{--@section('breadcrumb', Breadcrumbs::render('dashboard.category.edit'))--}}
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="col-lg-6">
             <div class="table-responsive">
                 <div class="panel panel-default">
-                    <div class="panel-heading">category</div>
+                    {{--<div class="panel-heading">category</div>--}}
 
                     <div class="panel-body">
                         @include('errors.message')
@@ -24,8 +24,8 @@
 
                         <!-- category id -->
                         <div class="form-group">
-                            {!! Form::label('cate_id', 'category') !!}
-                            {!! Form::select('category_id', array('' => '----- select -----', '0' => 'nieuwe categorie', 'sub categorieen' => \App\Category::where('CategoryID', 0)->pluck('title', 'id')->toArray() ), null, ['class' => 'form-control'] ) !!}
+                            {!! Form::label('category_id', 'category') !!}
+                            {!! Form::select('category_id', array('' => '----- select -----', '0' => 'nieuwe categorie', 'sub categorieen' => \App\Category::where('category_id', 0)->pluck('title', 'id')->toArray() ), null, ['class' => 'form-control'] ) !!}
                         </div>
 
                         {!! Form::submit('submit', ['class' => 'btn btn-primary pull-right'])!!}

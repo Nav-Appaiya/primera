@@ -1,6 +1,6 @@
 @extends('admin-panel.layouts.admin')
 
-@section('title', 'product')
+@section('title', 'Producten')
 {{--@section('breadcrumb', Breadcrumbs::render('dashboard.category'))--}}
 
 @section('content')
@@ -13,6 +13,12 @@
                     <tr>
                         <th>id</th>
                         <th>name</th>
+                        <th>Beschrijving</th>
+                        <th>Status</th>
+                        <th>Prijs</th>
+                        <th>cate</th>
+                        <th>toegevoegd</th>
+                        <th>gewijzigd</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +26,12 @@
                         <tr class="table-row" data-href="{{route('admin_product_edit', $product->id)}}">
                             <td>{{$product->id}}</td>
                             <td>{{$product->name}}</td>
+                            <td>{{$product->description}}</td>
+                            <td>{{$product->status}}</td>
+                            <td>{{$product->price}}</td>
+                            <td>{{$product->category->title}}</td>
+                            <td>{{$product->created_at}}</td>
+                            <td>{{$product->updated_at}}</td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -2,31 +2,23 @@
 
 namespace App\Http\Controllers\admin;
 
+//use App\ProductProperty;
 use App\Property;
 use Illuminate\Http\Request;
-use Validator;
 
+use Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class PropertyController extends Controller
 {
-
+//    protected $product_property;
     protected $property;
 
     public function __construct()
     {
+//        $this->product_property = new Property();
         $this->property = new Property();
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('admin-panel.admin.property.index')->with('property', $this->property->all());
     }
 
     /**
@@ -36,9 +28,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('admin-panel.admin.property.create');
-
-//        return'asdas';
+        return view('admin-panel.admin.product_property.create');
     }
 
     /**
@@ -50,42 +40,43 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
         $messages = [
-//            'image.required' => 'Select a profile image',
+
         ];
 
         $rules = [
-            'name'     => 'required|max:25'
+
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-//            log::error('.');
-
             return redirect()
-                ->route('admin_property_create')
+                ->route('admin_product_property_create', $request->id)
                 ->withErrors($validator)
                 ->withInput();
-        } else {
-
-            $this->property->name = $request->name;
-            $this->property->save();
-
-//            Log::info('made new category', ['name' => $request->name]);
-
-            return redirect()->route('admin_property_index');
         }
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $product = $this->property;
+
+        $product->product_id = $request->id;
+        $product->stock = $request->stock;
+        $product->serialNumber = $request->serialNumber;
+        $product->color = $request->color;
+        $product->nicotine = $request->nicotine;
+        $product->mah = $request->battery;
+
+//       $properties = array(
+//            ['value_id' => $request->color, 'property_id' => $request->color],
+//            ['value_id' => $request->nicotine, 'property_id' => $request->nicotine],
+//            ['value_id' => $request->battery, 'property_id' => $request->battery]
+//        );
+//        $this->property->insert($properties);
+
+        $product->save();
+
+        \Session::flash('succes_message','successfully.');
+
+        return redirect()->route('admin_product_edit', $request->id);
     }
 
     /**
@@ -96,7 +87,7 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        return view('admin-panel.admin.property.edit')->with('property', $this->property->find($id));
+        return view('admin-panel.admin.product_property.edit')->with('property', $this->property->find($id));
     }
 
     /**
@@ -106,9 +97,35 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $messages = [];
+
+        $rules = [];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('admin_product_property_edit', $request->_id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $product = $this->property->find($request->_id);
+
+        $product->stock = $request->stock;
+        $product->serialNumber = $request->serialNumber;
+        $product->color = $request->color;
+        $product->nicotine = $request->nicotine;
+        $product->mah = $request->battery;
+
+        $product->save();
+
+        \Session::flash('succes_message','successfully.');
+
+        return redirect()->route('admin_product_edit', $request->_product);
+
     }
 
     /**
