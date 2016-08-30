@@ -50,8 +50,6 @@ Route::get('auth/logout', ['as' => 'logoff', 'uses' => 'Auth\AuthController@getL
 Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-
-
 Route::get('/product/{id}', ['as' => 'product_detail', 'uses' => 'ProductController@detail']);
 Route::get('/product/{id}/add', ['as' => 'product_add', 'uses' => 'ProductController@add']);
 Route::get('/category/{name}', ['as' => 'category_detail', 'uses' => 'MainController@category']);
@@ -66,6 +64,29 @@ Route::get('/cart/remove/{id}', ['as' => 'cart.remove', 'uses' => 'CartControlle
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'MainController@payed']);
 }); // End of authed route group.
+
+Route::group(['prefix' => '/', 'middlewareGroups' => ['web']], function () {
+//
+//    Route::get('/', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/algemene-voorwaarden', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/over-ons', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/faq', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/privacy-policy', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/verzending', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/cookie-beleid', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/product/{id}', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/producten/{categorie}', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/mijn-bestelling', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/mijn-gegevens', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::patch('/mijn-gegevens', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/retouren', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/sitemap', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/winkelwagen', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/', ['as' => '', 'uses' => 'HomeController@']);
+//    Route::get('/', ['as' => '', 'uses' => 'HomeController@']);
+
+});
+
 
 // Admin authorisation only for admins, not authed users!
 Route::group(['prefix' => 'admin', 'middlewareGroups' => ['web']], function () {

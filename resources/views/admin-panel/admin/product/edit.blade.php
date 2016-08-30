@@ -9,7 +9,7 @@
         <div class="col-lg-6">
             <div class="table-responsive">
                 <div class="panel panel-default">
-                    <div class="panel-heading">category</div>
+                    {{--<div class="panel-heading">category</div>--}}
 
                     <div class="panel-body">
 
@@ -17,7 +17,15 @@
 
                         @include('errors.message')
 
-                        {!! Form::model($product, array('route' => 'admin_product_update', 'method' => 'patch')) !!}
+                        <label>Foto's</label>
+                        <div class="thumbnail">
+                            @foreach($product->productimages as $image)
+                                <img style="height: 100px; width: 100px; display: inline;" src="/images/product/{{$image->imagePath}}">
+                                <button style="margin: 0px -10px -40px 0px">x</button>
+                            @endforeach
+                        </div>
+
+                        {!! Form::model($product, array('route' => 'admin_product_update', 'method' => 'patch', 'files' => true)) !!}
 
                         {!! Form::hidden('_id', $product->id) !!}
 

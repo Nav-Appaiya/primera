@@ -15,16 +15,19 @@
     <div class="row">
         <div class="col-md-12">
 
-            @if($product->category_id)
+            {{--@if($product->category_id)--}}
                 {{--{!! Breadcrumbs::render('product_detail', $product) !!}--}}
-            @endif
+            {{--@endif--}}
 
         </div>
         <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="artist-data pull-left panel">
                 <div class="artst-pic pull-left">
                     <a href="#">
-                        <img src="{{ $product->imageurl }}" alt="" class="img-responsive"/>
+                        @foreach($product->productimages as $image)
+                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="/images/product/{{$image->imagePath}}">
+                        @endforeach
+                        {{--<img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="350" height="230" class="">--}}
                     </a>
                 </div>
                 <div class="artst-prfle pull-right col-md-12 col-xs-12 col-sm-12">
@@ -32,14 +35,19 @@
                     <div class="art-title">
                         {{--{{ $product->name }} ({{$product->categories()->first()->title}})--}}
                         <br><span class="artst-sub">
+                            <label>beschrijving</label><br>
                             <span class="byname">{{ $product->description }}</span>
                             <h1 class="pull-right"><span class="daysago"></span>
                                 &euro;{{ $product->price }}</h1>
                             <small style="color: green; font-weight: 900;">
                                 <br>
                                 <br>
-                                {{ $product->stock }} op voorraad
+                                {{--{{ $product->property }}--}}
+                                op voorraad
                             </small>
+                            {{ Form::select('number', \App\Property::where('product_id', $product->id)->pluck('nicotine', 'id')->toArray(), null) }}
+
+
 
                         </span>
                     </div>

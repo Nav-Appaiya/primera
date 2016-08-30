@@ -28,17 +28,17 @@
 
             <div class="form-group">
                 {!! Form::label('color', 'kleur') !!}
-                {{ Form::select('color', [\App\Details::where('type', 'color')->pluck('value', 'value')->toArray()], null, ['class' => 'form-control']) }}
+                {{ Form::select('color', array_merge(['null' => 'geen'], \App\Details::where('type', 'color')->pluck('value', 'value')->toArray() ), null, ['class' => 'form-control']) }}
             </div>
 
             <div class="form-group">
                 {!! Form::label('nicotine', 'nicotine') !!}
-                {{ Form::select('nicotine', [\App\Details::where('type', 'nicotine')->pluck('value', 'value')->toArray()], null, ['class' => 'form-control']) }}
+                {{ Form::select('nicotine', array_merge(['null' => 'geen'], \App\Details::where('type', 'nicotine')->pluck('value', 'value')->toArray() ), null, ['class' => 'form-control']) }}
             </div>
 
             <div class="form-group">
                 {!! Form::label('battery', 'battery') !!}
-                {{ Form::select('battery', ['' => \App\Details::where('type', 'battery')->pluck('value', 'value')->toArray()], null, ['class' => 'form-control']) }}
+                {{ Form::select('battery', array_merge(['null' => 'geen'], \App\Details::where('type', 'battery')->pluck('value', 'value')->toArray() ), null, ['class' => 'form-control']) }}
             </div>
 
             {!! Form::submit('submit', ['class' => 'btn btn-primary pull-right'])!!}

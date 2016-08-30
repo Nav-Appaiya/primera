@@ -22,7 +22,7 @@ class MainController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('productimages')->get();
         $categories = Category::all();
         $pages = Pages::all();
         

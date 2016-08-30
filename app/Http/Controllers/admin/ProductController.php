@@ -11,6 +11,9 @@ use Validator;
 use Illuminate\Support\Facades\Input;
 use Session;
 
+//use Input;
+use Redirect;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -143,19 +146,24 @@ class ProductController extends Controller
 
         $product->save();
 
-//        $images = Input::file('images');
-//
+        $images = $request->file('images');
+
 //        if(empty($images)) {
-//            foreach ($images as $image){
-//                $extension = $image->getClientOriginalExtension();
-//                $new_filename = str_random(10) . '.' . $extension;
-//                $image->move(public_path() . '/images/product/', $new_filename);
-//
-//                $img = $this->image;
-//                $img->imagePath = $new_filename;
-//                $img->product_id = $product->id;
-//                $img->save();
-//            }
+            foreach ($images as $image){
+                $extension = $image->getClientOriginalExtension();
+//                $original_filename = $image->getClientOriginalName();
+                $new_filename = str_random(10) . '.' . $extension;
+                $image->move(public_path() . '/images/product', $new_filename);
+
+                $this->image->insert([
+                    [
+                        'imagePath' => $new_filename,
+                        'product_id' => $product->id,
+                    ],
+                ]);
+
+            }
+
 //        }
 
         \Session::flash('succes_message','successfully.');

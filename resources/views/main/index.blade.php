@@ -20,7 +20,12 @@
             @foreach ($products as $product)
                     <div class="col-sm-3 col-md-3">
                         <div class="card">
-                            <img src="{{$product->imageurl}}" class="img-responsive">
+                            {{--{{$product->productimages->first() ? $product->productimages->first()->imagePath : '' }}--}}
+                            {{--@if($product->productimages->first() != null)--}}
+{{--                                {{$product->productimages->first()->imagePath}}--}}
+                            {{--@endif--}}
+                            {{--<img src="{{$product->productimages()->first->imagePath}}" class="img-responsive">aa--}}
+                            <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="350" height="230" class="">
                             <div class="caption">
                                 <div class="row">
                                     <div class="col-md-6 col-xs-6">

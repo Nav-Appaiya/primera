@@ -36,9 +36,9 @@
                 <a href="{{ URL::route('homepage') }}">Homepage</a>
             </li>
 
-                @foreach($categories->where('category_id', 0) as $category)
-                    <li><a href="{{ str_replace(' ', '-', $category->title)}}">{{$category->title}}</a></li>
-                @endforeach
+                {{--@foreach($categories->where('category_id', 0) as $category)--}}
+                    {{--<li><a href="{{ str_replace(' ', '-', $category->title)}}">{{$category->title}}</a></li>--}}
+                {{--@endforeach--}}
 
               <li style="margin-left: 30px">
                   <a href="{{ route('login') }}"><i style="font-size: 20px" class="fa fa-user" aria-hidden="true"></i></a>
