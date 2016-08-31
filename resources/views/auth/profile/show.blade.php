@@ -25,6 +25,22 @@
                                     <table class="table table-user-information">
                                         <tbody>
                                         <tr>
+                                            <td>E-mail</td>
+                                            <td>{{ $user->email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Username</td>
+                                            <td>{{ $user->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Wachtwoord</td>
+                                            <td>*******</td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <table class="table table-user-information">
+
+                                        <tr>
                                             <td>Voornaam</td>
                                             <td>{{ $user->voornaam }}</td>
                                         </tr>
@@ -58,8 +74,9 @@
                                         </tbody>
                                     </table>
 
-                                    <a href="{{ route('cart') }}" class="btn btn-primary">Mijn winkelwagen</a>
-                                    <a href="{{ route('checkout') }}" class="btn btn-primary">Direct afrekenen</a>
+                                    {{--<a href="{{ route('cart') }}" class="btn btn-primary">Mijn winkelwagen</a>--}}
+                                    <a href="{{ route('user.edit') }}" class="btn btn-primary">Account Wijzigen</a>
+                                    {{--<a href="{{ route('checkout') }}" class="btn btn-primary">Direct afrekenen</a>--}}
                                 </div>
                             </div>
                         </div>

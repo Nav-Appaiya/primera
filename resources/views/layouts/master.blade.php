@@ -41,7 +41,7 @@
                 {{--@endforeach--}}
 
               <li style="margin-left: 30px">
-                  <a href="{{ route('login') }}"><i style="font-size: 20px" class="fa fa-user" aria-hidden="true"></i></a>
+                  <a href="{{ route('user.show') }}"><i style="font-size: 20px" class="fa fa-user" aria-hidden="true"></i></a>
               </li>
               <li>
                 <a href="{{ URL::route('cart') }}"><i style="font-size: 20px" class="fa fa-shopping-bag" aria-hidden="true"></i>

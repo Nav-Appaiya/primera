@@ -35,9 +35,9 @@ Route::get('/checkout', ['as' => 'checkout', 'uses' => 'MainController@checkout'
 Route::get('/payment', ['as' => 'payment', 'uses' => 'MainController@payment']);
 
 Route::get('mollie/status/{paymentid}', ['as' => 'payment.status', 'uses' => 'MainController@paymentStatus']);
-
-Route::get('/profile/orders', ['as' => 'profile.orders', 'uses' => 'ProfileController@orders']);
-Route::get('/profile', ['as' => 'profile.index', 'uses' => 'ProfileController@index', 'middleware' => 'auth']);
+//
+//Route::get('/profile/orders', ['as' => 'profile.orders', 'uses' => 'ProfileController@orders']);
+//Route::get('/profile', ['as' => 'profile.index', 'uses' => 'ProfileController@index', 'middleware' => 'auth']);
 
 // User authentication routes... Nav Appaiya 19 July 21:55
 Route::get('auth/login', ['as'=>'login', 'uses' => 'Auth\AuthController@getLogin']);
@@ -65,7 +65,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'MainController@payed']);
 }); // End of authed route group.
 
-Route::group(['prefix' => '/', 'middlewareGroups' => ['web']], function () {
+Route::group(['prefix' => '/', 'middleware' => ['web', 'auth']], function () {
+
+//Route::get('/profile/orders', ['as' => 'profile.orders', 'uses' => 'ProfileController@orders']);
+//Route::get('/profile', ['as' => 'profile.index', 'uses' => 'ProfileController@index']);
+
 //
 //    Route::get('/', ['as' => '', 'uses' => 'HomeController@']);
 //    Route::get('/algemene-voorwaarden', ['as' => '', 'uses' => 'HomeController@']);
@@ -77,8 +81,9 @@ Route::group(['prefix' => '/', 'middlewareGroups' => ['web']], function () {
 //    Route::get('/product/{id}', ['as' => '', 'uses' => 'HomeController@']);
 //    Route::get('/producten/{categorie}', ['as' => '', 'uses' => 'HomeController@']);
 //    Route::get('/mijn-bestelling', ['as' => '', 'uses' => 'HomeController@']);
-//    Route::get('/mijn-gegevens', ['as' => '', 'uses' => 'HomeController@']);
-//    Route::patch('/mijn-gegevens', ['as' => '', 'uses' => 'HomeController@']);
+    Route::get('/mijn-gegevens', ['as' => 'user.show', 'uses' => 'user\UserController@show']);
+    Route::get('/mijn-gegevens/wijzigen', ['as' => 'user.edit', 'uses' => 'user\UserController@edit']);
+    Route::patch('/mijn-gegevens', ['as' => 'user.update', 'uses' => 'user\UserController@udate']);
 //    Route::get('/retouren', ['as' => '', 'uses' => 'HomeController@']);
 //    Route::get('/sitemap', ['as' => '', 'uses' => 'HomeController@']);
 //    Route::get('/winkelwagen', ['as' => '', 'uses' => 'HomeController@']);
@@ -89,7 +94,8 @@ Route::group(['prefix' => '/', 'middlewareGroups' => ['web']], function () {
 
 
 // Admin authorisation only for admins, not authed users!
-Route::group(['prefix' => 'admin', 'middlewareGroups' => ['web']], function () {
+//Route::group(['prefix' => 'admin', 'middlewareGroups' => ['web', 'admin']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function () {
 
     //    Route::get('/admin/orders', ['as' => 'orders.index', 'uses' => 'OrderController@index']);
 //    Route::get('/admin/orders/new', ['as' => 'orders.create', 'uses' => 'OrderController@create']);
