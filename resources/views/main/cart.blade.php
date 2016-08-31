@@ -4,17 +4,13 @@
 
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-            <div class="well">
-                <h1 class="text-center">Winkelwagen</h1>
-            </div>
-            </div>
-        </div>
 
         @if(isset(session('cart')['items']))
-            <div class="row">
+        <ol class="breadcrumb">
+  <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
+  <li class="active">Winkelwagen</li>
+</ol>
+            <div class="content">
                 <div class="col-md-12">
                     <table id="cart" class="table table-hover table-condensed">
                         <thead>
@@ -65,14 +61,18 @@
                         </tfoot>
                     </table>
                 </div>
-            </div>
         @else
+        <ol class="breadcrumb">
+  <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
+  <li class="active">Winkelwagen</li>
+</ol>
+            <div class="content">
             <h3 class="text-center">
                 No Products in your cart yet, go back <a href="{{ URL::route('homepage') }}">shopping</a>.
             </h3>
+            </div>
         @endif
-    </div>
-
+</div>
     <script>
         var items = JSON.parse(localStorage.getItem('cart'));
         for (i = 0; i < JSON.parse(localStorage.getItem('cart')).length; i++) {

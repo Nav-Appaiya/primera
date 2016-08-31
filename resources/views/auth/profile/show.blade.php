@@ -8,17 +8,9 @@
 @endsection
 
 @section('content')
-    <div class="container">
-
 
         @if(Auth::check())
-            <div class="row">
-                <h3 class="text-center">Goedenmiddag,  {{ $user->voornaam }} {{ $user->achternaam }}!</h3>
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">{{ $user->voornaam }} {{ $user->achternaam }}</h3>
-                        </div>
+                    <div class="content">
                         <div class="panel-body">
                             <div class="row">
                                 <div class=" col-md-12 col-lg-12">
@@ -77,13 +69,10 @@
                                     {{--<a href="{{ route('cart') }}" class="btn btn-primary">Mijn winkelwagen</a>--}}
                                     <a href="{{ route('user.edit') }}" class="btn btn-primary">Account Wijzigen</a>
                                     {{--<a href="{{ route('checkout') }}" class="btn btn-primary">Direct afrekenen</a>--}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+
         @endif()
-    </div>
+
 @endsection
 
