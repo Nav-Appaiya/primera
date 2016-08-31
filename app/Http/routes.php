@@ -65,6 +65,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'MainController@payed']);
 }); // End of authed route group.
 
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/c/{name}', ['as' => 'category.show', 'uses' => 'CategoryController@show']);
+});
+
 Route::group(['prefix' => '/', 'middleware' => ['web', 'auth']], function () {
 
 //Route::get('/profile/orders', ['as' => 'profile.orders', 'uses' => 'ProfileController@orders']);
@@ -180,7 +184,7 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
-Route::get('/home', 'HomeController@index');
+//Route::get('/home', 'HomeController@index');
 
 Route::auth();
 

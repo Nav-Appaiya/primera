@@ -36,9 +36,16 @@
                 <a href="{{ URL::route('homepage') }}">Homepage</a>
             </li>
 
-                {{--@foreach($categories->where('category_id', 0) as $category)--}}
-                    {{--<li><a href="{{ str_replace(' ', '-', $category->title)}}">{{$category->title}}</a></li>--}}
-                {{--@endforeach--}}
+                @foreach($main_categories->where('category_id', 0) as $category)
+                    <li class="deeper parent dropdown">
+                        <a href="{{ route('category.show', str_replace(' ', '-', $category->title))  }}">{{ $category->title }}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @foreach($category->children as $child)
+                                <li class=""><a href="/{{ url('courses/'.str_replace(' ', '-', $child->name).'') }}">{{$child->title}}</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endforeach
 
               <li style="margin-left: 30px">
                   <a href="{{ route('user.show') }}"><i style="font-size: 20px" class="fa fa-user" aria-hidden="true"></i></a>
