@@ -21,7 +21,7 @@
 
         </div>
         <div class="col-md-12 col-xs-12 col-sm-12">
-            <div class="artist-data pull-left panel">
+        <div class="content">
                 <div class="artst-pic pull-left">
                     <a href="#">
                         @foreach($product->productimages as $image)

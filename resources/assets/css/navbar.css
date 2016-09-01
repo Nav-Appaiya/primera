@@ -4,57 +4,46 @@ html, body {
     background: #F8F8F8;
 }
 
-.top {
-    height: 35px;
-    background-color: #FFFFFF;
-    border-bottom: #ECECEC 1px solid;
-    line-height: 35px;
-    overflow: hidden;
-}
-
 header.head {
-    height: 105px;
-    background-color: #FFFFFF;
-    border-bottom: #ECECEC 1px solid;
+    width: 100%;
+    height: 140px;
 }
 
-header.head .logo {
+header.head .head-service {
+    height: 35px;
+    line-height: 35px;
+    background: #fff;
+    border-bottom: 1px #ECECEC solid;
+}
+
+header.head .head-bar {
+    height: 105px;
+    background: #fff;
+    border-bottom: 1px #ECECEC solid;
+}
+
+header.head .head-bar .logo {
     height: 105px;
     line-height: 105px;
 }
 
-header.head .logo img {
+header.head .head-bar .logo img {
     height: 55px;
     margin-top: 25px;
 }
 
-.breadcrumb {
-    background: none;
-    overflow: hidden;
-}
-
-.card {
-  background: #fff;
-  border-radius: 2px;
-  border: #ECECEC 1px solid;
-  padding: 30px 15px;
-  margin-bottom: 25px;
-  overflow: hidden;
-}
-
-ul {
+header.head .head-bar ul {
     list-style-type: none;
     margin: 0px;
     padding: 0px;
     height: 105px;
-    line-height: 105px;
+    line-height: 106px;
     float: right;
 }
 
-ul li {
+header.head .head-bar ul li {
     float: left;
     font-weight: bold;
-    margin-bottom: 5px;
     font-family: supergroup_bold,Arial,"Lucida Grande", "宋体", SimSun, "华文细黑", STXihei, sans-serif;
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
@@ -64,21 +53,58 @@ ul li {
     margin-right: 20px;
 }
 
-ul li:last-child {
+header.head .head-bar ul li:last-child {
     margin-right: 0px;
     margin-left: 15px;
 }
 
-a {
+header.head a {
     color: black;
     transition: 0.15s all ease-in-out;
     text-decoration: none;
 }
 
-a:hover {
+header.head a:hover {
     color: #A3ABA6;
     text-decoration: none;
 }
+
+
+.breadcrumb {
+    background: none;
+    overflow: hidden;
+}
+
+.breadcrumb a {
+    color: black;
+    transition: 0.15s all ease-in-out;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #A3ABA6;
+    text-decoration: none;
+}
+
+.content {
+  background: #fff;
+  border-radius: 2px;
+  border: #ECECEC 1px solid;
+  padding: 30px 15px;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+.product-list {
+  background: #fff;
+  border-radius: 2px;
+  border: #ECECEC 1px solid;
+  padding: 15px 15px;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+/* Bootstrap Fixes */
 
 .container-fluid {
     width: 90%;
@@ -91,3 +117,4 @@ a:hover {
 .al-right {
     text-align: right;
 }
+

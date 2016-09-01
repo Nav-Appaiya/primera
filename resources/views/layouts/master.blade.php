@@ -7,8 +7,8 @@
     </head>
     <body>
         @section('sidebar')
-
-    <div class="top">
+  <header class="head">
+    <div class="head-service">
         <div class="container-fluid">
           <div class="col-md-6 col-sm-6 col-xs-7">
             Op werkdagen voor 19:00 besteld, morgen in huis.
@@ -17,17 +17,17 @@
         @if(Auth::check() == false)
             <a href="{{ route('login') }}">Mijn account</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="{{ route('register') }}">Nog geen klant?</a>
         @else
-            <a href="/logout"> {{ Auth::user()->voornaam}} Uitloggen</a>
+            Welkom terug Mr. {{ Auth::user()->achternaam}}, <a href="/logout">Uitloggen</a>
         @endif
           </div>
         </div>
       </div>
 
-      <header class="head">
+      <div class="head-bar">
         <div class="container-fluid">
           <div class="col-md-4 col-sm-3 col-xs-4">
             <div class="logo">
-              <img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png">
+              <a href="/"><img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png"></a>
             </div>
           </div>
           <div class="col-md-8 col-sm-9 col-xs-8">
@@ -58,6 +58,7 @@
               </li>
             </ul>
           </div>
+        </div>
         </div>
       </header>
 
