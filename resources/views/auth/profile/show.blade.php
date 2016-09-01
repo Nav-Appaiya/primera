@@ -10,67 +10,106 @@
 @section('content')
 
         @if(Auth::check())
+                    <ol class="breadcrumb">
+                        <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
+                        <li class="active">Klanten Pagina</li>
+                    </ol>
+
                     <div class="content">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class=" col-md-12 col-lg-12">
-                                    <table class="table table-user-information">
-                                        <tbody>
-                                        <tr>
-                                            <td>E-mail</td>
-                                            <td>{{ $user->email }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Username</td>
-                                            <td>{{ $user->name }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Wachtwoord</td>
-                                            <td>*******</td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <table class="table table-user-information">
+                        <div class="col-md-12">
+                            <h3>Laatste bestellingen</h3>
+                        </div>
+                    </div>
 
-                                        <tr>
-                                            <td>Voornaam</td>
-                                            <td>{{ $user->voornaam }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Achternaam</td>
-                                            <td>{{ $user->achternaam }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Geboortedatum</td>
-                                            <td>{{ $user->geboortedatum }}</td>
-                                        </tr>
-                                        <tr>
-                                        <tr>
-                                            <td>Straat</td>
-                                            <td>{{ $user->adres }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Postcode</td>
-                                            <td>{{ $user->postcode }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Plaats</td>
-                                            <td>{{ $user->woonplaats }}</td>
-                                        </tr>
-                                        <td>Phone Number</td>
-                                        <td>{{ $user->telThuis }}(vast)<br><br>{{ $user->telMobiel }}(mobiel)
-                                        </td>
+                    <div class="content">
+                        <div class="col-md-6">
+                        <h3>Persoonlijke gegevens</h3>
+                        <form class="form-horizontal" role="form">
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Voornaam:</label>
+                            <div class="col-lg-8">
+                              <input class="form-control" type="text" value="{{ $user->voornaam }}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Achternaam:</label>
+                            <div class="col-lg-8">
+                              <input class="form-control" type="text" value="{{ $user->achternaam }}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Geboortedatum:</label>
+                            <div class="col-lg-8">
+                              <input class="form-control" type="text" value="{{ $user->geboortedatum }}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Straat:</label>
+                            <div class="col-lg-8">
+                              <input class="form-control" type="text" value="{{ $user->adres }}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Postcode:</label>
+                            <div class="col-md-8">
+                              <input class="form-control" type="text" value="{{ $user->postcode }}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Plaats:</label>
+                            <div class="col-md-8">
+                              <input class="form-control" type="text" value="{{ $user->woonplaats }}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Telefoon:</label>
+                            <div class="col-md-8">
+                              <input class="form-control" type="text" value="{{ $user->telThuis }} & {{ $user->telMobiel }}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                              <input type="button" class="btn btn-primary" value="Save Changes">
+                              <span></span>
+                              <input type="reset" class="btn btn-default" value="Cancel">
+                            </div>
+                          </div>
+                        </form>
+                        </div>
+                    <div class="col-md-6">
+                        <h3>Account gegevens</h3>
+                        <form class="form-horizontal" role="form">
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Email adres:</label>
+                            <div class="col-lg-8">
+                              <input class="form-control" type="text" value="{{ $user->email }}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Gebruikersnaam:</label>
+                            <div class="col-lg-8">
+                              <input class="form-control" type="text" value="{{ $user->name }}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Wachtwoord:</label>
+                            <div class="col-lg-8">
+                              <input class="form-control" type="password" value="*******">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                              <input type="button" class="btn btn-primary" value="Save Changes">
+                              <span></span>
+                              <input type="reset" class="btn btn-default" value="Cancel">
+                            </div>
+                          </div>
+                        </form>
+                        </div>
+                    </div>
 
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-
-                                    {{--<a href="{{ route('cart') }}" class="btn btn-primary">Mijn winkelwagen</a>--}}
-                                    <a href="{{ route('user.edit') }}" class="btn btn-primary">Account Wijzigen</a>
-                                    {{--<a href="{{ route('checkout') }}" class="btn btn-primary">Direct afrekenen</a>--}}
-                </div>
-            </div>
 
         @endif()
 

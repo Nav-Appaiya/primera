@@ -68,7 +68,9 @@
 </ol>
             <div class="content">
             <h3 class="text-center">
-                No Products in your cart yet, go back <a href="{{ URL::route('homepage') }}">shopping</a>.
+                Je hebt geen artikelen in je winkelwagen.
+
+ <a href="{{ URL::route('homepage') }}"> Ga naar de producten</a>.
             </h3>
             </div>
         @endif

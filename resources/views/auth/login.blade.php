@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-        <div class="card">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
+    <ol class="breadcrumb">
+      <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
+      <li class="active">Klanten</li>
+    </ol>
+    <div class="content">
+        <div class="col-md-6">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
@@ -61,11 +61,7 @@
                                 </a>
 
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                            </div>
-                        </div>
                     </form>
-                </div>
-            </div>
         </div>
     </div>
 </div>
