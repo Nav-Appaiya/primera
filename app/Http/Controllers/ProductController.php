@@ -50,13 +50,10 @@ class ProductController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(){
-        $products = Product::all();
-
-        return view('admin.products.products',[
-            'products' => $products,
-            'meta' => array('meta1', 'meta2', 'meta3')
-        ]);
+    public function index($name1, $name2, $id)
+    {
+//     return $id;
+        return view('product.index')->with('products', $this->category->find($id));
     }
 
     /**

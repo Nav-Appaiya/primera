@@ -66,7 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
 }); // End of authed route group.
 
 Route::group(['middleware' => 'web'], function () {
-    Route::get('/c/{name}', ['as' => 'category.show', 'uses' => 'CategoryController@show']);
+    Route::get('/{name}/c-{id}', ['as' => 'category.show', 'uses' => 'CategoryController@show']);
+    Route::get('/{cate1}/{cate2}/c-{id}/', ['as' => 'product.index', 'uses' => 'ProductController@index']);
 });
 
 Route::group(['prefix' => '/', 'middleware' => ['web', 'auth']], function () {

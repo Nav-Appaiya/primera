@@ -18,11 +18,9 @@ class CategoryController extends Controller
    public function show($name)
    {
        $str_category = str_replace('-', ' ', $name);
-//
-       $cate = $this->category->where('title', $str_category)->first();
-//       $cate = $this->category->get();
 
-//       return view('category.show');
+       $cate = $this->category->where('title', $str_category)->first();
+
        return view('category.show')->with('category', $cate);
    }
 
