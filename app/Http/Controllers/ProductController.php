@@ -53,7 +53,7 @@ class ProductController extends Controller
     public function index($name1, $name2, $id)
     {
 //     return $id;
-        return view('product.index')->with('products', $this->category->find($id));
+        return view('product.index')->with('category', $this->category->find($id));
     }
 
     /**

@@ -42,7 +42,7 @@
                         <ul class="dropdown-menu">
                             @foreach($category->children as $child)
                                 <li class="">
-                                    <a href="{{ route('product.index', [str_replace(' ', '-', $child->title), str_replace(' ', '-', $category->title), $child->id ]) }}">{{$child->title}}</a>
+                                    <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
                                 </li>
                             @endforeach
                         </ul>
