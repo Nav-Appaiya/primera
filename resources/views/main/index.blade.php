@@ -14,8 +14,9 @@
         </ol>
 
         <div class="content">
-        <div class="row">
             <div class="col-md-12">
+                    <h3>Test</h3>
+
             @foreach ($products as $product)
                     <div class="col-xs-4 col-sm-4 col-md-3">
                         <div class="product-list">
@@ -51,7 +52,6 @@
                     </div>
 
                 @endforeach
-                </div>
                 </div>
         </div>
 
