@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Order;
 use Illuminate\Http\Request;
 
 use Validator;
-
-use App\CreditOrder;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -17,7 +16,7 @@ class OrderController extends Controller
 
     public function __construct()
     {
-        $this->order = new CreditOrder();
+        $this->order = new Order();
     }
 
     /**
@@ -27,7 +26,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('admin.orders.index')->with('orders', $this->order->paginate(20));
+        return view('admin-panel.admin.orders.index')->with('orders', $this->order->paginate(20));
     }
 
     /**
@@ -38,7 +37,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.orders.edit')->with('order', $this->order->find($id));
+        return view('admin-panel.admin..orders.edit')->with('order', $this->order->find($id));
     }
 
     /**

@@ -17,7 +17,7 @@
         @if(Auth::check() == false)
             <a href="{{ route('login') }}">Mijn account</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="{{ route('register') }}">Nog geen klant?</a>
         @else
-            Welkom terug Mr. {{ Auth::user()->achternaam}}, <a href="/logout">Uitloggen</a>
+            Welkom terug {{ Auth::user()->name}}, <a href="/logout">Uitloggen</a>
         @endif
           </div>
         </div>
@@ -32,6 +32,12 @@
           </div>
           <div class="col-md-8 col-sm-9 col-xs-8">
             <ul>
+                <li>
+                    <div class="form-group">
+                        <input type="search" class="form-control" id="" placeholder="Zoeken">
+                    </div>
+
+                </li>
               <li>
                 <a href="{{ URL::route('homepage') }}">Homepage</a>
             </li>

@@ -1,7 +1,7 @@
-@extends('layouts.admin')
+@extends('admin-panel.layouts.admin')
 
 @section('title', 'orders')
-@section('breadcrumb', Breadcrumbs::render('dashboard.orders.edit', $order->id))
+{{--@section('breadcrumb', Breadcrumbs::render('dashboard.orders.edit', $order->id))--}}
 
 @section('content')
 

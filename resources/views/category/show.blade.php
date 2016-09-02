@@ -13,10 +13,11 @@
 
     <br>
     @foreach($category->children as $child)
-        <div class="col-lg-3 thumbnail">
-            <a></a>
-            <h1>{{$child->title}}</h1>
-        </div>
+        <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">
+            <div class="col-lg-3 thumbnail">
+                <h1>{{$child->title}}</h1>
+            </div>
+        </a>
     @endforeach
 
 @endsection

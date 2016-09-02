@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::get('/{name}/c-{id}', ['as' => 'category.show', 'uses' => 'CategoryController@show']);
     Route::get('/{cate1}/{cate2}/c-{id}/', ['as' => 'product.index', 'uses' => 'ProductController@index']);
+    Route::get('/{title}/p-{id}', ['as' => 'product.show', 'uses' => 'ProductController@show']);
 });
 
 Route::group(['prefix' => '/', 'middleware' => ['web', 'auth']], function () {
@@ -83,7 +84,6 @@ Route::group(['prefix' => '/', 'middleware' => ['web', 'auth']], function () {
 //    Route::get('/privacy-policy', ['as' => '', 'uses' => 'HomeController@']);
 //    Route::get('/verzending', ['as' => '', 'uses' => 'HomeController@']);
 //    Route::get('/cookie-beleid', ['as' => '', 'uses' => 'HomeController@']);
-//    Route::get('/product/{id}', ['as' => '', 'uses' => 'HomeController@']);
 //    Route::get('/producten/{categorie}', ['as' => '', 'uses' => 'HomeController@']);
 //    Route::get('/mijn-bestelling', ['as' => '', 'uses' => 'HomeController@']);
     Route::get('/mijn-gegevens', ['as' => 'user.show', 'uses' => 'user\UserController@show']);
@@ -174,6 +174,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function (
     Route::get('users/{id}/edit', ['as' => 'admin_user_edit', 'uses' => 'Admin\UserController@edit']);
     Route::post('users/{id}', ['as' => 'admin_user_update', 'uses' => 'Admin\UserController@update']);
     Route::delete('users/{id}', ['as' => 'admin_user_destroy', 'uses' => 'Admin\UserController@destroy']);
+
+    Route::delete('image/{id}', ['as' => 'admin_image_destroy', 'uses' => 'Admin\ImageController@destroy']);
+
 
 //    Route::resource('/admin/product', 'ProductController');
 //    Route::resource('/admin/customers', 'CustomerController');
