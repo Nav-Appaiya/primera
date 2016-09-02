@@ -15,11 +15,40 @@
 
     <div class="row">
         <div class="col-lg-3">
-            filter
-            {{$category}}
-            @foreach($category->children as $parent)
-                {{$parent}}a
-            @endforeach
+            filter<br>
+
+            <style>
+                .active > a{
+                    color: green;
+                }
+                .list > li > .active{
+                    display: block !important;
+                }
+                .list ul {
+                    display: none;
+                }
+
+            </style>
+
+            <ul class="list">
+                @foreach(\App\Category::where('category_id', 0)->get() as $parent)
+                    <li>
+                        <a href="{{route('product.index', [str_replace(' ', '-', $category->parent->title), str_replace(' ', '-', $parent->children()->first()->title), $parent->children()->first()->id])}}">{{$parent->title}}</a>
+                        <ul class="{{ $parent->id == $category->parent->id ? 'active' : '' }}">
+                            @foreach($parent->children as $children)
+                               <li class="{{$children->id == str_replace('c-', '', Request::segment(3)) ? 'active' : '' }}">
+                                    <a href="{{route('product.index', [ str_replace(' ', '-', $category->parent->title),  str_replace(' ', '-', $children->title), $children->id])}}">{{$children->title}}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endforeach
+            </ul>
+
+            prijs<br>
+            <input value="{{$category->product->min('price')}}">
+            <input value="{{$category->product->max('price')}}">
+
         </div>
 
         <div class="col-lg-9">
@@ -30,6 +59,7 @@
                         <p class="text">{{$product->name}}</p>
                         <p class="text">{{$product->price}}</p>
                         <p class="text">{{$product->description}}</p>
+                        <a href="{{route('product.show', [str_replace(' ', '-', $product->name), $product->id])}}">bekijken</a>
                         {{--<a href="{{route('')}}"></a>--}}
                     </div>
                 @endforeach

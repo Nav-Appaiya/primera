@@ -214,31 +214,6 @@ class MainController extends Controller
         exit;
     }
 
-    public function voorwaarde()
-    {
-        return view('main.voorwaarde');
-    }
-
-    public function about()
-    {
-        return view('main.about');
-    }
-
-    public function policy()
-    {
-        return view('main.policy');
-    }
-
-    public function verzending()
-    {
-        return view('main.verzending');
-    }
-
-    public function cookie()
-    {
-        return view('main.cookie');
-    }
-
     public function checkout(Request $request)
     {
         $user = Auth::user();

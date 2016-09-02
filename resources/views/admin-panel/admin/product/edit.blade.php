@@ -20,14 +20,19 @@
                         <label>Foto's</label>
                         <div class="thumbnail">
                             @foreach($product->productimages as $image)
-                                <img style="height: 100px; width: 100px; display: inline;" src="/images/product/{{$image->imagePath}}">
-                                <button style="margin: 0px -10px -40px 0px">x</button>
+                                {!! Form::open([ 'method'  => 'delete', 'route' => [ 'admin_image_destroy', $image->id ]]) !!}
+                                    <img style="height: 100px; width: 100px; display: inline;" src="/images/product/{{$image->imagePath}}">
+                                    {!! Form::button('delete', ['type' => 'submit', 'class' => 'btn btn-link']) !!}
+                                {!! Form::close() !!}
                             @endforeach
                         </div>
 
                         {!! Form::model($product, array('route' => 'admin_product_update', 'method' => 'patch', 'files' => true)) !!}
 
                         {!! Form::hidden('_id', $product->id) !!}
+
+                        {!! Form::file('images[]', array('multiple' => true)) !!}
+<br>
 
                         <div class="form-group">
                             {!! Form::label('name', 'name') !!}
@@ -60,8 +65,6 @@
                             {!! Form::select('category_id', \App\Category::groupList(), null, ['class' => 'form-control'] ) !!}
                             {{--                {!! Form::select('category_id', array('' => '----- select -----', '0' => 'new main category', 'for sub categories' => \App\Category::where('categoryID', 0)->pluck('title', 'id')->toArray() ), null, ['class' => 'form-control'] ) !!}--}}
                         </div>
-
-                        {!! Form::file('images[]', array('multiple' => true)) !!}
 
                         {!! Form::submit('edit', ['class' => 'btn btn-primary pull-right'])!!}
 

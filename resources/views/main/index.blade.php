@@ -25,7 +25,7 @@
 {{--                                {{$product->productimages->first()->imagePath}}--}}
                             {{--@endif--}}
                             {{--<img src="{{$product->productimages()->first->imagePath}}" class="img-responsive">aa--}}
-                            <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" class="">
+                            <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220px" class="">
                             <div class="caption">
                                 <div class="row">
                                     <div class="col-md-6 col-xs-6">
@@ -37,15 +37,15 @@
                                 </div>
                                 <div class="row center-block">
                                     <div class="btn-group cart">
-                                        <a href="{{ URL::route('product_detail', $product->id) }}" class="btn btn-info btn-product">
+                                        <a href="{{ URL::route('product.show', [$product->name, $product->id]) }}" class="btn btn-info btn-product">
                                             Meer weten <span class="fa fa-question-circle"></span>
                                         </a>
                                     </div>
-                                    <div class="btn-group wishlist">
-                                        <a href="{{ URL::route('cart.add', $product) }}" class="btn btn-success btn-product" onclick="">
-                                            In winkelwagen<span class="fa fa-shopping-cart"></span>
-                                        </a>
-                                    </div>
+                                    {{--<div class="btn-group wishlist">--}}
+                                        {{--<a href="{{ URL::route('cart.add', $product) }}" class="btn btn-success btn-product" onclick="">--}}
+                                            {{--In winkelwagen<span class="fa fa-shopping-cart"></span>--}}
+                                        {{--</a>--}}
+                                    {{--</div>--}}
                                 </div>
                             </div>
                         </div>

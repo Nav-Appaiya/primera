@@ -52,10 +52,17 @@ class ProductController extends Controller
      */
     public function index($name1, $name2, $id)
     {
-//     return $id;
         return view('product.index')->with('category', $this->category->find($id));
     }
 
+    public function show($title, $id)
+    {
+        return view('product.show')->with('product', $this->product->find($id));
+    }
+
+
+
+    ///// end
     /**
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
