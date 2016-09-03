@@ -25,7 +25,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        return view('admin.review.index')->with('reviews', $this->review);
+        return view('admin-panel.admin.review.index')->with('reviews', $this->review);
     }
 
     /**

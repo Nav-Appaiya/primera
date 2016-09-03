@@ -31,4 +31,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function review()
+    {
+        return $this->hasMany('App\Review', 'user_id');
+    }
+
+    public function order()
+    {
+        return $this->hasMany('App\Order', 'user_id');
+    }
 }
