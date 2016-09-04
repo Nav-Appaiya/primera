@@ -44,7 +44,7 @@ class PropertyController extends Controller
         ];
 
         $rules = [
-
+            '' => ''
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);

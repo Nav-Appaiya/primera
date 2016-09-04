@@ -13,7 +13,7 @@
 
 Route::auth();
 
-
+//
 Route::get('/test', ['as' => 'test', 'uses' => 'MainController@carting']);
 
 Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'MainController@payed']);
 }); // End of authed route group.
 
-Route::group(['middleware' => 'web'], function () {
+//Route::group(['middleware' => 'web'], function () {
     Route::get('/{name}/c-{id}', ['as' => 'category.show', 'uses' => 'CategoryController@show']);
     Route::get('/{cate1}/{cate2}/c-{id}/', ['as' => 'product.index', 'uses' => 'ProductController@index']);
     Route::get('/{title}/p-{id}', ['as' => 'product.show', 'uses' => 'ProductController@show']);
@@ -74,9 +74,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('password/email', 'Auth\PasswordController@postEmail');
     Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
     Route::post('password/reset', 'Auth\PasswordController@postReset');
-});
+//});
 
-Route::group(['prefix' => '/', 'middleware' => ['web', 'auth']], function () {
+Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/mijn-gegevens', ['as' => 'user.show', 'uses' => 'user\UserController@show']);
     Route::get('/mijn-gegevens/wijzigen', ['as' => 'user.edit', 'uses' => 'user\UserController@edit']);
     Route::patch('/mijn-gegevens', ['as' => 'user.update', 'uses' => 'user\UserController@update']);
@@ -87,8 +87,8 @@ Route::group(['prefix' => '/', 'middleware' => ['web', 'auth']], function () {
 });
 
 // Admin authorisation only for admins, not authed users!
-Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function () {
-//Route::group(['prefix' => 'admin', 'middlewareGroups' => ['web', 'admin']], function () {
+Route::group(['prefix'=>'admin','middlewareGroups' => ['web']], function () {
+//Route::group(['middlewareGroups' => ['web']], function () {
     Route::get('/', ['as' => 'admin_dashboard_index', 'uses' => 'admin\HomeController@index']);
 
     Route::get('product/create', ['as' => 'admin_product_create', 'uses' => 'admin\ProductController@create']);

@@ -6,6 +6,16 @@
 @section('content')
 
     <div class="row">
+        <div class="control-label">
+
+            <input placeholder="product nummer">
+            <input placeholder="aantal nieuwe producten" >
+            <button>toevoegen</button>
+            <br>
+            <br>
+        </div>
+
+
         <div class="col-md-10">
 
             <table class="table table-hover table-bordered">

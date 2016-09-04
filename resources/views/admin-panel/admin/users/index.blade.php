@@ -28,7 +28,7 @@
                             <td>{{ $user->is_admin }}</td>
                             <td>{{ $user->updated_at }}</td>
                             <td>{{ $user->created_at }}</td>
-                            <td>{{ $user->order }}</td>
+                            {{--<td>{{ $user->order }}</td>--}}
                         </tr>
                     @endforeach
                     </tbody>

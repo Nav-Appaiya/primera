@@ -53,7 +53,7 @@ class Product extends Model
 
     public function review()
     {
-        return $this->hasMany('App\Review', 'product_id');
+        return $this->hasMany('App\Review', 'product_id', 'id');
     }
 
     public function orderedproducts()

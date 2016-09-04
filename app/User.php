@@ -34,11 +34,11 @@ class User extends Authenticatable
 
     public function review()
     {
-        return $this->hasMany('App\Review', 'user_id');
+        return $this->hasMany('App\Review');
     }
 
     public function order()
     {
-        return $this->hasMany('App\Order', 'user_id');
+        return $this->hasMany('App\Order');
     }
 }

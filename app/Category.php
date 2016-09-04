@@ -31,24 +31,18 @@ class Category extends Model
         return $this->hasMany('App\Category', 'category_id');
     }
 
+    //makes a clean grouped array from the categories
     public static function groupList()
     {
         $category = Category::all();
 
-        $array = [];
-        $subArray= [];
-
         foreach ($category->where('category_id', 0) as $parent){
-//            $array = array_push($parent);
-            foreach ($parent->children as $child){
-                if($parent->id == $child->category_id){
-                    $subArray[$child->id] = $child->title;
-                }
-//            array_push($array, $subArray);
-//            $arry = array_push($array, $subArray);
-            }
-            $array[$parent->title] = $subArray;
 
+            $array[$parent->title] = array();
+
+            foreach($parent->children as $attribute) {
+                $array[$parent->title][$attribute->id] = $attribute->title;
+            }
         }
 
         return $array;
