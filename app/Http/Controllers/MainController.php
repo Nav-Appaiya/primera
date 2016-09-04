@@ -252,6 +252,7 @@ class MainController extends Controller
                 'first_name' => 'required|max:255',
                 'last_name' => 'required|min:3',
                 'street' => 'required|',
+                'street_number' => 'required|min:1',
                 'postcode' => 'required|min:5',
                 'plaats' => 'required|min:5',
                 'birthdate' => 'required',
@@ -282,13 +283,16 @@ class MainController extends Controller
                 $items = Session::get('cart.items');
                 $order = new Order();
                 $order->user_id = $user->id;
-                $order->shipping_address = $user->adres . ', ' . $user->postcode . ', ' . $user->woonplaats;
-                $order->billing_address = $user->adres . ', ' . $user->postcode . ', ' . $user->woonplaats;
-                $order->amount = $total;
+                $order->postcode = $request->get('postcode');
+                $order->adres = $request->get('street');
+                $order->huisnummer = $request->get('street_number');
+                $order->woonplaats = $request->get('plaats');
                 $order->status = 'awaiting payment';
+                $order->payment_id = 0;
                 $order->notification = 0;
                 $order->save();
 
+                // TODO: create order_items with links back to product & order
                 foreach ($items as $item) {
                     $orderedProduct = new OrderItem();
                     $orderedProduct->user_id = $user->id;

@@ -84,10 +84,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12"><strong>Straat + huisnummer: <span style="color: red;"> * </span></strong></div>
-                                <div class="col-md-12">
+                                <div class="col-md-8">
+                                    <strong>Straat: <span style="color: red;"> * </span></strong>
                                     <input type="text" name="street" class="form-control" value="{{ $user->adres or 'Straat' }}" />
                                 </div>
+                                <div class="col-md-4">
+                                    <strong>Huisnummer: <span style="color: red;"> * </span></strong>
+                                    <input type="text" name="street_number" class="form-control" value="{{ $user->adres or 'Straat' }}" />
+                                </div>
+
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-xs-12">
