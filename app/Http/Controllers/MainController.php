@@ -220,6 +220,7 @@ class MainController extends Controller
         $session = $request->session();
         $cart = $session->get('cart');
         $cartItems = $session->get('cart.items');
+        $producten = array();
 
 
         if(!$user){
@@ -238,7 +239,11 @@ class MainController extends Controller
     
         $total = 0;
         foreach ($cartItems as $item) {
-            $total += $item->price;
+            $product = Product::find($item);
+            if($product){
+                $producten[] = $product;
+                $total += $product->price;
+            }
         }
         $session->set('cart.total', $total);
 
@@ -312,7 +317,8 @@ class MainController extends Controller
 
         return view('main.checkout', [
             'user' => $user,
-            'cart' => $cart
+            'cart' => $cart,
+            'producten' => $producten
         ]);
     }
 
