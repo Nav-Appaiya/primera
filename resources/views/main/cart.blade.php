@@ -4,13 +4,19 @@
 
 
 @section('content')
-
-        @if(isset(session('cart')['items']))
+    @if($products)
         <ol class="breadcrumb">
-  <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
-  <li class="active">Winkelwagen</li>
-</ol>
-            <div class="content">
+            <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
+            <li class="active">Winkelwagen</li>
+        </ol>
+
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    @if (Session::has('status'))
+                        <div class="alert alert-info">{{ Session::get('status') }}</div>
+                    @endif
+                </div>
                 <div class="col-md-12">
                     <table id="cart" class="table table-hover table-condensed">
                         <thead>
@@ -23,16 +29,30 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach(session('cart')['items'] as $item)
+
+                        @foreach($products as $item)
                             <tr>
                                 <td data-th="Product">
                                     <div class="row">
                                         <div class="col-sm-2 hidden-xs">
-                                            <img src="{{ $item->imageurl }}" alt="{{ $item->name }}" class="img-responsive"/>
+                                            @if($item->productimages()->first())
+                                                <img src="/images/product/{{ $item->productimages()->first()->imagePath }}"
+                                                     alt="{{ $item->productimages()->first()->rel }}"
+                                                     class="img-responsive"
+                                                >
+                                            @else
+                                                {{-- Default image at /images/product/default.jpg --}}
+                                                <img src="/images/product/default.jpg" alt="{{ $item->name }}"
+                                                     class="img-responsive"/>
+                                            @endif
                                         </div>
                                         <div class="col-sm-10">
                                             <h4 class="nomargin">{{ $item->name }}</h4>
-                                            <p>{{ $item->description }}</p>
+                                            <p>
+                                                <a href="{{ route('product.show', [$item->name, $item->id]) }}">
+                                                    {{ $item->description }}
+                                                </a>
+                                            </p>
                                         </div>
                                     </div>
                                 </td>
@@ -42,7 +62,8 @@
                                 </td>
                                 <td data-th="Subtotal" class="text-center">{{ $item->price }}</td>
                                 <td class="actions" data-th="">
-                                    <a href="{{ URL::route('cart.remove', $item) }}" class="btn btn-danger btn-sm" role="button">Verwijderen uit winkelwagen <i class="fa fa-trash-o"></i></a>
+                                    <a href="{{ URL::route('cart.remove', $item) }}" class="btn btn-danger btn-sm"
+                                       role="button">Verwijderen uit winkelwagen <i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -50,36 +71,41 @@
                         </tbody>
                         <tfoot>
                         <tr class="visible-xs">
-                            <td class="text-center"><strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong></td>
+                            <td class="text-center"><strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong>
+                            </td>
                         </tr>
                         <tr>
-                            <td><a href="{{ URL::route('homepage') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Nog meer winkelen</a></td>
+                            <td><a href="{{ URL::route('homepage') }}" class="btn btn-warning"><i
+                                            class="fa fa-angle-left"></i> Nog meer winkelen</a></td>
                             <td colspan="2" class="hidden-xs"></td>
-                            <td class="hidden-xs text-center"><strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong></td>
-                        <td><a href="{{ URL::route('checkout') }}" class="button -green center">Bestelling afronden</a></td>
+                            <td class="hidden-xs text-center">
+                                <strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong></td>
+                            <td><a href="{{ URL::route('checkout') }}" class="button -green center">Bestelling afronden</a>
+                            </td>
                         </tr>
                         </tfoot>
                     </table>
                 </div>
-        @else
-        <ol class="breadcrumb">
-  <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
-  <li class="active">Winkelwagen</li>
-</ol>
-            <div class="content">
-            <h3 class="text-center">
-                Je hebt geen artikelen in je winkelwagen.
-
- <a href="{{ URL::route('homepage') }}"> Ga naar de producten</a>.
-            </h3>
             </div>
-        @endif
-</div>
-    <script>
-        var items = JSON.parse(localStorage.getItem('cart'));
-        for (i = 0; i < JSON.parse(localStorage.getItem('cart')).length; i++) {
-            document.write(items[i] + "<br />");
-        }
-    </script>
+            @else
+                <ol class="breadcrumb">
+                    <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
+                    <li class="active">Winkelwagen</li>
+                </ol>
+                <div class="content">
+                    <h3 class="text-center">
+                        Je hebt geen artikelen in je winkelwagen.
+
+                        <a href="{{ URL::route('homepage') }}"> Ga naar de producten</a>.
+                    </h3>
+                </div>
+            @endif
+        </div>
+        <script>
+            var items = JSON.parse(localStorage.getItem('cart'));
+            for (i = 0; i < JSON.parse(localStorage.getItem('cart')).length; i++) {
+                document.write(items[i] + "<br />");
+            }
+        </script>
 @endsection
 
