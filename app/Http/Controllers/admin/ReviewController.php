@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Product;
 use App\Review;
 
 use Illuminate\Http\Request;
@@ -11,11 +12,12 @@ use App\Http\Controllers\Controller;
 
 class ReviewController extends Controller
 {
-    protected $review;
+    protected $product;
 
     public function __construct()
     {
-        $this->review = Review::all();
+//        $this->review = Review::all();
+        $this->product = Product::all();
     }
 
     /**
@@ -25,28 +27,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        return view('admin.review.index')->with('reviews', $this->review);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('admin-panel.admin.review.index')->with('products', $this->product);
     }
 
     /**
@@ -57,9 +38,9 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        $review = Review::find($id)->first();
+//        $review = Review::find($id)->first();
         
-        return view('admin.review.show')->with('review', $review);
+        return view('admin-panel.admin.review.show')->with('product', $this->product->find($id));
     }
 
     /**

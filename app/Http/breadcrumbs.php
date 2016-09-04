@@ -22,8 +22,48 @@ Breadcrumbs::register('category', function($breadcrumbs, $category)
 // dashboard
 Breadcrumbs::register('dashboard', function($breadcrumbs)
 {
-    $breadcrumbs->push('Dashboard', route('admin_panel'));
+    $breadcrumbs->push('Dashboard', route('admin_dashboard_index'));
 });
+
+Breadcrumbs::register('dashboard.detail', function($breadcrumbs)
+{
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push('detail', route('admin_property_index'));
+});
+
+Breadcrumbs::register('dashboard.detail.edit', function($breadcrumbs, $id)
+{
+    $breadcrumbs->parent('dashboard.detail');
+    $breadcrumbs->push('wijzigen', route('admin_property_edit', $id));
+});
+
+Breadcrumbs::register('dashboard.detail.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('dashboard.detail');
+    $breadcrumbs->push('nieuwe', route('admin_property_create'));
+});
+
+// dashboard > Category
+Breadcrumbs::register('dashboard.category', function($breadcrumbs)
+{
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push('Categorieën', route('admin_category_index'));
+});
+
+// dashboard > Category > edit
+Breadcrumbs::register('dashboard.category.edit', function($breadcrumbs, $id)
+{
+    $breadcrumbs->parent('dashboard.category');
+    $breadcrumbs->push('Wijzigen', route('admin_category_edit', $id));
+});
+
+// dashboard > Category > new
+Breadcrumbs::register('dashboard.category.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('dashboard.category');
+    $breadcrumbs->push('Nieuw', route('admin_category_create'));
+});
+///ok
 
 // dashboard > orders
 Breadcrumbs::register('dashboard.orders', function($breadcrumbs)
@@ -53,20 +93,6 @@ Breadcrumbs::register('dashboard.videos.edit', function($breadcrumbs, $id)
     $breadcrumbs->push('Edit', route('admin_videos_edit', $id));
 });
 
-
-// dashboard > Category
-Breadcrumbs::register('dashboard.category', function($breadcrumbs)
-{
-    $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('Categories', route('admin_category_all'));
-});
-
-// dashboard > Category > edit
-Breadcrumbs::register('dashboard.category.edit', function($breadcrumbs)
-{
-    $breadcrumbs->parent('dashboard.category');
-    $breadcrumbs->push('Edit', route('admin_category_create'));
-});
 
 
 // dashboard > Users

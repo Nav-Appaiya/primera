@@ -1,7 +1,7 @@
 @extends('admin-panel.layouts.admin')
 
 @section('title', 'Nieuwe categorie')
-{{--@section('breadcrumb', Breadcrumbs::render('dashboard.category.edit'))--}}
+@section('breadcrumb', Breadcrumbs::render('dashboard.category.create'))
 
 @section('content')
 
@@ -12,20 +12,19 @@
                     {{--<div class="panel-heading">category</div>--}}
 
                     <div class="panel-body">
-                        @include('errors.message')
 
                         {!! Form::open(['route' => 'admin_category_store']) !!}
 
                         <!-- created_at -->
                         <div class="form-group">
-                            {!! Form::label('name', 'name') !!}
-                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                            {!! Form::label('title', 'naam') !!}
+                            {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                         </div>
 
                         <!-- category id -->
                         <div class="form-group">
-                            {!! Form::label('category_id', 'category') !!}
-                            {!! Form::select('category_id', array('' => '----- select -----', '0' => 'nieuwe categorie', 'sub categorieen' => \App\Category::where('category_id', 0)->pluck('title', 'id')->toArray() ), null, ['class' => 'form-control'] ) !!}
+                            {!! Form::label('category_id', 'categorie') !!}
+                            {!! Form::select('category_id', array('' => '----- select -----', '0' => 'nieuwe categorie', 'koppel aan:' => \App\Category::where('category_id', 0)->pluck('title', 'id')->toArray() ), null, ['class' => 'form-control'] ) !!}
                         </div>
 
                         {!! Form::submit('submit', ['class' => 'btn btn-primary pull-right'])!!}

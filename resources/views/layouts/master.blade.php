@@ -53,8 +53,13 @@
                   <a href="{{ route('user.show') }}"><i style="font-size: 18px" class="fa fa-user" aria-hidden="true"></i></a>
               </li>
               <li>
+<<<<<<< HEAD
                 <a href="{{ URL::route('cart') }}"><i style="font-size: 18px" class="fa fa-shopping-bag" aria-hidden="true"></i>
                 <span style="margin-top: -10px; margin-left: -8px" class="badge">0</span></a>
+=======
+                <a href="{{ URL::route('cart') }}"><i style="font-size: 20px" class="fa fa-shopping-bag" aria-hidden="true"></i>
+                <span style="margin-top: -10px; margin-left: -8px" class="badge">{{ count(\Illuminate\Support\Facades\Session::get('cart.items')) }}</span></a>
+>>>>>>> 1748bb2dbf4424a9f558aef4345f0582f46e6de3
               </li>
             </ul>
           </div>

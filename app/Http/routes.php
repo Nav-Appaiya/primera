@@ -13,37 +13,26 @@
 
 Route::auth();
 
-
+//
 Route::get('/test', ['as' => 'test', 'uses' => 'MainController@carting']);
 
 Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
 
-//Route::get('/home', ['as' => 'home', 'uses' => 'MainController@index']);
-
 // algemene-voorwaarde
-
-
 Route::post('/checkout', ['as' => 'checkout', 'uses' => 'MainController@checkout']);
 Route::get('/checkout', ['as' => 'checkout', 'uses' => 'MainController@checkout']);
 
 Route::get('/payment', ['as' => 'payment', 'uses' => 'MainController@payment']);
-
-//
-//Route::get('/profile/orders', ['as' => 'profile.orders', 'uses' => 'ProfileController@orders']);
-//Route::get('/profile', ['as' => 'profile.index', 'uses' => 'ProfileController@index', 'middleware' => 'auth']);
-
-
 
 //Route::get('/product/{id}', ['as' => 'product_detail', 'uses' => 'ProductController@detail']);
 Route::get('/product/{id}/add', ['as' => 'product_add', 'uses' => 'ProductController@add']);
 //Route::get('/category/{name}', ['as' => 'category_detail', 'uses' => 'MainController@category']);
 //Route::get('/categories', ['as' => 'categories_all', 'uses' => 'ProductController@add']);
 //Route::get('/pages/{pageId}', 'MainController@page');
-//Route::get('/admin', 'AdminController@index');
+
 Route::get('/cart', ['as' => 'cart', 'uses' => 'CartController@index']);
 Route::get('/cart/add/{id}', ['as' => 'cart.add', 'uses' => 'CartController@addCart']);
 Route::get('/cart/remove/{id}', ['as' => 'cart.remove', 'uses' => 'CartController@removeCart']);
-
 
 
 // oAuth Routes for facebook
@@ -54,7 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'MainController@payed']);
 }); // End of authed route group.
 
-Route::group(['middleware' => 'web'], function () {
+//Route::group(['middleware' => 'web'], function () {
     Route::get('/{name}/c-{id}', ['as' => 'category.show', 'uses' => 'CategoryController@show']);
     Route::get('/{cate1}/{cate2}/c-{id}/', ['as' => 'product.index', 'uses' => 'ProductController@index']);
     Route::get('/{title}/p-{id}', ['as' => 'product.show', 'uses' => 'ProductController@show']);
@@ -85,27 +74,21 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('password/email', 'Auth\PasswordController@postEmail');
     Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
     Route::post('password/reset', 'Auth\PasswordController@postReset');
+//});
 
-});
-
-Route::group(['prefix' => '/', 'middleware' => ['web', 'auth']], function () {
-
+Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/mijn-gegevens', ['as' => 'user.show', 'uses' => 'user\UserController@show']);
     Route::get('/mijn-gegevens/wijzigen', ['as' => 'user.edit', 'uses' => 'user\UserController@edit']);
     Route::patch('/mijn-gegevens', ['as' => 'user.update', 'uses' => 'user\UserController@update']);
     Route::get('/mijn-bestelling', ['as' => 'user.order.index', 'uses' => 'Auth\OrderController@index']);
     Route::get('/mijn-bestelling/{order_id}', ['as' => 'user.order.show', 'uses' => 'Auth\OrderController@show']);
-
     Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'MainController@payed']);
-
     Route::get('auth/logout', ['as' => 'logoff', 'uses' => 'Auth\AuthController@getLogout']);
-
 });
 
 // Admin authorisation only for admins, not authed users!
-Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function () {
-//Route::group(['prefix' => 'admin', 'middlewareGroups' => ['web', 'admin']], function () {
-
+Route::group(['prefix'=>'admin','middlewareGroups' => ['web']], function () {
+//Route::group(['middlewareGroups' => ['web']], function () {
     Route::get('/', ['as' => 'admin_dashboard_index', 'uses' => 'admin\HomeController@index']);
 
     Route::get('product/create', ['as' => 'admin_product_create', 'uses' => 'admin\ProductController@create']);
@@ -155,6 +138,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function (
 
     //admin image delete
     Route::delete('image/{id}', ['as' => 'admin_image_destroy', 'uses' => 'Admin\ImageController@destroy']);
-
 }); // End of authed route group.
 

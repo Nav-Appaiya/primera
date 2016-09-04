@@ -53,7 +53,9 @@ class DetailController extends Controller
         ];
 
         $rules = [
+            'value'          => 'required|unique:details,value',
 //            'name'          => 'required',
+
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);

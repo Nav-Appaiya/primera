@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin-panel.layouts.admin')
 
 @section('title')
    admin - all users
@@ -9,44 +9,44 @@
 @stop
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">admin all users</div>
 
-                    <div class="panel-body">
+    <div class="row">
+        <div class="col-md-10">
 
-                        @include('layouts.menus.admin_menu')
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>product naam</th>
+                    <th>product nummers</th>
+                    <th>Beschrijving</th>
+                    <th>aantal <br>reviews</th>
+                    <th>Gem. <br>score</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach ($products as $product)
+                        @if($product->review->count())
+                            <tr class="table-row" data-href="{{route('admin_product_edit', $product->id)}}">
+                                <td>{{$product->id}}</td>
+                                <td>{{$product->name}}</td>
+                                <td>
+                                    @foreach($product->property as $property)
+                                        {{$property->serialNumber}},
+                                    @endforeach
+                                </td>
+                                <td>{{$product->description}}</td>
+                                <td>{{$product->review->count()}}</td>
+                                <td>{{$product->review->avg('rating')}}</td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
 
-                        {{--<a class="btn btn-primary" href="{{ URL::route('admin_authors_requests') }}">requests</a>--}}
-
-                        <table class="table-condensed table-bordered table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nr</th>
-                                    <th>username</th>
-                                    <th>email</th>
-                                    <th>credits</th>
-                                    <th>status</th>
-                                    <th>verified</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($reviews as $review)
-                                    <tr class="table-row" data-href="{{URL::route('admin_reviews_show', $review->id )}}">
-                                        <td>{{ $review->user->name }}</td>
-                                        {{--<td>{{ $review->user->name }}</td>--}}
-                                        <td>{{ $review->video->video_key }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
         </div>
+        {{--</div>--}}
+
     </div>
 
 @endsection

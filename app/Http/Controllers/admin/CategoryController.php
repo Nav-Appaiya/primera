@@ -55,7 +55,7 @@ class CategoryController extends Controller
         ];
 
         $rules = [
-            'name'     => 'required|max:25',
+            'title'     => 'required|max:25',
             'category_id'     => 'required|max:20',
         ];
 
@@ -70,11 +70,11 @@ class CategoryController extends Controller
                 ->withInput();
         } else {
 
-            $this->category->title = $request->name;
+            $this->category->title = $request->title;
             $this->category->category_id = $request->category_id;
             $this->category->save();
 
-//            Log::info('made new category', ['name' => $request->name]);
+            \Session::flash('succes_message', 'successfully.');
 
             return redirect()->route('admin_category_index');
         }
@@ -103,12 +103,13 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         $messages = [
-            'regex' => 'Can only contain A-Z a-z'
+//            'regex' => 'Can only contain A-Z a-z'
         ];
 
         $rules = [
-            'name'     => 'required|max:25|regex:/^[A-Za-z \t]*$/i',
-            'id'     => 'required',
+            'title'     => 'required|max:25|regex:/^[A-Za-z \t]*$/i',
+//            'title'     => 'required',
+//            'id'     => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -122,13 +123,13 @@ class CategoryController extends Controller
 
             $category = $this->category->find($request->id);
 
-            $category->name = $request->tite;
+            $category->title = $request->title;
 
             $category->save();
 
-            \Session::flash('succes_message','successfully.');
+            \Session::flash('succes_message', 'successfully.');
 
-            return redirect()->route('admin_category_all');
+            return redirect()->route('admin_category_index');
         }
     }
 

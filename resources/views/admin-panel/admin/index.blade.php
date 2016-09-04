@@ -1,7 +1,7 @@
 @extends('admin-panel.layouts.admin')
 
 @section('title', 'Dashboard')
-{{--@section('breadcrumb', Breadcrumbs::render('dashboard.category'))--}}
+@section('breadcrumb', Breadcrumbs::render('dashboard'))
 
 @section('content')
 
@@ -15,10 +15,23 @@
             <div id="user-chart" style="height: 250px;"></div>
         </div>
     </div>
+    {{--{{$users = $user->all()->groupBy(function($date) {--}}
+        {{--return Carbon::parse($date->created_at)->format('Y'); // grouping by years--}}
+        {{--//return Carbon::parse($date->created_at)->format('m'); // grouping by months--}}
+    {{--})}}--}}
+    {{--@foreach($user as $item)--}}
+        {{--{{$item->created_at}}<br>--}}
+    {{--@endforeach--}}
+    {{--{{$user}}--}}
+
+    @foreach($users as $user)
+        {{$user}}<br><br>
+    @endforeach
 
 @stop
 
 @section('javascript')
+
     <script>
         new Morris.Line({
             // ID of the element in which to draw the chart.
