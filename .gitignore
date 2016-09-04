@@ -8,3 +8,4 @@ Homestead.json
 .env
 _ide_helper.php
 public/
+!public/images/product/*
