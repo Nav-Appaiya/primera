@@ -2,7 +2,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    background: #F8F8F8;
+    background: #f6f6f6;
 }
 
 header.head {
@@ -49,7 +49,7 @@ header.head .head-bar ul li {
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
     text-transform: uppercase;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     margin-right: 20px;
 }
@@ -130,7 +130,7 @@ header.head a:hover {
 h3 {
     font-size: 17px;
     margin: 0;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     padding: 0;
     text-transform: uppercase;
 }

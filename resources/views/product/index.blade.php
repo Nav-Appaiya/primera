@@ -9,11 +9,19 @@
 
 @section('content')
 
-    <h1>Producten</h1>
+<ol class="breadcrumb">
+    <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
+    <li>End</li>
+    <li>Somethings</li>
+    <li class="active">Products</li>
+</ol>
+
+<div class="content">
+
+    <h3>Filter</h3>
 
 {{--{{($category->product)}}aa--}}
 
-    <div class="row">
         <div class="col-lg-3">
             filter<br>
 
@@ -50,7 +58,8 @@
             <input value="{{$category->product->max('price')}}">
 
         </div>
-
+</div>
+<div class="content">
         <div class="col-lg-9">
             <div class="row">
                 @foreach($category->product as $product)
@@ -66,5 +75,4 @@
             </div>
         </div>
     </div>
-
 @endsection

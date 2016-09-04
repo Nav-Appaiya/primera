@@ -15,7 +15,7 @@
 
         <div class="content">
             <div class="col-md-12">
-                    <h3>Test</h3>
+                    <div class="col-md-12"><h3>Test</h3></div>
 
             @foreach ($products as $product)
                     <div class="col-xs-4 col-sm-4 col-md-3">
