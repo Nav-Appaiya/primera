@@ -7,6 +7,7 @@ use App\Pages;
 use App\Product;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -26,24 +27,10 @@ class CartController extends Controller
 
     public function addCart(Request $request, $id)
     {
-        header('Content-Type: text/plain');
+        $request->session()->push('cart.items', $id);
+        $request->session()->flash('status', 'Het product is toegevoegd aan je winkelwagentje!');
 
-        $session = $request->session();
-        $product = Product::find($id);
-
-        if($product){
-            $session->push('cart.items', $product);
-        }
-
-        $cart = $session->get('cart.items', []);
-
-        return redirect()->action('CartController@index', [
-            'categories' => Category::all(),
-            'pages' => Pages::all(),
-            'products' => Product::all(),
-            'cart' => $cart,
-            'total' => $this->getTotal($request)
-        ]);
+        return Redirect::back();
     }
 
     public function removeCart(Request $request, $id)

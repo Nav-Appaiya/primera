@@ -19,6 +19,10 @@
             {{--{!! Breadcrumbs::render('product_detail', $product) !!}--}}
             {{--@endif--}}
 
+            @if (Session::has('status'))
+                <div class="alert alert-info">{{ Session::get('status') }}</div>
+            @endif
+
         </div>
         <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="content">

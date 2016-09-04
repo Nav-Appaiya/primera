@@ -60,7 +60,7 @@
               </li>
               <li>
                 <a href="{{ URL::route('cart') }}"><i style="font-size: 20px" class="fa fa-shopping-bag" aria-hidden="true"></i>
-                <span style="margin-top: -10px; margin-left: -8px" class="badge">0</span></a>
+                <span style="margin-top: -10px; margin-left: -8px" class="badge">{{ count(\Illuminate\Support\Facades\Session::get('cart.items')) }}</span></a>
               </li>
             </ul>
           </div>
