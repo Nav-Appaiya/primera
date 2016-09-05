@@ -29,6 +29,7 @@
                 @endif
             </p>
         </div>
+
         <div class="row cart-body">
             <form class="form-horizontal" method="POST" action="{{ URL::route('checkout') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -38,20 +39,26 @@
                             Jouw bestelling <div class="pull-right"><small><a class="afix-1" href="{{ url('cart') }}">Terug naar je winkelwagentje</a></small></div>
                         </div>
                         <div class="panel-body">
-                            @foreach($cart['items'] as $item)
+                            @foreach($producten as $item)
                                 <div class="form-group">
                                     <div class="col-sm-3 col-xs-3">
                                         <img class="img-responsive" src="{{ $item->imageurl }}" />
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="col-xs-12">{{ $item->name }}</div>
-                                        <div class="col-xs-12"><small>Quantity:<span>1</span></small></div>
+                                        <div class="col-xs-12"><small>Aantal:<span>1</span></small></div>
                                     </div>
                                     <div class="col-sm-3 col-xs-3 text-right">
                                         <h6><span>&euro;</span>{{ $item->price }}</h6>
                                     </div>
                                 </div>
                             @endforeach
+
+                            <div class="panel-body">
+                                <div class="text-center pull-right">
+                                    <h4>Totaal bedrag: <span>&euro;</span> {{ $item->price }}</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,10 +84,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12"><strong>Straat + huisnummer: <span style="color: red;"> * </span></strong></div>
-                                <div class="col-md-12">
+                                <div class="col-md-8">
+                                    <strong>Straat: <span style="color: red;"> * </span></strong>
                                     <input type="text" name="street" class="form-control" value="{{ $user->adres or 'Straat' }}" />
                                 </div>
+                                <div class="col-md-4">
+                                    <strong>Huisnummer: <span style="color: red;"> * </span></strong>
+                                    <input type="text" name="street_number" class="form-control" value="{{ $user->adres or 'Straat' }}" />
+                                </div>
+
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-xs-12">
