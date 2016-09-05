@@ -2,74 +2,147 @@
 html, body {
     margin: 0;
     padding: 0;
-    background: #f6f6f6;
+    font-family: "Open Sans", sans-serif;
 }
 
-header.head {
-    width: 100%;
-    height: 140px;
+.card {
+    background: white;
+    border: 1px rgba(170, 170, 170, 0.25) solid;
+    padding: 10px;
+    margin-bottom: 30px;
 }
 
-header.head .head-service {
-    height: 35px;
-    line-height: 35px;
-    background: #fff;
-    border-bottom: 1px #ECECEC solid;
-}
-
-header.head .head-bar {
-    height: 105px;
-    background: #fff;
-    border-bottom: 1px #ECECEC solid;
-}
-
-header.head .head-bar .logo {
-    height: 105px;
-    line-height: 105px;
-}
-
-header.head .head-bar .logo img {
-    height: 55px;
-    margin-top: 25px;
-}
-
-header.head .head-bar ul {
-    list-style-type: none;
-    margin: 0px;
-    padding: 0px;
-    height: 105px;
-    line-height: 106px;
-    float: right;
-}
-
-header.head .head-bar ul li {
+#sidebar {
     float: left;
-    font-weight: bold;
-    font-family: supergroup_bold,Arial,"Lucida Grande", "宋体", SimSun, "华文细黑", STXihei, sans-serif;
-    font-weight: normal;
-    -webkit-font-smoothing: antialiased;
+    background: #fff;
+    width: 320px;
+    height: calc(100vh - 90px);
+    position: absolute;
+    padding: 13px 30px;
+    border-right: 1px solid #D5D4D4;
+    overflow: hidden;
+}
+
+#content {
+    width: calc(100% - 320px);
+    margin-left: 320px;
+    height: calc(100vh - 90px);
+    overflow-y: scroll;
+
+}
+.content {
+    overflow: hidden;
+    padding: 25px 30px;
+    padding-bottom: 15px;
+}
+
+#sidebar h3 {
+    color: #262626;
     text-transform: uppercase;
     font-size: 14px;
+    font-weight: 700;
+    padding: 35px 0 10px 0;
+    letter-spacing: 1px;
+    clear: both;
+    padding: 0;
+}
+
+#header {
+    height: 90px;
+    background: #fff;
+    border-bottom: 1px solid #D5D4D4;
+    overflow: hidden;
+    line-height: 90px;
+}
+
+#header .cart {
+    float: left;
+    width: 89px;
+    height: 89px;
+    line-height: 89px;
+    text-align: center;
+    border-right: 1px solid #D5D4D4;
+    font-size: 20px;
+}
+
+#header .usr {
+    float: right;
+    width: 89px;
+    height: 89px;
+    line-height: 89px;
+    text-align: center;
+    border-left: 1px solid #D5D4D4;
+    font-size: 20px;
+}
+
+#header .logo {
+    width: auto;
+    float: left;
+    margin: 0px 0px 0px 50px;
+}
+
+#header .logo img {
+    height: 40px;
+}
+
+#header ul {
+    float: right;
+    list-style-type: none;
+    height: 90px;
+    line-height: 90px;
+    margin-right: 45px;
+}
+
+#header ul li {
+    float: left;
+    padding: 0px 13px;
     font-weight: 600;
-    margin-right: 20px;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-header.head .head-bar ul li:last-child {
-    margin-right: 0px;
-    margin-left: 15px;
+button {
+    padding: 10px 20px;
+    border: 1px #D5D4D4 solid;
+    margin-top: 30px;
+    background: white;
+    width: 100%;
 }
 
-header.head a {
+input {
+    border: 1px solid #D5D4D4;
+    padding: 0px 3px;
+}
+
+select {
+    width: 100%;
+    height: 160px !important;
+    border: 1px solid #D5D4D4;
+}
+
+option {
+    padding: 4px;
+}
+
+a {
     color: black;
     transition: 0.15s all ease-in-out;
     text-decoration: none;
 }
 
-header.head a:hover {
+a:hover {
     color: #A3ABA6;
     text-decoration: none;
 }
 
+footer {
+    border-top: 1px solid #D5D4D4;
+    background-color: #f6f6f6;
+    color: #fff;
+    padding: 42px 0 66px;
+}
 
 .breadcrumb {
     background: none;
@@ -87,68 +160,15 @@ header.head a:hover {
     text-decoration: none;
 }
 
-.content {
-  background: #fff;
-  border-radius: 2px;
-  border: #ECECEC 1px solid;
-  padding: 30px 15px;
-  margin-bottom: 25px;
-  overflow: hidden;
-}
-
-.product-list {
-  background: #fff;
-  border-radius: 2px;
-  border: #ECECEC 1px solid;
-  padding: 15px 15px;
-  margin-bottom: 25px;
-  overflow: hidden;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 80px;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-    background-color: #fff;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    border: 1px #ECECEC solid;
-    border-radius: 0px;
-    -webkit-box-shadow: 0;
-    box-shadow: 0;
-}
-
-h3 {
-    font-size: 17px;
-    margin: 0;
-    margin-bottom: 25px;
-    padding: 0;
-    text-transform: uppercase;
-}
-
-/* Bootstrap Fixes */
-
 .container-fluid {
     width: 90%;
 }
 
-.al-center {
-    text-align: center;
-}
+.modal-dialog {
+    width: 600px;
+    margin: 30px auto;
 
-.al-right {
-    text-align: right;
 }
-
 
 
 /*# sourceMappingURL=all.css.map */

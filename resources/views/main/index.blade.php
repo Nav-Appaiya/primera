@@ -13,13 +13,10 @@
           <li class="active">Products</li>
         </ol>
 
-        <div class="content">
-            <div class="col-md-12">
-                    <div class="col-md-12"><h3>Test</h3></div>
 
             @foreach ($products as $product)
-                    <div class="col-xs-4 col-sm-4 col-md-3">
-                        <div class="product-list">
+                    <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="card">
                             {{--{{$product->productimages->first() ? $product->productimages->first()->imagePath : '' }}--}}
                             {{--@if($product->productimages->first() != null)--}}
 {{--                                {{$product->productimages->first()->imagePath}}--}}
@@ -52,8 +49,6 @@
                     </div>
 
                 @endforeach
-                </div>
-        </div>
 
 @endsection
 

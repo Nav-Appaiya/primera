@@ -1,40 +1,28 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Primera e-Sigarets - @yield('titel')</title>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
-        <link rel="stylesheet" href="/css/all.css">
-    </head>
-    <body>
+<head>
+  <title>Primera e-Sigarets - @yield('titel')</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="/css/all.css">
+</head>
+<body>
         @section('sidebar')
-  <header class="head">
-    <div class="head-service">
-        <div class="container-fluid">
-          <div class="col-md-6 col-sm-6 col-xs-7">
-            Op werkdagen voor 19:00 besteld, morgen in huis.
-          </div>
-          <div class="col-md-6 col-sm-6 col-xs-5 al-right">
-        @if(Auth::check() == false)
-            <a href="" data-toggle="modal" data-target="#myModal">Mijn account</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="{{ route('register') }}">Nog geen klant?</a>
-        @else
-            Welkom terug {{ Auth::user()->name}}, <a href="/logout">Uitloggen</a>
-        @endif
-          </div>
-        </div>
+<header>
+  <div id="header">
+      <div class="cart">
+        <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-user" aria-hidden="true"></i></a>
       </div>
-
-      <div class="head-bar">
-        <div class="container-fluid">
-          <div class="col-md-4 col-sm-3 col-xs-4">
-            <div class="logo">
-              <a href="/"><img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png"></a>
-            </div>
-          </div>
-          <div class="col-md-8 col-sm-9 col-xs-8">
-            <ul>
-              <li>
-                <a href="{{ URL::route('homepage') }}">Homepage</a>
-            </li>
+      <div class="usr">
+        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+        <span style="margin-top: 30px; margin-left: -8px; position: absolute;" class="badge">0</span>
+      </div>
+        <div class="logo">
+          <img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png">
+        </div>
+        <ul>
+          <li><a href="/">Homepage</a></li>
 
                 @foreach($main_categories->where('category_id', 0) as $category)
                     <li class="deeper parent dropdown">
@@ -48,93 +36,63 @@
                         </ul>
                     </li>
                 @endforeach
+        </ul>
+    </div>
+</header>
 
-              <li style="margin-left: 30px">
-                  <a href="{{ route('user.show') }}"><i style="font-size: 18px" class="fa fa-user" aria-hidden="true"></i></a>
-              </li>
-              <li>
-<<<<<<< HEAD
-                <a href="{{ URL::route('cart') }}"><i style="font-size: 18px" class="fa fa-shopping-bag" aria-hidden="true"></i>
-                <span style="margin-top: -10px; margin-left: -8px" class="badge">0</span></a>
-=======
-                <a href="{{ URL::route('cart') }}"><i style="font-size: 20px" class="fa fa-shopping-bag" aria-hidden="true"></i>
-                <span style="margin-top: -10px; margin-left: -8px" class="badge">{{ count(\Illuminate\Support\Facades\Session::get('cart.items')) }}</span></a>
->>>>>>> 1748bb2dbf4424a9f558aef4345f0582f46e6de3
-              </li>
-            </ul>
-          </div>
-        </div>
-        </div>
-      </header>
+<div id="sidebar">
+  <h3>Prijs</h3>
+  <input type="text" style="width: 47.5%; margin-bottom: 10px; margin-right: 5%; float: left" placeholder="€ 0">
+  <input type="text" style="width: 47.5%; margin-bottom: 10px;" placeholder="€ 120">
 
+  <h3>Merk</h3>
 
-        @show
-        <div class="container-fluid" style="margin-top: 25px; margin-bottom: 50px">
+  <select style="margin-bottom: 10px;" multiple>
+    <option>Some nice</option>
+    <option>Looking Options</option>
+    <option>Zijn hier te</option>
+    <option>Vinden op deze</option>
+    <option>pagina grote</option>
+    <option>Test 1234</option>
+    <option>Ik heb honger</option>
+    <option>Amersfoort</option>
+  </select>
+
+  <h3>Materiaal</h3>
+
+  <select multiple>
+    <option>Some nice</option>
+    <option>Looking Options</option>
+    <option>Zijn hier te</option>
+    <option>Vinden op deze</option>
+    <option>pagina grote</option>
+    <option>Test 1234</option>
+    <option>Ik heb honger</option>
+    <option>Amersfoort</option>
+  </select>
+
+  <button>Filter</button>
+
+</div>
+@show
+<div id="content">
+  <div class="content">
             @yield('content')
-        </div>
+    </div>
+  <footer></footer>
+</div>
 
-<!-- Modal -->
+<!-- Modals -->
+
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-        <div class="content">
-          
-<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+    <!-- Modal content-->
+   <div class="card">
+    <center><h3>Account stuff</h3></center>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+   </div>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i> Login
-                                </button>
-                                <a class="btn btn-primary" href="/redirect">
-
-                                        <i class="fa fa-btn fa-sign-in"></i>
-                                    Facebook Login
-
-                                </a>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                    </form>
-
-        </div>
   </div>
 </div>
 
@@ -142,5 +100,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="{{ URL::asset('assets/js/script.js') }}"></script>
         @yield('scripts')
-    </body>
+
+</body>
 </html>
