@@ -111,6 +111,7 @@ Route::group(['prefix'=>'admin','middlewareGroups' => ['web']], function () {
     Route::post('product-property', ['as' => 'admin_product_property_store', 'uses' => 'admin\PropertyController@store']);
     Route::patch('product-property', ['as' => 'admin_product_property_update', 'uses' => 'admin\PropertyController@update']);
     Route::delete('product-property/destroy/{id}', ['as' => 'admin_product_property_destroy', 'uses' => 'admin\PropertyController@destroy']);
+    Route::patch('product-property/{serialnumber}/stock/{amount}/add', ['as' => 'admin_product_property_addstock', 'uses' => 'admin\PropertyController@AddStock']);
 
     //admin categories
     Route::get('categories', ['as' => 'admin_category_index', 'uses' => 'Admin\CategoryController@index']);

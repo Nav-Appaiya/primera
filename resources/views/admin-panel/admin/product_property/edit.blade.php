@@ -8,8 +8,6 @@
     <div class="row">
         <div class="col-md-10">
 
-            @include('errors.message')
-
             {!! Form::model($property, array('route' => ['admin_product_property_update' , $property->id], 'method' => 'patch')) !!}
 
             {!! Form::hidden('_id', $property->id) !!}

@@ -1,14 +1,12 @@
 @extends('admin-panel.layouts.admin')
 
 @section('title', 'new category')
-{{--@section('breadcrumb', Breadcrumbs::render('dashboard.category'))--}}
+@section('breadcrumb', Breadcrumbs::render('dashboard.category'))
 
 @section('content')
 
     <div class="row">
         <div class="col-md-10">
-
-        @include('errors.message')
 
         {!! Form::open(['route' => ['admin_product_property_store']]) !!}
 
@@ -41,10 +39,10 @@
                 {{ Form::select('battery', array_merge(['null' => 'geen'], \App\Details::where('type', 'battery')->pluck('value', 'value')->toArray() ), null, ['class' => 'form-control']) }}
             </div>
 
-            {!! Form::submit('submit', ['class' => 'btn btn-primary pull-right'])!!}
+            {!! Form::submit('upload', ['class' => 'btn btn-primary pull-right'])!!}
 
             <div class="form-group">
-                <a class="btn btn-default pull-right" style="margin-right: 10px;">cancel</a>
+                <a class="btn btn-default pull-right" style="margin-right: 10px;">stop</a>
             </div>
 
             {!! Form::close() !!}

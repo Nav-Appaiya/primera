@@ -63,6 +63,34 @@ Breadcrumbs::register('dashboard.category.create', function($breadcrumbs)
     $breadcrumbs->parent('dashboard.category');
     $breadcrumbs->push('Nieuw', route('admin_category_create'));
 });
+
+// dashboard > product
+Breadcrumbs::register('dashboard.product.index', function($breadcrumbs)
+{
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push('Producten', route('admin_product_index'));
+});
+
+// dashboard > product > edit
+Breadcrumbs::register('dashboard.product.edit', function($breadcrumbs, $id)
+{
+    $breadcrumbs->parent('dashboard.product.index');
+    $breadcrumbs->push('Wijzigen', route('admin_product_edit', $id));
+});
+
+// dashboard > product > create
+Breadcrumbs::register('dashboard.product.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('dashboard.product.index');
+    $breadcrumbs->push('Nieuw', route('admin_product_create'));
+});
+
+// dashboard > product > wijzigen > property
+Breadcrumbs::register('dashboard.product.create', function($breadcrumbs, $id)
+{
+    $breadcrumbs->parent('dashboard.product.index');
+    $breadcrumbs->push('Nieuw', route('admin_product_create'));
+});
 ///ok
 
 // dashboard > orders

@@ -1,20 +1,33 @@
 @extends('admin-panel.layouts.admin')
 
 @section('title', 'Producten')
-{{--@section('breadcrumb', Breadcrumbs::render('dashboard.category'))--}}
+@section('breadcrumb', Breadcrumbs::render('dashboard.product.index'))
 
 @section('content')
 
     <div class="row">
-        <div class="control-label">
 
-            <input placeholder="product nummer">
-            <input placeholder="aantal nieuwe producten" >
-            <button>toevoegen</button>
-            <br>
-            <br>
+        <div class="col-lg-6">
+            <div class = "panel panel-default">
+                <div class = "panel-body ">
+                    <div class="row">
+                    {!! Form::model(array('route' => 'admin_product_property_addstock', 'method' => 'patch', 'class' => 'form-inline, panel')) !!}
+
+                        <label class="col-lg-12">Voeg product toe aan voorraad</label>
+                        <div class="col-sm-4">
+                            {!! Form::text('serialNumber', null, ['class' => 'form-control col-lg-8', 'placeholder' => 'product nummer']) !!}
+                        </div>
+                        <div class="col-sm-2">
+                            {!! Form::number('stock', null, ['class' => 'form-control col-lg-2', 'placeholder' => 'aantal', 'min' => '1', 'max' => '1000']) !!}
+                        </div>
+
+                        {!! Form::submit('toevoegen', ['class' => 'btn btn-primary']) !!}
+
+                    {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
         </div>
-
 
         <div class="col-md-10">
 

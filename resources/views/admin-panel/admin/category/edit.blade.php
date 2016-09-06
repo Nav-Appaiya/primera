@@ -10,8 +10,6 @@
 
             <div class="panel-body">
 
-                @include('errors.message')
-
                 {!! Form::model($cate, array('route' => 'admin_category_update', 'method' => 'patch', 'method' => 'patch')) !!}
 
                 {!! Form::hidden('id', $cate->id) !!}
@@ -22,7 +20,11 @@
                     {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                 </div>
 
-                {!! Form::submit('edit', ['class' => 'btn btn-primary pull-right'])!!}
+                {!! Form::submit('update', ['class' => 'btn btn-primary pull-right'])!!}
+
+                <div class="form-group">
+                    <a class="btn btn-default pull-right" href="{{route('admin_category_index')}}" style="margin-right: 10px;">stop</a>
+                </div>
 
                 {!! Form::close() !!}
 

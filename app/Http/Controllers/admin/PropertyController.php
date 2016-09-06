@@ -17,7 +17,6 @@ class PropertyController extends Controller
 
     public function __construct()
     {
-//        $this->product_property = new Property();
         $this->property = new Property();
     }
 
@@ -138,4 +137,31 @@ class PropertyController extends Controller
     {
         //
     }
+
+    public function AddStock(Request $request)
+    {
+        $messages = [];
+
+        $rules = [];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('admin_product_property_index')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $product = $this->property->where('serialNumber', $request->serialNumber);
+
+        $product->stock = $request->stock;
+
+        $product->save();
+
+        \Session::flash('succes_message','successfully.');
+
+        return redirect()->route('admin_product_index');
+    }
+
 }

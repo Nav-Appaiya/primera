@@ -1,36 +1,53 @@
 @extends('admin-panel.layouts.admin')
 
 @section('title', 'Product wijzigen')
-{{--@section('breadcrumb', Breadcrumbs::render('dashboard.category.edit'))--}}
+@section('breadcrumb', Breadcrumbs::render('dashboard.product.edit', $product->id))
 
 @section('content')
+
+    <style>
+        #img_container {
+            position:relative;
+            display:inline-block;
+            text-align:center;
+            border:1px solid red;
+            /* background:url('http://jsfiddle.net/img/initializing.png') no-repeat;
+            width:186px;
+            height:157px;*/
+        }
+
+        .button {
+            position:absolute;
+            bottom:0px;
+            right:10px;
+            /*width:100px;*/
+            /*height:30px;*/
+        }
+    </style>
 
     <div class="row">
         <div class="col-lg-6">
             <div class="table-responsive">
                 <div class="panel panel-default">
-                    {{--<div class="panel-heading">category</div>--}}
 
                     <div class="panel-body">
 
-                        {{--{{ displayAlert() }}--}}
-
-                        @include('errors.message')
-
                         <label>Foto's</label>
-                        <div class="thumbnail">
+                        <div class="row">
                             @foreach($product->productimages as $image)
-                                {!! Form::open([ 'method'  => 'delete', 'route' => [ 'admin_image_destroy', $image->id ]]) !!}
-                                    <img style="height: 100px; width: 100px; display: inline;" src="/images/product/{{$image->imagePath}}">
-                                    {!! Form::button('delete', ['type' => 'submit', 'class' => 'btn btn-link']) !!}
+                                <div class="col-lg-2">
+                                {!! Form::open([ 'method'  => 'delete', 'route' => [ 'admin_image_destroy', $image->id ], 'class' => 'img_container']) !!}
+                                    <img style="height: 100px; width: 100px; border: 1px solid #777; display: inline;" src="/images/product/{{$image->imagePath}}"/>
+                                    {!! Form::button('delete', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm button']) !!}
                                 {!! Form::close() !!}
+                                </div>
                             @endforeach
                         </div>
 
                         {!! Form::model($product, array('route' => 'admin_product_update', 'method' => 'patch', 'files' => true)) !!}
 
                         {!! Form::hidden('_id', $product->id) !!}
-
+<br>
                         {!! Form::file('images[]', array('multiple' => true)) !!}
 <br>
 
@@ -46,7 +63,7 @@
 
                         <div class="form-group">
                             {!! Form::label('status', 'status') !!}
-                            {!! Form::text('status', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                            {!! Form::select('status', ['---select---', 'on' => 'Online', 'off' => 'Offline'], null, ['class' => 'form-control'] ) !!}
                         </div>
 
                         <div class="form-group">
@@ -59,14 +76,12 @@
                             {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                         </div>
 
-                        <!-- category id -->
                         <div class="form-group">
-                            {!! Form::label('cate_id', 'category') !!}
+                            {!! Form::label('category_id', 'category_id') !!}
                             {!! Form::select('category_id', \App\Category::groupList(), null, ['class' => 'form-control'] ) !!}
-                            {{--                {!! Form::select('category_id', array('' => '----- select -----', '0' => 'new main category', 'for sub categories' => \App\Category::where('categoryID', 0)->pluck('title', 'id')->toArray() ), null, ['class' => 'form-control'] ) !!}--}}
                         </div>
 
-                        {!! Form::submit('edit', ['class' => 'btn btn-primary pull-right'])!!}
+                        {!! Form::submit('Wijzigen', ['class' => 'btn btn-primary pull-right'])!!}
 
                         {!! Form::close() !!}
 
@@ -100,7 +115,15 @@
                             <td>{{$property->color}}</td>
                             <td>{{$property->mah}}</td>
                             <td>{{$property->nicotine}}</td>
-
+                            <td>
+                                {{--@if (count($records) === 1)--}}
+                                    {{--I have one record!--}}
+                                {{--@elseif (count($records) > 1)--}}
+                                    {{--I have multiple records!--}}
+                                {{--@else--}}
+                                    {{--I don't have any records!--}}
+                                {{--@endif--}}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
