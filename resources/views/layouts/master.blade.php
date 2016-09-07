@@ -10,13 +10,14 @@
 <body>
         @section('sidebar')
 <header>
+  <div class="container">
   <div id="header">
       <div class="cart">
         <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-user" aria-hidden="true"></i></a>
       </div>
       <div class="usr">
         <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-        <span style="margin-top: 30px; margin-left: -8px; position: absolute;" class="badge">0</span>
+        <span style="margin-top: 10px; margin-left: -8px; position: absolute;" class="badge">0</span>
       </div>
         <div class="logo">
           <img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png">
@@ -38,49 +39,14 @@
                 @endforeach
         </ul>
     </div>
+    </div>
 </header>
 
-<div id="sidebar">
-  <h3>Prijs</h3>
-  <input type="text" style="width: 47.5%; margin-bottom: 10px; margin-right: 5%; float: left" placeholder="€ 0">
-  <input type="text" style="width: 47.5%; margin-bottom: 10px;" placeholder="€ 120">
-
-  <h3>Merk</h3>
-
-  <select style="margin-bottom: 10px;" multiple>
-    <option>Some nice</option>
-    <option>Looking Options</option>
-    <option>Zijn hier te</option>
-    <option>Vinden op deze</option>
-    <option>pagina grote</option>
-    <option>Test 1234</option>
-    <option>Ik heb honger</option>
-    <option>Amersfoort</option>
-  </select>
-
-  <h3>Materiaal</h3>
-
-  <select multiple>
-    <option>Some nice</option>
-    <option>Looking Options</option>
-    <option>Zijn hier te</option>
-    <option>Vinden op deze</option>
-    <option>pagina grote</option>
-    <option>Test 1234</option>
-    <option>Ik heb honger</option>
-    <option>Amersfoort</option>
-  </select>
-
-  <button>Filter</button>
-
-</div>
 @show
-<div id="content">
-  <div class="content">
+  <div class="container"  style="margin-top: 25px; background: white; border: 1px solid #D5D4D4;">
             @yield('content')
     </div>
   <footer></footer>
-</div>
 
 <!-- Modals -->
 

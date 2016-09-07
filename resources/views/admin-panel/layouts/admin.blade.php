@@ -21,6 +21,36 @@
     <!-- Custom Fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <style type="text/css">
+        label {
+            float: left;
+            margin-right: 35px;
+        }
+
+        input[type=search] {
+            width: 100%;
+            border-radius: 3px;
+            border: 1px #ddd solid;
+            border-bottom: 2px #ddd solid;
+            height: 35px;
+            margin-bottom: 25px;
+        }
+
+        .paginate_button{
+            border: 1px #ddd solid;
+            line-height: 35px;
+            padding: 0 4px;
+            height: 35px;
+            border-radius: 4px;
+        }
+        .next {
+            float: right;
+        }
+
+
+
+    </style>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
