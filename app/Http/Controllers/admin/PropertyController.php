@@ -38,15 +38,13 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-
-        ];
-
         $rules = [
-            '' => ''
+            'detail' => 'required',
+            'stock' => 'required',
+            'serialNumber' => 'required|unique:property'
         ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
@@ -60,9 +58,10 @@ class PropertyController extends Controller
         $product->product_id = $request->id;
         $product->stock = $request->stock;
         $product->serialNumber = $request->serialNumber;
-        $product->color = $request->color;
-        $product->nicotine = $request->nicotine;
-        $product->mah = $request->battery;
+        $product->detail_id = $request->detail;
+//        $product->color = $request->color;
+//        $product->nicotine = $request->nicotine;
+//        $product->mah = $request->battery;
 
 //       $properties = array(
 //            ['value_id' => $request->color, 'property_id' => $request->color],
@@ -98,11 +97,14 @@ class PropertyController extends Controller
      */
     public function update(Request $request)
     {
-        $messages = [];
+        $rules = [
+            'detail' => 'required',
+            'stock' => 'required',
+                        'serialNumber'          => 'required|unique:property,serialnumber,'.$request->_id
 
-        $rules = [];
+        ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
@@ -115,9 +117,11 @@ class PropertyController extends Controller
 
         $product->stock = $request->stock;
         $product->serialNumber = $request->serialNumber;
-        $product->color = $request->color;
-        $product->nicotine = $request->nicotine;
-        $product->mah = $request->battery;
+        $product->detail_id = $request->detail;
+//
+//        $product->color = $request->color;
+//        $product->nicotine = $request->nicotine;
+//        $product->mah = $request->battery;
 
         $product->save();
 
@@ -140,22 +144,33 @@ class PropertyController extends Controller
 
     public function AddStock(Request $request)
     {
-        $messages = [];
+        $array = implode(',',$this->property->pluck('serialNumber')->toArray());
 
-        $rules = [];
+        $messages = [
+            'serialNumber.in' => 'Dit product nummer bestaad niet in het systeem'
+        ];
+
+        $rules = [
+            'serialNumber' => 'required|in:'.$array.'',
+            'stock' => 'required',
+        ];
+//
+//        if(!$this->property->where('serialNumber', $request->serialNumber)->first()){
+//            array_push($rules, ['serialNumber' => 'required']);
+//        }
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
             return redirect()
-                ->route('admin_product_property_index')
+                ->route('admin_product_index')
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        $product = $this->property->where('serialNumber', $request->serialNumber);
+        $product = $this->property->where('serialNumber', $request->serialNumber)->first();
 
-        $product->stock = $request->stock;
+        $product->stock = $product->stock + $request->stock;
 
         $product->save();
 

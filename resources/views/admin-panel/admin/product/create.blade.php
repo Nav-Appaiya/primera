@@ -29,27 +29,19 @@
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('discount', 'discount') !!}
-                    {!! Form::number('discount', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                    {!! Form::label('korting', 'korting') !!}
+                    {!! Form::text('korting', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('prijs', 'prijs') !!}
-                    {!! Form::number('prijs', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                    {!! Form::text('prijs', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                 </div>
 
                 {{--<!-- category id -->--}}
                 <div class="form-group">
                     {!! Form::label('categorie', 'categorie') !!}
-{{--                    {!! Form::select('category_id', array('' => '----- select -----', 'sub categories' => \App\Category::where('category_id', '!=', 0)->pluck('title', 'id')->toArray() ), null, ['class' => 'form-control'] ) !!}--}}
                     {!! Form::select('categorie', \App\Category::groupList(), null, ['class' => 'form-control'] ) !!}
-                {{--{{ $category->children() }}--}}
-{{--                    <br>{{\App\Category::groupList()}}--}}
-
-
-                    {{--<pre>{{dd()}}</pre>--}}
-                    {{--<pre>{{dd(\App\Category::groupList())}}</pre>--}}
-                    {{--{{\App\Category::all()->orderBy('title')->pluck('title', 'id')}}--}}
                 </div>
 
                 {!! Form::file('images[]', array('multiple' => true)) !!}
@@ -63,14 +55,6 @@
         </div>
         </div>
         </div>
-        </div>
-
-
-        <div class="col-md-2">
-            <ul class="list-group">
-                <li class="list-group-item"><a href="{{route('admin_product_create')}}">new</a></li>
-                 {{--<li class="list-group-item"><a href="{{route('admin_property_create')}}">new</a></li>--}}
-            </ul>
         </div>
 
     </div>

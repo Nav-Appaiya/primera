@@ -63,12 +63,12 @@ class ProductController extends Controller
         ];
 
         $rules = [
-            'name' => 'required',
-            'description' => 'required',
+            'naam' => 'required',
+            'beschrijving' => 'required',
             'images.*' => 'mimes:jpeg,jpg,png,webm|max:10000',
-            'price' => 'required|regex:/^\d*(\.\d{1,2})?$/',
-            'discount' => 'regex:/^\d*(\.\d{1,2})?$/',
-            'category_id' => 'required',
+            'prijs' => 'required|regex:/^\d*(\.\d{1,2})?$/',
+            'korting' => 'regex:/^\d*(\.\d{1,2})?$/',
+            'categorie' => 'required',
             'status' => 'required|alpha'
         ];
 

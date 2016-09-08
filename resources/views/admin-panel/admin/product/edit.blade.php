@@ -91,18 +91,17 @@
         </div>
 
         <div class="col-md-6">
-            <a class="btn btn-default" href="{{route('admin_product_property_create', $product->id)}}">nieuw</a>
-            <br>
-            <br>
+            <a class="btn btn-primary pull-right" href="{{route('admin_product_property_create', $product->id)}}">nieuw</a>
+
             <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
                     <th>id</th>
                     <th>serienummer</th>
                     <th>voorraad</th>
-                    <th>kleur</th>
-                    <th>battery</th>
-                    <th>nicotine</th>
+                    {{--<th>kleur</th>--}}
+                    <th>detail</th>
+                    {{--<th>{{$product->property->first()->details}}</th>--}}
                 </tr>
                 </thead>
                 <tbody>
@@ -112,18 +111,8 @@
                             <td>{{$property->id}}</td>
                             <td>{{$property->serialNumber}}</td>
                             <td>{{$property->stock}}</td>
-                            <td>{{$property->color}}</td>
-                            <td>{{$property->mah}}</td>
-                            <td>{{$property->nicotine}}</td>
-                            <td>
-                                {{--@if (count($records) === 1)--}}
-                                    {{--I have one record!--}}
-                                {{--@elseif (count($records) > 1)--}}
-                                    {{--I have multiple records!--}}
-                                {{--@else--}}
-                                    {{--I don't have any records!--}}
-                                {{--@endif--}}
-                            </td>
+                            <td>{{$property->detail->value ? $property->detail->value : ''}}</td>
+
                         </tr>
                     @endforeach
                 </tbody>

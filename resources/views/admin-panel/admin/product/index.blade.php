@@ -16,29 +16,8 @@
 
     <div class="row">
 
-        <div class="col-lg-6">
-            <div class = "panel panel-default">
-                <div class = "panel-body ">
-                    <div class="row">
-                    {!! Form::model(array('route' => 'admin_product_property_addstock', 'method' => 'patch', 'class' => 'form-inline, panel')) !!}
-
-                        <label class="col-lg-12">Voeg product toe aan voorraad</label>
-                        <div class="col-sm-4">
-                            {!! Form::text('serialNumber', null, ['class' => 'form-control col-lg-8', 'placeholder' => 'product nummer']) !!}
-                        </div>
-                        <div class="col-sm-2">
-                            {!! Form::number('stock', null, ['class' => 'form-control col-lg-2', 'placeholder' => 'aantal', 'min' => '1', 'max' => '1000']) !!}
-                        </div>
-
-                        {!! Form::submit('toevoegen', ['class' => 'btn btn-primary']) !!}
-
-                    {!! Form::close() !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-10">
+        <div class="col-md-8">
+            <a class="btn btn-primary pull-right" href="{{route('admin_product_create')}}">new</a>
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
@@ -50,8 +29,7 @@
                         <th>cate</th>
                         <th>toegevoegd</th>
                         <th>gewijzigd</th>
-                        <th>serienummer</th>
-                        <th></th>
+                        <th>voorraad <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" data-container="body" title="Het product dat het minste op voorraad is wordt getoond als notificatie, als u er overheen hoverd ziet u meer. Incompleet betekent dat er nog geen details aangemaakt zijn op het product." aria-hidden="true"></i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,14 +39,12 @@
                         <tr class="table-row" data-href="{{route('admin_product_edit', $product->id)}}">
                             <td>{{$product->id}}</td>
                             <td>{{$product->name}}</td>
-                            <td>{{$product->description}}</td>
+                            <td>{{str_limit($product->description, 30)}}</td>
                             <td>{{$product->status}}</td>
                             <td>{{$product->price}}</td>
                             <td>{{$product->category->title}}</td>
-                            <td>{{$product->created_at}}</td>
-                            <td>{{$product->updated_at}}</td>
-                            <td>{{$product->updated_at}}</td>
-                            {{--<td><a data-container="body" title="Looooooooooooooooooooooooooooooooooooooong Message" href="#" class="tooltiplink" data-toggle="tooltip" data-placement="bottom" data-html="true"><i class="glyphicon glyphicon-info-sign"></i></a></td>--}}
+                            <td>{{date("d M, Y", strtotime($product->created_at))}}</td>
+                            <td>{{date("d M, Y", strtotime($product->updated_at))}}</td>
                             <td>
                                 <p style="margin-bottom: 0px" data-toggle="tooltip" data-placement="left" data-container="body" title="
                                     <label class='pull-left' style='padding-right:5em'>nummer</label> <label class='pull-right'>voorraad</label><br>
@@ -77,41 +53,60 @@
                                     @endforeach
                                     " data-html="true">
                                     @if($product->property->first())
-                                        {{--{{ $product->property->first() ? null : 'aaa'}}--}}
-                                        {{$product->property->sum('stock')}}
+                                        @foreach($product->property()->orderBy('stock', 'ASC')->get() as $property)
+                                            @if($property->stock == 0)
+                                                <span class="label label-danger">uitverkocht</span>
+                                                @break;
+                                            @elseif($property->stock > 14)
+                                                <span class="label label-primary">15 of meer</span>
+                                                @break;
+                                            @elseif($property->stock > 5)
+                                                <span class="label label-success">6 of meer</span>
+                                                @break;
+                                            @elseif($property->stock <= 5)
+                                                <span class="label label-warning">5 of minder</span>
+                                                @break;
+                                            @endif
+                                        @endforeach
                                     @else
-                                        incompleet
+                                        <span class="label label-default">incompleet</span>
                                     @endif
                                 </p>
                             </td>
-                         {{--@foreach($product->property as $item)--}}
-                             {{--<tr class="collapse row{{$product->id}}">--}}
-                                 {{--<td>- child row</td>--}}
-                                 {{--<td>--}}
-                                     {{--{{$item->serialNumber}}--}}
-                                 {{--</td>--}}
-                             {{--</tr>--}}
-                             {{--@endforeach--}}
-                            {{--</td>--}}
 
                         </tr>
-                             {{--<tr>--}}
-                                 {{--<td colspan="6" class="hiddenRow"><div id="demo2" class="accordian-body collapse">Demo2</div></td>--}}
-                             {{--</tr>--}}
-
 
                     @endforeach
                 </tbody>
             </table>
 
         </div>
-            {{--</div>--}}
 
-        <div class="col-md-2">
-            <ul class="list-group">
-                <li class="list-group-item"><a href="{{route('admin_product_create')}}">new</a></li>
-                {{--<li class="list-group-item"><a href="{{route('admin_property_create')}}">new</a></li>--}}
-            </ul>
+        <div class="col-lg-4">
+            <div class = "panel panel-default">
+                <div class = "panel-body ">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {!! Form::open(array('route' => 'admin_product_property_addstock', 'method' => 'patch', 'class' => 'form-inline, panel')) !!}
+
+                            <div class="row">
+                                <label class="col-lg-12">Voeg product toe aan voorraad</label>
+
+                                <div class="col-sm-9">
+                                    {!! Form::text('serialNumber', null, ['class' => 'form-control col-lg-8', 'placeholder' => 'product nummer']) !!}
+                                </div>
+                                <div class="col-sm-3">
+                                    {!! Form::number('stock', null, ['class' => 'form-control col-lg-2', 'placeholder' => 'aantal', 'min' => '1', 'max' => '1000']) !!}
+                                </div>
+                            </div>
+                            <br>
+                                {!! Form::submit('toevoegen', ['class' => 'btn btn-primary']) !!}
+
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

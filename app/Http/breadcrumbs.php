@@ -86,7 +86,7 @@ Breadcrumbs::register('dashboard.product.create', function($breadcrumbs)
 });
 
 // dashboard > product > wijzigen > property
-Breadcrumbs::register('dashboard.product.create', function($breadcrumbs, $id)
+Breadcrumbs::register('dashboard.product.property', function($breadcrumbs, $id)
 {
     $breadcrumbs->parent('dashboard.product.index');
     $breadcrumbs->push('Nieuw', route('admin_product_create'));

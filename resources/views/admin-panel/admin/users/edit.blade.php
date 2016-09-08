@@ -1,7 +1,7 @@
-@extends('layouts.admin')
+@extends('admin-panel.layouts.admin')
 
 @section('title', 'user')
-@section('breadcrumb', Breadcrumbs::render('dashboard.user.edit'))
+{{--@section('breadcrumb', Breadcrumbs::render('dashboard.user.edit'))--}}
 
 @section('content')
 
@@ -13,9 +13,8 @@
 
                     <div class="panel-body">
 
-                        @include('errors.message')
-
-                        {!! Form::model($user, array('route' => 'admin_authors_update', 'method' => 'patch')) !!}
+                        {!! Form::model($user, array('route' => ['admin_user_edit', $user->id], 'method' => 'patch')) !!}
+                        {{--{!! Form::hidden('id', $property->id) !!}--}}
 
                         <div class="form-group">
                             {!! Form::label('voornaam', 'voornaam') !!}
@@ -70,7 +69,7 @@
 
                         {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
 
-                        <a href="{{ URL::route('admin_profile_all') }}" class="btn btn-default">terug</a>
+                        <a href="{{ URL::route('admin_user_index') }}" class="btn btn-default">terug</a>
 
                         {!! Form::close() !!}
 

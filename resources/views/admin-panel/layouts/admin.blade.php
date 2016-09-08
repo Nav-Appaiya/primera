@@ -22,9 +22,18 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <style type="text/css">
-        label {
+        {{--interfereert met producten pagina tooltip--}}
+        /*label {*/
+            /*float: left;*/
+            /*margin-right: 35px;*/
+        /*}*/
+        #DataTables_Table_0_filter{
             float: left;
-            margin-right: 35px;
+
+        }
+        #DataTables_Table_0_length{
+            float: left;
+
         }
 
         input[type=search] {
@@ -100,7 +109,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
-    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.js"></script>
+    {{--<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>--}}
 
     @stack('scripts')
     {{--@yield('javascript')--}}
@@ -116,10 +126,25 @@
     <script>
         $(document).ready(function(){
             $('.table').DataTable({
+                "oLanguage": {
+                    "sSearch": "",
+                    "sLengthMenu": " _MENU_ records",
+                    "sLengthMenu": '<select class="form-control">'+
+                        '<option value="10">10</option>'+
+                        '<option value="20">20</option>'+
+                        '<option value="30">30</option>'+
+                        '<option value="40">40</option>'+
+                        '<option value="50">50</option>'+
+                        '<option value="-1">All</option>'+
+                    '</select>'
+                },
                 "language": {
-                   "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Dutch.json"
-                }
+                    "search": "_INPUT_",
+                    "searchPlaceholder": "Search..."                }
             });
+            $('div.dataTables_filter input').attr('placeholder', ' Zoeken');
+//            $('div.dataTables_filter input').addClass('whatever');
+            $('div.dataTables_length').addClass('form-group');
         });
     </script>
 
