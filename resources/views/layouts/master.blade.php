@@ -17,7 +17,11 @@
       </div>
       <div class="usr">
         <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-        <span style="margin-top: 10px; margin-left: -8px; position: absolute;" class="badge">{{ count(Session::get('cart.items')) }}</span>
+          <a href="{{ route('cart') }}">
+            <span style="margin-top: 10px; margin-left: -8px; position: absolute;" class="badge">
+                {{ count(Session::get('cart.items')) }}
+            </span>
+          </a>
       </div>
         <div class="logo">
           <img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png">
