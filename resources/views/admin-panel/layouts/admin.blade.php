@@ -27,13 +27,33 @@
             /*float: left;*/
             /*margin-right: 35px;*/
         /*}*/
-        #DataTables_Table_0_filter{
-            float: left;
+        /*#DataTables_Table_0_filter{*/
+            /*float: left;*/
 
+        /*}*/
+        /*#DataTables_Table_0_length{*/
+            /*float: left;*/
+
+        /*}*/
+        .dataTables_length{
+            float: left;
         }
-        #DataTables_Table_0_length{
-            float: left;
-
+        .dataTables_filter{
+            float: right;
+            /*text-align: right;*/
+            width: 100px;
+        }
+        .dataTables_filter > input{
+            display: inline-block;
+        }
+        .dataTables_length select{
+            color: #000;
+            /*width: 100%;*/
+            border-radius: 3px;
+            border: 1px #ddd solid;
+            border-bottom: 2px #ddd solid;
+            height: 35px;
+            margin-bottom: 25px;
         }
 
         input[type=search] {
@@ -109,7 +129,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.js"></script>
     {{--<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>--}}
 
     @stack('scripts')
@@ -124,32 +144,26 @@
     </script>
 
     <script>
+
         $(document).ready(function(){
+//            $(".dataTables_length").addClass(".test");
+
             $('.table').DataTable({
-                "oLanguage": {
-                    "sSearch": "",
-                    "sLengthMenu": " _MENU_ records",
-                    "sLengthMenu": '<select class="form-control">'+
-                        '<option value="10">10</option>'+
-                        '<option value="20">20</option>'+
-                        '<option value="30">30</option>'+
-                        '<option value="40">40</option>'+
-                        '<option value="50">50</option>'+
-                        '<option value="-1">All</option>'+
-                    '</select>'
-                },
                 "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Dutch.json",
                     "search": "_INPUT_",
-                    "searchPlaceholder": "Search..."                }
+                    "searchPlaceholder": "Search..."
+                }
             });
-            $('div.dataTables_filter input').attr('placeholder', ' Zoeken');
-//            $('div.dataTables_filter input').addClass('whatever');
-            $('div.dataTables_length').addClass('form-group');
         });
+
     </script>
 
     <script type="text/javascript">
+//        document.getElementById("endTimeLabel").appendChild('block');
+
         $(document).ready(function () {
+
             window.setTimeout(function() {
                 $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
                     $(this).remove();
@@ -163,6 +177,10 @@
             $( "#datepicker" ).datepicker();
         });
     </script>
+
+<script>
+    document.getElementById('DataTables_Table_0_filter').innerHTML = 'your tip has been submitted!';
+</script>
 
 </body>
 
