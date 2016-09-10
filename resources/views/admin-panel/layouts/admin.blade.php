@@ -146,21 +146,21 @@
     <script>
 
         $(document).ready(function(){
-//            $(".dataTables_length").addClass(".test");
 
-            $('.table').DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Dutch.json",
-                    "search": "_INPUT_",
-                    "searchPlaceholder": "Search..."
+            $('.table').dataTable( {
+                language: {
+//                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Dutch.json",
+                    sLengthMenu: "_MENU_ Show",
+                    search: "_INPUT_",
+                    searchPlaceholder: "Zoeken...",
+
                 }
-            });
+            } );
         });
 
     </script>
 
     <script type="text/javascript">
-//        document.getElementById("endTimeLabel").appendChild('block');
 
         $(document).ready(function () {
 
@@ -177,10 +177,6 @@
             $( "#datepicker" ).datepicker();
         });
     </script>
-
-<script>
-    document.getElementById('DataTables_Table_0_filter').innerHTML = 'your tip has been submitted!';
-</script>
 
 </body>
 
