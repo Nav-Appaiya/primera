@@ -49,27 +49,29 @@
                     <a href="{{route('admin_dashboard_index')}}" class="{{ Request::is('admin') ? 'active' : null }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_property_index')}}" class="{{ Request::is('admin/detail*') ? 'active' : null }}"><i class="fa fa-dashboard fa-fw"></i> Property</a>
+                    <a href="{{route('admin_property_index')}}" class="{{ Request::is('admin/detail*') ? 'active' : null }}"><i class="fa fa-asterisk fa-fw"></i> Details</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_category_index')}}" class="{{ Request::is('admin/categories*') ? 'active' : null }}"><i class="fa fa-dashboard fa-fw"></i> Categorieen</a>
+                    <a href="{{route('admin_category_index')}}" class="{{ Request::is('admin/categories*') ? 'active' : null }}"><i class="fa fa-th-list fa-fw"></i> Categorieen</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_product_index')}}" class="{{ Request::is('admin/product*') ? 'active' : null }}"><i class="fa fa-dashboard fa-fw"></i> Producten</a>
+                    <a href="{{route('admin_product_index')}}" class="{{ Request::is('admin/product*') ? 'active' : null }}"><i class="fa fa-archive fa-fw"></i> Producten</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_user_index')}}" class="{{ Request::is('admin/users*') ? 'active' : null }}"><i class="fa fa-dashboard fa-fw"></i> Users</a>
+                    <a href="{{route('admin_user_index')}}" class="{{ Request::is('admin/users*') ? 'active' : null }}"><i class="fa fa-users fa-fw"></i> Users</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_order_index')}}" class="{{ Request::is('admin/orders*') ? 'active' : null }}"><i class="fa fa-dashboard fa-fw"></i> Orders</a>
+                    <a href="{{route('admin_order_index')}}" class="{{ Request::is('admin/orders*') ? 'active' : null }}"><i class="fa fa-shopping-cart fa-fw"></i> Orders</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_review_index')}}" class="{{ Request::is('admin/reviews*') ? 'active' : null }}"><i class="fa fa-dashboard fa-fw"></i> Reviews</a>
+                    <a href="{{route('admin_review_index')}}" class="{{ Request::is('admin/reviews*') ? 'active' : null }}"><i class="fa fa-comments fa-fw"></i> Reviews</a>
                 </li>
 
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
+
+
     </div>
     <!-- /.navbar-static-side -->
 </nav>

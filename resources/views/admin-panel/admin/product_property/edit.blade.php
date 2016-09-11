@@ -1,7 +1,7 @@
 @extends('admin-panel.layouts.admin')
 
 @section('title', 'product type')
-{{--@section('breadcrumb', Breadcrumbs::render('dashboard.category.edit'))--}}
+@section('breadcrumb', Breadcrumbs::render('dashboard.category.edit', Request::segment(3)))
 
 @section('content')
 

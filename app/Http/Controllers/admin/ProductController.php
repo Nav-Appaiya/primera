@@ -194,6 +194,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = $this->product->find($id);
+        $product->delete();
+
+
+//        return route();
     }
 }

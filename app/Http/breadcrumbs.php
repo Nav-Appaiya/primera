@@ -28,19 +28,19 @@ Breadcrumbs::register('dashboard', function($breadcrumbs)
 Breadcrumbs::register('dashboard.detail', function($breadcrumbs)
 {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('detail', route('admin_property_index'));
+    $breadcrumbs->push('Detail', route('admin_property_index'));
 });
 
 Breadcrumbs::register('dashboard.detail.edit', function($breadcrumbs, $id)
 {
     $breadcrumbs->parent('dashboard.detail');
-    $breadcrumbs->push('wijzigen', route('admin_property_edit', $id));
+    $breadcrumbs->push('Wijzigen', route('admin_property_edit', $id));
 });
 
 Breadcrumbs::register('dashboard.detail.create', function($breadcrumbs)
 {
     $breadcrumbs->parent('dashboard.detail');
-    $breadcrumbs->push('nieuwe', route('admin_property_create'));
+    $breadcrumbs->push('nieuw', route('admin_property_create'));
 });
 
 // dashboard > Category
@@ -86,9 +86,9 @@ Breadcrumbs::register('dashboard.product.create', function($breadcrumbs)
 });
 
 // dashboard > product > wijzigen > property
-Breadcrumbs::register('dashboard.product.property', function($breadcrumbs, $id)
+Breadcrumbs::register('dashboard.product.edit.property.create', function($breadcrumbs, $id)
 {
-    $breadcrumbs->parent('dashboard.product.index');
+    $breadcrumbs->parent('dashboard.product.edit', $id);
     $breadcrumbs->push('Nieuw', route('admin_product_create'));
 });
 ///ok

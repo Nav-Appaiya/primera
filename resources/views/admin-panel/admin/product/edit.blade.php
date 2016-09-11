@@ -91,35 +91,38 @@
         </div>
 
         <div class="col-md-6">
-            <a class="btn btn-primary pull-right" href="{{route('admin_product_property_create', $product->id)}}">nieuw</a>
+            <div class="thumbnail">
 
-            <table class="table table-hover table-bordered">
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>serienummer</th>
-                    <th>voorraad</th>
-                    {{--<th>kleur</th>--}}
-                    <th>detail</th>
-                    {{--<th>{{$product->property->first()->details}}</th>--}}
-                </tr>
-                </thead>
-                <tbody>
-                {{--{{$product->productproperty}}--}}
-                    @foreach ($product->property as $property)
-                        <tr class="table-row" data-href="{{route('admin_product_property_edit', $property->id)}}">
-                            <td>{{$property->id}}</td>
-                            <td>{{$property->serialNumber}}</td>
-                            <td>{{$property->stock}}</td>
-                            <td>{{$property->detail->value ? $property->detail->value : ''}}</td>
+                <a class="btn btn-primary pull-right" style="margin-left: 10px;" href="{{route('admin_product_property_create', $product->id)}}">nieuw</a>
 
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>serienummer</th>
+                        <th>voorraad</th>
+                        {{--<th>kleur</th>--}}
+                        <th>detail</th>
+                        {{--<th>{{$product->property->first()->details}}</th>--}}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{--{{$product->productproperty}}--}}
+                        @foreach ($product->property as $property)
+                            <tr class="table-row" data-href="{{route('admin_product_property_edit', $property->id)}}">
+                                <td>{{$property->id}}</td>
+                                <td>{{$property->serialNumber}}</td>
+                                <td>{{$property->stock}}</td>
+                                <td>{{$property->detail->value ? $property->detail->value : ''}}</td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div>
 
         </div>
-
     </div>
 
 @stop

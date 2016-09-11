@@ -39,8 +39,9 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'detail' => 'required',
+            'detail' => 'required|unique:property,detail_id,'.$request->detail.',product_id',
             'stock' => 'required',
+//            'detail' => 'required|unique:property,id,detail_id,product_id',
             'serialNumber' => 'required|unique:property'
         ];
 
@@ -98,9 +99,9 @@ class PropertyController extends Controller
     public function update(Request $request)
     {
         $rules = [
-            'detail' => 'required',
+            'detail' => 'required|unique:property,detail_id,product_id',
             'stock' => 'required',
-                        'serialNumber'          => 'required|unique:property,serialnumber,'.$request->_id
+            'serialNumber' => 'required|unique:property,serialnumber,'.$request->_id
 
         ];
 

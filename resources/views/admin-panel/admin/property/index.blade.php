@@ -10,62 +10,68 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Nicotine</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($property->where('type', 'nicotine') as $prop)
-                            <tr class="table-row" data-href="{{route('admin_property_edit', $prop->id)}}">
-                                <td>{{$prop->id}}</td>
-                                <td>{{$prop->value}}</td>
+                    <div class="thumbnail">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Nicotine</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-
+                            </thead>
+                            <tbody>
+                            @foreach ($property->where('type', 'nicotine') as $prop)
+                                <tr class="table-row" data-href="{{route('admin_property_edit', $prop->id)}}">
+                                    <td>{{$prop->id}}</td>
+                                    <td>{{$prop->value}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
                 <div class="col-md-4">
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>mAh</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($property->where('type', 'battery') as $prop)
-                            <tr class="table-row" data-href="{{route('admin_property_edit', $prop->id)}}">
-                                <td>{{$prop->id}}</td>
-                                <td>{{$prop->value}}</td>
+                    <div class="thumbnail">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                <th>id</th>
+                                <th>mAh</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-
+                            </thead>
+                            <tbody>
+                            @foreach ($property->where('type', 'battery') as $prop)
+                                <tr class="table-row" data-href="{{route('admin_property_edit', $prop->id)}}">
+                                    <td>{{$prop->id}}</td>
+                                    <td>{{$prop->value}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
                 <div class="col-md-4">
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>color</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($property->where('type', 'color') as $prop)
-                            <tr class="table-row" data-href="{{route('admin_property_edit', $prop->id)}}">
-                                <td>{{$prop->id}}</td>
-                                <td>{{$prop->value}}</td>
+                    <div class="thumbnail">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>color</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-
+                            </thead>
+                            <tbody>
+                            @foreach ($property->where('type', 'color') as $prop)
+                                <tr class="table-row" data-href="{{route('admin_property_edit', $prop->id)}}">
+                                    <td>{{$prop->id}}</td>
+                                    <td>{{$prop->value}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
             </div>
 
         </div>

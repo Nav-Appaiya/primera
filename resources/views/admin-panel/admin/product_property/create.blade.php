@@ -1,7 +1,7 @@
 @extends('admin-panel.layouts.admin')
 
 @section('title', 'nieuwe product detail')
-@section('breadcrumb', Breadcrumbs::render('dashboard.category'))
+@section('breadcrumb', Breadcrumbs::render('dashboard.product.edit.property.create', Request::segment(3)))
 
 @section('content')
 
