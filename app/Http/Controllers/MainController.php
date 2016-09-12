@@ -156,7 +156,7 @@ class MainController extends Controller
         }
 
         $payment = Mollie::api()->payments()->get($order->payment_id);
-        $items = OrderItem::where('order_id', $order->id)->get();
+        $items = OrderItem::where('orders_id', $order->id)->get();
 
         if($payment->isPaid()){
             $request->session()->clear();
@@ -197,20 +197,24 @@ class MainController extends Controller
     }
 
     public function carting(Request $request){
-        header('Content-Type: text/plain');
-        echo 'Products in session: ' .  count($request->session()->get('cart.items')) . PHP_EOL . PHP_EOL;
         $session = $request->session();
         $items = $request->session()->get('cart.items');
-
-        $remove = 869;
-
-        foreach ($items as $item) {
-            if($item->id === $remove){
-                $pulled = $session->pull('cart.items', '312');
-                var_dump($pulled);exit;
+        if(count($items) >= 1){
+            foreach($items as $item){
+                $product = Product::find($item);
+                    $op = new OrderItem();
+                    $op->orders_id = 1;
+                    $op->product_id = $product->id;
+                    $op->amount = 1;
+                    $op->setCreatedAt(date('Y-m-d H:i:s'));
+                    $op->setUpdatedAt(date('Y-m-d H:i:s'));
+                    $op->save();
+                    $session->pull('cart.items', $product->id);
             }
         }
-
+        
+        dd('done');
+        
         exit;
     }
 
@@ -294,14 +298,13 @@ class MainController extends Controller
 
                 // TODO: create order_items with links back to product & order
                 foreach ($items as $item) {
+                    $item = Product::find($item);
                     $orderedProduct = new OrderItem();
-                    $orderedProduct->user_id = $user->id;
                     $orderedProduct->product_id = $item->id;
-                    $orderedProduct->order_id = $order->id;
-                    $orderedProduct->quantity = 1;
-                    $orderedProduct->price = $item->price;
-                    $orderedProduct->item_name = $item->name;
-                    $orderedProduct->item_info = $item->description;
+                    $orderedProduct->orders_id = $order->id;
+                    $orderedProduct->amount = 1;
+                    $orderedProduct->setCreatedAt(date('Y-m-d H:i:s'));
+                    $orderedProduct->setUpdatedAt(date('Y-m-d H:i:s'));
                     $orderedProduct->save();
                 }
 

@@ -26,7 +26,7 @@ class CreateTableOrderedProducts extends Migration
 //            $table->string('quantity');
 //            $table->string('price');
 //            $table->rememberToken();
-//            $table->timestamps();
+            $table->timestamps();
         });
     }
 

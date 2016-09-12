@@ -49,7 +49,7 @@
                                 {{--{{ $product->property }}--}}
                                 op voorraad
                             </small>
-                            {{ Form::select('number', \App\Property::where('product_id', $product->id)->pluck('nicotine', 'id')->toArray(), null) }}
+                            {{--{{ Form::select('number', \App\Property::where('product_id', $product->id)->pluck('nicotine', 'id')->toArray(), null) }}--}}
 
 
 

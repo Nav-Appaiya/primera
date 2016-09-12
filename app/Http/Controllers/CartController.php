@@ -17,10 +17,8 @@ class CartController extends Controller
         $cart = $request->session()->get('cart.items');
         $products = [];
         $total = 0;
-
         if(count($cart) >= 1){
             foreach ($cart as $item) {
-
                 $p = Product::find($item);
                 $total += $p->price;
                 $products[] = $p;
