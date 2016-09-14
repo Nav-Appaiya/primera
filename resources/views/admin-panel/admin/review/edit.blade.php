@@ -15,9 +15,12 @@ Here is you description. You can else echo content and use your foreach in here.
                     <p> Review van: {{ $review->user->name }} </p>
                     <p>Geplaats op: {{  $review->created_at }}</p>
                     @include('errors.message')
-                    
+
                     {!! Form::model($review, array('route' => array('admin_review_update', $review->id))) !!}
-                    
+
+                    <input type="hidden" name="user_id" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
+                    <input type="hidden" name="product_id" value="{{ $review->id }}">
+
                     <div class="form-group">
                         {{ Form::label('description', 'Description') }}
                         {{ Form::textarea('description', null, ['class' => 'form-control']) }}
