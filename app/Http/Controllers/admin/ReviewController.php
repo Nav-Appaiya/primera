@@ -16,7 +16,7 @@ class ReviewController extends Controller
 
     public function __construct()
     {
-//        $this->review = Review::all();
+        $this->review = Review::all();
         $this->product = Product::all();
     }
 
@@ -27,7 +27,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        return view('admin-panel.admin.review.index')->with('products', $this->product);
+        return view('admin-panel.admin.review.index')
+                ->with('products', $this->product);
     }
 
     /**
@@ -38,9 +39,10 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-//        $review = Review::find($id)->first();
+        $review = Review::find($id)->first();
         
-        return view('admin-panel.admin.review.show')->with('product', $this->product->find($id));
+        return view('admin-panel.admin.review.show')
+                    ->with('review', $review);
     }
 
     /**
@@ -50,8 +52,11 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        $review = Review::find($id)->first();
+
+        return view('admin-panel.admin.review.edit')
+                ->with('review', $review);
     }
 
     /**

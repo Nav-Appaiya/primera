@@ -18,19 +18,17 @@
 
                     <div class="panel-body">
 
-                        @include('layouts.menus.admin_menu')
-
                         @include('errors.message')
 
-                        {!! Form::model($review, array('route' => array('admin_reviews_update', $review->id))) !!}
+                        {!! Form::model($review, array('route' => array('admin_review_update', $review->id))) !!}
 
                             {!! Form::label('biography', 'biography') !!}
                             {!! Form::textarea('biography', null,  ['class' => 'form-control']) !!}
                             <br>
                             <hr>
                             {!! Form::submit('save changes', ['class' => 'btn btn-primary'])!!}
-                            <a class="btn btn-default" href="{{URL::route('admin_authors_all')}}">back</a>
-                            <a class="btn btn-default" href="{{URL::route('admin_reviews_destroy', $review->id)}}">delete</a>
+                            <a class="btn btn-default" href="{{URL::route('admin_review_index')}}">back</a>
+                            <a class="btn btn-default" href="{{URL::route('admin_review_destroy', $review->id)}}">delete</a>
                         {!! Form::close() !!}
 
                     </div>
