@@ -39,10 +39,12 @@
                             Jouw bestelling <div class="pull-right"><small><a class="afix-1" href="{{ url('cart') }}">Terug naar je winkelwagentje</a></small></div>
                         </div>
                         <div class="panel-body">
-                            @foreach($producten as $item)
+                        @foreach($producten as $item)
                                 <div class="form-group">
+
                                     <div class="col-sm-3 col-xs-3">
-                                        <img class="img-responsive" src="{{ $item->imageurl }}" />
+                                        @if()
+                                        <img class="img-responsive" src="{{ $item->productimages()->first() }}" />
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="col-xs-12">{{ $item->name }}</div>

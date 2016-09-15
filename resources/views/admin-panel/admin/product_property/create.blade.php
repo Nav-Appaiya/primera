@@ -15,7 +15,7 @@
             <!-- created_at -->
             <div class="form-group">
                 {!! Form::label('stock', 'voorraad') !!}
-                {!! Form::text('stock', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                {!! Form::number('stock', 0, ['class' => 'form-control', 'placeholder' => '']) !!}
             </div>
 
             <div class="form-group">

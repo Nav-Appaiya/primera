@@ -19,12 +19,6 @@ class CreateTableCategories extends Migration
             $table->string('title', 50);
             $table->string('image', 20);
             $table->timestamps();
-//            $table->increments('id')->unsigned();
-//            $table->integer('cate_id')->unsigned();
-//            $table->foreign('cate_id')->references('id')->on('categories');
-//            $table->string('name');
-//            $table->string('image');
-//            $table->timestamps();
         });
     }
 

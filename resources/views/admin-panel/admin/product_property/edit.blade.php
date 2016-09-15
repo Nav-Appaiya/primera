@@ -1,7 +1,7 @@
 @extends('admin-panel.layouts.admin')
 
-@section('title', 'product type')
-@section('breadcrumb', Breadcrumbs::render('dashboard.category.edit', Request::segment(3)))
+@section('title', 'Product Detail Wijzigen')
+@section('breadcrumb', Breadcrumbs::render('dashboard.product.edit.property.edit', Request::segment(3)))
 
 @section('content')
 
@@ -27,10 +27,16 @@
                 {!! Form::text('serialNumber', null, ['class' => 'form-control', 'placeholder' => '']) !!}
 {{--                {{ Form::select('serialNumber', ['color' => 'kleur', 'battery' => 'battery', 'nicotine' => 'nicotine'], null, ['class' => 'form-control']) }}--}}
             </div>
-
+                {{--{{count($property->product->property)}}--}}
+{{--{{count(\App\Details::where('type', $property->detail->type)->get())}}--}}
             <div class="form-group">
                 {!! Form::label('detail', $property->detail->type) !!}
-                {{ Form::select('detail', \App\Details::where('type', $property->detail->type)->pluck('value', 'id'), null, ['class' => 'form-control']) }}
+                @if(count($property->product->property) == 1)
+                    {{ Form::select('detail_id', \App\Details::groupDetails(), null, ['class' => 'form-control']) }}
+                @else
+
+                    {{ Form::select('detail_id', \App\Details::where('type', $property->detail->type)->lists('value', 'id'), null, ['class' => 'form-control']) }}
+                @endif
             </div>
 
             {{--<div class="form-group">--}}

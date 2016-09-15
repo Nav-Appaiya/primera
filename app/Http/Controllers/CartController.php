@@ -17,14 +17,17 @@ class CartController extends Controller
         $cart = $request->session()->get('cart.items');
         $products = [];
         $total = 0;
+        
         if(count($cart) >= 1){
             foreach ($cart as $item) {
-                $p = Product::find($item);
-                $total += $p->price;
-                $products[] = $p;
+                if(!$item instanceof Product){
+                    $item = Product::find($item);
+                }
+                $price = $item->price;
+                $total += $price;
+                $products[] = $item;
             }
         }
-
 
         return view('main.cart', [
             'categories' => Category::all(),

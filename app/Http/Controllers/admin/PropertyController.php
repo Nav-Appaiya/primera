@@ -39,9 +39,9 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'detail' => 'required|unique:property,detail_id,'.$request->detail.',product_id',
+//            'detail' => 'required|unique:property,detail_id,'.$request->detail.',product_id',
             'stock' => 'required',
-//            'detail' => 'required|unique:property,id,detail_id,product_id',
+            'detail' => 'required|unique:property,id,detail_id,product_id',
             'serialNumber' => 'required|unique:property'
         ];
 
@@ -99,7 +99,9 @@ class PropertyController extends Controller
     public function update(Request $request)
     {
         $rules = [
-            'detail' => 'required|unique:property,detail_id,product_id',
+            'building_id' => 'unique:property,product_id,NULL,id,detail_id',
+//            'building_id' => 'unique:property,product_id,NULL,id,detail_id,' . $request->_id,
+//            'detail_id' => 'required|unique:property,id,'.$request->_id.',detail_id,product_id',
             'stock' => 'required',
             'serialNumber' => 'required|unique:property,serialnumber,'.$request->_id
 
@@ -118,7 +120,7 @@ class PropertyController extends Controller
 
         $product->stock = $request->stock;
         $product->serialNumber = $request->serialNumber;
-        $product->detail_id = $request->detail;
+        $product->detail_id = $request->detail_id;
 //
 //        $product->color = $request->color;
 //        $product->nicotine = $request->nicotine;

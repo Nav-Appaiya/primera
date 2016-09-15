@@ -4,6 +4,7 @@
 @parent
 @endsection
 @section('content')
+<<<<<<< HEAD
 <ol class="breadcrumb">
     <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
     <li>Products</li>
@@ -47,12 +48,68 @@
                 </div>
                 {{--@if(count($seotags))--}}
                 {{--<div class="pull-left">--}}
+=======
+    <ol class="breadcrumb">
+        <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
+        <li>Products</li>
+        <li class="active">Product name</li>
+    </ol>
+    <div class="row">
+        <div class="col-md-12">
+
+            {{--@if($product->category_id)--}}
+            {{--{!! Breadcrumbs::render('product_detail', $product) !!}--}}
+            {{--@endif--}}
+
+            @if (Session::has('status'))
+                <div class="alert alert-info">{{ Session::get('status') }}</div>
+            @endif
+
+        </div>
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <div class="content">
+                <div class="artst-pic pull-left">
+                    <a href="#">
+                        @foreach($product->productimages as $image)
+                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="{{$image->imagePath}}">
+                        @endforeach
+                        {{--<img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="350" height="230" class="">--}}
+                    </a>
+                </div>
+                <div class="artst-prfle pull-right col-md-12 col-xs-12 col-sm-12">
+
+                    <div class="art-title">
+                        {{--{{ $product->name }} ({{$product->categories()->first()->title}})--}}
+                        <br><span class="artst-sub">
+                            <label>beschrijving</label><br>
+                            <span class="byname">{{ $product->description }}</span>
+                            <h1 class="pull-right"><span class="daysago"></span>
+                                &euro;{{ $product->price }}</h1>
+                            <small style="color: green; font-weight: 900;">
+                                <br>
+                                <br>
+                                @if($product->property->sum('stock') != 0)
+                                    op voorraad
+                                @else
+                                    uitverkocht
+                                @endif
+
+                            </small>
+                            {{--{{ Form::select('number', \App\Property::where('product_id', $product->id)->pluck('nicotine', 'id')->toArray(), null) }}--}}
+
+
+                        </span>
+                    </div>
+                    {{--@if(count($seotags))--}}
+                    {{--<div class="pull-left">--}}
+>>>>>>> a7c3bce847d965a31a9e23397e3889100fe63efe
                     {{--<ul>--}}
                         {{--<strong>Seotags: </strong><br>--}}
                         {{--@foreach($seotags as $seotag)--}}
                         {{--<li>{{ $seotag->seotag }}</li>--}}
                         {{--@endforeach--}}
                     {{--</ul>--}}
+<<<<<<< HEAD
                 {{--</div>--}}
                 {{--@endif--}}
                 <div class="pull-right">
@@ -76,6 +133,32 @@
                             {{ Form::hidden('product', $product) }}
                             {{ Form::submit('Toevoegen winkelwagen', ['class' => 'btn btn-large btn-success'])}}
                             {{ Form::close() }}
+=======
+                    {{--</div>--}}
+                    {{--@endif--}}
+                    <div class="pull-right">
+                        <div class="row center-block">
+                            <div class="btn-group wishlist">
+                                <label>{{$product->property()->first()->detail->type}}</label>
+                                @if($product->property()->first()->detail->type)
+                                    <select class="form-control" name="serialcode">
+                                        @foreach($product->property as $property)
+                                            @if($property->stock == 0)
+                                                <option value="{{$property->serialNumber}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>
+                                            @else
+                                                <option value="{{$property->serialNumber}}">{{$property->detail->value}}  -  <small>op voorraad</small></option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                @endif
+
+                                {{-- TODO: Add to shoppingcart button ajax --}}
+                                <a href="{{ route('cart.add', $product) }}" class="btn btn-success btn-product"
+                                   onclick="">
+                                    In winkelwagen<span class="fa fa-shopping-cart"></span>
+                                </a>
+                            </div>
+>>>>>>> a7c3bce847d965a31a9e23397e3889100fe63efe
                         </div>
                     </div>
                 </div>
