@@ -12,20 +12,15 @@
 */
 
 Route::auth();
-
-//
 Route::get('/test', ['as' => 'test', 'uses' => 'MainController@carting']);
-
 Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
 
-// algemene-voorwaarde
 Route::post('/checkout', ['as' => 'checkout', 'uses' => 'MainController@checkout']);
 Route::get('/checkout', ['as' => 'checkout', 'uses' => 'MainController@checkout']);
-
 Route::get('/payment', ['as' => 'payment', 'uses' => 'MainController@payment']);
 
-//Route::get('/product/{id}', ['as' => 'product_detail', 'uses' => 'ProductController@detail']);
 Route::get('/product/{id}/add', ['as' => 'product_add', 'uses' => 'ProductController@add']);
+//Route::get('/product/{id}', ['as' => 'product_detail', 'uses' => 'ProductController@detail']);
 //Route::get('/category/{name}', ['as' => 'category_detail', 'uses' => 'MainController@category']);
 //Route::get('/categories', ['as' => 'categories_all', 'uses' => 'ProductController@add']);
 //Route::get('/pages/{pageId}', 'MainController@page');
@@ -33,7 +28,6 @@ Route::get('/product/{id}/add', ['as' => 'product_add', 'uses' => 'ProductContro
 Route::get('/cart', ['as' => 'cart', 'uses' => 'CartController@index']);
 Route::get('/cart/add/{id}', ['as' => 'cart.add', 'uses' => 'CartController@addCart']);
 Route::get('/cart/remove/{id}', ['as' => 'cart.remove', 'uses' => 'CartController@removeCart']);
-
 
 // oAuth Routes for facebook
 Route::get('/redirect', 'SocialAuthController@redirect');
@@ -44,36 +38,36 @@ Route::group(['middleware' => 'auth'], function () {
 }); // End of authed route group.
 
 //Route::group(['middleware' => 'web'], function () {
-    Route::get('/{name}/c-{id}', ['as' => 'category.show', 'uses' => 'CategoryController@show']);
-    Route::get('/{cate1}/{cate2}/c-{id}/', ['as' => 'product.index', 'uses' => 'ProductController@index']);
-    Route::get('/{title}/p-{id}', ['as' => 'product.show', 'uses' => 'ProductController@show']);
+Route::get('/{name}/c-{id}', ['as' => 'category.show', 'uses' => 'CategoryController@show']);
+Route::get('/{cate1}/{cate2}/c-{id}/', ['as' => 'product.index', 'uses' => 'ProductController@index']);
+Route::get('/{title}/p-{id}', ['as' => 'product.show', 'uses' => 'ProductController@show']);
 
-    Route::get('mollie/status/{paymentid}', ['as' => 'payment.status', 'uses' => 'MainController@paymentStatus']);
+Route::get('mollie/status/{paymentid}', ['as' => 'payment.status', 'uses' => 'MainController@paymentStatus']);
 
-    Route::get('/algemene-voorwaarde', ['as' => 'voorwaarde', 'uses' => 'HomeController@voorwaarde']);
-    Route::get('/over-ons', ['as' => 'about', 'uses' => 'HomeController@about']);
-    Route::get('/privacy-policy', ['as' => 'policy', 'uses' => 'HomeController@policy']);
-    Route::get('/verzending', ['as' => 'verzending', 'uses' => 'HomeController@verzending']);
-    Route::get('/cookie-beleid', ['as' => 'cookies', 'uses' => 'HomeController@cookie']);
-    Route::get('/sitemap', ['as' => 'sitemap', 'uses' => 'HomeController@sitemap']);
-    Route::get('/retouren', ['as' => 'retour', 'uses' => 'HomeController@retour']);
-    Route::get('/faq', ['as' => 'faq', 'uses' => 'HomeController@faq']);
+Route::get('/algemene-voorwaarde', ['as' => 'voorwaarde', 'uses' => 'HomeController@voorwaarde']);
+Route::get('/over-ons', ['as' => 'about', 'uses' => 'HomeController@about']);
+Route::get('/privacy-policy', ['as' => 'policy', 'uses' => 'HomeController@policy']);
+Route::get('/verzending', ['as' => 'verzending', 'uses' => 'HomeController@verzending']);
+Route::get('/cookie-beleid', ['as' => 'cookies', 'uses' => 'HomeController@cookie']);
+Route::get('/sitemap', ['as' => 'sitemap', 'uses' => 'HomeController@sitemap']);
+Route::get('/retouren', ['as' => 'retour', 'uses' => 'HomeController@retour']);
+Route::get('/faq', ['as' => 'faq', 'uses' => 'HomeController@faq']);
 
-    // Start of contact routes
-    Route::get('/contact', ['as' => 'contact', 'uses' => 'ContactController@index']);
-    Route::post('contact', ['as' => 'contact_store', 'uses' => 'ContactController@store']);
+// Start of contact routes
+Route::get('/contact', ['as' => 'contact', 'uses' => 'ContactController@index']);
+Route::post('contact', ['as' => 'contact_store', 'uses' => 'ContactController@store']);
 //    Route::get('/winkelwagen', ['as' => '', 'uses' => 'HomeController@']);
 
-    // User authentication routes... Nav Appaiya 19 July 21:55
-    Route::get('auth/login', ['as'=>'login', 'uses' => 'Auth\AuthController@getLogin']);
-    Route::get('/login', ['uses' => 'Auth\AuthController@getLogin']);
-    Route::post('auth/login', 'Auth\AuthController@postLogin');
-    Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
-    Route::post('auth/register', 'Auth\AuthController@postRegister');
-    Route::get('password/email', 'Auth\PasswordController@getEmail');
-    Route::post('password/email', 'Auth\PasswordController@postEmail');
-    Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-    Route::post('password/reset', 'Auth\PasswordController@postReset');
+// User authentication routes... Nav Appaiya 19 July 21:55
+Route::get('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
+Route::get('/login', ['uses' => 'Auth\AuthController@getLogin']);
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
 //});
 
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
@@ -87,7 +81,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
 });
 
 // Admin authorisation only for admins, not authed users!
-Route::group(['prefix'=>'admin','middlewareGroups' => ['web']], function () {
+Route::group(['prefix' => 'admin', 'middlewareGroups' => ['web']], function () {
 //Route::group(['middlewareGroups' => ['web']], function () {
     Route::get('/', ['as' => 'admin_dashboard_index', 'uses' => 'admin\HomeController@index']);
 
@@ -97,25 +91,34 @@ Route::group(['prefix'=>'admin','middlewareGroups' => ['web']], function () {
     Route::get('product/{id}', ['as' => 'admin_product_show', 'uses' => 'admin\ProductController@show']);
     Route::post('product', ['as' => 'admin_product_store', 'uses' => 'admin\ProductController@store']);
     Route::patch('product', ['as' => 'admin_product_update', 'uses' => 'admin\ProductController@update']);
-    Route::delete('product/destroy/{id}', ['as' => 'admin_product_destroy', 'uses' => 'admin\ProductController@destroy']);
+    Route::delete('product/destroy/{id}',
+        ['as' => 'admin_product_destroy', 'uses' => 'admin\ProductController@destroy']);
 
     Route::get('detail/create', ['as' => 'admin_property_create', 'uses' => 'admin\DetailController@create']);
     Route::get('detail', ['as' => 'admin_property_index', 'uses' => 'admin\DetailController@index']);
     Route::get('detail/{id}/edit', ['as' => 'admin_property_edit', 'uses' => 'admin\DetailController@edit']);
     Route::post('detail', ['as' => 'admin_property_store', 'uses' => 'admin\DetailController@store']);
     Route::patch('detail', ['as' => 'admin_property_update', 'uses' => 'admin\DetailController@update']);
-    Route::delete('detail/destroy/{id}', ['as' => 'admin_property_destroy', 'uses' => 'admin\DetailController@destroy']);
+    Route::delete('detail/destroy/{id}',
+        ['as' => 'admin_property_destroy', 'uses' => 'admin\DetailController@destroy']);
 
-    Route::get('product-property/{id}/create', ['as' => 'admin_product_property_create', 'uses' => 'admin\PropertyController@create']);
-    Route::get('product-property/{id}/edit', ['as' => 'admin_product_property_edit', 'uses' => 'admin\PropertyController@edit']);
-    Route::post('product-property', ['as' => 'admin_product_property_store', 'uses' => 'admin\PropertyController@store']);
-    Route::patch('product-property', ['as' => 'admin_product_property_update', 'uses' => 'admin\PropertyController@update']);
-    Route::delete('product-property/destroy/{id}', ['as' => 'admin_product_property_destroy', 'uses' => 'admin\PropertyController@destroy']);
-    Route::patch('product-property/stock', ['as' => 'admin_product_property_addstock', 'uses' => 'admin\PropertyController@AddStock']);
+    Route::get('product-property/{id}/create',
+        ['as' => 'admin_product_property_create', 'uses' => 'admin\PropertyController@create']);
+    Route::get('product-property/{id}/edit',
+        ['as' => 'admin_product_property_edit', 'uses' => 'admin\PropertyController@edit']);
+    Route::post('product-property',
+        ['as' => 'admin_product_property_store', 'uses' => 'admin\PropertyController@store']);
+    Route::patch('product-property',
+        ['as' => 'admin_product_property_update', 'uses' => 'admin\PropertyController@update']);
+    Route::delete('product-property/destroy/{id}',
+        ['as' => 'admin_product_property_destroy', 'uses' => 'admin\PropertyController@destroy']);
+    Route::patch('product-property/stock',
+        ['as' => 'admin_product_property_addstock', 'uses' => 'admin\PropertyController@AddStock']);
 
     //admin categories
     Route::get('categories', ['as' => 'admin_category_index', 'uses' => 'Admin\CategoryController@index']);
-    Route::get('categories/{category}/edit', ['as' => 'admin_category_edit', 'uses' => 'Admin\CategoryController@edit']);
+    Route::get('categories/{category}/edit',
+        ['as' => 'admin_category_edit', 'uses' => 'Admin\CategoryController@edit']);
     Route::get('categories/create', ['as' => 'admin_category_create', 'uses' => 'Admin\CategoryController@create']);
     Route::post('categories', ['as' => 'admin_category_store', 'uses' => 'Admin\CategoryController@store']);
     Route::patch('categories', ['as' => 'admin_category_update', 'uses' => 'Admin\CategoryController@update']);

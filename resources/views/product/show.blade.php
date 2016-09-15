@@ -29,7 +29,7 @@
                 <div class="artst-pic pull-left">
                     <a href="#">
                         @foreach($product->productimages as $image)
-                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="/images/product/{{$image->imagePath}}">
+                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="{{$image->imagePath}}">
                         @endforeach
                         {{--<img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="350" height="230" class="">--}}
                     </a>

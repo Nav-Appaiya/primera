@@ -43,8 +43,6 @@ class ProductController extends Controller
         $this->image = new ProductImage();
         $this->product = new Product();
         $this->category = new Category();
-        // Turned this off, because product userviews are here also used.
-        // $this->middleware('auth');
     }
 
     /**
@@ -209,14 +207,8 @@ class ProductController extends Controller
      */
     public function detail(Product $id)
     {
-
         return view('products.detail', [
             'product' => $id,
-//            'seotags' => $id->seotags()->getResults(),
-//            'seotags' => $id->seotags()->getResults(),
-//            'related' => Product::all(),
-//            'categories' => Category::all(),
-//            'pages' => Pages::all()
         ]);
     }
 }
