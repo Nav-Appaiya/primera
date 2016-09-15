@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,9 @@ Route::get('/product/{id}/add', ['as' => 'product_add', 'uses' => 'ProductContro
 //Route::get('/pages/{pageId}', 'MainController@page');
 
 Route::get('/cart', ['as' => 'cart', 'uses' => 'CartController@index']);
-Route::get('/cart/add/{id}', ['as' => 'cart.add', 'uses' => 'CartController@addCart']);
+Route::post('/checkout', ['as' => 'checkout', 'uses' => 'MainController@checkout']);
+
+Route::post('/cart/add', ['as' => 'cart.add', 'uses' => 'CartController@addCart']);
 Route::get('/cart/remove/{id}', ['as' => 'cart.remove', 'uses' => 'CartController@removeCart']);
 
 

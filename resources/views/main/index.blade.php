@@ -22,7 +22,7 @@
 {{--                                {{$product->productimages->first()->imagePath}}--}}
                             {{--@endif--}}
                             {{--<img src="{{$product->productimages()->first->imagePath}}" class="img-responsive">aa--}}
-                            <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220px" class="">
+                            <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : '/uploads/img/default.jpg' }}" width="100%" height="220px" class="">
                             <div class="caption">
                                 <div class="row">
                                     <div class="col-md-6 col-xs-6">

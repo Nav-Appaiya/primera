@@ -35,8 +35,11 @@ class CartController extends Controller
         ]);
     }
 
-    public function addCart(Request $request, $id)
+    // Toevoegen middels post request POST: /cart/add [product[props]]
+    public function addCart(Request $request)
     {
+        $product = json_decode($request->get('product'));
+        $id = $product->id;
         $request->session()->push('cart.items', $id);
         $request->session()->flash('status', 'Het product is toegevoegd aan je winkelwagentje!');
 
