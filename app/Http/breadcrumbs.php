@@ -89,8 +89,16 @@ Breadcrumbs::register('dashboard.product.create', function($breadcrumbs)
 Breadcrumbs::register('dashboard.product.edit.property.create', function($breadcrumbs, $id)
 {
     $breadcrumbs->parent('dashboard.product.edit', $id);
-    $breadcrumbs->push('Nieuw', route('admin_product_create'));
+    $breadcrumbs->push('Detail nieuw', route('admin_product_create'));
 });
+
+// dashboard > product > wijzigen > property
+Breadcrumbs::register('dashboard.product.edit.property.edit', function($breadcrumbs, $id)
+{
+    $breadcrumbs->parent('dashboard.product.edit', $id);
+    $breadcrumbs->push('Detail wijzigen', route('admin_product_create'));
+});
+
 ///ok
 
 // dashboard > orders

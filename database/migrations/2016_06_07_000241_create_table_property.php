@@ -18,6 +18,8 @@ class CreateTableProperty extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->string('stock');
             $table->string('serialNumber');
+//            $table->unique(['detail_id', 'product_id']);
+
             $table->integer('detail_id')->unsigned();
             $table->foreign('detail_id')->references('id')->on('details');//            $table->string('color');
 //            $table->string('nicotine');

@@ -46,11 +46,14 @@
                             <small style="color: green; font-weight: 900;">
                                 <br>
                                 <br>
-                                {{--{{ $product->property }}--}}
-                                op voorraad
+                                @if($product->property->sum('stock') != 0)
+                                    op voorraad
+                                @else
+                                    uitverkocht
+                                @endif
+
                             </small>
                             {{--{{ Form::select('number', \App\Property::where('product_id', $product->id)->pluck('nicotine', 'id')->toArray(), null) }}--}}
-
 
 
                         </span>
@@ -68,8 +71,21 @@
                     <div class="pull-right">
                         <div class="row center-block">
                             <div class="btn-group wishlist">
+                                <label>{{$product->property()->first()->detail->type}}</label>
+                                @if($product->property()->first()->detail->type)
+                                    <select class="form-control" name="serialcode">
+                                        @foreach($product->property as $property)
+                                            @if($property->stock == 0)
+                                                <option value="{{$property->serialNumber}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>
+                                            @else
+                                                <option value="{{$property->serialNumber}}">{{$property->detail->value}}  -  <small>op voorraad</small></option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                @endif
+
                                 {{-- TODO: Add to shoppingcart button ajax --}}
-                                <a href="{{ URL::route('cart.add', $product) }}" class="btn btn-success btn-product"
+                                <a href="{{ route('cart.add', $product) }}" class="btn btn-success btn-product"
                                    onclick="">
                                     In winkelwagen<span class="fa fa-shopping-cart"></span>
                                 </a>

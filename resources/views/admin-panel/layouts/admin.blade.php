@@ -35,6 +35,9 @@
             /*float: left;*/
 
         /*}*/
+        .thumbnail{
+            background-color: #F8F8F8;
+        }
         .dataTables_length{
             float: left;
         }
