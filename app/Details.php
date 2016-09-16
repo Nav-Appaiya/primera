@@ -10,10 +10,6 @@ class Details extends Model
 
     public $timestamps = false;
 
-//    protected $fillable = [];
-
-//    protected $guarded = [];
-
     public function property()
     {
         return $this->hasMany('App\Property', 'detail_id', 'id');
@@ -29,7 +25,9 @@ class Details extends Model
                 $array[$parent->type][$attribute->id] = $attribute->value;
             }
         }
-        return $array;
+        if (!empty($array)) {
+            return $array;
+        }
     }
 
 }

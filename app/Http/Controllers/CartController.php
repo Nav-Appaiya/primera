@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: Nav
+ * Date: 16-09-16
+ * Time: 14:24
+ */
 namespace App\Http\Controllers;
 
 use App\Category;
@@ -20,12 +25,11 @@ class CartController extends Controller
         
         if(count($cart) >= 1){
             foreach ($cart as $item) {
-                if(!$item instanceof Product){
-                    $item = Product::find($item);
+                $product = Product::find($item);
+                if($product){
+                    $total += $product->price;
+                    $products[] = $product;
                 }
-                $price = $item->price;
-                $total += $price;
-                $products[] = $item;
             }
         }
 
@@ -42,10 +46,9 @@ class CartController extends Controller
     public function addCart(Request $request)
     {
         $product = json_decode($request->get('product'));
-        $id = $product->id;
-        $request->session()->push('cart.items', $id);
+        $request->session()->push('cart.items', $product->id);
+        
         $request->session()->flash('status', 'Het product is toegevoegd aan je winkelwagentje!');
-
         return Redirect::back();
     }
 
