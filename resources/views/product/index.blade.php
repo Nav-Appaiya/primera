@@ -62,16 +62,21 @@
 <div class="content">
         <div class="col-lg-9">
             <div class="row">
-                @foreach($category->product as $product)
-                    <div class="col-lg-3">
-                        <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">
-                        <p class="text">{{$product->name}}</p>
-                        <p class="text">{{$product->price}}</p>
-                        <p class="text">{{$product->description}}</p>
-                        <a href="{{route('product.show', [str_replace(' ', '-', $product->name), $product->id])}}">bekijken</a>
+                {{--{{var_dump($category->product()->get()->property->SeralNumber)}}--}}
+                {{$property}}
+                {{--@foreach($property->product as $item)--}}
+                    {{--{{$item}}--}}
+                {{--@foreach($property->product as $product)--}}
+                    {{--{{$product}}--}}
+                    {{--<div class="col-lg-3">--}}
+                        {{--<img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">--}}
+                        {{--<p class="text">{{$product->name}}</p>--}}
+                        {{--<p class="text">{{$product->price}}</p>--}}
+                        {{--<p class="text">{{$product->description}}</p>--}}
+                        {{--<a href="{{route('product.show', [str_replace(' ', '-', $product->name), $product->id])}}">bekijken</a>--}}
                         {{--<a href="{{route('')}}"></a>--}}
-                    </div>
-                @endforeach
+                    {{--</div>--}}
+                {{--@endforeach--}}
             </div>
         </div>
     </div>

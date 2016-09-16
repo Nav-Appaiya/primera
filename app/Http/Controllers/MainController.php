@@ -9,6 +9,7 @@ use App\Pages;
 
 use App\Http\Requests;
 use App\Product;
+use App\Property;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,8 @@ class MainController extends Controller
 {
     public function index()
     {
-        $products = Product::with('productimages')->get();
+//        $products = Product::where('status', 'on')->with('productimages')->get();
+        $products = new Property();
         $categories = Category::all();
         $pages = Pages::all();
         
