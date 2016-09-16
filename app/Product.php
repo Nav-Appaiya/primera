@@ -11,15 +11,7 @@ class Product extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-//        'naam', 'image', 'categoryID',
     ];
-
-//    /**
-//     * Product constructor.
-//     */
-//    public function __construct()
-//    {
-//    }
 
     public function seotags()
     {
@@ -30,16 +22,6 @@ class Product extends Model
     {
         return $this->hasMany('App\ProductImage', 'product_id', 'id');
     }
-
-//    public function categories()
-//    {
-//        return $this->hasMany('App\Category', 'id', 'category_id');
-//    }
-
-//    public function category()
-//    {
-//        return $this->hasMany('App\Category', 'categoryID');
-//    }
 
     public function category()
     {

@@ -23,9 +23,10 @@ class MainController extends Controller
     public function index()
     {
         $products = Product::with('productimages')->get();
+        
         $categories = Category::all();
         $pages = Pages::all();
-        
+
         return view('main.index',[
             'products' => $products,
             'categories' => $categories,
