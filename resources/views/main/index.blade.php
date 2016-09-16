@@ -13,7 +13,7 @@
       <li class="active">Products</li>
     </ol>
 
-    @foreach($products->first()->product->where('status', 'on')->get() as $product)
+    @foreach($products->first()->product->where('status', 'on')->skip(0)->take(10)->get() as $product)
         @if(!$product->property->isEmpty())
 
             <div class="col-xs-3 col-sm-3 col-md-3">
@@ -29,7 +29,7 @@
                             @if($product->discount == 0)
                                 <h3 class="pull-right"><label>&euro;{{number_format($product->price, 2, '.', ',')}}</label></h3>
                             @else
-                                <h3 class="pull-right"><small>&euro;{{number_format($product->price, 2, '.', ',')}}</small></h3>
+                                <h3 class="pull-right"><small style="text-decoration:line-through;">&euro;{{number_format($product->price, 2, '.', ',')}}</small></h3>
                                 <h3 class="pull-right" style="margin-top: -16px;"><label style="color: red">&euro;{{number_format($product->price - $product->discount, 2, '.', ',')}}</label></h3>
                             @endif
                         </div>
@@ -56,6 +56,8 @@
             </div>
         </div>
         @endif
+
+
 
 
     @endforeach

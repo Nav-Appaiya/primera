@@ -60,11 +60,21 @@ class ProductController extends Controller
     public function index($name1, $name2, $id)
     {
         $property = Property::whereHas('product', function($q) use ($id){
+
+            $price = Input::has('price') ? Input::get('price') : $price = null;
+
+            if($price) {
+                $price = explode(',', $price);
+
+                $q->where('price', '>=', $price[0]);
+                $q->where('price', '<=', $price[1]);
+            }
             $q->where('status', 'on');
             $q->where('category_id', $id);
         })
         ->groupBy('product_id')
         ->get();
+
 
         return view('product.index')
             ->with('category', $this->category->find($id))
