@@ -79,12 +79,14 @@
                                         </thead>
                                         <tbody>
                                         <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                        
+                                        
                                         @foreach($items as $item)
                                             <tr>
-                                                <td>{{ $item->item_name }}</td>
-                                                <td class="text-right">{{ $item->item_info }}</td>
-                                                <td class="text-right">{{ $item->quantity }}</td>
-                                                <td class="text-right">{{ $item->price }}</td>
+                                                <td>{{ \App\Product::find($item->product_id)->name }}</td>
+                                                <td class="text-right">{{ \App\Product::find($item->product_id)->description }}</td>
+                                                <td class="text-right">{{ $item->amount }}</td>
+                                                <td class="text-right">{{ $item->selling_price }}</td>
                                             </tr>
                                         @endforeach()
                                         <tr class="hidden">

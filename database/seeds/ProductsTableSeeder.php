@@ -24,7 +24,7 @@ class ProductsTableSeeder extends Seeder
             'id' => $categoryId,
             'category_id' => $categoryId,
             'title' => 'Smokestik',
-            'image' => 'smokestik.jpg',
+            'image' => 'default.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);

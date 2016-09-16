@@ -30,7 +30,7 @@
                                 isset($product->productimages()->first()->rel) ? $product->productimages()->first()->rel : "Image-rel-missing" }}">
 
                 @else
-                    <img src="/uploads/img/default.jpg" alt="default-img">
+                    <img src="/uploads/img/default.jpg" alt="default-img" width="200px">
                 @endif
 
                 <div class="caption" style="margin-top: 35px;">
