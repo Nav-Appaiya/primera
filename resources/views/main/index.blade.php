@@ -22,8 +22,18 @@
 {{--                                {{$product->productimages->first()->imagePath}}--}}
                             {{--@endif--}}
                             {{--<img src="{{$product->productimages()->first->imagePath}}" class="img-responsive">aa--}}
-                            <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : '/uploads/img/default.jpg' }}" width="100%" height="220px" class="">
-                            <div class="caption">
+
+                            @if( null !== $product->productimages->first() )
+                                <img src="/uploads/img/{{ $product->productimages()->first()->imagePath }}"
+                                     class="img-responsive"
+                                     width="200px" alt="{{ 
+                                isset($product->productimages()->first()->rel) ? $product->productimages()->first()->rel : "Image-rel-missing" }}" >
+
+                            @else
+                                <img src="/uploads/img/default.jpg" alt="default-img">
+                            @endif
+                            
+                            <div class="caption" style="margin-top: 35px;">
                                 <div class="row">
                                     <div class="col-md-6 col-xs-6">
                                         <h4>{!! $product->name !!}</h4>
@@ -33,9 +43,10 @@
                                     </div>
                                 </div>
                                 <div class="row center-block">
-                                    <div class="btn-group cart">
-                                        <a href="{{ URL::route('product.show', [$product->name, $product->id]) }}" class="btn btn-info btn-product">
-                                            Meer weten <span class="fa fa-question-circle"></span>
+                                    <div class="btn-group cart pull-right">
+                                        <a href="{{ URL::route('product.show', [$product->name, $product->id]) }}" 
+                                           class="btn btn-info btn-product pull-right">
+                                            Meer info <span class="fa fa-question-circle"></span>
                                         </a>
                                     </div>
                                     {{--<div class="btn-group wishlist">--}}
