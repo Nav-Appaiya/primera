@@ -25,7 +25,7 @@
                 <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
-            <!-- /.dropdown-user -->
+            <!-- /.dropdown-user -->/Users/nav/PhpstormProjects/primera/resources/views/admin-panel/layouts/menus/__admin.blade.php
         </li>
         <!-- /.dropdown -->
     </ul>

@@ -22,9 +22,7 @@ class CreateTableProperty extends Migration
 
             $table->integer('detail_id')->unsigned();
             $table->foreign('detail_id')->references('id')->on('details');//            $table->string('color');
-//            $table->string('nicotine');
-//            $table->string('mah');
-//            $table->timestamps();
+            $table->timestamps();
         });
     }
 

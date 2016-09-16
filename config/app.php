@@ -158,6 +158,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        'Barryvdh\Debugbar\ServiceProvider',
     ],
 
     /*
@@ -208,7 +209,7 @@ return [
         'Mollie' => \Mollie\Laravel\Facades\Mollie::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Socialize' => 'Laravel\Socialite\Facades\Socialite',
-
+        'Debugbar' => \Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
