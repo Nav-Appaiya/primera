@@ -30,7 +30,7 @@ class Product extends Model
 
     public function property()
     {
-        return $this->hasMany('App\Property', 'product_id');
+        return $this->hasMany('App\Property');
     }
 
     public function review()

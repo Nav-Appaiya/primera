@@ -54,8 +54,8 @@
             </ul>
 
             prijs<br>
-            <input value="{{$category->product->min('price')}}">
-            <input value="{{$category->product->max('price')}}">
+            {{--<input value="{{$property->product}}">--}}
+            {{--<input value="{{$property->product->max('price')}}">--}}
 
         </div>
 </div>
@@ -63,20 +63,24 @@
         <div class="col-lg-9">
             <div class="row">
                 {{--{{var_dump($category->product()->get()->property->SeralNumber)}}--}}
-                {{$property}}
-                {{--@foreach($property->product as $item)--}}
+                {{--{{($property)}}--}}
+                {{--@foreach($property->groupBy()->first()->product->get() as $product)--}}
+                {{--@foreach($property->first()->product->where('status', 'on')->where('category_id', $category->id)->get() as $product)--}}
+                    {{--{{$product}}<br>--}}
                     {{--{{$item}}--}}
-                {{--@foreach($property->product as $product)--}}
+{{--                {{var_dump($property->product()->get())}}--}}
+                @foreach($property as $product)
                     {{--{{$product}}--}}
-                    {{--<div class="col-lg-3">--}}
-                        {{--<img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">--}}
-                        {{--<p class="text">{{$product->name}}</p>--}}
-                        {{--<p class="text">{{$product->price}}</p>--}}
-                        {{--<p class="text">{{$product->description}}</p>--}}
-                        {{--<a href="{{route('product.show', [str_replace(' ', '-', $product->name), $product->id])}}">bekijken</a>--}}
+                    <div class="col-lg-3">
+                        {{--{{$product}}--}}
+                        <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">
+                        <p class="text">{{$product->product->name}}</p>
+                        <p class="text">{{$product->product->price}}</p>
+                        {{--<p class="text">{{$product->product->description}}</p>--}}
+                        <a href="{{route('product.show', [str_replace(' ', '-', $product->product->name), $product->product->id])}}">bekijken</a>
                         {{--<a href="{{route('')}}"></a>--}}
-                    {{--</div>--}}
-                {{--@endforeach--}}
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

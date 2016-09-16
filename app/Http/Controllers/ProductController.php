@@ -43,7 +43,12 @@ class ProductController extends Controller
     {
         $this->image = new ProductImage();
         $this->product = new Product();
-        $this->property = new Property();
+//        $this->property = Property::with(array('product' => function($query)
+//        {
+//            $query->where('orders.user_id', $customerID);
+//            $query->orderBy('orders.created_at', 'DESC');
+//        }));
+
         $this->category = new Category();
         // Turned this off, because product userviews are here also used.
         // $this->middleware('auth');
@@ -54,9 +59,16 @@ class ProductController extends Controller
      */
     public function index($name1, $name2, $id)
     {
+        $property = Property::whereHas('product', function($q) use ($id){
+            $q->where('status', 'on');
+            $q->where('category_id', $id);
+        })
+        ->groupBy('product_id')
+        ->get();
+
         return view('product.index')
             ->with('category', $this->category->find($id))
-            ->with('property', $this->property->get());
+            ->with('property', $property);
     }
 
     public function show($title, $id)
