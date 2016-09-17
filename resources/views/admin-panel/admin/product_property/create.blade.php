@@ -23,11 +23,37 @@
                 {!! Form::text('serialNumber', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                 {{--{{ Form::select('serialNumber', ['color' => 'kleur', 'battery' => 'battery', 'nicotine' => 'nicotine'], null, ['class' => 'form-control']) }}--}}
             </div>
+{{--{{array_except(\App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get(),\App\Property::where('product_id', Request::segment(3))->get())}}--}}
+            {{--get all --}}
+            <?php
+            $one = collect(\App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get())
+                    ->diffKeys(collect(\App\Product::find(Request::segment(3))->property->first()->detail->first()));
+            $two = \App\Product::find(Request::segment(3))->property->first()->detail->first();
+            echo $one;
+            echo $two;
 
+//            array_except(
+//                $one,
+//                $two
+//            )
+            ?>
+{{--{{--}}
+{{--array_except(--}}
+    {{--\App\Product::find(Request::segment(3))->property->first()->detail,--}}
+    {{--\App\Property::where('product_id', Request::segment(3))->first()->detail->where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get()--}}
+{{--)--}}
+{{--}}--}}
+{{--{{dd(\App\Details::groupDetails())}}--}}
             @if(\App\Product::find(Request::segment(3))->property()->exists() != 0)
                 <div class="form-group">
-                    {!! Form::label('detail', \App\Product::find(Request::segment(3))->property->first()->detail->type) !!}
-                    {{ Form::select('detail', \App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->pluck('value', 'id'), null, ['class' => 'form-control']) }}
+{{--                    {!! Form::label('detail', \App\Product::find(Request::segment(3))->property->first()->detail->type) !!}--}}
+                    {{--{{ Form::select('detail', \App\Details::where('type',--}}
+                    {{--array_except(--}}
+                        {{--\App\Product::find(--}}
+                            {{--Request::segment(3)--}}
+                        {{--)->property->first()->detail->type,--}}
+                        {{--\App\Details::groupDetails()--}}
+                    {{--)->pluck('value', 'id'), null, ['class' => 'form-control']) }}--}}
                 </div>
             @else
                 <div class="form-group">

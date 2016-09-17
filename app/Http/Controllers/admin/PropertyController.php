@@ -41,7 +41,8 @@ class PropertyController extends Controller
         $rules = [
 //            'detail' => 'required|unique:property,detail_id,'.$request->detail.',product_id',
             'stock' => 'required',
-            'detail' => 'required|unique:property,id,detail_id,product_id',
+            'detail' => 'required',
+//            'detail' => 'required|unique:property,product_id,detail_id',
             'serialNumber' => 'required|unique:property'
         ];
 
