@@ -26,11 +26,16 @@
 {{--{{array_except(\App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get(),\App\Property::where('product_id', Request::segment(3))->get())}}--}}
             {{--get all --}}
             <?php
-            $one = collect(\App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get())
-                    ->diffKeys(collect(\App\Product::find(Request::segment(3))->property->first()->detail->first()));
-            $two = \App\Product::find(Request::segment(3))->property->first()->detail->first();
-            echo $one;
-            echo $two;
+//            $all = collect(\App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get());
+////                    ->except(collect(\App\Product::find(Request::segment(3))->property->first()->detail->first())->all());
+//            $used = (\App\Property::where('product_id' ,Request::segment(3))->get());
+//            $array = [];
+//                foreach ($used as $use){
+//                    $array[] = [$use->detail];
+//                }
+//echo $array;
+//            echo $all."<br><br>";
+//            echo $used;
 
 //            array_except(
 //                $one,
