@@ -11,6 +11,9 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/3.3.7+1/css/sb-admin-2.css" rel="stylesheet">
 
@@ -35,50 +38,51 @@
             /*float: left;*/
 
         /*}*/
-        .thumbnail{
-            background-color: #F8F8F8;
-        }
-        .dataTables_length{
-            float: left;
-        }
-        .dataTables_filter{
-            float: right;
-            /*text-align: right;*/
-            width: 100px;
-        }
-        .dataTables_filter > input{
-            display: inline-block;
-        }
-        .dataTables_length select{
-            color: #000;
+        /*.thumbnail{*/
+            /*background-color: #F8F8F8;*/
+        /*}*/
+        /*.dataTables_length{*/
+            /*float: left;*/
+        /*}*/
+        /*.dataTables_filter{*/
+            /*float: right;*/
+            /*!*text-align: right;*!*/
+            /*width: 100px;*/
+        /*}*/
+        /*.dataTables_filter > input{*/
+            /*display: inline-block;*/
+        /*}*/
+        /*.dataTables_length select{*/
+            /*color: #000;*/
+            /*!*width: 100%;*!*/
+            /*border-radius: 3px;*/
+            /*border: 1px #ddd solid;*/
+            /*border-bottom: 2px #ddd solid;*/
+            /*height: 35px;*/
+            /*margin-bottom: 25px;*/
+        /*}*/
+
+        /*input[type=search] {*/
             /*width: 100%;*/
-            border-radius: 3px;
-            border: 1px #ddd solid;
-            border-bottom: 2px #ddd solid;
-            height: 35px;
-            margin-bottom: 25px;
-        }
+            /*border-radius: 3px;*/
+            /*border: 1px #ddd solid;*/
+            /*border-bottom: 2px #ddd solid;*/
+            /*height: 35px;*/
+            /*margin-bottom: 25px;*/
+        /*}*/
 
-        input[type=search] {
-            width: 100%;
-            border-radius: 3px;
-            border: 1px #ddd solid;
-            border-bottom: 2px #ddd solid;
-            height: 35px;
-            margin-bottom: 25px;
-        }
+        /*.paginate_button{*/
+            /*border: 1px #ddd solid;*/
+            /*line-height: 35px;*/
+            /*padding: 0 4px;*/
+            /*height: 35px;*/
+            /*border-radius: 4px;*/
+        /*}*/
+        /*.next {*/
+            /*float: right;*/
+        /*}*/
 
-        .paginate_button{
-            border: 1px #ddd solid;
-            line-height: 35px;
-            padding: 0 4px;
-            height: 35px;
-            border-radius: 4px;
-        }
-        .next {
-            float: right;
-        }
-
+        /*.paging_simple_numbers*/
 
 
     </style>
@@ -152,10 +156,10 @@
 
             $('.table').dataTable( {
                 language: {
-//                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Dutch.json",
+                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Dutch.json",
                     sLengthMenu: "_MENU_ Show",
-                    search: "_INPUT_",
-                    searchPlaceholder: "Zoeken...",
+                    search: "_INPUT_"
+//                    searchPlaceholder: "Zoeken...",
 
                 }
             } );

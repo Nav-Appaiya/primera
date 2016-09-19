@@ -113,7 +113,7 @@
                                 <td>{{$property->id}}</td>
                                 <td>{{$property->serialNumber}}</td>
                                 <td>{{$property->stock}}</td>
-                                <td>{{$property->detail->value ? $property->detail->value : ''}}</td>
+                                {{--<td>{{$property->detail->value ? $property->detail->value : ''}}</td>--}}
 
                             </tr>
                         @endforeach

@@ -23,47 +23,27 @@
                 {!! Form::text('serialNumber', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                 {{--{{ Form::select('serialNumber', ['color' => 'kleur', 'battery' => 'battery', 'nicotine' => 'nicotine'], null, ['class' => 'form-control']) }}--}}
             </div>
-{{--{{array_except(\App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get(),\App\Property::where('product_id', Request::segment(3))->get())}}--}}
-            {{--get all --}}
-            <?php
-//            $all = collect(\App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get());
-////                    ->except(collect(\App\Product::find(Request::segment(3))->property->first()->detail->first())->all());
-//            $used = (\App\Property::where('product_id' ,Request::segment(3))->get());
-//            $array = [];
-//                foreach ($used as $use){
-//                    $array[] = [$use->detail];
-//                }
-//echo $array;
-//            echo $all."<br><br>";
-//            echo $used;
 
-//            array_except(
-//                $one,
-//                $two
-//            )
-            ?>
-{{--{{--}}
-{{--array_except(--}}
-    {{--\App\Product::find(Request::segment(3))->property->first()->detail,--}}
-    {{--\App\Property::where('product_id', Request::segment(3))->first()->detail->where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get()--}}
-{{--)--}}
-{{--}}--}}
-{{--{{dd(\App\Details::groupDetails())}}--}}
             @if(\App\Product::find(Request::segment(3))->property()->exists() != 0)
+
+                <?php
+                    $all = collect(\App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get());
+                    $used = \App\Property::where('product_id' ,Request::segment(3))->get();
+                    $array = [];
+                    foreach ($used as $item){
+                        array_push($array, $item->detail);
+                    }
+                    $newCollection = collect($all)->diff($array)->flatten(1) ;
+                ?>
+
                 <div class="form-group">
-{{--                    {!! Form::label('detail', \App\Product::find(Request::segment(3))->property->first()->detail->type) !!}--}}
-                    {{--{{ Form::select('detail', \App\Details::where('type',--}}
-                    {{--array_except(--}}
-                        {{--\App\Product::find(--}}
-                            {{--Request::segment(3)--}}
-                        {{--)->property->first()->detail->type,--}}
-                        {{--\App\Details::groupDetails()--}}
-                    {{--)->pluck('value', 'id'), null, ['class' => 'form-control']) }}--}}
+                    {!! Form::label('detail', \App\Product::find(Request::segment(3))->property->first()->detail->type) !!}
+                    {{ Form::select('detail', array_merge(['null' => 'geen'], $newCollection->pluck('value', 'id')), null, ['class' => 'form-control']) }}
                 </div>
             @else
                 <div class="form-group">
-                {!! Form::label('detail', 'detail') !!}
-                {{ Form::select('detail', \App\Details::groupDetails(), null, ['class' => 'form-control']) }}
+                    {!! Form::label('detail', 'detail') !!}
+                    {{ Form::select('detail', array_merge(['null' => 'geen'], \App\Details::groupDetails()), null, ['class' => 'form-control']) }}
                 </div>
             @endif
 {{--            {{dd(\App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type))}}--}}

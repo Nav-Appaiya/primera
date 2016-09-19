@@ -14,6 +14,7 @@
     </ol>
 
     @foreach($products->first()->product->where('status', 'on')->skip(0)->take(10)->get() as $product)
+    {{--@foreach($products->first()->product->where('status', 'on')->skip(0)->take(10)->get() as $product)--}}
         @if(!$product->property->isEmpty())
 
             <div class="col-xs-3 col-sm-3 col-md-3">
