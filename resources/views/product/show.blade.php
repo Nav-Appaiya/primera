@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
     <ol class="breadcrumb">
         <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
         <li>Products</li>
@@ -27,8 +28,9 @@
             <div class="content">
                 <div class="artst-pic pull-left">
                     {{--<a href="#">--}}
-                        @foreach($product->productimages()->get() as $image)
-                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="/images/product/{{$image->imagePath}}">
+
+                        @foreach($product->productimages()->get() as $image) 
+                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="{{$image->imagePath}}">
                         @endforeach
 {{--                        <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="350" height="230" class="">--}}
                     {{--</a>--}}
@@ -47,7 +49,7 @@
                     @if($product->discount == 0)
                         <h2>&euro;{{ $product->price }}</h2>
                     @else
-                        <h2>&euro;{{ $product->price - $product->discount }}</h2>
+                            <h2>&euro;{{ $product->price - $product->discount }}</h2>
                         <small style="text-decoration:line-through;">&euro;{{ $product->price }}</small>
                     @endif
 
@@ -59,6 +61,7 @@
                             uitverkocht
                         @endif
                     </small>
+
 
                             {{--{{ Form::select('number', \App\Property::where('product_id', $product->id)->pluck('nicotine', 'id')->toArray(), null) }}--}}
 
@@ -78,7 +81,7 @@
                     <div class="pull-right">
                         <div class="row center-block">
                             <div class="btn-group wishlist">
-{{--                                {{dd($product->property()->first()->detail->type)}}--}}
+                                
                                     <label>{{$product->property()->first()->detail->type}}</label>
                                     @if($product->property()->first()->detail->type)
                                         <select class="form-control" name="serialcode">

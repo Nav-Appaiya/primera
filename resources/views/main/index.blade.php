@@ -13,7 +13,8 @@
       <li class="active">Products</li>
     </ol>
 
-    @foreach($products->first()->product->where('status', 'on')->skip(0)->take(10)->get() as $product)
+
+    {{ dd() }}
     {{--@foreach($products->first()->product->where('status', 'on')->skip(0)->take(10)->get() as $product)--}}
         @if(!$product->property->isEmpty())
 
