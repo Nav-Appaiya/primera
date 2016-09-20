@@ -51,7 +51,7 @@
                                         <label class='pull-left' style='padding-right:5em'>nummer</label> <label class='pull-right'>voorraad</label><br>
                                         @foreach($product->property as $item)
                                             <label class='pull-left' style='padding-right:5em'>{{$item->serialNumber}}</label> <label class='pull-right'>{{$item->stock}}</label><br>
-                                        @endforeach
+                                        @endforeach<br>
                                         " data-html="true">
                                         @if($product->property->first())
                                             @foreach($product->property()->orderBy('stock', 'ASC')->get() as $property)

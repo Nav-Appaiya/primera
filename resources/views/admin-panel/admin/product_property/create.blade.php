@@ -37,8 +37,15 @@
                 ?>
 
                 <div class="form-group">
-                    {!! Form::label('detail', \App\Product::find(Request::segment(3))->property->first()->detail->type) !!}
-                    {{ Form::select('detail', array_merge(['null' => 'geen'], $newCollection->pluck('value', 'id')), null, ['class' => 'form-control']) }}
+                    {!! Form::label('detail', 'detail > '.\App\Product::find(Request::segment(3))->property->first()->detail->type) !!}
+                    @if(count($used) == 1)
+                        {{ Form::select('detail', array_merge(['null' => 'geen'], $newCollection->pluck('value', 'id')->toArray()), null, ['class' => 'form-control']) }}
+                    @else
+                        {{ Form::select('detail', $newCollection->pluck('value', 'id')->toArray(), null, ['class' => 'form-control', count($newCollection) == 0 ? 'disabled' : '']) }}
+                        @if (count($newCollection) == 0)
+                            <label>Uw details zijn op. Maak <a href="{{route('admin_property_index')}}">hier</a> meer aan.</label>
+                        @endif
+                    @endif
                 </div>
             @else
                 <div class="form-group">

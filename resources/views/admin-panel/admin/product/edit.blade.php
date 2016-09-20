@@ -93,7 +93,8 @@
         <div class="col-md-6">
             <div class="thumbnail">
 
-                <a class="btn btn-primary pull-right" style="margin-left: 10px;" href="{{route('admin_product_property_create', $product->id)}}">nieuw</a>
+                <a class="btn btn-primary pull-right" style="margin-left: 10px;" href="{{route('admin_product_property_create', $product->id)}}" {{$product->property()->first()->detail()->exists() ? '"' : 'disabled'}}>nieuw</a>
+            {{--a    {{$product->property()->get() ? '' : 'disabled'}}a--}}
 
                 <table class="table table-hover table-bordered">
                     <thead>
@@ -113,8 +114,8 @@
                                 <td>{{$property->id}}</td>
                                 <td>{{$property->serialNumber}}</td>
                                 <td>{{$property->stock}}</td>
-                                {{--<td>{{$property->detail->value ? $property->detail->value : ''}}</td>--}}
-
+                                {{--<td>{{$property->detail->exists() ? $property->detail->value : ''}}</td>--}}
+                                <td>{{$property->detail()->exists() ? $property->detail->value : 'geen'}}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -30,11 +30,10 @@
                 {{--{{count($property->product->property)}}--}}
 {{--{{count(\App\Details::where('type', $property->detail->type)->get())}}--}}
             <div class="form-group">
-                {!! Form::label('detail', $property->detail->type) !!}
+                {!! Form::label('detail', $property->first()->detail()->exists() ? '' : 'geen') !!}
                 @if(count($property->product->property) == 1)
-                    {{ Form::select('detail_id', \App\Details::groupDetails(), null, ['class' => 'form-control']) }}
+                    {{ Form::select('detail_id', array_merge(['null' => 'geen'], \App\Details::groupDetails()), null, ['class' => 'form-control']) }}
                 @else
-
                     {{ Form::select('detail_id', \App\Details::where('type', $property->detail->type)->lists('value', 'id'), null, ['class' => 'form-control']) }}
                 @endif
             </div>
