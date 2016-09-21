@@ -60,7 +60,8 @@
 
                                 </a>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Wachtwoord vergeten?</a>
+                                <a class="btn btn-link" href="{{ route('register') }}">Nog geen account?</a>
                     </form>
         </div>
     </div>

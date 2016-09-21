@@ -93,8 +93,11 @@
         <div class="col-md-6">
             <div class="thumbnail">
 
-                <a class="btn btn-primary pull-right" style="margin-left: 10px;" href="{{route('admin_product_property_create', $product->id)}}" {{$product->property()->first()->detail()->exists() ? '"' : 'disabled'}}>nieuw</a>
-            {{--a    {{$product->property()->get() ? '' : 'disabled'}}a--}}
+                @if($product->property()->where('detail_id', '0')->exists())
+                    <a class="btn btn-primary pull-right" style="margin-left: 10px;" disabled="">nieuw</a>
+                @else
+                    <a class="btn btn-primary pull-right" style="margin-left: 10px;" href="{{route('admin_product_property_create', $product->id)}}" >nieuw</a>
+                @endif
 
                 <table class="table table-hover table-bordered">
                     <thead>

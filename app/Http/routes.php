@@ -11,7 +11,9 @@
 |
 */
 
-Route::auth();
+//Route::auth();
+
+
 Route::get('/test', ['as' => 'test', 'uses' => 'MainController@carting']);
 Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
 
@@ -59,92 +61,100 @@ Route::post('contact', ['as' => 'contact_store', 'uses' => 'ContactController@st
 
 // User authentication routes... Nav Appaiya 19 July 21:55
 Route::get('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
-Route::get('/login', ['uses' => 'Auth\AuthController@getLogin']);
+//Route::get('/inloggen', ['uses' => 'Auth\AuthController@getLogin']);
 Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
+//Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
-Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-Route::post('password/reset', 'Auth\PasswordController@postReset');
+//Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+//Route::post('password/reset', 'Auth\PasswordController@postReset');
 //});
+Route::get('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
+Route::post('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@postRegister']);
+Route::get('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
+Route::post('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
+Route::get('/uitloggen', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+Route::get('/account-herstel', ['as' => 'forgot', 'uses' => 'Auth\PasswordController@postEmail']);
+//Route::get('/account-herstel/{token}', ['as' => 'forgot', 'uses' => 'Auth\AuthController@getLogin']);
+Route::post('/account-herstel', ['as' => 'forgot', 'uses' => 'Auth\PasswordController@postEmail']);
 
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
-Route::get('/mijn-gegevens', ['as' => 'user.show', 'uses' => 'user\UserController@show']);
-Route::get('/mijn-gegevens/wijzigen', ['as' => 'user.edit', 'uses' => 'user\UserController@edit']);
-Route::patch('/mijn-gegevens', ['as' => 'user.update', 'uses' => 'user\UserController@update']);
+    Route::get('/mijn-gegevens', ['as' => 'user.show', 'uses' => 'user\UserController@show']);
+    Route::get('/mijn-gegevens/wijzigen', ['as' => 'user.edit', 'uses' => 'user\UserController@edit']);
+    Route::patch('/mijn-gegevens', ['as' => 'user.update', 'uses' => 'user\UserController@update']);
 
-// TODO: Deze routes moeten nog gemaakt worden
-//    Route::get('/mijn-bestelling', ['as' => 'user.order.index', 'uses' => 'Auth\OrderController@index']);
-//    Route::get('/mijn-bestelling/{order_id}', ['as' => 'user.order.show', 'uses' => 'Auth\OrderController@show']);
+    // TODO: Deze routes moeten nog gemaakt worden
+    //    Route::get('/mijn-bestelling', ['as' => 'user.order.index', 'uses' => 'Auth\OrderController@index']);
+    //    Route::get('/mijn-bestelling/{order_id}', ['as' => 'user.order.show', 'uses' => 'Auth\OrderController@show']);
 
-Route::get('auth/logout', ['as' => 'logoff', 'uses' => 'Auth\AuthController@getLogout']);
+    Route::get('auth/logout', ['as' => 'logoff', 'uses' => 'Auth\AuthController@getLogout']);
 });
 
 // Admin authorisation only for admins, not authed users!
-Route::group(['prefix' => 'admin', 'middlewareGroups' => ['web']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
 //Route::group(['middlewareGroups' => ['web']], function () {
-Route::get('/', ['as' => 'admin_dashboard_index', 'uses' => 'admin\HomeController@index']);
+    Route::get('/', ['as' => 'admin_dashboard_index', 'uses' => 'admin\HomeController@index']);
 
-Route::get('product/create', ['as' => 'admin_product_create', 'uses' => 'admin\ProductController@create']);
-Route::get('product', ['as' => 'admin_product_index', 'uses' => 'admin\ProductController@index']);
-Route::get('product/{id}/edit', ['as' => 'admin_product_edit', 'uses' => 'admin\ProductController@edit']);
-Route::get('product/{id}', ['as' => 'admin_product_show', 'uses' => 'admin\ProductController@show']);
-Route::post('product', ['as' => 'admin_product_store', 'uses' => 'admin\ProductController@store']);
-Route::patch('product', ['as' => 'admin_product_update', 'uses' => 'admin\ProductController@update']);
-Route::delete('product/destroy/{id}',
-    ['as' => 'admin_product_destroy', 'uses' => 'admin\ProductController@destroy']);
+    Route::get('product/create', ['as' => 'admin_product_create', 'uses' => 'admin\ProductController@create']);
+    Route::get('product', ['as' => 'admin_product_index', 'uses' => 'admin\ProductController@index']);
+    Route::get('product/{id}/edit', ['as' => 'admin_product_edit', 'uses' => 'admin\ProductController@edit']);
+    Route::get('product/{id}', ['as' => 'admin_product_show', 'uses' => 'admin\ProductController@show']);
+    Route::post('product', ['as' => 'admin_product_store', 'uses' => 'admin\ProductController@store']);
+    Route::patch('product', ['as' => 'admin_product_update', 'uses' => 'admin\ProductController@update']);
+    Route::delete('product/destroy/{id}',
+        ['as' => 'admin_product_destroy', 'uses' => 'admin\ProductController@destroy']);
 
-Route::get('detail/create', ['as' => 'admin_property_create', 'uses' => 'admin\DetailController@create']);
-Route::get('detail', ['as' => 'admin_property_index', 'uses' => 'admin\DetailController@index']);
-Route::get('detail/{id}/edit', ['as' => 'admin_property_edit', 'uses' => 'admin\DetailController@edit']);
-Route::post('detail', ['as' => 'admin_property_store', 'uses' => 'admin\DetailController@store']);
-Route::patch('detail', ['as' => 'admin_property_update', 'uses' => 'admin\DetailController@update']);
-Route::delete('detail/destroy/{id}',
-    ['as' => 'admin_property_destroy', 'uses' => 'admin\DetailController@destroy']);
+    Route::get('detail/create', ['as' => 'admin_property_create', 'uses' => 'admin\DetailController@create']);
+    Route::get('detail', ['as' => 'admin_property_index', 'uses' => 'admin\DetailController@index']);
+    Route::get('detail/{id}/edit', ['as' => 'admin_property_edit', 'uses' => 'admin\DetailController@edit']);
+    Route::post('detail', ['as' => 'admin_property_store', 'uses' => 'admin\DetailController@store']);
+    Route::patch('detail', ['as' => 'admin_property_update', 'uses' => 'admin\DetailController@update']);
+    Route::delete('detail/destroy/{id}',
+        ['as' => 'admin_property_destroy', 'uses' => 'admin\DetailController@destroy']);
 
-Route::get('product-property/{id}/create',
-    ['as' => 'admin_product_property_create', 'uses' => 'admin\PropertyController@create']);
-Route::get('product-property/{id}/edit',
-    ['as' => 'admin_product_property_edit', 'uses' => 'admin\PropertyController@edit']);
-Route::post('product-property',
-    ['as' => 'admin_product_property_store', 'uses' => 'admin\PropertyController@store']);
-Route::patch('product-property',
-    ['as' => 'admin_product_property_update', 'uses' => 'admin\PropertyController@update']);
-Route::delete('product-property/destroy/{id}',
-    ['as' => 'admin_product_property_destroy', 'uses' => 'admin\PropertyController@destroy']);
-Route::patch('product-property/stock',
-    ['as' => 'admin_product_property_addstock', 'uses' => 'admin\PropertyController@AddStock']);
+    Route::get('product-property/{id}/create',
+        ['as' => 'admin_product_property_create', 'uses' => 'admin\PropertyController@create']);
+    Route::get('product-property/{id}/edit',
+        ['as' => 'admin_product_property_edit', 'uses' => 'admin\PropertyController@edit']);
+    Route::post('product-property',
+        ['as' => 'admin_product_property_store', 'uses' => 'admin\PropertyController@store']);
+    Route::patch('product-property',
+        ['as' => 'admin_product_property_update', 'uses' => 'admin\PropertyController@update']);
+    Route::delete('product-property/destroy/{id}',
+        ['as' => 'admin_product_property_destroy', 'uses' => 'admin\PropertyController@destroy']);
+    Route::patch('product-property/stock',
+        ['as' => 'admin_product_property_addstock', 'uses' => 'admin\PropertyController@AddStock']);
 
-//admin categories
-Route::get('categories', ['as' => 'admin_category_index', 'uses' => 'Admin\CategoryController@index']);
-Route::get('categories/{category}/edit',
-    ['as' => 'admin_category_edit', 'uses' => 'Admin\CategoryController@edit']);
-Route::get('categories/create', ['as' => 'admin_category_create', 'uses' => 'Admin\CategoryController@create']);
-Route::post('categories', ['as' => 'admin_category_store', 'uses' => 'Admin\CategoryController@store']);
-Route::patch('categories', ['as' => 'admin_category_update', 'uses' => 'Admin\CategoryController@update']);
+    //admin categories
+    Route::get('categories', ['as' => 'admin_category_index', 'uses' => 'Admin\CategoryController@index']);
+    Route::get('categories/{category}/edit',
+        ['as' => 'admin_category_edit', 'uses' => 'Admin\CategoryController@edit']);
+    Route::get('categories/create', ['as' => 'admin_category_create', 'uses' => 'Admin\CategoryController@create']);
+    Route::post('categories', ['as' => 'admin_category_store', 'uses' => 'Admin\CategoryController@store']);
+    Route::patch('categories', ['as' => 'admin_category_update', 'uses' => 'Admin\CategoryController@update']);
 
-//admin reviews
-Route::get('reviews', ['as' => 'admin_review_index', 'uses' => 'Admin\ReviewController@index']);
-Route::get('reviews/{id}', ['as' => 'admin_review_show', 'uses' => 'Admin\ReviewController@show']);
-Route::post('reviews/{id}', ['as' => 'admin_review_update', 'uses' => 'Admin\ReviewController@update']);
-Route::get('reviews/{id}/edit', ['as' => 'admin_review_edit', 'uses' => 'Admin\ReviewController@edit']);
-Route::post('reviews', ['as' => 'admin_category_update', 'uses' => 'Admin\CategoryController@update']);
+    //admin reviews
+    Route::get('reviews', ['as' => 'admin_review_index', 'uses' => 'Admin\ReviewController@index']);
+    Route::get('reviews/{id}', ['as' => 'admin_review_show', 'uses' => 'Admin\ReviewController@show']);
+    Route::post('reviews/{id}', ['as' => 'admin_review_update', 'uses' => 'Admin\ReviewController@update']);
+    Route::get('reviews/{id}/edit', ['as' => 'admin_review_edit', 'uses' => 'Admin\ReviewController@edit']);
+    Route::post('reviews', ['as' => 'admin_category_update', 'uses' => 'Admin\CategoryController@update']);
 
-Route::delete('reviews/{id}', ['as' => 'admin_review_destroy', 'uses' => 'Admin\ReviewController@destroy']);
+    Route::delete('reviews/{id}', ['as' => 'admin_review_destroy', 'uses' => 'Admin\ReviewController@destroy']);
 
-//admin orders
-Route::get('orders', ['as' => 'admin_order_index', 'uses' => 'Admin\OrderController@index']);
-Route::get('orders/{id}/edit', ['as' => 'admin_order_edit', 'uses' => 'Admin\OrderController@edit']);
-Route::post('orders/{id}', ['as' => 'admin_order_update', 'uses' => 'Admin\OrderController@update']);
+    //admin orders
+    Route::get('orders', ['as' => 'admin_order_index', 'uses' => 'Admin\OrderController@index']);
+    Route::get('orders/{id}/edit', ['as' => 'admin_order_edit', 'uses' => 'Admin\OrderController@edit']);
+    Route::post('orders/{id}', ['as' => 'admin_order_update', 'uses' => 'Admin\OrderController@update']);
 
-//admin users
-Route::get('users', ['as' => 'admin_user_index', 'uses' => 'Admin\UserController@index']);
-Route::get('users/{id}/edit', ['as' => 'admin_user_edit', 'uses' => 'Admin\UserController@edit']);
-Route::post('users/{id}', ['as' => 'admin_user_update', 'uses' => 'Admin\UserController@update']);
-Route::delete('users/{id}', ['as' => 'admin_user_destroy', 'uses' => 'Admin\UserController@destroy']);
+    //admin users
+    Route::get('users', ['as' => 'admin_user_index', 'uses' => 'Admin\UserController@index']);
+    Route::get('users/{id}/edit', ['as' => 'admin_user_edit', 'uses' => 'Admin\UserController@edit']);
+    Route::post('users/{id}', ['as' => 'admin_user_update', 'uses' => 'Admin\UserController@update']);
+    Route::delete('users/{id}', ['as' => 'admin_user_destroy', 'uses' => 'Admin\UserController@destroy']);
 
-//admin image delete
-Route::delete('image/{id}', ['as' => 'admin_image_destroy', 'uses' => 'Admin\ImageController@destroy']);
+    //admin image delete
+    Route::delete('image/{id}', ['as' => 'admin_image_destroy', 'uses' => 'Admin\ImageController@destroy']);
 }); // End of authed route group.
 

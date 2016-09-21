@@ -2,11 +2,13 @@
 
 @section('title', 'nieuwe product detail')
 @section('breadcrumb', Breadcrumbs::render('dashboard.product.edit.property.create', Request::segment(3)))
+{{--@section('breadcrumb', Breadcrumbs::render('dashboard.product.edit.property.edit',$property->product->id))--}}
+
 
 @section('content')
 
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-6">
 
         {!! Form::open(['route' => ['admin_product_property_store']]) !!}
 
@@ -91,7 +93,7 @@
 
         <div class="col-md-2">
             <ul class="list-group">
-                <li class="list-group-item"><a href="{{route('admin_property_create')}}">new</a></li>
+                {{--<li class="list-group-item"><a href="{{route('admin_property_create')}}">new</a></li>--}}
                  {{--<li class="list-group-item"><a href="{{route('admin_property_create')}}">new</a></li>--}}
             </ul>
         </div>
