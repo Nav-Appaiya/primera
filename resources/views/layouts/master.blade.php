@@ -76,8 +76,10 @@
 </div>
 @show
 <div id="content">
+  <div class="container-fluid" style="width: 100%">
   <div class="content">
             @yield('content')
+    </div>
     </div>
   <footer></footer>
 </div>
