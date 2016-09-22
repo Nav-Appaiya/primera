@@ -58,6 +58,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+//        $request->replace(array('prijs' => str_replace(",", ".", $request->prijs)) );
         $message = [
             'status.alpha' => 'Het :attribute veld is verplicht.',
         ];

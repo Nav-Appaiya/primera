@@ -30,12 +30,12 @@
 
                         <div class="form-group">
                             {!! Form::label('korting', 'korting') !!}
-                            {!! Form::text('korting', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                            {!! Form::text('korting', '0.00', ['class' => 'form-control', 'placeholder' => '']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('prijs', 'prijs') !!}
-                            {!! Form::text('prijs', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                            {!! Form::text('prijs', '0.00', ['class' => 'form-control', 'placeholder' => '']) !!}
                         </div>
 
                         {{--<!-- category id -->--}}
@@ -43,7 +43,8 @@
                             {!! Form::label('categorie', 'categorie') !!}
                             {!! Form::select('categorie', \App\Category::groupList(), null, ['class' => 'form-control'] ) !!}
                         </div>
-
+{{--TODO: http://plugins.krajee.com/file-input--}}
+{{--TODO: https://github.com/kartik-v/bootstrap-fileinput--}}
                         {!! Form::file('images[]', array('multiple' => true)) !!}
         {{----}}
                         {!! Form::submit('Aanmaken', array('class' => 'btn btn-default pull-right'))!!}

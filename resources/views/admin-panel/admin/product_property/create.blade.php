@@ -29,6 +29,7 @@
             @if(\App\Product::find(Request::segment(3))->property()->exists() != 0)
 
                 <?php
+                    //not clean fix later
                     $all = collect(\App\Details::where('type', \App\Product::find(Request::segment(3))->property->first()->detail->type)->get());
                     $used = \App\Property::where('product_id' ,Request::segment(3))->get();
                     $array = [];
@@ -41,7 +42,7 @@
                 <div class="form-group">
                     {!! Form::label('detail', 'detail > '.\App\Product::find(Request::segment(3))->property->first()->detail->type) !!}
                     @if(count($used) == 1)
-                        {{ Form::select('detail', array_merge(['null' => 'geen'], $newCollection->pluck('value', 'id')->toArray()), null, ['class' => 'form-control']) }}
+                        {{ Form::select('detail', $newCollection->pluck('value', 'id')->toArray(), null, ['class' => 'form-control']) }}
                     @else
                         {{ Form::select('detail', $newCollection->pluck('value', 'id')->toArray(), null, ['class' => 'form-control', count($newCollection) == 0 ? 'disabled' : '']) }}
                         @if (count($newCollection) == 0)

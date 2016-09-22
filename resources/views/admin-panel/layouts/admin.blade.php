@@ -11,6 +11,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
+    {{--load style sheet for databasetables--}}
     <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
@@ -23,6 +24,8 @@
 
     <!-- Custom Fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    @stack('css')
 
     <style type="text/css">
         {{--interfereert met producten pagina tooltip--}}
@@ -83,15 +86,13 @@
         /*}*/
 
         /*.paging_simple_numbers*/
-
-
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -132,15 +133,15 @@
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    {{-- javascript money mask on inputs --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.js"></script>
-    {{--<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>--}}
 
     @stack('scripts')
-    {{--@yield('javascript')--}}
 
     <script type="text/javascript">
         $(document).ready(function($) {
@@ -151,20 +152,23 @@
     </script>
 
     <script>
+        $("#prijs").maskMoney({thousands:'', decimal:'.', allowZero:true, suffix: ''});
+        $("#korting").maskMoney({thousands:'', decimal:'.', allowZero:true, suffix: ''});
+        $("#discount").maskMoney({thousands:'', decimal:'.', allowZero:true, suffix: ''});
+        $("#price").maskMoney({thousands:'', decimal:'.', allowZero:true, suffix: ''});
+    </script>
 
+    <script>
         $(document).ready(function(){
-
             $('.table').dataTable( {
                 language: {
                     url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Dutch.json",
                     sLengthMenu: "_MENU_ Show",
                     search: "_INPUT_"
 //                    searchPlaceholder: "Zoeken...",
-
                 }
-            } );
+            });
         });
-
     </script>
 
     <script type="text/javascript">

@@ -3,19 +3,14 @@
 @section('titel', 'Primera shop')
 @section('seotags', 'seotags')
 
-@section('sidebar')
-    @parent
-@endsection
-
 @section('content')
 
-
-<ol class="breadcrumb">
-    <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
-    <li>End</li>
-    <li>Somethings</li>
-    <li class="active">Products</li>
-</ol>
+{{--<ol class="breadcrumb">--}}
+    {{--<li><a href="{{ URL::route('homepage') }}">Homepage</a></li>--}}
+    {{--<li>End</li>--}}
+    {{--<li>Somethings</li>--}}
+    {{--<li class="active">Products</li>--}}
+{{--</ol>--}}
 
 <div class="content">
 
@@ -177,6 +172,7 @@
             </style>
 
             <ul class="list">
+
                 @foreach(\App\Category::where('category_id', 0)->get() as $parent)
                     <li>
                         <a href="{{route('product.index', [str_replace(' ', '-', $category->parent->title), str_replace(' ', '-', $parent->children()->first()->title), $parent->children()->first()->id])}}">{{$parent->title}}</a>
@@ -194,17 +190,26 @@
             prijs<br>
             <form action="{{URL::current()}}">
 
+                <input type="text" class="unibox-price-min" placeholder="Min Price" onfocus="uniboxResetHint('Min Price',false,this);" onblur="uniboxResetHint('Min Price',true,this);" value="Min Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)"/>
+                <input type="text" class="unibox-price-max" placeholder="Max Price" onfocus="uniboxResetHint('Max Price',false,this);" onblur="uniboxResetHint('Max Price',true,this);" value="Max Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)"/>
+
+                <div id="sliderone"></div>
+                {{--<div id="slider"></div>--}}
+                {{--<div class="unibox-quick-summary-line">--}}
+                    {{--<span class="unibox-quick-summary"></span><span>&nbsp;</span>--}}
+                {{--</div>--}}
             {{--<input value="{{$property->first()->product->min('price')}}">--}}
             {{--<input value="{{$property->first()->product->max('price')}}">--}}
-            <input id="ex2" type="text" class="span2" name="price" value="" data-slider-min="{{$property->first()->product->min('price')}}" data-slider-max="{{$property->first()->product->max('price')}}" data-slider-step="5" data-slider-value="[{{ \Illuminate\Support\Facades\Input::get('price') == null ? $property->first()->product->min('price').','.$property->first()->product->max('price') : \Illuminate\Support\Facades\Input::get('price')}}]"/>
-
-
-            </form>
+            {{--<input id="slider-snap" type="text" class="span2" name="price" value="" data-slider-min="{{$property->first()->product->min('price')}}" data-slider-max="{{$property->first()->product->max('price')}}" data-slider-step="5" data-slider-value="[{{ \Illuminate\Support\Facades\Input::get('price') == null ? $property->first()->product->min('price').','.$property->first()->product->max('price') : \Illuminate\Support\Facades\Input::get('price')}}]"/>--}}
+                {{--<span class="example-val" id="slider-snap-value-upper">800.00</span>--}}
+                {{--<span class="example-val" id="slider-snap-value-lower">0.00</span>--}}
+            {{--</form>--}}
             {{--Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>--}}
         </div>
 </div>
 <div class="content">
         <div class="col-lg-9">
+            asd
             <div class="row">
                 @if(!$property->isEmpty())
                     @if(count($property) != 1)
@@ -227,55 +232,38 @@
             </div>
         </div>
     </div>
-@endsection
+@stop
 
-@section('scripts')
+@push('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
 
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.1.3/bootstrap-slider.js"></script>
-    {{--<script type="text/javascript">--}}
-        {{--$(function() {--}}
-            {{--$( "#datepicker" ).datepicker();--}}
-        {{--});--}}
-    {{--</script>--}}
-    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/bootstrap-slider.js"></script>--}}
-    <script type="text/javascript">
-        // Instantiate a slider
-        var mySlider = $("#ex2").bootstrapSlider();
+        var min = {!! ($property->first()->product->min('price')) !!};
+        var max = {!! ($property->first()->product->max('price')) !!};
 
-        // Call a method on the slider
-        var value = mySlider.bootstrapSlider('getValue');
+        $("#sliderone").noUiSlider({
+            start: [{!! ($property->first()->product->min('price')) !!}, {!! ($property->first()->product->max('price')) !!}],
+            step: 1,
+            connect: true,
+            range: {
+                'min': [ {!! ($property->first()->product->min('price')) !!} ],
+                'max': [ {!! ($property->first()->product->max('price')) !!} ]
+            }
+        });
 
-//        <!--
-//        $(document).ready(function () {
-//            window.setTimeout(function() {
-//                $(".alert").fadeTo(1500, 0).slideUp(500, function(){
-//                    $(this).remove();
-//                });
-//            }, 5000);
-//        });
-        //-->
-        // With JQuery
-//        $("#ex2").slider({
-//            tooltip: 'always'
-//        });
-//        // Without JQuery
-//        var slider = new Slider('#ex2', {
-//            tooltip: 'always'
-//        });
-//        / With JQuery
-//        $("#ex2").bootstrapSlider ({});
-//
-//        // Without JQuery
-//        var slider = new bootstrapSlider ('#ex2', {});
-    </script>
-<style>
-    #ex1Slider .slider-selection {
-        background: #BABABA;
-    }
+        $("input.unibox-price-min").val(min);
+        $("input.unibox-price-max").val(max);
 
-</style>
+        $("#sliderone").on('slide', function(event, values) {
+            $("input.unibox-price-min").val(values[0]);
+            $("input.unibox-price-max").val(values[1]);
+        });
+    });
+</script>
+@endpush
 
-@endsection
-
+@push('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.css">
+@endpush

@@ -62,7 +62,7 @@ Route::post('contact', ['as' => 'contact_store', 'uses' => 'ContactController@st
 // User authentication routes... Nav Appaiya 19 July 21:55
 Route::get('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
 //Route::get('/inloggen', ['uses' => 'Auth\AuthController@getLogin']);
-Route::post('auth/login', 'Auth\AuthController@postLogin');
+//Route::post('auth/login', 'Auth\AuthController@postLogin');
 //Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('password/email', 'Auth\PasswordController@getEmail');
@@ -139,7 +139,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     Route::get('reviews/{id}', ['as' => 'admin_review_show', 'uses' => 'Admin\ReviewController@show']);
     Route::post('reviews/{id}', ['as' => 'admin_review_update', 'uses' => 'Admin\ReviewController@update']);
     Route::get('reviews/{id}/edit', ['as' => 'admin_review_edit', 'uses' => 'Admin\ReviewController@edit']);
-    Route::post('reviews', ['as' => 'admin_category_update', 'uses' => 'Admin\CategoryController@update']);
+    Route::post('reviews', ['as' => 'admin_review_update', 'uses' => 'Admin\CategoryController@update']);
 
     Route::delete('reviews/{id}', ['as' => 'admin_review_destroy', 'uses' => 'Admin\ReviewController@destroy']);
 

@@ -15,9 +15,13 @@
                             <ul>
                                 <li style="margin-bottom: 7px;"><span style="font-weight: bold">{{$category->title}} </span><a class="pull-right " href="{{ URL::route('admin_category_edit', $category->id) }}"><span class="label label-default ">edit</span></a></li>
                                 <ul>
-                                    @foreach ($category->children as $child)
-                                        <li>{{ $category->id }} - {{ $child->title }} <a class="pull-right" href="{{ URL::route('admin_category_edit', $child->id) }}"><span class="label label-default">edit</span></a></li>
-                                    @endforeach
+                                    @if($category->children()->exists())
+                                        @foreach ($category->children as $child)
+                                            <li>{{ $child->title }} <a class="pull-right" href="{{ URL::route('admin_category_edit', $child->id) }}"><span class="label label-default">edit</span></a></li>
+                                        @endforeach
+                                    @else
+                                        Er zijn geen sub categorieen.
+                                    @endif
                                 </ul>
                             </ul>
                         </div>

@@ -38,6 +38,29 @@
                 @endif
             </div>
 
+                <?php
+//                TODO: fix select menu alleen items die niet eerder op dit product gebruikts zij.
+                {{--//not clean fix later--}}
+                {{--$all = collect(\App\Details::where('type', \App\Product::find($property->product()->first()->id)->property->first()->detail->type)->get());--}}
+                {{--$used = \App\Property::where('product_id' ,Request::segment(3))->get();--}}
+                {{--$array = [];--}}
+                {{--foreach ($used as $item){--}}
+                    {{--array_push($array, $item->detail);--}}
+                {{--}--}}
+                {{--$newCollection = collect($all)->diff($array)->flatten(1) ;--}}
+                {{--?>--}}
+
+                {{--<div class="form-group">--}}
+{{--                    {!! Form::label('detail', 'detail > '.\App\Product::find($property->product()->first()->id)->property->first()->detail->type) !!}--}}
+                    {{--@if(count($used) == 1)--}}
+                        {{--{{ Form::select('detail', $newCollection->pluck('value', 'id')->toArray(), null, ['class' => 'form-control']) }}--}}
+                    {{--@else--}}
+                        {{--{{ Form::select('detail', $newCollection->pluck('value', 'id')->toArray(), null, ['class' => 'form-control', count($newCollection) == 0 ? 'disabled' : '']) }}--}}
+                        {{--@if (count($newCollection) == 0)--}}
+                            {{--<label>Uw details zijn op. Maak <a href="{{route('admin_property_index')}}">hier</a> meer aan.</label>--}}
+                        {{--@endif--}}
+                    {{--@endif--}}
+                {{--</div>--}}
             {{--<div class="form-group">--}}
                 {{--{!! Form::label('color', 'kleur') !!}--}}
                 {{--{{ Form::select('color', [\App\Details::where('type', 'color')->pluck('value', 'value')->toArray()], null, ['class' => 'form-control']) }}--}}

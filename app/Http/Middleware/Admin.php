@@ -26,7 +26,7 @@ class Admin
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('login');
+                return redirect()->route('login');
             }
         } else if (!Auth::guard($guard)->user()->is_admin) {
             return redirect()->to('/')->withError('Permission Denied');

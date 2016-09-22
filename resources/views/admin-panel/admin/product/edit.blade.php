@@ -48,7 +48,8 @@
 
                         {!! Form::hidden('_id', $product->id) !!}
 <br>
-                        {!! Form::file('images[]', array('multiple' => true)) !!}
+                        <label class="control-label">Select File</label>
+                        {!! Form::file('images[]', array('multiple' => true, 'data-show-caption' => 'true', 'data-show-upload' => 'false')) !!}
 <br>
 
                         <div class="form-group">
@@ -102,7 +103,6 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
-                        <th>id</th>
                         <th>serienummer</th>
                         <th>voorraad</th>
                         {{--<th>kleur</th>--}}
@@ -114,7 +114,6 @@
                     {{--{{$product->productproperty}}--}}
                         @foreach ($product->property as $property)
                             <tr class="table-row" data-href="{{route('admin_product_property_edit', $property->id)}}">
-                                <td>{{$property->id}}</td>
                                 <td>{{$property->serialNumber}}</td>
                                 <td>{{$property->stock}}</td>
                                 {{--<td>{{$property->detail->exists() ? $property->detail->value : ''}}</td>--}}

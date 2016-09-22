@@ -81,7 +81,8 @@
                     <div class="pull-right">
                         <div class="row center-block">
                             <div class="btn-group wishlist">
-                                
+                                {{--{{$product->property()->first()->detail_id == 0 ? '2' : 'ok'}}--}}
+                                @if($product->property()->first()->detail_id)
                                     <label>{{$product->property()->first()->detail->type}}</label>
                                     @if($product->property()->first()->detail->type)
                                         <select class="form-control" name="serialcode">
@@ -94,8 +95,10 @@
                                             @endforeach
                                         </select>
                                     @endif
-                                {{--@endif--}}
-
+                                @else
+                                    <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
+                                @endif
+                                    {{--{"id":1,"product_id":1,"stock":"2","serialNumber":"345462562","detail_id":0,"created_at":null,"updated_at":null}--}}
 
                                 {{-- TODO: Add to shoppingcart button ajax --}}
                                 {{--<a href="{{ route('cart.add', $product) }}" class="btn btn-success btn-product"--}}

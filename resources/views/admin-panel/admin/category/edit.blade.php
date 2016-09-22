@@ -9,7 +9,7 @@
         <div class="col-lg-6">
 
             <div class="panel-body">
-
+a
                 {!! Form::model($cate, array('route' => 'admin_category_update', 'method' => 'patch', 'method' => 'patch')) !!}
 
                 {!! Form::hidden('id', $cate->id) !!}
