@@ -4,15 +4,9 @@
 @section('seotags', 'seotags')
 
 @section('content')
-
-{{--<ol class="breadcrumb">--}}
-    {{--<li><a href="{{ URL::route('homepage') }}">Homepage</a></li>--}}
-    {{--<li>End</li>--}}
-    {{--<li>Somethings</li>--}}
-    {{--<li class="active">Products</li>--}}
-{{--</ol>--}}
-
-<div class="content">
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
 
     <h3>Filter</h3>
 
@@ -227,7 +221,9 @@
             {{--Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>--}}
         </div>
 </div>
-<div class="content">
+</div>
+<div class="col-md-9">
+<div class="card">
         <div class="col-lg-9">
             {{--asd--}}
             <div class="row">
@@ -260,6 +256,8 @@
                 @endif
             </div>
         </div>
+    </div>
+    </div>
     </div>
 @stop
 

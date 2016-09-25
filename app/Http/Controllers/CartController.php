@@ -42,13 +42,10 @@ class CartController extends Controller
      */
     public function index(Request $request)
     {
-//        $cart = new Cart($this->oldCart);
+        $cart = new Cart($this->oldCart);
 
-        $cart = $request->session()->get('cart');
-
-        return view('main.cart')
-            ->with('products', $cart)
-            ->with('totalPrice', $cart);
+        return view('cart.index')
+            ->with('products', $cart);
     }
 
     /**
@@ -58,7 +55,7 @@ class CartController extends Controller
      */
     public function create()
     {
-        return view('checkout')->with('cart', $this->oldCart);
+        return view('cart.checkout')->with('cart', $this->oldCart);
     }
 
     /**
@@ -71,23 +68,16 @@ class CartController extends Controller
     {
         $property = Property::where('serialNumber', $request->serialcode)->first();
 
-//        $property = DB::table('property')
-//            ->select('property.id', 'property.serialNumber', 'products.price')
-//            ->join('products', 'products.id', '=', 'property.product_id')
-//            ->where('property.serialNumber', $request->serialcode )
-//            ->first();
-
         $cart = new Cart($this->oldCart);
 //        $product = collect($property->first()->product()->first());
 //        $product = collect($property->first()->product()->first())->only('id', 'price');
 //        $new[$property->id] = collect($property)->only('serialNumber')->merge($product);
 //
-//dd($property);
+//dd($proper
         $cart->add($property, $property->id);
 
         $request->session()->put('cart', $cart);
-//        return $new;
-//        dd(  $request->session()->get('cart'));
+
         return redirect()->route('cart');
     }
 
