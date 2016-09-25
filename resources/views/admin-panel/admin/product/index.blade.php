@@ -3,6 +3,17 @@
 @section('title', 'Producten')
 @section('breadcrumb', Breadcrumbs::render('dashboard.product.index'))
 
+
+@push('scripts')
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            container : 'body'
+        });
+    });
+</script>
+@endpush
+
 @section('content')
 
     <style>
