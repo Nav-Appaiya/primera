@@ -11,6 +11,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
+    {{--load style sheet for databasetables--}}
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/3.3.7+1/css/sb-admin-2.css" rel="stylesheet">
 
@@ -21,11 +25,74 @@
     <!-- Custom Fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    @stack('css')
+
+    <style type="text/css">
+        {{--interfereert met producten pagina tooltip--}}
+        /*label {*/
+            /*float: left;*/
+            /*margin-right: 35px;*/
+        /*}*/
+        /*#DataTables_Table_0_filter{*/
+            /*float: left;*/
+
+        /*}*/
+        /*#DataTables_Table_0_length{*/
+            /*float: left;*/
+
+        /*}*/
+        /*.thumbnail{*/
+            /*background-color: #F8F8F8;*/
+        /*}*/
+        /*.dataTables_length{*/
+            /*float: left;*/
+        /*}*/
+        /*.dataTables_filter{*/
+            /*float: right;*/
+            /*!*text-align: right;*!*/
+            /*width: 100px;*/
+        /*}*/
+        /*.dataTables_filter > input{*/
+            /*display: inline-block;*/
+        /*}*/
+        /*.dataTables_length select{*/
+            /*color: #000;*/
+            /*!*width: 100%;*!*/
+            /*border-radius: 3px;*/
+            /*border: 1px #ddd solid;*/
+            /*border-bottom: 2px #ddd solid;*/
+            /*height: 35px;*/
+            /*margin-bottom: 25px;*/
+        /*}*/
+
+        /*input[type=search] {*/
+            /*width: 100%;*/
+            /*border-radius: 3px;*/
+            /*border: 1px #ddd solid;*/
+            /*border-bottom: 2px #ddd solid;*/
+            /*height: 35px;*/
+            /*margin-bottom: 25px;*/
+        /*}*/
+
+        /*.paginate_button{*/
+            /*border: 1px #ddd solid;*/
+            /*line-height: 35px;*/
+            /*padding: 0 4px;*/
+            /*height: 35px;*/
+            /*border-radius: 4px;*/
+        /*}*/
+        /*.next {*/
+            /*float: right;*/
+        /*}*/
+
+        /*.paging_simple_numbers*/
+    </style>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -62,17 +129,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    {{-- javascript money mask on inputs --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
-    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.js"></script>
 
-    @yield('javascript')
+    @stack('scripts')
 
     <script type="text/javascript">
         $(document).ready(function($) {
@@ -83,17 +152,29 @@
     </script>
 
     <script>
+        $("#prijs").maskMoney({thousands:'', decimal:'.', allowZero:true, suffix: ''});
+        $("#korting").maskMoney({thousands:'', decimal:'.', allowZero:true, suffix: ''});
+        $("#discount").maskMoney({thousands:'', decimal:'.', allowZero:true, suffix: ''});
+        $("#price").maskMoney({thousands:'', decimal:'.', allowZero:true, suffix: ''});
+    </script>
+
+    <script>
         $(document).ready(function(){
-            $('.table').DataTable({
-                "language": {
-                   "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Dutch.json"
+            $('.table').dataTable( {
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Dutch.json",
+                    sLengthMenu: "_MENU_ Show",
+                    search: "_INPUT_"
+//                    searchPlaceholder: "Zoeken...",
                 }
             });
         });
     </script>
 
     <script type="text/javascript">
+
         $(document).ready(function () {
+
             window.setTimeout(function() {
                 $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
                     $(this).remove();

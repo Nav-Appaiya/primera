@@ -35,7 +35,7 @@ class Category extends Model
     public static function groupList()
     {
         $category = Category::all();
-
+        $array = [];
         foreach ($category->where('category_id', 0) as $parent){
 
             $array[$parent->title] = array();

@@ -39,10 +39,21 @@
                             Jouw bestelling <div class="pull-right"><small><a class="afix-1" href="{{ url('cart') }}">Terug naar je winkelwagentje</a></small></div>
                         </div>
                         <div class="panel-body">
-                            @foreach($producten as $item)
+                        @foreach($producten as $item)
                                 <div class="form-group">
+
                                     <div class="col-sm-3 col-xs-3">
-                                        <img class="img-responsive" src="{{ $item->imageurl }}" />
+
+                                        @if( null !== $item->productimages->first() )
+                                            <img src="/uploads/img/{{ $item->productimages()->first()->imagePath }}"
+                                                 class="img-responsive"
+                                                 width="100px" alt="{{ 
+                                isset($item->productimages()->first()->rel) ? $item->productimages()->first()->rel : "Image-rel-missing" }}">
+
+                                        @else
+                                            <img src="/uploads/img/default.jpg" alt="default-img" width="100px">
+                                        @endif
+                                        
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="col-xs-12">{{ $item->name }}</div>
@@ -56,7 +67,7 @@
 
                             <div class="panel-body">
                                 <div class="text-center pull-right">
-                                    <h4>Totaal bedrag: <span>&euro;</span> {{ $item->price }}</h4>
+                                    <h4>Totaal bedrag: <span>&euro;</span> {{ $total }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +138,9 @@
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <input type="submit" value="Valideren en Verdergaan" class="btn btn-success pull-right">
+                                    <input type="submit" value="Afrekenen met iDeal" class="btn 
+                                    btn-success 
+                                    pull-right">
                                 </div>
                             </div>
                         </div>

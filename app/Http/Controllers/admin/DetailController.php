@@ -48,17 +48,11 @@ class DetailController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-
-        ];
-
         $rules = [
             'value'          => 'required|unique:details,value',
-//            'name'          => 'required',
-
         ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
@@ -100,19 +94,15 @@ class DetailController extends Controller
      */
     public function update(Request $request)
     {
-        $messages = [
-
-        ];
-
         $rules = [
-//            'name'          => 'required',
+            'value'          => 'required|unique:details,value,'.$request->id
         ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
-                ->route('admin_property_edit')
+                ->route('admin_property_edit', $request->id)
                 ->withErrors($validator)
                 ->withInput();
         }

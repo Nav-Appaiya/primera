@@ -10,12 +10,24 @@ class Details extends Model
 
     public $timestamps = false;
 
-//    protected $fillable = [];
+    public function property()
+    {
+        return $this->hasMany('App\Property', 'detail_id', 'id');
+    }
 
-//    protected $guarded = [];
+    public static function groupDetails(){
 
-//    public function property()
-//    {
-//        return $this->hasMany('App\Property', 'property_id', 'id');
-//    }
+        foreach (\App\Details::groupBy('type')->get() as $parent){
+
+            $array[$parent->type] = array();
+
+            foreach(\App\Details::where('type', $parent->type)->get() as $attribute) {
+                $array[$parent->type][$attribute->id] = $attribute->value;
+            }
+        }
+        if (!empty($array)) {
+            return $array;
+        }
+    }
+
 }

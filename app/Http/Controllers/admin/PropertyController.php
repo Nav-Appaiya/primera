@@ -17,7 +17,6 @@ class PropertyController extends Controller
 
     public function __construct()
     {
-//        $this->product_property = new Property();
         $this->property = new Property();
     }
 
@@ -39,15 +38,15 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-
-        ];
-
         $rules = [
-            '' => ''
+//            'detail' => 'required|unique:property,detail_id,'.$request->detail.',product_id',
+            'stock' => 'required',
+            'detail' => 'required',
+//            'detail' => 'required|unique:property,product_id,detail_id',
+            'serialNumber' => 'required|unique:property'
         ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
@@ -61,9 +60,10 @@ class PropertyController extends Controller
         $product->product_id = $request->id;
         $product->stock = $request->stock;
         $product->serialNumber = $request->serialNumber;
-        $product->color = $request->color;
-        $product->nicotine = $request->nicotine;
-        $product->mah = $request->battery;
+        $product->detail_id = $request->detail;
+//        $product->color = $request->color;
+//        $product->nicotine = $request->nicotine;
+//        $product->mah = $request->battery;
 
 //       $properties = array(
 //            ['value_id' => $request->color, 'property_id' => $request->color],
@@ -99,11 +99,16 @@ class PropertyController extends Controller
      */
     public function update(Request $request)
     {
-        $messages = [];
+        $rules = [
+            'building_id' => 'unique:property,product_id,NULL,id,detail_id',
+//            'building_id' => 'unique:property,product_id,NULL,id,detail_id,' . $request->_id,
+//            'detail_id' => 'required|unique:property,id,'.$request->_id.',detail_id,product_id',
+            'stock' => 'required',
+            'serialNumber' => 'required|unique:property,serialnumber,'.$request->_id
 
-        $rules = [];
+        ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
@@ -116,9 +121,11 @@ class PropertyController extends Controller
 
         $product->stock = $request->stock;
         $product->serialNumber = $request->serialNumber;
-        $product->color = $request->color;
-        $product->nicotine = $request->nicotine;
-        $product->mah = $request->battery;
+        $product->detail_id = $request->detail_id;
+//
+//        $product->color = $request->color;
+//        $product->nicotine = $request->nicotine;
+//        $product->mah = $request->battery;
 
         $product->save();
 
@@ -138,4 +145,42 @@ class PropertyController extends Controller
     {
         //
     }
+
+    public function AddStock(Request $request)
+    {
+        $array = implode(',',$this->property->pluck('serialNumber')->toArray());
+
+        $messages = [
+            'serialNumber.in' => 'Dit product nummer bestaad niet in het systeem'
+        ];
+
+        $rules = [
+            'serialNumber' => 'required|in:'.$array.'',
+            'stock' => 'required',
+        ];
+//
+//        if(!$this->property->where('serialNumber', $request->serialNumber)->first()){
+//            array_push($rules, ['serialNumber' => 'required']);
+//        }
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('admin_product_index')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $product = $this->property->where('serialNumber', $request->serialNumber)->first();
+
+        $product->stock = $product->stock + $request->stock;
+
+        $product->save();
+
+        \Session::flash('succes_message','successfully.');
+
+        return redirect()->route('admin_product_index');
+    }
+
 }

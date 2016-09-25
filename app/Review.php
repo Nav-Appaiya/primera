@@ -10,6 +10,21 @@ class Review extends Model
 
     public $timestamps = true;
 
+    public static $rules = [
+        'product_id' => 'required',
+        'user_id' => 'required',
+        'description' => 'required',
+        'rating' => 'required|max:5'
+    ];
+
+    protected $fillable =  [
+        'product_id',
+        'user_id',
+        'description',
+        'rating'
+    ];
+
+
     public function product()
     {
         return $this->belongsTo('App\Product');

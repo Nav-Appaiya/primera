@@ -24,9 +24,14 @@
     {{--@endforeach--}}
     {{--{{$user}}--}}
 
-    @foreach($users as $user)
-        {{$user}}<br><br>
+    {{--@foreach($users as $user)--}}
+        {{--{{$user}}<br><br>--}}
+    {{--@endforeach--}}
+
+    @foreach($products as $product)
+        {{$product}}<br><br>
     @endforeach
+
 
 @stop
 
@@ -38,7 +43,8 @@
             element: 'order-chart',
             // Chart data records -- each entry in this array corresponds to a point on
             // the chart.
-            data: [
+            data:
+                    [
                 { year: '2008', value: 20 },
                 { year: '2009', value: 10 },
                 { year: '2010', value: 11 },

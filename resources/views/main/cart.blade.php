@@ -4,13 +4,13 @@
 
 
 @section('content')
-    @if($products)
+    @if(count($products) >= 1)
         <ol class="breadcrumb">
             <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
             <li class="active">Winkelwagen</li>
         </ol>
 
-        <div class="content">
+        <div class="content">   
             <div class="row">
                 <div class="col-md-12">
                     @if (Session::has('status'))
@@ -34,19 +34,20 @@
                             <tr>
                                 <td data-th="Product">
                                     <div class="row">
-                                        <div class="col-sm-2 hidden-xs">
-                                            @if($item->productimages()->first())
-                                                <img src="/images/product/{{ $item->productimages()->first()->imagePath }}"
+                                        <div class="col-sm-3 hidden-xs">
+                                            
+                                            @if(count($item->productimages()->first()) >= 1)
+                                                <img src="/uploads/img/{{ $item->productimages()->first()->imagePath }}"
                                                      alt="{{ $item->productimages()->first()->rel }}"
-                                                     class="img-responsive"
+                                                     width="120%" class="text-center" style="margin-top:30px;"
                                                 >
                                             @else
                                                 {{-- Default image at /images/product/default.jpg --}}
-                                                <img src="/images/product/default.jpg" alt="{{ $item->name }}"
+                                                <img src="/uploads/img/default.jpg" alt="{{ $item->name }}"
                                                      class="img-responsive"/>
                                             @endif
                                         </div>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-9">
                                             <h4 class="nomargin">{{ $item->name }}</h4>
                                             <p>
                                                 <a href="{{ route('product.show', [$item->name, $item->id]) }}">
@@ -80,7 +81,10 @@
                             <td colspan="2" class="hidden-xs"></td>
                             <td class="hidden-xs text-center">
                                 <strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong></td>
-                            <td><a href="{{ URL::route('checkout') }}" class="button -green center">Bestelling afronden</a>
+                            <td>
+                                <a type="button" class="btn btn-success pull-right" href="{{ route('checkout_index') }}">
+                                    Bestelling plaatsen
+                                </a>
                             </td>
                         </tr>
                         </tfoot>

@@ -1,7 +1,7 @@
 @extends('admin-panel.layouts.admin')
 
 @section('title')
-   admin - all users
+   admin - alle Reviews
 @endsection
 
 @section('description')
@@ -27,7 +27,8 @@
                 <tbody>
                     @foreach ($products as $product)
                         @if($product->review->count())
-                            <tr class="table-row" data-href="{{route('admin_product_edit', $product->id)}}">
+                            <a href="">
+                                <tr class="table-row" data-href="{{route('admin_review_edit', $product->id)}}">
                                 <td>{{$product->id}}</td>
                                 <td>{{$product->name}}</td>
                                 <td>
@@ -39,6 +40,7 @@
                                 <td>{{$product->review->count()}}</td>
                                 <td>{{$product->review->avg('rating')}}</td>
                             </tr>
+                            </a>
                         @endif
                     @endforeach
                 </tbody>

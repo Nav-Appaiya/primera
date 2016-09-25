@@ -17,7 +17,7 @@
 
                         <!-- created_at -->
                         <div class="form-group">
-                            {!! Form::label('title', 'naam') !!}
+                            {!! Form::label('title', 'titel') !!}
                             {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                         </div>
 
@@ -27,10 +27,10 @@
                             {!! Form::select('category_id', array('' => '----- select -----', '0' => 'nieuwe categorie', 'koppel aan:' => \App\Category::where('category_id', 0)->pluck('title', 'id')->toArray() ), null, ['class' => 'form-control'] ) !!}
                         </div>
 
-                        {!! Form::submit('submit', ['class' => 'btn btn-primary pull-right'])!!}
+                        {!! Form::submit('upload', ['class' => 'btn btn-primary pull-right'])!!}
 
                         <div class="form-group">
-                            <a class="btn btn-default pull-right" style="margin-right: 10px;">cancel</a>
+                            <a class="btn btn-default pull-right" href="{{route('admin_category_index')}}" style="margin-right: 10px;">stop</a>
                         </div>
 
                         {!! Form::close() !!}

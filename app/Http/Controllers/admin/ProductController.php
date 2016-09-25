@@ -58,11 +58,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [];
+//        $request->replace(array('prijs' => str_replace(",", ".", $request->prijs)) );
+        $message = [
+            'status.alpha' => 'Het :attribute veld is verplicht.',
+        ];
 
-        $rules = [];
+        $rules = [
+            'naam' => 'required',
+            'beschrijving' => 'required',
+            'images.*' => 'mimes:jpeg,jpg,png,webm|max:10000',
+            'prijs' => 'required|regex:/^\d*(\.\d{1,2})?$/',
+            'korting' => 'regex:/^\d*(\.\d{1,2})?$/',
+            'categorie' => 'required',
+            'status' => 'required|alpha'
+        ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules, $message);
 
         if ($validator->fails()) {
             return redirect()
@@ -73,27 +84,27 @@ class ProductController extends Controller
 
         $product = $this->product;
 
-        $product->name = $request->name;
-        $product->description = $request->description;
+        $product->name = $request->naam;
+        $product->description = $request->beschrijving;
         $product->status = $request->status;
-        $product->discount = $request->discount;
-        $product->price = $request->price;
-        $product->category_id = $request->category_id;
+        $product->discount = $request->korting;
+        $product->price = $request->prijs;
+        $product->category_id = $request->categorie;
 
         $product->save();
 
         $images = Input::file('images');
-
-        if(empty($images)) {
+        if (Input::hasFile('images')){
             foreach ($images as $image){
                 $extension = $image->getClientOriginalExtension();
                 $new_filename = str_random(10) . '.' . $extension;
-                $image->move(public_path() . '/images/product/', $new_filename);
-
-                $img = $this->image;
-                $img->imagePath = $new_filename;
-                $img->product_id = $product->id;;
-                $img->save();
+                $image->move(public_path() . '/images/product', $new_filename);
+                $this->image->insert([
+                    [
+                        'imagePath' => $new_filename,
+                        'product_id' => $product->id,
+                    ],
+                ]);
             }
         }
 
@@ -122,11 +133,21 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
-        $messages = [];
+        $message = [
+            'status.alpha' => 'Het :attribute veld is verplicht.',
+        ];
 
-        $rules = [];
+        $rules = [
+            'name' => 'required',
+            'description' => 'required',
+            'images.*' => 'mimes:jpeg,jpg,png,webm|max:10000',
+            'price' => 'required|regex:/^\d*(\.\d{1,2})?$/',
+            'discount' => 'regex:/^\d*(\.\d{1,2})?$/',
+            'category_id' => 'required',
+            'status' => 'required|alpha'
+        ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules, $message);
 
         if ($validator->fails()) {
             return redirect()
@@ -146,26 +167,20 @@ class ProductController extends Controller
 
         $product->save();
 
-        $images = $request->file('images');
-
-//        if(empty($images)) {
+        $images = Input::file('images');
+        if (Input::hasFile('images')){
             foreach ($images as $image){
                 $extension = $image->getClientOriginalExtension();
-//                $original_filename = $image->getClientOriginalName();
                 $new_filename = str_random(10) . '.' . $extension;
                 $image->move(public_path() . '/images/product', $new_filename);
-
                 $this->image->insert([
                     [
                         'imagePath' => $new_filename,
                         'product_id' => $product->id,
                     ],
                 ]);
-
-
             }
-
-//        }
+        }
 
         \Session::flash('succes_message','successfully.');
 
@@ -180,6 +195,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = $this->product->find($id);
+        $product->delete();
+
+
+//        return route();
     }
 }

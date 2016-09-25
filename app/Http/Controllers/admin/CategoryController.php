@@ -49,35 +49,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
-        $messages = [
-            'image.required' => 'Select a profile image',
-        ];
-
         $rules = [
             'title'     => 'required|max:25',
             'category_id'     => 'required|max:20',
         ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-//            log::error('.');
-
             return redirect()
                 ->route('admin_category_create')
                 ->withErrors($validator)
                 ->withInput();
-        } else {
-
-            $this->category->title = $request->title;
-            $this->category->category_id = $request->category_id;
-            $this->category->save();
-
-            \Session::flash('succes_message', 'successfully.');
-
-            return redirect()->route('admin_category_index');
         }
+
+        $this->category->title = $request->title;
+        $this->category->category_id = $request->category_id;
+        $this->category->save();
+
+        \Session::flash('succes_message', 'successfully.');
+
+        return redirect()->route('admin_category_index');
     }
 
     /**
@@ -102,35 +94,28 @@ class CategoryController extends Controller
      */
     public function update(Request $request)
     {
-        $messages = [
-//            'regex' => 'Can only contain A-Z a-z'
-        ];
-
         $rules = [
-            'title'     => 'required|max:25|regex:/^[A-Za-z \t]*$/i',
-//            'title'     => 'required',
-//            'id'     => 'required',
+            'title'     => 'required|max:25',
         ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
                 ->route('admin_category_edit', $request->id)
                 ->withErrors($validator)
                 ->withInput();
-        } else {
-
-            $category = $this->category->find($request->id);
-
-            $category->title = $request->title;
-
-            $category->save();
-
-            \Session::flash('succes_message', 'successfully.');
-
-            return redirect()->route('admin_category_index');
         }
+
+        $category = $this->category->find($request->id);
+
+        $category->title = $request->title;
+
+        $category->save();
+
+        \Session::flash('succes_message', 'successfully.');
+
+        return redirect()->route('admin_category_index');
     }
 
 }

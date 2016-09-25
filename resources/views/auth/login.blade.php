@@ -7,7 +7,7 @@
     </ol>
     <div class="content">
         <div class="col-md-6">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -60,7 +60,8 @@
 
                                 </a>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Wachtwoord vergeten?</a>
+                                <a class="btn btn-link" href="{{ route('register') }}">Nog geen account?</a>
                     </form>
         </div>
     </div>

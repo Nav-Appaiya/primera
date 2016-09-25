@@ -23,7 +23,7 @@ class UserController extends Controller
     {
 //        $this->middleware('auth');
 
-        $this->users = User::all();
+        $this->users = new User();
         $this->user = Auth::user();
     }
 
@@ -34,9 +34,7 @@ class UserController extends Controller
      */
     public function index()
     {
-//        return view('admin.users.index')
-        return view('admin-panel.admin.users.index')->with('users', $this->users);
-
+        return view('admin-panel.admin.users.index')->with('users', $this->users->get());
     }
 
     /**
@@ -47,7 +45,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.users.edit')->with('user', $this->user);
+        return view('admin-panel.admin.users.edit')->with('user', $this->users->find($id));
     }
 
     /**
