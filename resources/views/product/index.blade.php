@@ -19,7 +19,7 @@
 {{--{{($category->product)}}aa--}}
 
         <div class="col-lg-3">
-            filter<br>
+            <label>Filter</label>
 
             <style>
                 .active > a{
@@ -187,11 +187,31 @@
                 @endforeach
             </ul>
 
-            prijs<br>
+            <label>Prijs</label>
             <form action="{{URL::current()}}">
 
-                <input type="text" class="unibox-price-min" placeholder="Min Price" onfocus="uniboxResetHint('Min Price',false,this);" onblur="uniboxResetHint('Min Price',true,this);" value="Min Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)"/>
-                <input type="text" class="unibox-price-max" placeholder="Max Price" onfocus="uniboxResetHint('Max Price',false,this);" onblur="uniboxResetHint('Max Price',true,this);" value="Max Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)"/>
+                <style>
+                    .sliderone{
+                        margin-top: 10px;
+                    }
+                    .unibox-price-min{
+                        display: inline-block;
+                        width: 50px;
+                        text-align: center;
+                        float: left;
+                        margin-top: 30px;
+                    }
+                    .unibox-price-max{
+                       display: inline-block;
+                        width: 50px;
+                        text-align: center;
+                        float: right;
+                        margin-top: 30px;
+                    }
+                </style>
+
+                <input type="text" class="unibox-price-min" placeholder="Min Price" onfocus="uniboxResetHint('Min Price',false,this);" onblur="uniboxResetHint('Min Price',true,this);" value="Min Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)" disabled/>
+                <input type="text" class="unibox-price-max" placeholder="Max Price" onfocus="uniboxResetHint('Max Price',false,this);" onblur="uniboxResetHint('Max Price',true,this);" value="Max Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)" disabled/>
 
                 <div id="sliderone"></div>
                 {{--<div id="slider"></div>--}}
@@ -209,61 +229,71 @@
 </div>
 <div class="content">
         <div class="col-lg-9">
-            asd
+            {{--asd--}}
             <div class="row">
                 @if(!$property->isEmpty())
                     @if(count($property) != 1)
                         <p>Er zijn {{count($property)}} producten gevonden</p>
+                        <hr>
                     @else
                         <p>Er is één product gevonden</p>
+                        <hr>
                     @endif
                     @foreach($property as $product)
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" style="border: 1px solid #000">
                             <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">
                             <p class="text">{{$product->product->name}}</p>
-                            <p class="text">{{$product->product->price}}</p>
+                            <p class="text">
+                                @if($product->product->discount != 0)
+                                    <small style="text-decoration:line-through;">{{$product->product->price}}</small>
+                                    <b style="">{{$product->product->price - $product->product->discount}}</b>
+                                @else
+                                    {{$product->product->price}}
+                                @endif
+                            </p>
                             <a href="{{route('product.show', [str_replace(' ', '-', $product->product->name), $product->product->id])}}">bekijken</a>
                         </div>
                     @endforeach
                 @else
-                  <p>Er zijn geen product(en) gevonden</p>
+                    <p>Er zijn geen product(en) gevonden</p>
+                    <hr>
                 @endif
-
             </div>
         </div>
     </div>
 @stop
 
 @push('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function() {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
 
-        var min = {!! ($property->first()->product->min('price')) !!};
-        var max = {!! ($property->first()->product->max('price')) !!};
+            var min = {!! (count( $property) == 0 ? 0 : $property->first()->product->min('price') ) !!};
+            var max = {!! (count( $property) == 0 ? 0 : $property->first()->product->max('price') ) !!};
+            {{--var max = {!! ($property->first()->product->max('price')) !!};--}}
 
-        $("#sliderone").noUiSlider({
-            start: [{!! ($property->first()->product->min('price')) !!}, {!! ($property->first()->product->max('price')) !!}],
-            step: 1,
-            connect: true,
-            range: {
-                'min': [ {!! ($property->first()->product->min('price')) !!} ],
-                'max': [ {!! ($property->first()->product->max('price')) !!} ]
-            }
+            $("#sliderone").noUiSlider({
+                start: [{!! (count( $property) == 0 ? 0 : $property->first()->product->min('price') ) !!}, {!! (count( $property) == 0 ? 0 : $property->first()->product->max('price') ) !!}],
+                step: 1,
+                connect: true,
+                range: {
+                    'min': [ {!! (count( $property) == 0 ? 0 : $property->first()->product->min('price') ) !!} ],
+                    'max': [ {!! (count( $property) == 0 ? 0 : $property->first()->product->max('price') ) !!} ]
+                }
+            });
+
+            $("input.unibox-price-min").val(min);
+            $("input.unibox-price-max").val(max);
+
+            $("#sliderone").on('slide', function(event, values) {
+                $("input.unibox-price-min").val(values[0]);
+                $("input.unibox-price-max").val(values[1]);
+            });
         });
-
-        $("input.unibox-price-min").val(min);
-        $("input.unibox-price-max").val(max);
-
-        $("#sliderone").on('slide', function(event, values) {
-            $("input.unibox-price-min").val(values[0]);
-            $("input.unibox-price-max").val(values[1]);
-        });
-    });
-</script>
+    </script>
 @endpush
 
 @push('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.css">
 @endpush

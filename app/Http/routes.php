@@ -29,10 +29,13 @@ Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'CheckoutC
 //Route::get('/pages/{pageId}', 'MainController@page');
 Route::get('/product/{id}/add', ['as' => 'product_add', 'uses' => 'ProductController@add']);
 
-Route::get('/cart', ['as' => 'cart', 'uses' => 'CartController@index']);
-
-Route::post('/cart/add', ['as' => 'cart.add', 'uses' => 'CartController@addCart']);
-Route::get('/cart/remove/{id}', ['as' => 'cart.remove', 'uses' => 'CartController@removeCart']);
+//Route::post('/cart/add', ['as' => 'cart.add', 'uses' => 'CartController@addCart']);
+//Route::get('/cart/remove/{id}', ['as' => 'cart.remove', 'uses' => 'CartController@removeCart']);
+//Route::get('/', ['as' => 'cart.index', 'uses' => 'CartController@index']);
+Route::get('/winkelwagen', ['as' => 'cart', 'uses' => 'CartController@index']);
+Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@create']);
+Route::get('/winkelwagen/legen', ['as' => 'cart.empty', 'uses' => 'CartController@destroy']);
+Route::post('/winkelwagen/toevoegen', ['as' => 'cart.add', 'uses' => 'CartController@store']);
 
 // oAuth Routes for facebook
 Route::get('/redirect', 'SocialAuthController@redirect');
