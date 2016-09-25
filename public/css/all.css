@@ -19,31 +19,44 @@ header {
 }
 
 #header {
-    height: 50px;
+    height: 70px;
     background: #fff;
     overflow: hidden;
-    line-height: 50px;
+    line-height: 70px;
 }
 
 #header .cart {
     float: left;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
     text-align: center;
     border-right: 1px solid #D5D4D4;
+    border-left: 1px solid #D5D4D4;
     font-size: 20px;
 }
 
 #header .usr {
     float: right;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    border-left: 1px solid #D5D4D4;
+    border-right: 1px solid #D5D4D4;
+    font-size: 20px;
+}
+
+#header .srch {
+    float: right;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
     text-align: center;
     border-left: 1px solid #D5D4D4;
     font-size: 20px;
 }
+
 
 #header .logo {
     width: auto;
@@ -58,8 +71,8 @@ header {
 #header ul {
     float: right;
     list-style-type: none;
-    height: 50px;
-    line-height: 50px;
+    height: 70px;
+    line-height: 70px;
     margin-right: 45px;
 }
 

@@ -12,15 +12,6 @@
             {{--@section('sidebar')--}}
         <header>
           <div class="container">
-              <div class="row">
-                  {{--{{Auth::check()}}--}}
-                  @if(!Auth::check())
-                    <a href="{{route('login')}}">inloggen</a>
-                    <a href="{{route('register')}}">registeren</a>
-                  @else
-                    <label>Welkom {{Auth::user()->name}}</label>
-                  @endif
-              </div>
             <div id="header">
               <div class="cart">
                 <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-user" aria-hidden="true"></i></a>
@@ -28,10 +19,13 @@
               <div class="usr">
                   <a href="{{ route('cart') }}">
                       <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    <span style="margin-top: 10px; margin-left: -8px; position: absolute;" class="badge">
+                    <span style="margin-top: 18px; margin-left: -8px; position: absolute;" class="badge">
                         {{ Session::has('cart') ? Session::get('cart')['qty'] : 0 }}
                     </span>
                   </a>
+              </div>
+              <div class="srch">
+                <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-search" aria-hidden="true"></i></a>
               </div>
                 <div class="logo">
                   <img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png">
@@ -71,20 +65,7 @@
             </div>
         </footer>
 
-<<<<<<< HEAD
-</div>
-@show
-<div id="content">
-  <div class="container-fluid" style="width: 100%">
-  <div class="content">
-            @yield('content')
-    </div>
-    </div>
-  <footer></footer>
-</div>
-=======
-    <!-- Modals -->
->>>>>>> 1651826a44e5dac4040da9fda093e123456809d5
+
 
     {{--<div id="myModal" class="modal fade" role="dialog">--}}
       {{--<div class="modal-dialog">--}}
