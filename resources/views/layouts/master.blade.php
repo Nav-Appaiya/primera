@@ -178,10 +178,14 @@
                 <li><a href="{{ route('homepage') }}">Homepage</a></li>
             </ol>
           </div>
+        </div>
+      <section class="content">
+        <div class="container">
             @yield('content')
         </div>
+      </section>
 
-        <footer id="footer" style="color: #000; background: white;">
+        <footer id="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">

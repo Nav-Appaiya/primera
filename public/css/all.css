@@ -66,7 +66,7 @@ header {
 }
 
 #header .logo img {
-    height: 20px;
+    height: 30px;
 }
 
 #header ul {
@@ -99,9 +99,14 @@ a:hover {
     text-decoration: none;
 }
 
+section.content {
+    border-top: 1px solid #D5D4D4;
+    background: #fff;
+    padding: 42px 0 66px;
+}
+
 footer {
     border-top: 1px solid #D5D4D4;
-    background-color: #f6f6f6;
     color: #fff;
     padding: 42px 0 66px;
 }
@@ -118,8 +123,8 @@ footer ul li {
     float: left;
     width: calc(16.66666666666667% - 1px);
     text-align: center;
-    font-weight: bold;
     border-right: 1px grey solid;
+    font-size: 11px;
 }
 
 footer ul li:last-child {
