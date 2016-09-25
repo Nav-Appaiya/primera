@@ -8,10 +8,10 @@
 @endsection
 
 @section('content')
-    <ol class="breadcrumb">
-      <li><a href="{{ route('homepage') }}">Homepage</a></li>
-      <li class="active">Products</li>
-    </ol>
+    {{--<ol class="breadcrumb">--}}
+      {{--<li><a href="{{ route('homepage') }}">Homepage</a></li>--}}
+      {{--<li class="active">Products</li>--}}
+    {{--</ol>--}}
 
     {{--{{ dd() }}--}}
     {{--@foreach($products->first()->product->where('status', 'on')->skip(0)->take(10)->get() as $product)--}}

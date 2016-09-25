@@ -2,10 +2,6 @@
 
 @section('titel', 'Detail product')
 
-@section('sidebar')
-    @parent
-@endsection
-
 @section('content')
 
     <ol class="breadcrumb">
@@ -49,7 +45,7 @@
                     @if($product->discount == 0)
                         <h2>&euro;{{ $product->price }}</h2>
                     @else
-                            <h2>&euro;{{ $product->price - $product->discount }}</h2>
+                        <h2>&euro;{{ $product->price - $product->discount }}</h2>
                         <small style="text-decoration:line-through;">&euro;{{ $product->price }}</small>
                     @endif
 
@@ -81,25 +77,27 @@
                     <div class="pull-right">
                         <div class="row center-block">
                             <div class="btn-group wishlist">
-                                {{--{{$product->property()->first()->detail_id == 0 ? '2' : 'ok'}}--}}
-                                @if($product->property()->first()->detail_id)
-                                    <label>{{$product->property()->first()->detail->type}}</label>
-                                    @if($product->property()->first()->detail->type)
-                                        <select class="form-control" name="serialcode">
-                                            @foreach($product->property as $property)
-                                                @if($property->stock == 0)
-                                                    <option value="{{$property->serialNumber}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>
-                                                @else
-                                                    <option value="{{$property->serialNumber}}">{{$property->detail->value}}  -  <small>op voorraad</small></option>
-                                                @endif
-                                            @endforeach
-                                        </select>
+                                {!! Form::model($product, array('route' => 'cart.add', 'method' => 'post', 'files' => true)) !!}
+                                    @if($product->property()->first()->detail_id)
+                                        <label>{{$product->property()->first()->detail->type}}</label>
+                                        @if($product->property()->first()->detail->type)
+                                            <select class="form-control" name="serialcode">
+                                                @foreach($product->property as $property)
+                                                    @if($property->stock == 0)
+                                                        <option value="{{$property->serialNumber}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>
+                                                    @else
+                                                        <option value="{{$property->serialNumber}}">{{$property->detail->value}}  -  <small>op voorraad</small></option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        @endif
+                                    @else
+                                        <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
                                     @endif
-                                @else
-                                    <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
-                                @endif
+                                <br>
+                                    {{ Form::submit('In winkelwagen', ['class' => 'btn btn-primary']) }}
                                     {{--{"id":1,"product_id":1,"stock":"2","serialNumber":"345462562","detail_id":0,"created_at":null,"updated_at":null}--}}
-
+                                {{ Form::close() }}
                                 {{-- TODO: Add to shoppingcart button ajax --}}
                                 {{--<a href="{{ route('cart.add', $product) }}" class="btn btn-success btn-product"--}}
                                    {{--onclick="">--}}

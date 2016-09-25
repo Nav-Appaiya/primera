@@ -12,15 +12,24 @@
             {{--@section('sidebar')--}}
         <header>
           <div class="container">
+              <div class="row">
+                  {{--{{Auth::check()}}--}}
+                  @if(!Auth::check())
+                    <a href="{{route('login')}}">inloggen</a>
+                    <a href="{{route('register')}}">registeren</a>
+                  @else
+                    <label>Welkom {{Auth::user()->name}}</label>
+                  @endif
+              </div>
             <div id="header">
               <div class="cart">
                 <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-user" aria-hidden="true"></i></a>
               </div>
               <div class="usr">
-                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                   <a href="{{ route('cart') }}">
+                      <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                     <span style="margin-top: 10px; margin-left: -8px; position: absolute;" class="badge">
-                        {{ count(Session::get('cart.items')) }}
+                        {{ Session::has('cart') ? Session::get('cart')['qty'] : 0 }}
                     </span>
                   </a>
               </div>
@@ -51,8 +60,15 @@
             @yield('content')
         </div>
 
-        <footer>
-
+        <footer id="footer">
+            <div class="container">
+                <div class="col-lg-12">
+                    a
+                    <ul>
+                        <li>aa</li>
+                    </ul>
+                </div>
+            </div>
         </footer>
 
     <!-- Modals -->
