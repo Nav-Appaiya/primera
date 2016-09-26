@@ -6,13 +6,9 @@
 @section('content')
 <div class="row">
     <div class="col-md-3">
-        <div class="card">
 
-    <h3>Filter</h3>
 
 {{--{{($category->product)}}aa--}}
-
-        <div class="col-lg-3">
             <label>Filter</label>
 
             <style>
@@ -39,7 +35,7 @@
                     position: relative;
                 }
                 .slider.slider-horizontal {
-                    width: 210px;
+                    width: 100%;
                     height: 20px;
                 }
                 .slider.slider-horizontal .slider-track {
@@ -207,7 +203,7 @@
                 <input type="text" class="unibox-price-min" placeholder="Min Price" onfocus="uniboxResetHint('Min Price',false,this);" onblur="uniboxResetHint('Min Price',true,this);" value="Min Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)" disabled/>
                 <input type="text" class="unibox-price-max" placeholder="Max Price" onfocus="uniboxResetHint('Max Price',false,this);" onblur="uniboxResetHint('Max Price',true,this);" value="Max Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)" disabled/>
 
-                <div id="sliderone"></div>
+                <div id="sliderone" style="width: 100%"></div>
                 {{--<div id="slider"></div>--}}
                 {{--<div class="unibox-quick-summary-line">--}}
                     {{--<span class="unibox-quick-summary"></span><span>&nbsp;</span>--}}
@@ -219,14 +215,9 @@
                 {{--<span class="example-val" id="slider-snap-value-lower">0.00</span>--}}
             {{--</form>--}}
             {{--Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>--}}
-        </div>
-</div>
 </div>
 <div class="col-md-9">
-<div class="card">
-        <div class="col-lg-9">
             {{--asd--}}
-            <div class="row">
                 @if(!$property->isEmpty())
                     @if(count($property) != 1)
                         <p>Er zijn {{count($property)}} producten gevonden</p>
@@ -254,10 +245,6 @@
                     <p>Er zijn geen product(en) gevonden</p>
                     <hr>
                 @endif
-            </div>
-        </div>
-    </div>
-    </div>
     </div>
 @stop
 

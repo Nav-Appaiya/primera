@@ -189,16 +189,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-
-                        <ul>
+                        <center>
+                        <ul class="list-group">
                             <li><a href="">Algemene voorwaarden</a></li>
                             <li><a href="">Cookies</a></li>
                             <li><a href="">Privacy policy</a></li>
                             <li><a href="">Contact</a></li>
                             <li><a href="">Retourneren</a></li>
                             <li><a href="">Garantie</a></li>
-                            {{--<li><a href=""></a></li>--}}
                         </ul>
+                        </center>
                     </div>
                 </div>
             </div>
