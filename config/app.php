@@ -159,6 +159,7 @@ return [
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         'Barryvdh\Debugbar\ServiceProvider',
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -210,6 +211,7 @@ return [
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Socialize' => 'Laravel\Socialite\Facades\Socialite',
         'Debugbar' => \Barryvdh\Debugbar\Facade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

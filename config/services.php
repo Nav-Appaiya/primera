@@ -43,5 +43,9 @@ return [
         'client_secret' => '38f721d658659a9abcdd274bf0288b81',
         'redirect' => 'http://localhost:8000/callback',
     ],
-
+    'mollie' => [
+         'client_id'     => env('MOLLIE_CLIENT_ID', 'app_xxx'),
+         'client_secret' => env('MOLLIE_CLIENT_SECRET'),
+         'redirect'      => env('MOLLIE_REDIRECT_URI'),
+     ],
 ];

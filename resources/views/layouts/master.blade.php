@@ -121,15 +121,23 @@
             {{--@section('sidebar')--}}
         <header>
           <div class="container">
-             <!-- <div class="row">
-                  {{--{{Auth::check()}}--}}
-                  @if(!Auth::check())
-                    <a href="{{route('login')}}">inloggen</a>
-                    <a href="{{route('register')}}">registeren</a>
-                  @else
-                    <label>Welkom {{Auth::user()->name}}</label>
-                  @endif
-              </div>-->
+             <div class="row">
+
+                 {{-- TODO niet verwijderen, maar maak het mooier --}}
+                 <div class="col-lg-3">
+                     <small>Besteld voor x uur is morgen in huis.</small>
+                 </div>
+                 <div class="col-lg-2 col-lg-offset-1 pull-right">
+                     @if(Auth::check())
+                         <label class="pull-right">Welkom, {{Auth::user()->name}}.</label>
+                     @else
+                         <a class="pull-right" href="{{route('register')}}">registeren</a>
+                        <small class="pull-right"> | </small>
+                        <a class="pull-right" href="{{route('login')}}">inloggen</a>
+                     @endif
+                 </div>
+
+              </div>
             <div id="header">
               <div class="cart">
                 <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-user" aria-hidden="true"></i></a>
