@@ -33,6 +33,9 @@ header .usr-inf p {
     padding: 0;
     color: #fff;
     height: 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 header .usr-inf p a {
@@ -261,3 +264,5 @@ a, a:hover {
 .brands .brand {
     max-width: 200px;
 }
+
+input:active,input:focus,textarea:active,textarea:hover,textarea:focus,button:focus,button:active,button:hover,select:hover,select:focus,select:active{outline:0px!important;}

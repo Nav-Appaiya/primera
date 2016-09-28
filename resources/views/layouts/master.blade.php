@@ -5,8 +5,16 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/assets/slick.css">
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/assets/slick-theme.css">
         <link rel="stylesheet" type="text/css" href="/css/all.css">
 
+        <style type="text/css">
+            .slick-slider {
+                margin-bottom: 15px;
+                margin-top: 15px;
+            }
+        </style>
         {{--<style>--}}
             {{--ul.dropdown-cart{--}}
                 {{--min-width:250px;--}}
@@ -227,9 +235,60 @@
     </div>
 </section>
 
-@yield('content')
+
+<section class="content" style="padding: 0px;">
+    <div class="container">
+        @yield('content')
+    </div>
+</section>
+
+<section class="brands">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="slider slider-brands">
+                <div>
+                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                </div>
+                <div>
+                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                </div>
+                <div>
+                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                </div>
+                <div>
+                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                </div>
+                <div>
+                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                </div>
+                <div>
+                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                </div>
+                <div>
+                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
+<footer>
+    <div class="container">
+        <center>
+            <ul class="list-group">
+                <li><a href="">Algemene voorwaarden</a></li>
+                <li><a href="">Cookies</a></li>
+                <li><a href="">Privacy policy</a></li>
+                <li><a href="">Contact</a></li>
+                <li><a href="">Retourneren</a></li>
+                <li><a href="">Garantie</a></li>
+            </ul>
+        </center>
+    </div>
+ </footer>
 
 
     <!-- Modals -->
@@ -246,8 +305,97 @@
       {{--</div>--}}
     {{--</div>--}}
 
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="http://localhost:8080/assets/slick.js"></script>
+    <script type="text/javascript">
+        $('.center').slick({
+              centerMode: true,
+              centerPadding: '60px',
+              slidesToShow: 3,
+              responsive: [
+                {
+                  breakpoint: 768,
+                  settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 3
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                  }
+                }
+              ]
+            });
+
+
+$('.multiple-items').slick({
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 3,
+              autoplay: true,
+              autoplaySpeed: 2000,
+responsive: [
+                {
+                  breakpoint: 768,
+                  settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 3
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                  }
+                }
+              ]
+});
+
+            $('.slider-brands').slick({
+              centerMode: true,
+              centerPadding: '40px',
+              arrows: false,
+              slidesToShow: 6,
+              slidesToScroll: 1,
+              autoplay: true,
+              autoplaySpeed: 2000,
+              responsive: [
+                {
+                  breakpoint: 768,
+                  settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 3
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                  }
+                }
+              ]
+            });
+
+    </script>
         @stack('script')
 
         <script src="{{ URL::asset('assets/js/script.js') }}"></script>

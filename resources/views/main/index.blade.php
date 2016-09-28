@@ -8,6 +8,8 @@
 @endsection
 
 @section('content')
+
+
     {{--<ol class="breadcrumb">--}}
       {{--<li><a href="{{ route('homepage') }}">Homepage</a></li>--}}
       {{--<li class="active">Products</li>--}}
