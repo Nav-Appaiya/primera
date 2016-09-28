@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0px;
-    padding-top: 35px;
+    padding-top: 50px;
     background: #fff;
     font-family: "Open Sans", sans-serif;
     color: #000;
@@ -10,13 +10,33 @@ html, body {
 header {
     width: 100%;
     display: block;
-    height: 71px;
     background: #fff;
     border-bottom: 1px #D5D4D4 solid;
     z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
+}
+
+header .usr-inf {
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    background: #363C3F;
+    width: 100%;
+    border-bottom: 1px #D5D4D4 solid;
+}
+
+header .usr-inf p {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    height: 30px;
+}
+
+header .usr-inf p a {
+    color: #fff;
 }
 
 header .head {
@@ -29,7 +49,6 @@ header .head .bv-logo {
     float: left;
     height: 70px;
     line-height: 70px;
-    margin-left: 20px;
     width: auto;
 }
 

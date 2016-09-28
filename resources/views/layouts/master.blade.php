@@ -119,11 +119,30 @@
     <body>
 
 <header>
+    <div class="usr-inf">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="text-left">
+                        Besteld voor 6 uur volgende dag in huis
+                    </p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="text-right">
+                         @if(Auth::check())
+                             <label class="pull-right">Welkom, {{Auth::user()->name}}.</label>
+                         @else
+                             <a class="pull-right" href="{{route('register')}}">Registeren</a>
+                            <small class="pull-right">&nbsp; | &nbsp;</small>
+                            <a class="pull-right" href="{{route('login')}}">Inloggen</a>
+                         @endif
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="head">
-            <div class="usr-button">
-                <i class="fa fa-user" aria-hidden="true"></i>
-            </div>
 
             <div class="bv-logo">
                 <img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png" height="30px">
@@ -131,39 +150,44 @@
 
             <div class="cart-button">
                 <div class="">
-                        <div class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <a href="{{ route('cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                 <span style="margin-top: 20px; margin-left: -8px; position: absolute;" class="badge">
+                    <div class="dropdown">
+                        <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="{{ route('cart') }}">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                <span style="margin-top: 17px; margin-left: -4px; position: absolute;" class="badge">
                         {{ Session::has('cart') ? Session::get('cart')['qty'] : 0 }}
-                    </span></a>
+                                </span>
                             </a>
-                            <div class="dropdown-menu dropdown-to-right">
-                                <center>
-                                    <h3>Winkelwagen</h3>
-                                </center>
-                                <table class="table table-striped">
-                                    <tbody>
-                                      <tr>
+                        </a>
+                    <div class="dropdown-menu dropdown-to-right">
+                        <center>
+                            <h3>Winkelwagen</h3>
+                        </center>
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
                                         <td>John</td>
                                         <td>Doe</td>
                                         <td>john@example.com</td>
-                                      </tr>
-                                      <tr>
+                                    </tr>
+                                    <tr>
                                         <td>Mary</td>
                                         <td>Moe</td>
                                         <td>mary@example.com</td>
-                                      </tr>
-                                      <tr>
+                                    </tr>
+                                    <tr>
                                         <td>July</td>
                                         <td>Dooley</td>
                                         <td>july@example.com</td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                    <center><button style="margin: 0;" type="button" class="btn btn-default">Afrekenen</button></center>
-                            </div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <center>
+                            <button style="margin: 0;" type="button" class="btn btn-default">Bekijken</button>
+                            <button style="margin: 0;" type="button" class="btn btn-default">Afrekenen</button>
+                        </center>
                         </div>
+                    </div>
                 </div>
             </div>
             <div class="search-button">
@@ -174,7 +198,7 @@
                     <li><a href="#">Homepage</a></li>
                     @foreach($main_categories->where('category_id', 0) as $category)
                         <li class="dropdown">
-                            <a href="{{ route('category.show', [str_replace(' ', '-', $category->title), $category->id])  }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $category->title }}<span class="caret"></span></a>
+                            <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 @foreach($category->children as $child)
                                     <li class="">
@@ -189,42 +213,24 @@
         </div>
     </div>
 </header>
+    {{--@section('sidebar')--}}
+       
 
-            {{--@section('sidebar')--}}
-      
     {{--@show--}}
-        <div class="container padding">
-          <div class="row">
-            <ol class="breadcrumb">
-                <li><a href="{{ route('homepage') }}">Homepage</a></li>
-                <li><a href="{{ route('homepage') }}">Homepage</a></li>
-            </ol>
-          </div>
-        </div>
-      <section class="content">
-        <div class="container">
-            @yield('content')
-        </div>
-      </section>
+<section class="bread-crumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="#">Homepage</a></li>
+            <li><a href="#">Cartomizers</a></li>
+            <li class="active">Product #1</li>
+        </ol>
+    </div>
+</section>
 
-        <footer id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <center>
-                        <ul class="list-group">
-                            <li><a href="">Algemene voorwaarden</a></li>
-                            <li><a href="">Cookies</a></li>
-                            <li><a href="">Privacy policy</a></li>
-                            <li><a href="">Contact</a></li>
-                            <li><a href="">Retourneren</a></li>
-                            <li><a href="">Garantie</a></li>
-                        </ul>
-                        </center>
-                    </div>
-                </div>
-            </div>
-        </footer>
+@yield('content')
+
+
+
 
     <!-- Modals -->
 

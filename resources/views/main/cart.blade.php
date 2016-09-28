@@ -5,6 +5,24 @@
 
 @section('content')
 
+<section class="bread-crumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="#">Homepage</a></li>
+            <li><a href="#">Cartomizers</a></li>
+            <li class="active">Product #1</li>
+        </ol>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container">
+        <div class="row">
+            
+        </div>
+    </div>
+</section>
+
     <div class="container">
         <div class="row">
             <div class="col-xs-8">
