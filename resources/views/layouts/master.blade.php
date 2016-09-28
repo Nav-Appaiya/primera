@@ -236,7 +236,7 @@
 </section>
 
 
-<section class="content" style="padding: 0px;">
+<section class="content">
     <div class="container">
         @yield('content')
     </div>
@@ -248,25 +248,39 @@
             <div class="col-md-12">
                 <div class="slider slider-brands">
                 <div>
-                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                    <center>
+                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
+                    </center>
                 </div>
                 <div>
-                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                    <center>
+                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
+                    </center>
                 </div>
                 <div>
-                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                    <center>
+                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
+                    </center>
                 </div>
                 <div>
-                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                     <center>
+                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
+                    </center>
                 </div>
                 <div>
-                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                    <center>
+                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
+                    </center>
                 </div>
                 <div>
-                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                    <center>
+                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
+                    </center>
                 </div>
                 <div>
-                    <img class="brand" width="100%" height="100%" src="https://az834416.vo.msecnd.net/cmsstorage/whu/media/whu2/commercial/heineken/heinekenfooterlogo.png?width=500&height=281&ext=.png"/>
+                    <center>
+                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
+                    </center>
                 </div>
             </div>
             </div>
