@@ -118,44 +118,63 @@
     </head>
     <body>
 
-            {{--@section('sidebar')--}}
-        <header>
-          <div class="container">
-             <!-- <div class="row">
-                  {{--{{Auth::check()}}--}}
-                  @if(!Auth::check())
-                    <a href="{{route('login')}}">inloggen</a>
-                    <a href="{{route('register')}}">registeren</a>
-                  @else
-                    <label>Welkom {{Auth::user()->name}}</label>
-                  @endif
-              </div>-->
-            <div id="header">
-              <div class="cart">
-                <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-user" aria-hidden="true"></i></a>
-              </div>
-              <div class="usr">
-                  <a href="{{ route('cart') }}">
-                      <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    <span style="margin-top: 20px; margin-left: -8px; position: absolute;" class="badge">
-                        {{ Session::has('cart') ? Session::get('cart')['qty'] : 0 }}
-                    </span>
-                  </a>
-              </div>
-                <div>
+<header>
+    <div class="container">
+        <div class="head">
+            <div class="usr-button">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
 
+            <div class="bv-logo">
+                <img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png" height="30px">
+            </div>
+
+            <div class="cart-button">
+                <div class="">
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a href="{{ route('cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                 <span style="margin-top: 20px; margin-left: -8px; position: absolute;" class="badge">
+                        {{ Session::has('cart') ? Session::get('cart')['qty'] : 0 }}
+                    </span></a>
+                            </a>
+                            <div class="dropdown-menu dropdown-to-right">
+                                <center>
+                                    <h3>Winkelwagen</h3>
+                                </center>
+                                <table class="table table-striped">
+                                    <tbody>
+                                      <tr>
+                                        <td>John</td>
+                                        <td>Doe</td>
+                                        <td>john@example.com</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Mary</td>
+                                        <td>Moe</td>
+                                        <td>mary@example.com</td>
+                                      </tr>
+                                      <tr>
+                                        <td>July</td>
+                                        <td>Dooley</td>
+                                        <td>july@example.com</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                    <center><button style="margin: 0;" type="button" class="btn btn-default">Afrekenen</button></center>
+                            </div>
+                        </div>
                 </div>
-              <div class="srch">
-                <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-search" aria-hidden="true"></i></a>
-              </div>
-                <div class="logo">
-                  <img src="http://esiggie.nl/wp-content/uploads/2014/12/Esiggie-logo.png">
-                </div>
-                <ul>
-                  <li><a href="/">Home</a></li>
+            </div>
+            <div class="search-button">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Homepage</a></li>
                     @foreach($main_categories->where('category_id', 0) as $category)
-                        <li class="deeper parent dropdown">
-                            <a href="{{ route('category.show', [str_replace(' ', '-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
+                        <li class="dropdown">
+                            <a href="{{ route('category.show', [str_replace(' ', '-', $category->title), $category->id])  }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $category->title }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 @foreach($category->children as $child)
                                     <li class="">
@@ -167,9 +186,12 @@
                     @endforeach
                 </ul>
             </div>
-          </div>
-        </header>
+        </div>
+    </div>
+</header>
 
+            {{--@section('sidebar')--}}
+      
     {{--@show--}}
         <div class="container padding">
           <div class="row">
