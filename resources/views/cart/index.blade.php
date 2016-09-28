@@ -103,62 +103,74 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <h4 class="text-right">Totaal <strong>€ {{Session::has('cart') ? number_format($products['price'], 2) : 0}}</strong></h4>
+                            <h4 class="text-right">incl. btw <strong>€ {{Session::has('cart') ? round( ($products['price'] / 100) * 3.8, 2) : 0}}</strong></h4>
 
-                            <label>Levering</label><br>
+                            {!! Form::model(null, array('route' => array('cart.update'), 'method' => 'PATCH')) !!}
 
-                            <input type="radio" name="levering" value="aa"> Verzenden met PostNL<br>
-                            <small>+ €3.95</small><br>
+                                <label>Levering</label><br>
 
-                            <input type="radio" name="levering" value="aa"> Ophalen in Eindhoven <br>
-                            <small>+ €0.00</small>
+                            {{ Form::text('text', null, ['class' => 'form']) }}
+                                <input type="radio" name="levering" value="aa"> Verzenden met PostNL<br>
+                                <small>+ €3.95</small><br>
 
-                            <?php
+                                <input type="radio" name="levering" value="aa"> Ophalen in Eindhoven <br>
+                                <small>+ €0.00</small>
 
-                            $methods = Mollie::api()->methods()->all();
-//
-//                            $payment = Mollie::api()->payments()->create([
-//                                    "amount"      => 10.00,
-//                                    "description" => "My first API payment",
-//                                    "redirectUrl" => "https://webshop.example.org/order/12345/",
-//                            ]);
-//
-//                            $payment = Mollie::api()->payments()->get($payment->id);
-//
-//                            if ($payment->isPaid())
-//                            {
-//                                echo "Payment received.";
-//                            }
+                                <?php
 
-//                            $mollie = new Mollie_API_Client;
-//                            $mollie->setApiKey('test_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM');
-//
-//                            $methods = $mollie->methods->all();
-//
-                            foreach ($methods as $method)
-                            {
-                                echo '<div style="line-height:40px; vertical-align:top">';
-                                echo '<img src="' . htmlspecialchars($method->image->normal) . '"> ';
-                                echo htmlspecialchars($method->description);
-                                echo ' (' .  htmlspecialchars($method->id). ')';
-                                echo '</div>';
-                            }
-                            ?>
+                                $methods = Mollie::api()->methods()->all();
+    //
+    //                            $payment = Mollie::api()->payments()->create([
+    //                                    "amount"      => 10.00,
+    //                                    "description" => "My first API payment",
+    //                                    "redirectUrl" => "https://webshop.example.org/order/12345/",
+    //                            ]);
+    //
+    //                            $payment = Mollie::api()->payments()->get($payment->id);
+    //
+    //                            if ($payment->isPaid())
+    //                            {
+    //                                echo "Payment received.";
+    //                            }
+    //                            $mollie = new Mollie_API_Client;
+    //                            $mollie->setApiKey('test_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM');
+    //
+    //                            $methods = $mollie->methods->all();
+                                ?>
+                                <br>
+                                <label>Betaalmethoden</label>
+                                <br>
+                            {{--{{dd($methods)}}--}}
 
-                            {{--                                <a href="{{route('cart.store', $product->id)}}">bestellen</a>--}}
-                            <a href="{{URL::route('cart.checkout')}}" class="btn btn-success btn-block">
-                                afrekenen
-                            </a>
+                                <select onchange="this.form.submit()">
+                                    @foreach ($methods as $method)
+                                        <option value="{{$method->id}}" style="background-image:url({{$method->image->normal}});">
+                                             {{($method->description)}}
+                                             {{htmlspecialchars($method->id)}}
+                                             <small class="text-right" style="font-size: 6px !important;">+ {{$method->amount->minimum}}</small>
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <br><br>
+
+
+                                <?php
+
+    //                            $data = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?region=NL&language=nederlands&address=' . rawurlencode('pietercoecke straat 14'));
+    //                            $data = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=' . rawurlencode('5643 VK'));
+    //                            $object = json_decode($data);
+    //                            dd($object);
+
+                                ?>
+
+
+                            {!! Form::submit('afrekenen', ['class' => 'btn btn-success btn-block'])!!}
+
                             <a href="{{URL::route('cart.empty')}}" class="btn btn-danger btn-block">
                                 legen
                             </a>
-                            <?php
 
-//                            $data = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?region=NL&language=nederlands&address=' . rawurlencode('pietercoecke straat 14'));
-//                            $data = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=' . rawurlencode('5643 VK'));
-//                            $object = json_decode($data);
-//                            dd($object);
-
-                            ?>
+                            {!! Form::close() !!}
 
                         </div>
                     </div>
@@ -166,117 +178,12 @@
             </div>
         </div>
     </div>
-
-    {{--@if(count($products) >= 1)--}}
-        {{--<ol class="breadcrumb">--}}
-            {{--<li><a href="{{ URL::route('homepage') }}">Homepage</a></li>--}}
-            {{--<li class="active">Winkelwagen</li>--}}
-        {{--</ol>--}}
-
-        {{--<div class="content">   --}}
-            {{--<div class="row">--}}
-                {{--<div class="col-md-12">--}}
-                    {{--@if (Session::has('status'))--}}
-                        {{--<div class="alert alert-info">{{ Session::get('status') }}</div>--}}
-                    {{--@endif--}}
-                {{--</div>--}}
-                {{--<div class="col-md-12">--}}
-                    {{--<table id="cart" class="table table-hover table-condensed">--}}
-                        {{--<thead>--}}
-                        {{--<tr>--}}
-                            {{--<th style="width:50%">Product</th>--}}
-                            {{--<th style="width:10%">Price</th>--}}
-                            {{--<th style="width:8%">Quantity</th>--}}
-                            {{--<th style="width:22%" class="text-center">Subtotal</th>--}}
-                            {{--<th style="width:10%"></th>--}}
-                        {{--</tr>--}}
-                        {{--</thead>--}}
-                        {{--<tbody>--}}
-
-                        {{--@foreach($products as $item)--}}
-                            {{--<tr>--}}
-                                {{--<td data-th="Product">--}}
-                                    {{--<div class="row">--}}
-                                        {{--<div class="col-sm-3 hidden-xs">--}}
-                                            {{----}}
-                                            {{--@if(count($item->productimages()->first()) >= 1)--}}
-                                                {{--<img src="/uploads/img/{{ $item->productimages()->first()->imagePath }}"--}}
-                                                     {{--alt="{{ $item->productimages()->first()->rel }}"--}}
-                                                     {{--width="120%" class="text-center" style="margin-top:30px;"--}}
-                                                {{-->--}}
-                                            {{--@else--}}
-                                                {{-- Default image at /images/product/default.jpg --}}
-                                                {{--<img src="/uploads/img/default.jpg" alt="{{ $item->name }}"--}}
-                                                     {{--class="img-responsive"/>--}}
-                                            {{--@endif--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-sm-9">--}}
-                                            {{--<h4 class="nomargin">{{ $item->name }}</h4>--}}
-                                            {{--<p>--}}
-                                                {{--<a href="{{ route('product.show', [$item->name, $item->id]) }}">--}}
-                                                    {{--{{ $item->description }}--}}
-                                                {{--</a>--}}
-                                            {{--</p>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</td>--}}
-                                {{--<td data-th="Price">&euro; {{ $item->price }}</td>--}}
-                                {{--<td data-th="Quantity">--}}
-                                    {{--<input type="number" class="form-control text-center" value="1">--}}
-                                {{--</td>--}}
-                                {{--<td data-th="Subtotal" class="text-center">{{ $item->price }}</td>--}}
-                                {{--<td class="actions" data-th="">--}}
-                                    {{--<a href="{{ URL::route('cart.remove', $item) }}" class="btn btn-danger btn-sm"--}}
-                                       {{--role="button">Verwijderen uit winkelwagen <i class="fa fa-trash-o"></i></a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                        {{--@endforeach--}}
-
-                        {{--</tbody>--}}
-                        {{--<tfoot>--}}
-                        {{--<tr class="visible-xs">--}}
-                            {{--<td class="text-center"><strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong>--}}
-                            {{--</td>--}}
-                        {{--</tr>--}}
-                        {{--<tr>--}}
-                            {{--<td><a href="{{ URL::route('homepage') }}" class="btn btn-warning"><i--}}
-                                            {{--class="fa fa-angle-left"></i> Nog meer winkelen</a></td>--}}
-                            {{--<td colspan="2" class="hidden-xs"></td>--}}
-                            {{--<td class="hidden-xs text-center">--}}
-                                {{--<strong>Totaal: &euro;{{ number_format($total, 2, '.', ',') }}</strong></td>--}}
-                            {{--<td>--}}
-                                {{--<a type="button" class="btn btn-success pull-right" href="{{ route('checkout_index') }}">--}}
-                                    {{--Bestelling plaatsen--}}
-                                {{--</a>--}}
-                            {{--</td>--}}
-                        {{--</tr>--}}
-                        {{--</tfoot>--}}
-                    {{--</table>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--@else--}}
-                {{--<ol class="breadcrumb">--}}
-                    {{--<li><a href="{{ URL::route('homepage') }}">Homepage</a></li>--}}
-                    {{--<li class="active">Winkelwagen</li>--}}
-                {{--</ol>--}}
-                {{--<div class="content">--}}
-                    {{--<h3 class="text-center">--}}
-                        {{--Je hebt geen artikelen in je winkelwagen.--}}
-
-                        {{--<a href="{{ URL::route('homepage') }}"> Ga naar de producten</a>.--}}
-                    {{--</h3>--}}
-                {{--</div>--}}
-            {{--@endif--}}
-        {{--</div>--}}
-        {{--<script>--}}
-            {{--var items = JSON.parse(localStorage.getItem('cart'));--}}
-            {{--for (i = 0; i < JSON.parse(localStorage.getItem('cart')).length; i++) {--}}
-                {{--document.write(items[i] + "<br />");--}}
-            {{--}--}}
-        {{--</script>--}}
 @stop
 
 @push('script')
+<script src="js/msdropdown/jquery-1.3.2.min.js" type="text/javascript"></script>
+<script src="js/msdropdown/jquery.dd.min.js" type="text/javascript"></script>
+{{--<link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css" />--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.js"></script>
     <script>
 
@@ -298,5 +205,10 @@
 //        });
 
     </script>
+
+@endpush
+
+@push('css')
+<link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css" />
 @endpush
 
