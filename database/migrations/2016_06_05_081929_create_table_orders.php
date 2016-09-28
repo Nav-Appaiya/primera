@@ -23,6 +23,8 @@ class CreateTableOrders extends Migration
             $table->string('woonplaats');
 //            $table->decimal('amount');
             $table->string('status');
+            $table->string('delivery_type');
+            $table->decimal('delivery_price', 5, 2)->nullable();
             $table->string('payment_id');
             $table->boolean('notification');
             $table->timestamps();

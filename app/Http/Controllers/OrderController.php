@@ -18,12 +18,15 @@ use Symfony\Component\Console\Input\Input;
 
 class OrderController extends Controller
 {
+
+    private $order;
     /**
      * OrderController constructor.
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->order = new Order();
+//        $this->middleware('auth');
     }
 
     /**
@@ -59,33 +62,68 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'name'       => 'required',
-            'email'      => 'required|email',
-            'password' => 'required|numeric'
-        );
-        $validator = \Illuminate\Support\Facades\Validator::make(\Illuminate\Support\Facades\Input::all(), $rules);
 
-        // process the login
+        $rules = [
+//            'value' => 'required|unique:details,value',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
         if ($validator->fails()) {
-            return Redirect::to('orders/create')
+            return redirect()
+                ->route('admin_property_create')
                 ->withErrors($validator)
-                ->withInput(\Illuminate\Support\Facades\Input::except('password'));
-        } else {
-            // store
-            $order = new Order();
-            $order->user_id = 1;
-            $order->shipping_address       = \Illuminate\Support\Facades\Input::get('name');
-            $order->billing_address      = \Illuminate\Support\Facades\Input::get('email');
-            $order->status = \Illuminate\Support\Facades\Input::get('password');
-            $order->save();
-
-            // redirect
-            Session::flash('message', 'Successfully created nerd!');
-            return view('admin.orders.all', [
-                'orders' => Order::all()
-            ]);
+                ->withInput();
         }
+
+        $order = $this->order;
+
+        $order->user_id = $request;
+        $order->postcode = $request;
+        $order->adres = $request;
+        $order->huisnummer = $request;
+        $order->woonplaats = $request;
+        $order->status = $request;
+        $order->delivery_type = $request;
+        $order->delivery_price = $request;
+        $order->payment_id = $request;
+        $order->notification = $request;
+
+        $order->save();
+
+
+        \Session::flash('succes_message','successfully.');
+
+        return redirect()->route('admin_property_index');
+
+
+//        $rules = array(
+//            'name'       => 'required',
+//            'email'      => 'required|email',
+//            'password' => 'required|numeric'
+//        );
+//        $validator = \Illuminate\Support\Facades\Validator::make(\Illuminate\Support\Facades\Input::all(), $rules);
+//
+//        // process the login
+//        if ($validator->fails()) {
+//            return Redirect::to('orders/create')
+//                ->withErrors($validator)
+//                ->withInput(\Illuminate\Support\Facades\Input::except('password'));
+//        } else {
+//            // store
+//            $order = new Order();
+//            $order->user_id = 1;
+//            $order->shipping_address       = \Illuminate\Support\Facades\Input::get('name');
+//            $order->billing_address      = \Illuminate\Support\Facades\Input::get('email');
+//            $order->status = \Illuminate\Support\Facades\Input::get('password');
+//            $order->save();
+//
+//            // redirect
+//            Session::flash('message', 'Successfully created nerd!');
+//            return view('admin.orders.all', [
+//                'orders' => Order::all()
+//            ]);
+//        }
     }
 
     /**

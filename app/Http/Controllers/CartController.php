@@ -6,6 +6,7 @@
  * Time: 14:24
  */
 namespace App\Http\Controllers;
+
 //
 //use App\Category;
 //use App\Pages;
@@ -23,6 +24,7 @@ use DB;
 
 use Session;
 use Redirect;
+use Validator;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -40,7 +42,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $cart = new Cart($this->oldCart);
 
@@ -57,6 +59,53 @@ class CartController extends Controller
     {
         return view('cart.checkout')->with('cart', $this->oldCart);
     }
+
+    public function update(Request $request)
+    {
+        session([
+            'options' => [
+                'levering' => $request->levering,
+                'betaalmethode' => $request->betaalmethode,
+                'gegevens' => [
+                    'voornaam' => '',
+                    'achternaam' => '',
+                    'email' => '',
+                    'geboortedatum' => '',
+                    'huisnummer' => '',
+                    'postcode' => '',
+                    'straatnaam' => '',
+                    'land' => '',
+                    'plaats' => ''
+                ]
+            ]
+        ]);
+
+        $rules = [
+            'title'     => 'required|max:25',
+        ];
+
+//        $validator = Validator::make($request->all(), $rules);
+//
+//        if ($validator->fails()) {
+//            return redirect()
+//                ->route('admin_category_edit', $request->id)
+//                ->withErrors($validator)
+//                ->withInput();
+//        }
+
+//        $category = $this->category->find($request->id);
+//
+//        $category->title = $request->title;
+//
+//        $category->save();
+//
+//        \Session::flash('succes_message', 'successfully.');
+
+//        return redirect()->route('admin_category_index');
+
+        return redirect()->route('cart');
+    }
+
 
     /**
      * Store a newly created resource in storage.
