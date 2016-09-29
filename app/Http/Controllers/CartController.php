@@ -22,6 +22,8 @@ use App\Property;
 
 use DB;
 
+use Illuminate\Support\Facades\Auth;
+use Mollie\Laravel\Facades\Mollie;
 use Session;
 use Redirect;
 use Validator;
@@ -44,10 +46,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = new Cart($this->oldCart);
-
+        $cart = session()->get('cart', []);
+        $methods = Mollie::api()->methods()->all();
+        
         return view('cart.index')
-            ->with('products', $cart);
+            ->with([
+                'products' => $cart,
+                'methods' => $methods
+            ]);
     }
 
     /**
@@ -57,53 +63,54 @@ class CartController extends Controller
      */
     public function create()
     {
-        return view('cart.checkout')->with('cart', $this->oldCart);
+        $producten = [];
+        $total = 0;
+        $user = Auth::user();
+        
+        debug(session()->get('cart', []));
+
+        return view('cart.checkout')->with([
+            'cart' => session('cart'),
+            'producten' => $producten,
+            'total' => $total,
+            'user'=>$user
+        ]);
     }
 
     public function update(Request $request)
     {
+        $user = Auth::user();
+        if(!$user){
+            return redirect()->route('login');
+        }
+        
         session([
             'options' => [
                 'levering' => $request->levering,
                 'betaalmethode' => $request->betaalmethode,
                 'gegevens' => [
-                    'voornaam' => '',
-                    'achternaam' => '',
-                    'email' => '',
-                    'geboortedatum' => '',
-                    'huisnummer' => '',
-                    'postcode' => '',
-                    'straatnaam' => '',
-                    'land' => '',
-                    'plaats' => ''
+                    'voornaam' => $user->voornaam,
+                    'achternaam' => $user->achternaam,
+                    'email' => $user->email,
+                    'geboortedatum' => $user->geboortedatum,
+                    'huisnummer' => $user->huisnummer,
+                    'postcode' => $user->postcode,
+                    'straatnaam' => $user->adres,
+                    'land' => 'Nederland',
+                    'plaats' => $user->woonplaats
                 ]
             ]
         ]);
-
-        $rules = [
-            'title'     => 'required|max:25',
-        ];
-
-//        $validator = Validator::make($request->all(), $rules);
-//
-//        if ($validator->fails()) {
-//            return redirect()
-//                ->route('admin_category_edit', $request->id)
-//                ->withErrors($validator)
-//                ->withInput();
-//        }
-
-//        $category = $this->category->find($request->id);
-//
-//        $category->title = $request->title;
-//
-//        $category->save();
-//
-//        \Session::flash('succes_message', 'successfully.');
-
-//        return redirect()->route('admin_category_index');
-
-        return redirect()->route('cart');
+        
+        $cart = session('cart');
+        $total = 0;
+        
+        
+        return view('cart.checkout')->with([
+            'cart' => $cart,
+            'total' => $total,
+            'user'=>$user
+        ]);
     }
 
 
@@ -118,13 +125,7 @@ class CartController extends Controller
         $property = Property::where('serialNumber', $request->serialcode)->first();
 
         $cart = new Cart($this->oldCart);
-//        $product = collect($property->first()->product()->first());
-//        $product = collect($property->first()->product()->first())->only('id', 'price');
-//        $new[$property->id] = collect($property)->only('serialNumber')->merge($product);
-//
-//dd($proper
         $cart->add($property, $property->id);
-
         $request->session()->put('cart', $cart);
 
         return redirect()->route('cart');
