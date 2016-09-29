@@ -48,9 +48,15 @@
                                 op voorraad
                             @endif
                             <div class="btn-group wishlist">
-                                <a href="{{ route('cart.add', $product) }}" class="btn btn-success btn-product" onclick="">
-                                    In winkelwagen<span class="fa fa-shopping-cart"></span>
-                                </a>
+                                <form action="{{ route('cart.add') }}" method="post">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+
+                                    <button type="submit" class="btn btn-success btn-product" name="serialcode" 
+                                            id="serialcode" value="{{ $product->property()->first()->serialNumber }}">
+                                        In winkelwagen<span class="fa fa-shopping-cart"></span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
