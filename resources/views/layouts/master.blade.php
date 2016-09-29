@@ -5,8 +5,6 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="http://localhost:8080/assets/slick.css">
-        <link rel="stylesheet" type="text/css" href="http://localhost:8080/assets/slick-theme.css">
         <link rel="stylesheet" type="text/css" href="/css/all.css">
 
         <style type="text/css">
@@ -400,6 +398,7 @@ responsive: [
     </script>
     @stack('script')
 
+    <script src="{{ URL::asset('assets/js/slick.js') }}"></script>
     <script src="{{ URL::asset('assets/js/script.js') }}"></script>
 
     </body>

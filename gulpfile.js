@@ -13,6 +13,8 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix.styles([
         'styles.css',
-        'navbar.css'
+        'navbar.css',
+        'slick.css',
+        'slick-theme.css'
     ]);
 });
