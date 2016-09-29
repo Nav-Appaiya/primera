@@ -22,6 +22,7 @@ use App\Property;
 
 use DB;
 
+use Mollie\Laravel\Facades\Mollie;
 use Session;
 use Redirect;
 use Validator;
@@ -45,9 +46,13 @@ class CartController extends Controller
     public function index()
     {
         $cart = new Cart($this->oldCart);
-
+        $methods = Mollie::api()->methods()->all();
+        
         return view('cart.index')
-            ->with('products', $cart);
+            ->with([
+                'products' => $cart,
+                'methods' => $methods
+            ]);
     }
 
     /**
@@ -118,13 +123,7 @@ class CartController extends Controller
         $property = Property::where('serialNumber', $request->serialcode)->first();
 
         $cart = new Cart($this->oldCart);
-//        $product = collect($property->first()->product()->first());
-//        $product = collect($property->first()->product()->first())->only('id', 'price');
-//        $new[$property->id] = collect($property)->only('serialNumber')->merge($product);
-//
-//dd($proper
         $cart->add($property, $property->id);
-
         $request->session()->put('cart', $cart);
 
         return redirect()->route('cart');

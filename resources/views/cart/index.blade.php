@@ -118,24 +118,8 @@
 
                                 <?php
 
-                                $methods = Mollie::api()->methods()->all();
-    //
-    //                            $payment = Mollie::api()->payments()->create([
-    //                                    "amount"      => 10.00,
-    //                                    "description" => "My first API payment",
-    //                                    "redirectUrl" => "https://webshop.example.org/order/12345/",
-    //                            ]);
-    //
-    //                            $payment = Mollie::api()->payments()->get($payment->id);
-    //
-    //                            if ($payment->isPaid())
-    //                            {
-    //                                echo "Payment received.";
-    //                            }
-    //                            $mollie = new Mollie_API_Client;
-    //                            $mollie->setApiKey('test_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM');
-    //
-    //                            $methods = $mollie->methods->all();
+                                
+    
                                 ?>
                                 <br>
                                 <label>Betaalmethoden</label>
