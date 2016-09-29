@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('titel', 'Primera shop')
-@section('seotags', 'seotags')
+@section('breadcrumbs', Breadcrumbs::render('home'))
 
 @section('content')
 
@@ -50,7 +50,6 @@
                             <div class="btn-group wishlist">
                                 <form action="{{ route('cart.add') }}" method="post">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
 
                                     <button type="submit" class="btn btn-success btn-product" name="serialcode" 
                                             id="serialcode" value="{{ $product->property()->first()->serialNumber }}">

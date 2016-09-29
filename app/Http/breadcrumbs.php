@@ -5,15 +5,20 @@ Breadcrumbs::register('home', function($breadcrumbs)
 {
     $breadcrumbs->push('Home', route('homepage'));
 });
-Breadcrumbs::register('product_detail', function($breadcrumbs, $product)
-{
-    $breadcrumbs->parent('category', $product->categories()->first());
-    $breadcrumbs->push($product->name, route('product_detail', $product->id));
-});
 Breadcrumbs::register('category', function($breadcrumbs, $category)
 {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push($category->title, route('category_detail', $category->id));
+    $breadcrumbs->push($category->title, route('category.show', [$category->title, $category->id]));
+});
+Breadcrumbs::register('category.show', function($breadcrumbs, $category)
+{
+    $breadcrumbs->parent('category', $category->parent);
+    $breadcrumbs->push($category->title, route('product.index', [ str_replace(' ', '-', $category->parent->title),  str_replace(' ', '-', $category->title), $category->id]));
+});
+Breadcrumbs::register('cart', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Winkelwagen', route('cart'));
 });
 
 
@@ -115,22 +120,6 @@ Breadcrumbs::register('dashboard.orders.edit', function($breadcrumbs, $id)
     $breadcrumbs->push('Edit', route('admin_orders_edit', $id));
 });
 
-// dashboard > video
-Breadcrumbs::register('dashboard.videos', function($breadcrumbs)
-{
-    $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('Videos', route('admin_videos_all'));
-});
-
-// dashboard > video > edit
-Breadcrumbs::register('dashboard.videos.edit', function($breadcrumbs, $id)
-{
-    $breadcrumbs->parent('dashboard.videos');
-    $breadcrumbs->push('Edit', route('admin_videos_edit', $id));
-});
-
-
-
 // dashboard > Users
 Breadcrumbs::register('dashboard.user', function($breadcrumbs)
 {
@@ -145,47 +134,3 @@ Breadcrumbs::register('dashboard.user.edit', function($breadcrumbs)
     $breadcrumbs->push('Edit', route('admin_user_edit'));
 });
 
-// dashboard > Authors
-Breadcrumbs::register('dashboard.author', function($breadcrumbs)
-{
-    $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('Author', route('admin_authors_all'));
-});
-
-// dashboard > Authors > edit
-Breadcrumbs::register('dashboard.author.edit', function($breadcrumbs)
-{
-    $breadcrumbs->parent('dashboard.author');
-    $breadcrumbs->push('Edit', route('admin_authors_update'));
-});
-
-//Breadcrumbs::register('product_detail_with_category', function($breadcrumbs, $product)
-//{
-//    $breadcrumbs->parent('category', $product->categories->first()->title);
-//    $breadcrumbs->push($product->name, route('category_detail', $product->id));
-//
-//});
-//
-//// Home > About
-//Breadcrumbs::register('about', function($breadcrumbs)
-//{
-//    $breadcrumbs->parent('home');
-//    $breadcrumbs->push('About', route('about'));
-//});
-//
-//// Home > Blog
-//Breadcrumbs::register('blog', function($breadcrumbs)
-//{
-//    $breadcrumbs->parent('home');
-//    $breadcrumbs->push('Blog', route('blog'));
-//});
-//
-//// Home > Blog > [Category]
-
-//
-//// Home > Blog > [Category] > [Page]
-//Breadcrumbs::register('page', function($breadcrumbs, $page)
-//{
-//    $breadcrumbs->parent('category', $page->category);
-//    $breadcrumbs->push($page->title, route('page', $page->id));
-//});

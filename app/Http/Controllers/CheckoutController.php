@@ -62,34 +62,20 @@ class CheckoutController extends Controller
             }
             $producten[] = $item;
         }
-
+        
         return view('main.checkout', [
             'user' => $request->user(),
             'cart' => $cart,
             'producten' => $producten,
-            'total' => $this->calculateCartTotal()
+            'total' => session('cart')->price
         ]);
     }
 
     private function calculateCartTotal($decimal = false)
     {
-        $amount = 0;
-        $cartItems = Session::get('cart.items');
-
-        foreach ($cartItems as $cartItem) {
-            $product = Product::find($cartItem);
-            $amount += $product->price;
-        }
-
-        if ($amount != 0) {
-            if ($decimal) {
-                return number_format($amount, 2, ',', ' ');
-            }
-
-            return $amount;
-        }
-
-        return false;
+        $cart = session('cart');
+        
+        return $cart['price'];
     }
 
     /**
@@ -189,6 +175,7 @@ class CheckoutController extends Controller
             ]);
             
         }
+        
 
         $payment = Mollie::api()->payments()->get($order->payment_id);
         $items = $order->orderItems()->getResults();

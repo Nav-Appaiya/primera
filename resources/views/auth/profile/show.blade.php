@@ -3,24 +3,38 @@
 @section('titel', 'Primera shop')
 @section('seotags', 'seotags')
 
-@section('sidebar')
-    @parent
-@endsection
 
 @section('content')
-
         @if(Auth::check())
-                    <ol class="breadcrumb">
-                        <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
-                        <li class="active">Klanten Pagina</li>
-                    </ol>
-
                     <div class="content">
                         <div class="col-md-12">
-                            <h3>Laatste bestellingen</h3>
+                            <table class="table table-striped custab">
+                                <h3>Laatste bestellingen</h3>
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Order datum</th>
+                                    <th>Adres gegevens</th>
+                                    <th>Laatste wijziging</th>
+                                </tr>
+                                </thead>
+                                
+                                @foreach($orders as $order)
+                                    <tr>
+                                        <td>{{ $order->id }}</td>
+                                        <td>{{ $order->created_at }}</td>
+                                        <td>{{ $order->adres }}  {{ $order->huisnummer }}, {{ $order->woonplaats }} 
+                                        </td>
+                                        <td>{{ $order->updated_at }}</td>
+                                    </tr>
+                                @endforeach()
+                            </table>
+                            <hr>
                         </div>
                     </div>
 
+                    <br>
+                    
                     <div class="content">
                         <div class="col-md-6">
                         <h3>Persoonlijke gegevens</h3>
@@ -109,7 +123,7 @@
                         </form>
                         </div>
                     </div>
-
+                    <hr>
 
         @endif()
 
