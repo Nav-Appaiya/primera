@@ -41,19 +41,19 @@
                             Jouw bestelling <div class="pull-right"><small><a class="afix-1" href="{{ url('cart') }}">Terug naar je winkelwagentje</a></small></div>
                         </div>
                         <div class="panel-body">
+{{--                            {{dd(session('cart.items'))}}--}}
                             @foreach(session('cart.items') as $i)
                                 <div class="form-group">
                                     <div class="col-sm-3 col-xs-3">
                                         @if( null !== $i['item']->product()->first()->productimages->first() )
-                                            <img src="{{ $i['item']->product()->first()->productimages()->first()->imagePath }}"
+                                            <img src="/images/product/{{ $i['item']->product()->first()->productimages()->first()->imagePath }}"
                                                  class="img-responsive"
-                                                 width="100px" alt="{{ 
-                                isset($i['item']->product()->first()->productimages()->first()->rel) ? $i['item']->product()->first()->productimages()->first()->rel : "Image-rel-missing" }}">
+                                                 width="100px" alt="{{isset($i['item']->product()->first()->productimages()->first()->rel) ? $i['item']->product()->first()->productimages()->first()->rel : "Image-rel-missing" }}">
 
                                         @else
                                             <img src="/uploads/img/default.jpg" alt="default-img" width="100px">
                                         @endif
-                                        
+                                        {{----}}
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="col-xs-12">{{ $i['item']->product()->first()->name }}</div>

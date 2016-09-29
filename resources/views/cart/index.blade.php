@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('titel', 'Winkelwagen shop')
+@section('breadcrumbs', Breadcrumbs::render('cart'))
 
 @section('content')
 
@@ -149,8 +150,7 @@
                             <select onchange="this.form.submit()" name="betaalmethode" id="betaalmethode">
                                 @foreach ($methods as $method)
                                     <option value="{{$method->id}}"
-                                            style="background-image:url({{$method->image->normal}});"
-                                    >
+                                            style="background-image:url({{$method->image->normal}});">
                                         {{($method->description)}}
                                         {{htmlspecialchars($method->id)}}
                                         <small class="text-right" style="font-size: 6px !important;">

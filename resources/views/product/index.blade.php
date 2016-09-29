@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
 @section('titel', 'Primera shop')
-@section('seotags', 'seotags')
+@section('breadcrumbs', Breadcrumbs::render('category.show', $category))
 
 @section('content')
 <div class="row">
     <div class="col-md-3">
 
 
-{{--{{($category->product)}}aa--}}
+{{--{{()}}aa--}}
             <label>Filter</label>
 
             <style>
