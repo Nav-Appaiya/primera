@@ -6,15 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-//    public function user()
-//    {
-//        return $this->belongsTo('App\User');
-//    }
-//
-//    public function cartItems()
-//    {
-//        return $this->hasMany('App\CartItem');
-//    }
 
     public $items = null;
     public $qty = 0;
@@ -28,6 +19,7 @@ class Cart extends Model
             $this->price = $oldCart->price;
         }
     }
+
     public function add($item, $id){
         $storedItem = ['qty' => 0, 'price' => $this->price, 'item' => $item];
         if ($this->items){

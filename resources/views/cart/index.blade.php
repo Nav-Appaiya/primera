@@ -17,8 +17,6 @@
                             <a><i class="fa fa-times-circle-o" style="color: #8e8b92;" aria-hidden="true"></i> Gegevens</a><br>
                             U heeft geen producten in uw winkelwagen
                         @endif
-
-
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -102,14 +100,16 @@
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h4 class="text-right">Totaal <strong>€ {{Session::has('cart') ? number_format($products['price'], 2) : 0}}</strong></h4>
-                            <h4 class="text-right">incl. btw <strong>€ {{Session::has('cart') ? round( ($products['price'] / 100) * 3.8, 2) : 0}}</strong></h4>
+                            <h4 class="text-right">Subtotaal excl. btw <strong>€ {{Session::has('cart') ? number_format($products['price'] - round( ($products['price'] / 100) * 21, 2), 2) : 0}}</strong></h4>
+                            <h4 class="text-right">btw 21% <strong>€ {{Session::has('cart') ? round( ($products['price'] / 100) * 21, 2) : 0}}</strong></h4>
+
+                            <h4 class="text-right">Totaal incl. btw <strong>€ {{Session::has('cart') ? number_format($products['price'], 2) : 0}}</strong></h4>
 
                             {!! Form::model(null, array('route' => array('cart.update'), 'method' => 'PATCH')) !!}
 
                                 <label>Levering</label><br>
 
-                            {{ Form::text('text', null, ['class' => 'form']) }}
+                            {{--{{ Form::text('text', null, ['class' => 'form']) }}--}}
                                 <input type="radio" name="levering" value="aa"> Verzenden met PostNL<br>
                                 <small>+ €3.95</small><br>
 

@@ -163,7 +163,7 @@
                             <a href="{{ route('cart') }}">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span style="margin-top: 17px; margin-left: -4px; position: absolute;" class="badge">
-                        {{ Session::has('cart') ? Session::get('cart')['qty'] : 0 }}
+                                    {{ Session::has('cart') ? Session::get('cart')['qty'] : 0 }}
                                 </span>
                             </a>
                         </a>
@@ -171,28 +171,31 @@
                         <center>
                             <h3>Winkelwagen</h3>
                         </center>
-                            <table class="table table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td>John</td>
-                                        <td>Doe</td>
-                                        <td>john@example.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mary</td>
-                                        <td>Moe</td>
-                                        <td>mary@example.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>July</td>
-                                        <td>Dooley</td>
-                                        <td>july@example.com</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            @if(Session::has('cart'))
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <th>Afbeelding</th>
+                                            <th>Naam</th>
+                                            <th>Aantal</th>
+                                            <th>Prijs</th>
+                                        </tr>
+                                        @foreach($cart_items->items as $product)
+                                            <tr>
+                                                <td><img class="img-responsive" src="/images/product/{{$product['item']->product->productimages->first()->imagePath}}"></td>
+                                                <td>{{$product['item']->product->name}} {{$product['item']->detail ? '- '.$product['item']->detail->value : ''}}</td>
+                                                <td>{{$product['qty']}} x</td>
+                                                <td>€ {{number_format($product['price'], 2)}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                uw winkelwagen is leeg
+                            @endif
                         <center>
-                            <button style="margin: 0;" type="button" class="btn btn-default">Bekijken</button>
-                            <button style="margin: 0;" type="button" class="btn btn-default">Afrekenen</button>
+                            <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
+{{--                            <a href="{{route('')}}" style="margin: 0;" type="button" class="btn btn-default">Afrekenen</a>--}}
                         </center>
                         </div>
                     </div>
@@ -203,7 +206,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Homepage</a></li>
+                    <li><a href="{{route('homepage')}}">Homepage</a></li>
                     @foreach($main_categories->where('category_id', 0) as $category)
                         <li class="dropdown">
                             <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
@@ -293,36 +296,25 @@
     <div class="container">
         <center>
             <ul class="list-group">
-                <li><a href="">Algemene voorwaarden</a></li>
-                <li><a href="">Cookies</a></li>
-                <li><a href="">Privacy policy</a></li>
-                <li><a href="">Contact</a></li>
-                <li><a href="">Retourneren</a></li>
-                <li><a href="">Garantie</a></li>
+                <li><a href="{{route('voorwaarde')}}">Algemene voorwaarden</a></li>
+                <li><a href="{{route('cookies')}}">Cookies</a></li>
+                <li><a href="{{route('policy')}}">Privacy policy</a></li>
+                <li><a href="{{route('contact')}}">Contact</a></li>
+                <li><a href="{{route('retour')}}">Retourneren</a></li>
+                {{--<li><a href="{{route('retour')}}">faq</a></li>--}}
+                <li><a href="{{route('about')}}">Over ons</a></li>
+                <li><a href="{{route('verzending')}}">Verzending</a></li>
+                <li><a href="{{route('sitemap')}}">sitemap</a></li>
+                {{--<li><a href="{{route('over-ons')}}">Garantie</a></li>--}}
             </ul>
         </center>
     </div>
  </footer>
 
-
-    <!-- Modals -->
-
-    {{--<div id="myModal" class="modal fade" role="dialog">--}}
-      {{--<div class="modal-dialog">--}}
-
-        {{--<!-- Modal content-->--}}
-       {{--<div class="card">--}}
-        {{--<center><h3>Account stuff</h3></center>--}}
-
-       {{--</div>--}}
-
-      {{--</div>--}}
-    {{--</div>--}}
-
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="http://localhost:8080/assets/slick.js"></script>
+    {{--<script type="text/javascript" src="http://localhost:8080/assets/slick.js"></script>--}}
     <script type="text/javascript">
         $('.center').slick({
               centerMode: true,
@@ -410,9 +402,9 @@ responsive: [
             });
 
     </script>
-        @stack('script')
+    @stack('script')
 
-        <script src="{{ URL::asset('assets/js/script.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/script.js') }}"></script>
 
     </body>
 </html>

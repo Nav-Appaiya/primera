@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use App\Category;
+use App\Cart;
+
+use Session;
+
 use Illuminate\Support\ServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -24,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
             $config = $app['config']['services.mollie'];
 
             return Socialite::buildProvider('Mollie\Laravel\MollieConnectProvider', $config);
+        });
+
+        view()->composer('layouts.master', function($view)
+        {
+            $view->with('cart_items', Session::has('cart') ? Session::get('cart') : null);
         });
     }
 
