@@ -1,10 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <ol class="breadcrumb">
-      <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
-      <li class="active">Klanten</li>
-    </ol>
+
     <div class="content">
         <div class="col-md-6">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">

@@ -215,6 +215,12 @@
                 {{--<span class="example-val" id="slider-snap-value-lower">0.00</span>--}}
             {{--</form>--}}
             {{--Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>--}}
+            <label>Merken</label>
+            <select class="form-control">
+                <option>Merk1</option>
+                <option>Merk2</option>
+                <option>Merk3</option>
+            </select>
 </div>
 <div class="col-md-9">
             {{--asd--}}

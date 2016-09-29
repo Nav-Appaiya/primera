@@ -138,7 +138,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <p class="text-right">
                          @if(Auth::check())
-                             <label class="pull-right">Welkom, {{Auth::user()->name}}.</label>
+                             <label class="pull-right">Welkom <a href="{{ route('cart') }}">{{Auth::user()->name}}, </a><a href="/logout">Uitloggen</a></label>
                          @else
                              <a class="pull-right" href="{{route('register')}}">Registeren</a>
                             <small class="pull-right">&nbsp; | &nbsp;</small>
@@ -203,7 +203,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Homepage</a></li>
+                    <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                     @foreach($main_categories->where('category_id', 0) as $category)
                         <li class="dropdown">
                             <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
