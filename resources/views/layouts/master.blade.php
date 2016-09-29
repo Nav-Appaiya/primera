@@ -206,8 +206,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-                    <li><a href="{{route('homepage')}}">Homepage</a></li>
+                    <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                     @foreach($main_categories->where('category_id', 0) as $category)
                         <li class="dropdown">
                             <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>

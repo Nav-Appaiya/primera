@@ -5,11 +5,24 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-lg-12">
+        @if(!$property->isEmpty())
+            @if(count($property) != 1)
+                <p>
+                    <h1></h1>
+                    Er zijn {{count($property)}} producten gevonden
+                </p>
+                 <hr>
+            @else
+                <p>Er is één product gevonden</p>
+                <hr>
+        @endif
+    </div>
 
-
-{{--{{()}}aa--}}
-            <label>Filter</label>
+    <div class="col-md-2">
+    {{--{{()}}aa--}}
+        <div class="filter-sec">
+            <label>CATEGORIEËN</label>
 
             <style>
                 .active > a{
@@ -176,7 +189,9 @@
                     </li>
                 @endforeach
             </ul>
+            </div>
 
+            <div class="filter-sec">
             <label>Prijs</label>
             <form action="{{URL::current()}}">
 
@@ -215,25 +230,22 @@
                 {{--<span class="example-val" id="slider-snap-value-lower">0.00</span>--}}
             {{--</form>--}}
             {{--Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>--}}
-            <label>Merken</label>
-            <select class="form-control">
-                <option>Merk1</option>
-                <option>Merk2</option>
-                <option>Merk3</option>
-            </select>
+            </div>
+
+            <div class="filter-sec">
+                <label>Merken</label>
+                <select class="form-control">
+                    <option>Merk1</option>
+                    <option>Merk2</option>
+                    <option>Merk3</option>
+                </select>
+            </div>
 </div>
-<div class="col-md-9">
+<div class="col-lg-10">
             {{--asd--}}
-                @if(!$property->isEmpty())
-                    @if(count($property) != 1)
-                        <p>Er zijn {{count($property)}} producten gevonden</p>
-                        <hr>
-                    @else
-                        <p>Er is één product gevonden</p>
-                        <hr>
-                    @endif
                     @foreach($property as $product)
-                        <div class="col-lg-3" style="border: 1px solid #000">
+                        <div class="col-lg-3">
+                            <div class="product">
                             <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">
                             <p class="text">{{$product->product->name}}</p>
                             <p class="text">
@@ -245,6 +257,7 @@
                                 @endif
                             </p>
                             <a href="{{route('product.show', [str_replace(' ', '-', $product->product->name), $product->product->id])}}">bekijken</a>
+                            </div>
                         </div>
                     @endforeach
                 @else

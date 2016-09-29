@@ -13,7 +13,6 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix.styles([
         'styles.css',
-        'navbar.css',
-        'main.scss'
+        'navbar.css'
     ]);
 });
