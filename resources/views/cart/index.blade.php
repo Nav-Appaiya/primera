@@ -5,174 +5,123 @@
 
 @section('content')
 
-    <div class="container">
-        <div class="row">
             <div class="row">
-                <div class="col-lg-2 col-lg-offset-1">
-                    <div class="table-bordered">
-                        @if(Session::has('cart'))
-                            <a><i class="fa fa-check-circle-o" style="color: #2cff1c" aria-hidden="true"></i> Bestelling</a>
-                            <br>
-                            product(en) - {{Session::get('cart')['qty']}}<br>
-                            Totaal prijs - {{Session::get('cart')['price']}}<br>
-                        @else
-                            <a><i class="fa fa-times-circle-o" style="color: #8e8b92;" aria-hidden="true"></i> Gegevens</a>
-                            <br>
-                            U heeft geen producten in uw winkelwagen
-                        @endif
-                    </div>
+                <div class="col-lg-12">
+                    <center>
+                        <h2 style="margin-bottom: 25px; margin-top: 0px;">Winkelwagen</h2>
+                    </center>
                 </div>
-                <div class="col-lg-2">
 
-                    <div class="table-bordered">
-                        @if(Auth::check())
-                            @if(Auth::user()->adres && Auth::user()->huisnummer && Auth::user()->voornaam && Auth::user()->achternaam && Auth::user()->postcode && Auth::user()->woonplaats)
-                                <a><i class="fa fa-check-circle-o" style="color: #2cff1c" aria-hidden="true"></i>
-                                    Gegevens</a><br>
-                                {{Auth::user()->voornaam}} {{ Auth::user()->achternaam}}<br>
-                                {{Auth::user()->adres}} -  {{Auth::user()->huisnummer}}<br>
-                                {{Auth::user()->postcode}} -  {{Auth::user()->woonplaats}}
-                            @else
-                                <a><i class="fa fa-times-circle-o" style="color: #8e8b92;" aria-hidden="true"></i>
-                                    Gegevens</a><br>
-                                U heeft nog geen of volledig adres opgegeven
-                            @endif
-                        @else
-                            <a><i class="fa fa-times-circle-o" style="color: #8e8b92;" aria-hidden="true"></i> Gegevens</a>
-                            <br>
-                            <a>Inloggen</a>
-                        @endif
+                <div class="col-lg-9">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            @if(Session::has('cart'))
+                                @foreach($products->items as $product)
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                            <img class="img-responsive"
+                                                 src="/images/product/{{$product['item']->product->productimages->first()->imagePath}}">
 
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <a>levering</a>
-                </div>
-                <div class="col-lg-2">
-                    <a>betaling</a>
-                </div>
-                <div class="col-lg-2">
-                    <a>Bevestiging</a>
-                </div>
-            </div>
-            <div class="col-xs-8">
-                <div class="panel">
-                    <div class="panel-body">
-
-                        <h1>Winkelwagen</h1>
-                        <hr>
-                        @if(Session::has('cart'))
-                            @foreach($products->items as $product)
-                                <div class="row">
-                                    <div class="col-xs-2">
-                                        <img class="img-responsive"
-                                             src="/images/product/{{$product['item']->product->productimages->first()->imagePath}}">
-
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <h4 class="product-name">
-                                            <strong>{{$product['item']->product->name}} {{$product['item']->detail ? '- '.$product['item']->detail->value : ''}}</strong>
-                                            <br>
-                                            <small>{{str_limit($product['item']->product->description, 60, '...')}}</small>
-                                        </h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="col-xs-4 text-right">
-                                            <h6><strong>€{{number_format($product['price'], 2)}}<span
-                                                            class="text-muted"></span></strong></h6>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <h4 class="product-name">
+                                                <strong>{{$product['item']->product->name}} {{$product['item']->detail ? '- '.$product['item']->detail->value : ''}}</strong>
+                                                <br>
+                                                <small>{{str_limit($product['item']->product->description, 60, '...')}}</small>
+                                            </h4>
                                         </div>
                                         <div class="col-xs-6">
-                                            <a href="{{route('cart.add', $product['item']->product->id)}}"
-                                               class="btn btn-sm btn-default fa fa-minus pull-left"
-                                               aria-hidden="true"></a>
-                                            <input type="text" style="width: 40px; margin-right: 4px;"
-                                                   class="form-control input-sm pull-left text-center"
-                                                   value="{{$product['qty']}}" disabled>
-                                            <a href="{{route('cart.add', $product['item']->product->name)}}"
-                                               class="btn btn-sm btn-default fa fa-plus pull-left"
-                                               aria-hidden="true"></a>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <button type="button" class="btn btn-link btn-xs">
-                                                <span class="glyphicon glyphicon-trash"> </span>
-                                            </button>
+                                            <div class="col-xs-4 text-right">
+                                                <h6><strong>€{{number_format($product['price'], 2)}}<span
+                                                                class="text-muted"></span></strong></h6>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <a href="{{route('cart.add', $product['item']->product->id)}}"
+                                                   class="btn btn-sm btn-default fa fa-minus pull-left"
+                                                   aria-hidden="true"></a>
+                                                <input type="text" style="width: 40px; margin-right: 4px;"
+                                                       class="form-control input-sm pull-left text-center"
+                                                       value="{{$product['qty']}}" disabled>
+                                                <a href="{{route('cart.add', $product['item']->product->name)}}"
+                                                   class="btn btn-sm btn-default fa fa-plus pull-left"
+                                                   aria-hidden="true"></a>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <button type="button" class="btn btn-link btn-xs">
+                                                    <span class="glyphicon glyphicon-trash"> </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <hr>
-                            @endforeach
-                        @else
-                            Uw winkelwagen is leeg.
-                        @endif
-
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-xs-4">
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h4 class="text-right">Subtotaal excl. btw <strong>€ {{ Session::has('cart') ? 
-                            number_format($products['price'] - round( ($products['price'] / 100) * 21, 2), 2) : 0}}</strong>
-                            </h4>
-                            <h4 class="text-right">btw 21%
-                                <strong>€ {{Session::has('cart') ? round( ($products['price'] / 100) * 21, 2) : 0}}</strong>
-                            </h4>
-
-                            <h4 class="text-right">Totaal incl. btw
-                                € <strong id="totalprice">{{ Session::has('cart') ? number_format($products['price'], 
-                                2) : 
-                                0}}</strong>
-                            </h4>
-
-                            {!! Form::model(null, array('route' => array('cart.update'), 'method' => 'PATCH')) !!}
-
-                            <label>Levering</label><br>
-
-                            {{--{{ Form::text('text', null, ['class' => 'form']) }}--}}
-                            <input type="radio" name="levering" value="postnl" onclick="verzendkosten(this.value)" checked> 
-                            Verzenden met 
-                            PostNL<br>
-                            <small>+ €3.95</small>
-                            <br>
-
-                            <input type="radio" name="levering" value="ophalen" onclick="verzendkosten(this.value)"> 
-                            Ophalen in
-                            Eindhoven <br>
-                            <small>+ €0.00</small>
-
-                            <br>
-                            <label>Betaalmethoden</label>
-                            <br>
-
-                            <select onchange="this.form.submit()" name="betaalmethode" id="betaalmethode">
-                                @foreach ($methods as $method)
-                                    <option value="{{$method->id}}"
-                                            style="background-image:url({{$method->image->normal}});">
-                                        {{($method->description)}}
-                                        {{htmlspecialchars($method->id)}}
-                                        <small class="text-right" style="font-size: 6px !important;">
-                                            + {{$method->amount->minimum}}</small>
-                                    </option>
+                                    <hr>
                                 @endforeach
-                            </select>
-                            <br><br>
-                            {!! Form::submit('afrekenen', ['class' => 'btn btn-success btn-block'])!!}
+                            @else
+                                Uw winkelwagen is leeg.
+                            @endif
+                        </div>
 
-                            <a href="{{URL::route('cart.empty')}}" class="btn btn-danger btn-block">
-                                legen
-                            </a>
+                        <div class="panel-footer" style="overflow: hidden;">
+                            <div class="col-lg-offset-8 col-lg-4">
+                                <h4 class="text-right">Subtotaal excl. btw <strong>€ {{ Session::has('cart') ? 
+                                number_format($products['price'] - round( ($products['price'] / 100) * 21, 2), 2) : 0}}</strong>
+                                </h4>
+                                <h4 class="text-right">btw 21%
+                                    <strong>€ {{Session::has('cart') ? round( ($products['price'] / 100) * 21, 2) : 0}}</strong>
+                                </h4>
 
-                            {!! Form::close() !!}
+                                <h4 class="text-right">Totaal incl. btw
+                                    € <strong id="totalprice">{{ Session::has('cart') ? number_format($products['price'], 
+                                    2) : 
+                                    0}}</strong>
+                                </h4>
+                            </div>
+                            {!! Form::model(null, array('route' => array('cart.update'), 'method' => 'PATCH')) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            
+                                <label>Levering</label><br>
 
+                                {{--{{ Form::text('text', null, ['class' => 'form']) }}--}}
+                                <input type="radio" name="levering" value="postnl" onclick="verzendkosten(this.value)" checked> 
+                                Verzenden met 
+                                PostNL<br>
+                                <small>+ €3.95</small>
+                                <br>
+
+                                <input type="radio" name="levering" value="ophalen" onclick="verzendkosten(this.value)"> 
+                                Ophalen in
+                                Eindhoven <br>
+                                <small>+ €0.00</small>
+                            <hr/>
+                            <label>Betaalmethoden</label>
+                                <select onchange="this.form.submit()" name="betaalmethode" id="betaalmethode">
+                                    @foreach ($methods as $method)
+                                        <option value="{{$method->id}}"
+                                                style="background-image:url({{$method->image->normal}});">
+                                            {{($method->description)}}
+                                            {{htmlspecialchars($method->id)}}
+                                            <small class="text-right" style="font-size: 6px !important;">
+                                                + {{$method->amount->minimum}}</small>
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <hr/>
+                                {!! Form::submit('afrekenen', ['class' => 'btn btn-success btn-block'])!!}
+
+                                <a href="{{URL::route('cart.empty')}}" class="btn btn-danger btn-block">
+                                    legen
+                                </a>
+
+                                {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
 @stop
 
 @push('script')

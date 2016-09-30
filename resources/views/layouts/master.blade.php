@@ -189,7 +189,7 @@
                                     </tbody>
                                 </table>
                             @else
-                                uw winkelwagen is leeg
+                                <div class="col-m-12">uw winkelwagen is leeg</div>
                             @endif
                         <center>
                             <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
@@ -396,10 +396,10 @@ responsive: [
             });
 
     </script>
-    @stack('script')
-
     <script src="{{ URL::asset('assets/js/slick.js') }}"></script>
+    @stack('script')
     <script src="{{ URL::asset('assets/js/script.js') }}"></script>
+
 
     </body>
 </html>

@@ -245,26 +245,30 @@
             {{--asd--}}
                     @foreach($property as $product)
                         <div class="col-lg-3">
-                            <div class="product">
-                            <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">
-                            <p class="text">{{$product->product->name}}</p>
-                            <p class="text">
-                                @if($product->product->discount != 0)
-                                    <small style="text-decoration:line-through;">{{$product->product->price}}</small>
-                                    <b style="">{{$product->product->price - $product->product->discount}}</b>
-                                @else
-                                    {{$product->product->price}}
-                                @endif
-                            </p>
-                            <a href="{{route('product.show', [str_replace(' ', '-', $product->product->name), $product->product->id])}}">bekijken</a>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">
+                                    <p class="text">{{$product->product->name}}</p>
+                                    <p class="text">
+                                        @if($product->product->discount != 0)
+                                            <small style="text-decoration:line-through;">{{$product->product->price}}</small>
+                                            <b style="">{{$product->product->price - $product->product->discount}}</b>
+                                        @else
+                                            {{$product->product->price}}
+                                        @endif
+                                    </p>
+                                </div>
+                                <div class="panel-footer">
+                                    <a href="{{route('product.show', [str_replace(' ', '-', $product->product->name), $product->product->id])}}">bekijken</a>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
-                @else
-                    <p>Er zijn geen product(en) gevonden</p>
-                    <hr>
-                @endif
-    </div>
+                            @endforeach
+                        @else
+                            <p>Er zijn geen product(en) gevonden</p>
+                            <hr>
+                        @endif
+                     </div>
+ </div>
 @stop
 
 @push('script')
