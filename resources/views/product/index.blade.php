@@ -214,11 +214,12 @@
                         margin-top: 30px;
                     }
                 </style>
-
-                <input type="text" class="unibox-price-min" placeholder="Min Price" onfocus="uniboxResetHint('Min Price',false,this);" onblur="uniboxResetHint('Min Price',true,this);" value="Min Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)" disabled/>
-                <input type="text" class="unibox-price-max" placeholder="Max Price" onfocus="uniboxResetHint('Max Price',false,this);" onblur="uniboxResetHint('Max Price',true,this);" value="Max Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)" disabled/>
+                <input type="text" onchange="this.form.submit()" class="unibox-price-min" placeholder="Min Price" onfocus="uniboxResetHint('Min Price',false,this);" onblur="uniboxResetHint('Min Price',true,this);" value="Min Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)" />
+                <input type="text" onchange="this.form.submit()" class="unibox-price-max" placeholder="Max Price">
 
                 <div id="sliderone" style="width: 100%"></div>
+                <input type="submit" >
+
                 {{--<div id="slider"></div>--}}
                 {{--<div class="unibox-quick-summary-line">--}}
                     {{--<span class="unibox-quick-summary"></span><span>&nbsp;</span>--}}
@@ -228,18 +229,18 @@
             {{--<input id="slider-snap" type="text" class="span2" name="price" value="" data-slider-min="{{$property->first()->product->min('price')}}" data-slider-max="{{$property->first()->product->max('price')}}" data-slider-step="5" data-slider-value="[{{ \Illuminate\Support\Facades\Input::get('price') == null ? $property->first()->product->min('price').','.$property->first()->product->max('price') : \Illuminate\Support\Facades\Input::get('price')}}]"/>--}}
                 {{--<span class="example-val" id="slider-snap-value-upper">800.00</span>--}}
                 {{--<span class="example-val" id="slider-snap-value-lower">0.00</span>--}}
-            {{--</form>--}}
+            </form>
             {{--Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>--}}
             </div>
 
-            <div class="filter-sec">
-                <label>Merken</label>
-                <select class="form-control">
-                    <option>Merk1</option>
-                    <option>Merk2</option>
-                    <option>Merk3</option>
-                </select>
-            </div>
+            {{--<div class="filter-sec">--}}
+                {{--<label>Merken</label>--}}
+                {{--<select class="form-control">--}}
+                    {{--<option>Merk1</option>--}}
+                    {{--<option>Merk2</option>--}}
+                    {{--<option>Merk3</option>--}}
+                {{--</select>--}}
+            {{--</div>--}}
 </div>
 <div class="col-lg-10">
             {{--asd--}}
@@ -298,10 +299,18 @@
                 $("input.unibox-price-min").val(values[0]);
                 $("input.unibox-price-max").val(values[1]);
             });
+
+            $('#selectElementId').change(
+                    function(){
+                        $(this).closest('form').trigger('submit');
+//            $('#sliderone').change(function(){
+//                alert('cake!');
+            });
         });
     </script>
 @endpush
 
 @push('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.css">
+
 @endpush

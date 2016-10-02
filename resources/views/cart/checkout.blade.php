@@ -1,14 +1,7 @@
-
-
-
 @extends('layouts.master')
 
 @section('titel', 'Primera shop')
 @section('seotags', 'seotags')
-
-@section('sidebar')
-    @parent
-@endsection
 
 @section('content')
     
@@ -17,16 +10,16 @@
             <h3 class="text-center">Betaalgegevens invullen</h3>
             <p>
                 <br>
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <p>Controleer het formulier of je alle velden hebt ingevuld: </p>
-            <br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+                @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <p>Controleer het formulier of je alle velden hebt ingevuld: </p>
+                        <br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
             </p>
         </div>

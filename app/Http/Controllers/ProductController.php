@@ -69,6 +69,7 @@ class ProductController extends Controller
                 $q->where('price', '>=', $price[0]);
                 $q->where('price', '<=', $price[1]);
             }
+
             $q->where('status', 'on');
             $q->where('category_id', $id);
         })
@@ -83,7 +84,8 @@ class ProductController extends Controller
 
     public function show($title, $id)
     {
-        return view('product.show')->with('product', $this->product->where('id', $id)->where('status', 'on')->first());
+        return view('product.show')
+            ->with('product', $this->product->where('id', $id)->where('status', 'on')->first());
     }
 
 

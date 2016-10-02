@@ -15,6 +15,12 @@ Breadcrumbs::register('category.show', function($breadcrumbs, $category)
     $breadcrumbs->parent('category', $category->parent);
     $breadcrumbs->push($category->title, route('product.index', [ str_replace(' ', '-', $category->parent->title),  str_replace(' ', '-', $category->title), $category->id]));
 });
+Breadcrumbs::register('product.show', function($breadcrumbs, $product)
+{
+    $breadcrumbs->parent('category.show', $product->category);
+    $breadcrumbs->push($product->name, route('product.show', [$product->title, $product->id]));
+});
+
 Breadcrumbs::register('cart', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');

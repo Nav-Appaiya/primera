@@ -36,7 +36,10 @@ Route::get('/winkelwagen', ['as' => 'cart', 'uses' => 'CartController@index']);
 Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@create']);
 Route::get('/winkelwagen/legen', ['as' => 'cart.empty', 'uses' => 'CartController@destroy']);
 Route::post('/winkelwagen/toevoegen', ['as' => 'cart.add', 'uses' => 'CartController@store']);
+Route::post('/winkelwagen/verwijderen', ['as' => 'cart.remove', 'uses' => 'CartController@remove']);
 Route::patch('/winkelwagen', ['as' => 'cart.update', 'uses' => 'CartController@update']);
+
+Route::get('/winkelwagen/stap/{number}', ['as' => 'product.check', 'uses' => 'CartController@check']);
 
 
 // oAuth Routes for facebook

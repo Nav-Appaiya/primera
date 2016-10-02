@@ -1,41 +1,25 @@
 @extends('layouts.master')
 
 @section('titel', 'Detail product')
+@section('breadcrumbs', Breadcrumbs::render('product.show', $product))
 
 @section('content')
 
-    <ol class="breadcrumb">
-        <li><a href="{{ URL::route('homepage') }}">Homepage</a></li>
-        <li>Products</li>
-        <li class="active">Product name</li>
-    </ol>
     <div class="row">
-        <div class="col-md-12">
-            {{--@if($product->category_id)--}}
-            {{--{!! Breadcrumbs::render('product_detail', $product) !!}--}}
-            {{--@endif--}}
 
-            {{--@if (Session::has('status'))--}}
-                {{--<div class="alert alert-info">{{ Session::get('status') }}</div>--}}
-            {{--@endif--}}
-
-        </div>
         <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="content">
                 <div class="artst-pic pull-left">
-                    {{--<a href="#">--}}
-
+                    @if($product->productimages()->exists())
                         @foreach($product->productimages()->get() as $image) 
-                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="{{$image->imagePath}}">
+                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="/images/product/{{$image->imagePath}}">
                         @endforeach
-{{--                        <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="350" height="230" class="">--}}
-                    {{--</a>--}}
+                    @else
+                        <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="/images/dummy.jpg">
+                    @endif
                 </div>
                 <div class="artst-prfle pull-right col-md-12 col-xs-12 col-sm-12">
 
-                    {{--<div class="art-title">--}}
-                        {{--{{ $product->name }} ({{$product->categories()->first()->title}})--}}
-                        {{--<br><span class="artst-sub">--}}
                     <h1>{{$product->name}}</h1>
 
                     <label>beschrijving</label><br>
@@ -58,22 +42,6 @@
                         @endif
                     </small>
 
-
-                            {{--{{ Form::select('number', \App\Property::where('product_id', $product->id)->pluck('nicotine', 'id')->toArray(), null) }}--}}
-
-
-                        {{--</span>--}}
-                    {{--</div>--}}
-                    {{--@if(count($seotags))--}}
-                    {{--<div class="pull-left">--}}
-                    {{--<ul>--}}
-                    {{--<strong>Seotags: </strong><br>--}}
-                    {{--@foreach($seotags as $seotag)--}}
-                    {{--<li>{{ $seotag->seotag }}</li>--}}
-                    {{--@endforeach--}}
-                    {{--</ul>--}}
-                    {{--</div>--}}
-                    {{--@endif--}}
                     <div class="pull-right">
                         <div class="row center-block">
                             <div class="btn-group wishlist">
@@ -94,18 +62,14 @@
                                     @else
                                         <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
                                     @endif
-                                <br>
+                                    <br>
                                     {{ Form::submit('In winkelwagen', ['class' => 'btn btn-primary']) }}
-                                    {{--{"id":1,"product_id":1,"stock":"2","serialNumber":"345462562","detail_id":0,"created_at":null,"updated_at":null}--}}
+
                                 {{ Form::close() }}
-                                {{-- TODO: Add to shoppingcart button ajax --}}
-                                {{--<a href="{{ route('cart.add', $product) }}" class="btn btn-success btn-product"--}}
-                                   {{--onclick="">--}}
-                                    {{--In winkelwagen<span class="fa fa-shopping-cart"></span>--}}
-                                {{--</a>--}}
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

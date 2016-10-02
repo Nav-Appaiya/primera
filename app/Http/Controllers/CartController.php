@@ -131,6 +131,17 @@ class CartController extends Controller
         return redirect()->route('cart');
     }
 
+    public function remove(Request $request)
+    {
+        $property = Property::where('serialNumber', $request->serialcode)->first();
+
+        $cart = new Cart($this->oldCart);
+        $cart->remove($property, $property->id);
+        $request->session()->put('cart', $cart);
+
+        return redirect()->route('cart');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -142,6 +153,58 @@ class CartController extends Controller
         Session::forget('cart');
         return redirect()->back();
     }
+
+
+    public function check(Request $request, $id)
+    {
+        $session = $request->Session('options');
+
+        if(!$session){
+            // Uw gegevens
+            $rules = [
+                'value'          => 'required|unique:details,value',
+            ];
+        }elseif ($session){
+            //Verzendmethode
+            $rules = [
+                'value'          => 'required|unique:details,value',
+            ];
+        }elseif ($id == 3){
+            //Betaalmethode
+            $rules = [
+                'value'          => 'required|unique:details,value',
+            ];
+        }elseif ($id == 4){
+            //Bevestiging
+            //check mollie for status
+        }
+
+
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('admin_property_create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $details = $this->detail;
+
+        $details->type = $request->type;
+        $details->value = $request->value;
+
+        $details->save();
+
+
+        \Session::flash('succes_message','successfully.');
+
+        return redirect()->route('cart');
+
+//        return view('cart')->with('', );
+    }
+
 }
 
 

@@ -36,15 +36,22 @@
                                                                 class="text-muted"></span></strong></h6>
                                             </div>
                                             <div class="col-xs-6">
-                                                <a href="{{route('cart.add', $product['item']->product->id)}}"
-                                                   class="btn btn-sm btn-default fa fa-minus pull-left"
-                                                   aria-hidden="true"></a>
+
+                                                <form action="{{ route('cart.add') }}" method="post">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-sm btn-default fa fa-plus pull-left" name="serialcode"
+                                                            id="serialcode" value="{{ $product['item']->product->property()->first()->serialNumber }}">
+                                                    </button>
+                                                </form>
                                                 <input type="text" style="width: 40px; margin-right: 4px;"
                                                        class="form-control input-sm pull-left text-center"
                                                        value="{{$product['qty']}}" disabled>
-                                                <a href="{{route('cart.add', $product['item']->product->name)}}"
-                                                   class="btn btn-sm btn-default fa fa-plus pull-left"
-                                                   aria-hidden="true"></a>
+                                                <form action="{{ route('cart.remove') }}" method="post">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-sm btn-default fa fa-minus pull-left" name="serialcode"
+                                                            id="serialcode" value="{{ $product['item']->product->property()->first()->serialNumber }}">
+                                                    </button>
+                                                </form>
                                             </div>
                                             <div class="col-xs-2">
                                                 <button type="button" class="btn btn-link btn-xs">
@@ -97,19 +104,19 @@
                                 Eindhoven <br>
                                 <small>+ €0.00</small>
                             <hr/>
-                            <label>Betaalmethoden</label>
-                                <select onchange="this.form.submit()" name="betaalmethode" id="betaalmethode">
-                                    @foreach ($methods as $method)
-                                        <option value="{{$method->id}}"
-                                                style="background-image:url({{$method->image->normal}});">
-                                            {{($method->description)}}
-                                            {{htmlspecialchars($method->id)}}
-                                            <small class="text-right" style="font-size: 6px !important;">
-                                                + {{$method->amount->minimum}}</small>
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <hr/>
+                            {{--<label>Betaalmethoden</label>--}}
+                                {{--<select onchange="this.form.submit()" name="betaalmethode" id="betaalmethode">--}}
+                                    {{--@foreach ($methods as $method)--}}
+                                        {{--<option value="{{$method->id}}"--}}
+                                                {{--style="background-image:url({{$method->image->normal}});">--}}
+                                            {{--{{($method->description)}}--}}
+                                            {{--{{htmlspecialchars($method->id)}}--}}
+                                            {{--<small class="text-right" style="font-size: 6px !important;">--}}
+                                                {{--+ {{$method->amount->minimum}}</small>--}}
+                                        {{--</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                                {{--<hr/>--}}
                                 {!! Form::submit('afrekenen', ['class' => 'btn btn-success btn-block'])!!}
 
                                 <a href="{{URL::route('cart.empty')}}" class="btn btn-danger btn-block">
@@ -153,6 +160,6 @@
 @endpush
 
 @push('css')
-<link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css"/>
+{{--<link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css"/>--}}
 @endpush
 

@@ -38,4 +38,23 @@ class Cart extends Model
         $this->price += $item->product->price;
     }
 
+    public function remove($item, $id)
+    {
+        $storedItem = [
+            'qty' => 0,
+            'price' =>  $this->price,
+            'item' => $item
+        ];
+        if ($this->items) {
+            if (array_key_exists($id, $this->items)) {
+                $storedItem = $this->items[$id];
+            }
+        }
+        $storedItem['qty']--;
+        $storedItem['price'] = $item->product->price * $storedItem['qty'];
+        $this->items[$id] = $storedItem;
+        $this->qty--;
+        $this->price -= $item->product->price;
+    }
+
 }
