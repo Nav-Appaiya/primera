@@ -16,23 +16,25 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             @if(Session::has('cart'))
-                                @foreach($products->items as $product)
+                                {{--{{dd(Session::get('cart'))}}--}}
+                                @foreach($products->items as $product => $key)
+                                    {{($product)}}
                                     <div class="row">
                                         <div class="col-xs-2">
                                             <img class="img-responsive"
-                                                 src="/images/product/{{$product['item']->product->productimages->first()->imagePath}}">
+                                                 src="/images/product/{{$key['item']->product->productimages->first()->imagePath}}">
 
                                         </div>
                                         <div class="col-xs-4">
                                             <h4 class="product-name">
-                                                <strong>{{$product['item']->product->name}} {{$product['item']->detail ? '- '.$product['item']->detail->value : ''}}</strong>
+                                                <strong>{{$key['item']->product->name}} {{$key['item']->detail ? '- '.$key['item']->detail->value : ''}}</strong>
                                                 <br>
-                                                <small>{{str_limit($product['item']->product->description, 60, '...')}}</small>
+                                                <small>{{str_limit($key['item']->product->description, 60, '...')}}</small>
                                             </h4>
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="col-xs-4 text-right">
-                                                <h6><strong>€{{number_format($product['price'], 2)}}<span
+                                                <h6><strong>€{{number_format($key['price'], 2)}}<span
                                                                 class="text-muted"></span></strong></h6>
                                             </div>
                                             <div class="col-xs-6">
@@ -40,23 +42,29 @@
                                                 <form action="{{ route('cart.add') }}" method="post">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <button type="submit" class="btn btn-sm btn-default fa fa-plus pull-left" name="serialcode"
-                                                            id="serialcode" value="{{ $product['item']->product->property()->first()->serialNumber }}">
+                                                            id="serialcode" value="{{ $key['item']->serialNumber }}">
                                                     </button>
                                                 </form>
                                                 <input type="text" style="width: 40px; margin-right: 4px;"
                                                        class="form-control input-sm pull-left text-center"
-                                                       value="{{$product['qty']}}" disabled>
+                                                       value="{{$key['qty']}}" disabled>
                                                 <form action="{{ route('cart.remove') }}" method="post">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <button type="submit" class="btn btn-sm btn-default fa fa-minus pull-left" name="serialcode"
-                                                            id="serialcode" value="{{ $product['item']->product->property()->first()->serialNumber }}">
+                                                            id="serialcode" value="{{ $key['item']->serialNumber }}">
                                                     </button>
                                                 </form>
                                             </div>
                                             <div class="col-xs-2">
-                                                <button type="button" class="btn btn-link btn-xs">
-                                                    <span class="glyphicon glyphicon-trash"> </span>
-                                                </button>
+
+                                                <form action="{{ route('cart.remove_key') }}" method="post">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-sm btn-default pull-left" name="serialcode"
+                                                            id="serialcode" value="{{ $product }}">
+                                                        <span class="glyphicon glyphicon-trash"> </span>
+                                                    </button>
+                                                </form>
+
                                             </div>
                                         </div>
                                     </div>

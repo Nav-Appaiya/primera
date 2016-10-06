@@ -37,6 +37,7 @@ Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartCon
 Route::get('/winkelwagen/legen', ['as' => 'cart.empty', 'uses' => 'CartController@destroy']);
 Route::post('/winkelwagen/toevoegen', ['as' => 'cart.add', 'uses' => 'CartController@store']);
 Route::post('/winkelwagen/verwijderen', ['as' => 'cart.remove', 'uses' => 'CartController@remove']);
+Route::post('/winkelwagen/verwijder/item', ['as' => 'cart.remove_key', 'uses' => 'CartController@remove_key']);
 Route::patch('/winkelwagen', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 
 Route::get('/winkelwagen/stap/{number}', ['as' => 'product.check', 'uses' => 'CartController@check']);
@@ -73,8 +74,8 @@ Route::get('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLog
 //Route::post('auth/login', 'Auth\AuthController@postLogin');
 //Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('auth/register', 'Auth\AuthController@postRegister');
-Route::get('password/email', 'Auth\PasswordController@getEmail');
-Route::post('password/email', 'Auth\PasswordController@postEmail');
+//Route::get('password/email', 'Auth\PasswordController@getEmail');/*
+//Route::post('password/email', 'Auth\PasswordController@postEmail');*/
 //Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 //Route::post('password/reset', 'Auth\PasswordController@postReset');
 //});
@@ -83,6 +84,7 @@ Route::post('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@
 Route::get('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
 Route::get('/uitloggen', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+
 Route::get('/account-herstel', ['as' => 'forgot', 'uses' => 'Auth\PasswordController@postEmail']);
 //Route::get('/account-herstel/{token}', ['as' => 'forgot', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('/account-herstel', ['as' => 'forgot', 'uses' => 'Auth\PasswordController@postEmail']);

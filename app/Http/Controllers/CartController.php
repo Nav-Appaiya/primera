@@ -131,6 +131,7 @@ class CartController extends Controller
         return redirect()->route('cart');
     }
 
+
     public function remove(Request $request)
     {
         $property = Property::where('serialNumber', $request->serialcode)->first();
@@ -138,6 +139,99 @@ class CartController extends Controller
         $cart = new Cart($this->oldCart);
         $cart->remove($property, $property->id);
         $request->session()->put('cart', $cart);
+
+        return redirect()->route('cart');
+    }
+
+    public function remove_key(Request $request)
+    {
+
+
+//        $property = Property::where('id', $request->serialcode)->first();
+//        dd($property);
+
+//        $asd = $request->session()->pull('cart.items', array_diff($request->session()->get('cart.items'), [$request->serialcode]));
+//        $request->session()->forget('cart.items.'.$request->serialcode);
+//
+//        unset($this->oldCart['items'][$request->serialcode]);
+
+        $items = array_except($this->oldCart['items'], $request->serialcode);
+
+        dd($items);
+
+        foreach ($items as $item){
+
+            $property = Property::find($item->id)->first();
+
+            $cart = new Cart($this->oldCart);
+            $cart->add($property, $property->id);
+        }
+
+
+        $request->session()->put('cart', $cart);
+
+
+//        $newCart = $this->oldCart;
+//        $request->session()->forget('cart.items.3');
+//        $newCart = $request->session()->get('cart')['items'];
+
+         $newCart = array_except($this->oldCart['items'], $request->serialcode);
+
+        dd(Session::get('cart'));
+//        $cart = new Cart($newCart);
+
+//        $request->session()->put('cart', $cart);
+
+
+//        Session::forget('cart.items.3');
+//        dd($newCart);
+//        dd((int)$request->serialcode);
+
+//        foreach ($cart as $index => $product) {
+//            if ($product['productId'] == $id) {
+//                unset($newCart[$request->serialcode]);
+//            }
+//        }
+//        session(['cart' => $cart]);
+
+//        dd($request->serialcode);
+//
+//        dd($request->session()->get('cart'));
+
+//        $request->session()->put('cart', $cart);
+
+//        if($request->session()->get('cart') == NULL){
+//            Session::forget('cart');
+//        }
+
+
+
+//        $newCart =;
+
+//        return new Cart($newCart);
+//        unset($cart['items'][$request->serialcode]);
+
+//        return dd($cart);
+
+
+
+//        if(Session::has('cart')) {
+//            $classes = Session::get('cart.items');
+//            foreach($classes as $index => $class) {
+//                if($data['class'] === $class) {
+//                    unset($classes[$index]);
+//                    $newClass = array_values($classes);
+//                    Session::put('class', $newClass);
+//                    return Response::json(array(
+//                            'success' => true,
+//                            'code' => 1,
+//                            'class' => $classes,
+//                            'message' => $data['class'] . ' removed from cart'
+//                        )
+//                    );
+//                }
+//            }
+//        }
 
         return redirect()->route('cart');
     }

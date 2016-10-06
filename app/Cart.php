@@ -22,8 +22,8 @@ class Cart extends Model
     public function add($item, $id)
     {
         $storedItem = [
-            'qty' => 0, 
-            'price' =>  $this->price, 
+            'qty' => 0,
+            'price' =>  $this->price,
             'item' => $item
         ];
         if ($this->items) {
@@ -46,7 +46,7 @@ class Cart extends Model
             'item' => $item
         ];
         if ($this->items) {
-            if (array_key_exists($id, $this->items)) {
+            if (array_key_exists($id, $this->items) || $this->items['qty'] != 0) {
                 $storedItem = $this->items[$id];
             }
         }
