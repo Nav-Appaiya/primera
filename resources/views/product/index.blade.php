@@ -246,10 +246,10 @@
 <div class="col-lg-9">
             {{--asd--}}
     @if(count($property) > 0)
-        @if(count($property) > 0)
-            <p>Er is <b>één</b> producten gevonden.</p>
+        @if(count($property) == 1)
+            <p>Er is <b>één</b> product gevonden.</p>
         @elseif(count($property) > 1)
-            <p>Er zijn {{count($property)}} producten gevonden.</p>
+            <p>Er zijn <b>{{count($property)}}</b> producten gevonden.</p>
         @endif
         <hr>
         @foreach($property as $product)
@@ -274,21 +274,10 @@
             </div>
         @endforeach
     @else
-        <hr>
-        <p>Er is geen product gevonden.</p>
+        <p>Er is <b>geen</b> product gevonden.</p>
     @endif
     <hr>
 
-
-
-        {{--@else--}}
-            {{--<p>Er zijn geen product(en) gevonden</p>--}}
-            {{--<hr>--}}
-        {{--@endif--}}
-    {{$min_price}}
-    {{$max_price}}
-    {{$min}}
-    {{$max}}
      </div>
  </div>
 @stop
@@ -298,19 +287,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
     <script type="text/javascript">
 
-
       jQuery(document).ready(function() {
 
-            var min = {!! 15 !!};
-            var max = {!! $max == 0 ? $max_price : $max  !!};
+            var min = {!! $min_price !!};
+            var max = {!! $max_price !!};
             {{--var max = {!! ($propexrty->first()->product->max('price')) !!};--}}
 
             $("#sliderone").noUiSlider({
-                start: [{!! 15!!}, {!! $max_price !!}],
+                start: [{!! $min !!}, {!! $max !!}],
                 step: 1,
                 connect: true,
                 range: {
-                    'min': [ {!! 0 !!} ],
+                    'min': [ {!! $min_price !!} ],
                     {{--'min': [ {!! (count( $property) == 0 ? 0 : $property->first()->product->min('price') ) !!} ],--}}
                     'max': [ {!! $max_price !!} ]
                 }
@@ -325,8 +313,8 @@
             });
 
             $('#selectElementId').change(
-                    function(){
-                        $(this).closest('form').trigger('submit');
+                function(){
+                    $(this).closest('form').trigger('submit');
 //            $('#sliderone').change(function(){
 //                alert('cake!');
             });
