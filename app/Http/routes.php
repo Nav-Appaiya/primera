@@ -79,6 +79,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 //Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 //Route::post('password/reset', 'Auth\PasswordController@postReset');
 //});
+
 Route::get('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@postRegister']);
 Route::get('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);

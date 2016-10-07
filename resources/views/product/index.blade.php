@@ -6,20 +6,21 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
-        @if(!$property->isEmpty())
-            @if(count($property) != 1)
-                <p>
-                    <h1></h1>
-                    Er zijn {{count($property)}} producten gevonden
-                </p>
-                 <hr>
-            @else
-                <p>Er is één product gevonden</p>
-                <hr>
-        @endif
+        {{--@if(!$property->isEmpty())--}}
+        {{--@if(count($property) != 1)--}}
+            {{--<p>--}}
+                {{--<h1></h1>--}}
+                {{--Er zijn {{count($property)}} producten gevonden--}}
+            {{--</p>--}}
+             {{--<hr>--}}
+        {{--@else--}}
+            {{--<p>Er is één product gevonden</p>--}}
+            {{--<hr>--}}
+        {{--@endif--}}
+
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-3">
     {{--{{()}}aa--}}
         <div class="filter-sec">
             <label>CATEGORIEËN</label>
@@ -214,8 +215,8 @@
                         margin-top: 30px;
                     }
                 </style>
-                <input type="text" onchange="this.form.submit()" class="unibox-price-min" placeholder="Min Price" onfocus="uniboxResetHint('Min Price',false,this);" onblur="uniboxResetHint('Min Price',true,this);" value="Min Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)" />
-                <input type="text" onchange="this.form.submit()" class="unibox-price-max" placeholder="Max Price">
+                <input type="text" name="min" onchange="this.form.submit()" class="unibox-price-min" placeholder="Min Price" onfocus="uniboxResetHint('Min Price',false,this);" onblur="uniboxResetHint('Min Price',true,this);" value="Min Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)" />
+                <input type="text" name="max" class="unibox-price-max" placeholder="Max Price" value="0">
 
                 <div id="sliderone" style="width: 100%"></div>
                 <input type="submit" >
@@ -242,33 +243,53 @@
                 {{--</select>--}}
             {{--</div>--}}
 </div>
-<div class="col-lg-10">
+<div class="col-lg-9">
             {{--asd--}}
-                    @foreach($property as $product)
-                        <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">
-                                    <p class="text">{{$product->product->name}}</p>
-                                    <p class="text">
-                                        @if($product->product->discount != 0)
-                                            <small style="text-decoration:line-through;">{{$product->product->price}}</small>
-                                            <b style="">{{$product->product->price - $product->product->discount}}</b>
-                                        @else
-                                            {{$product->product->price}}
-                                        @endif
-                                    </p>
-                                </div>
-                                <div class="panel-footer">
-                                    <a href="{{route('product.show', [str_replace(' ', '-', $product->product->name), $product->product->id])}}">bekijken</a>
-                                </div>
-                            </div>
-                            @endforeach
-                        @else
-                            <p>Er zijn geen product(en) gevonden</p>
-                            <hr>
-                        @endif
-                     </div>
+    @if(count($property) > 0)
+        @if(count($property) > 0)
+            <p>Er is <b>één</b> producten gevonden.</p>
+        @elseif(count($property) > 1)
+            <p>Er zijn {{count($property)}} producten gevonden.</p>
+        @endif
+        <hr>
+        @foreach($property as $product)
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">
+                        <p class="text">{{$product->product->name}}</p>
+                        <p class="text">
+                            @if($product->product->discount != 0)
+                                <small style="text-decoration:line-through;">{{$product->product->price}}</small>
+                                <b style="">{{$product->product->price - $product->product->discount}}</b>
+                            @else
+                                {{$product->product->price}}
+                            @endif
+                        </p>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{{route('product.show', [str_replace(' ', '-', $product->product->name), $product->product->id])}}">bekijken</a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @else
+        <hr>
+        <p>Er is geen product gevonden.</p>
+    @endif
+    <hr>
+
+
+
+        {{--@else--}}
+            {{--<p>Er zijn geen product(en) gevonden</p>--}}
+            {{--<hr>--}}
+        {{--@endif--}}
+    {{$min_price}}
+    {{$max_price}}
+    {{$min}}
+    {{$max}}
+     </div>
  </div>
 @stop
 
@@ -276,19 +297,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
     <script type="text/javascript">
-        jQuery(document).ready(function() {
 
-            var min = {!! (count( $property) == 0 ? 0 : $property->first()->product->min('price') ) !!};
-            var max = {!! (count( $property) == 0 ? 0 : $property->first()->product->max('price') ) !!};
-            {{--var max = {!! ($property->first()->product->max('price')) !!};--}}
+
+      jQuery(document).ready(function() {
+
+            var min = {!! 15 !!};
+            var max = {!! $max == 0 ? $max_price : $max  !!};
+            {{--var max = {!! ($propexrty->first()->product->max('price')) !!};--}}
 
             $("#sliderone").noUiSlider({
-                start: [{!! (count( $property) == 0 ? 0 : $property->first()->product->min('price') ) !!}, {!! (count( $property) == 0 ? 0 : $property->first()->product->max('price') ) !!}],
+                start: [{!! 15!!}, {!! $max_price !!}],
                 step: 1,
                 connect: true,
                 range: {
-                    'min': [ {!! (count( $property) == 0 ? 0 : $property->first()->product->min('price') ) !!} ],
-                    'max': [ {!! (count( $property) == 0 ? 0 : $property->first()->product->max('price') ) !!} ]
+                    'min': [ {!! 0 !!} ],
+                    {{--'min': [ {!! (count( $property) == 0 ? 0 : $property->first()->product->min('price') ) !!} ],--}}
+                    'max': [ {!! $max_price !!} ]
                 }
             });
 
