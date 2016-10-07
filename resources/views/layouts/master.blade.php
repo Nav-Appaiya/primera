@@ -247,35 +247,7 @@
                 <div>
                     <center>
                         <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
-                    </center>
-                </div>
-                <div>
-                    <center>
                         <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
-                    </center>
-                </div>
-                <div>
-                    <center>
-                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
-                    </center>
-                </div>
-                <div>
-                     <center>
-                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
-                    </center>
-                </div>
-                <div>
-                    <center>
-                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
-                    </center>
-                </div>
-                <div>
-                    <center>
-                        <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
-                    </center>
-                </div>
-                <div>
-                    <center>
                         <img class="brand" width="80%" src="http://esmoker-shop.nl/wp-content/uploads/2014/07/squape_logo_pos_dunkel_mit.png"/>
                     </center>
                 </div>
@@ -299,7 +271,7 @@
                 <li><a href="{{route('about')}}">Over ons</a></li>
                 <li><a href="{{route('verzending')}}">Verzending</a></li>
                 <li><a href="{{route('sitemap')}}">sitemap</a></li>
-                {{--<li><a href="{{route('over-ons')}}">Garantie</a></li>--}}
+                <li><a href="{{route('garantie')}}">Garantie</a></li>
             </ul>
         </center>
     </div>
@@ -336,8 +308,7 @@
               ]
             });
 
-
-$('.multiple-items').slick({
+        $('.multiple-items').slick({
   infinite: true,
   slidesToShow: 3,
   slidesToScroll: 3,
@@ -365,7 +336,7 @@ responsive: [
               ]
 });
 
-            $('.slider-brands').slick({
+        $('.slider-brands').slick({
               centerMode: true,
               centerPadding: '40px',
               arrows: false,
@@ -396,9 +367,18 @@ responsive: [
             });
 
     </script>
-    <script src="{{ URL::asset('assets/js/slick.js') }}"></script>
+
+    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+    <script type="text/javascript">
+        window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"light-top"};
+    </script>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
+    <!-- End Cookie Consent plugin -->
+
+    {{--<script src="{{ URL::asset('assets/js/slick.js') }}"></script>--}}
     @stack('script')
-    <script src="{{ URL::asset('assets/js/script.js') }}"></script>
+    {{--<script src="{{ URL::asset('assets/js/script.js') }}"></script>--}}
 
 
     </body>

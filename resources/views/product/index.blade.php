@@ -221,27 +221,9 @@
                 <div id="sliderone" style="width: 100%"></div>
                 <input type="submit" >
 
-                {{--<div id="slider"></div>--}}
-                {{--<div class="unibox-quick-summary-line">--}}
-                    {{--<span class="unibox-quick-summary"></span><span>&nbsp;</span>--}}
-                {{--</div>--}}
-            {{--<input value="{{$property->first()->product->min('price')}}">--}}
-            {{--<input value="{{$property->first()->product->max('price')}}">--}}
-            {{--<input id="slider-snap" type="text" class="span2" name="price" value="" data-slider-min="{{$property->first()->product->min('price')}}" data-slider-max="{{$property->first()->product->max('price')}}" data-slider-step="5" data-slider-value="[{{ \Illuminate\Support\Facades\Input::get('price') == null ? $property->first()->product->min('price').','.$property->first()->product->max('price') : \Illuminate\Support\Facades\Input::get('price')}}]"/>--}}
-                {{--<span class="example-val" id="slider-snap-value-upper">800.00</span>--}}
-                {{--<span class="example-val" id="slider-snap-value-lower">0.00</span>--}}
             </form>
-            {{--Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>--}}
-            </div>
+    </div>
 
-            {{--<div class="filter-sec">--}}
-                {{--<label>Merken</label>--}}
-                {{--<select class="form-control">--}}
-                    {{--<option>Merk1</option>--}}
-                    {{--<option>Merk2</option>--}}
-                    {{--<option>Merk3</option>--}}
-                {{--</select>--}}
-            {{--</div>--}}
 </div>
 <div class="col-lg-9">
             {{--asd--}}

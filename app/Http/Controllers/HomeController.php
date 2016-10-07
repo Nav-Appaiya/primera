@@ -57,6 +57,11 @@ class HomeController extends Controller
         return view('main.cookie');
     }
 
+    public function garantie()
+    {
+        return view('main.garantie');
+    }
+
     public function sitemap()
     {
         return view('main.cookie');
