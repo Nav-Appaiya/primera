@@ -130,7 +130,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <p class="text-left">
-                        Besteld voor 6 uur volgende dag in huis
+                        Op werkdagen besteld voor 18:00 uur, de volgende dag in huis!
                     </p>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6">

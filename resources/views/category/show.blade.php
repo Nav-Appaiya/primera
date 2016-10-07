@@ -6,14 +6,16 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <h1>{{$category->title}}</h1>
-                <hr>
-                <br>
+            <h2>{{$category->title}}</h2>
+        </div>
                 @foreach($category->children as $child)
                     <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">
-                        <div class="col-lg-3 thumbnail">
-                            <h1>{{$child->title}}</h1>
+                        <div class="col-lg-4">
+                            <div class="panel grey">
+                                <div class="panel-body">
+                                    <h6>{{$child->title}}</h6>
+                                </div>
+                            </div>
                         </div>
                     </a>
                 @endforeach

@@ -40,24 +40,25 @@
                     <div class="panel-footer">
                             <div class="btn-group cart">
                                 <a href="{{ route('product.show', [str_replace(' ', '-', $product->name), $product->id]) }}" class="btn btn-info btn-product">
-                                    Meer weten <span class="fa fa-question-circle"></span>
+                                    <span class="fa fa-question-circle"></span>
                                 </a>
                             </div>
-                            @if($product->property()->sum('stock') == 0)
-                                uitverkocht
-                            @else
-                                op voorraad
-                            @endif
                             <div class="btn-group wishlist">
                                 <form action="{{ route('cart.add') }}" method="post">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                     <button type="submit" class="btn btn-success btn-product" name="serialcode" 
                                             id="serialcode" value="{{ $product->property()->first()->serialNumber }}">
-                                        In winkelwagen<span class="fa fa-shopping-cart"></span>
+                                        <span class="fa fa-shopping-cart"></span>
                                     </button>
                                 </form>
                             </div>
+                            <font class="pull-right">@if($product->property()->sum('stock') == 0)
+                                uitverkocht
+                            @else
+                                op voorraad
+                            @endif
+                            </font>
                         </div>
                     </div>
 
@@ -81,7 +82,7 @@
 
                             <div class="btn-group cart">
                                 <a href="{{ route('product.show', [str_replace(' ', '-', $product->name), $product->id]) }}" class="btn btn-info btn-product">
-                                    Meer weten <span class="fa fa-question-circle"></span>
+                                    <span class="fa fa-question-circle"></span>
                                 </a>
                             </div>
                             @if($product->property()->sum('stock') == 0)
@@ -95,7 +96,7 @@
 
                                     <button type="submit" class="btn btn-success btn-product" name="serialcode" 
                                             id="serialcode" value="{{ $product->property()->first()->serialNumber }}">
-                                        In winkelwagen<span class="fa fa-shopping-cart"></span>
+                                        <span class="fa fa-shopping-cart"></span>
                                     </button>
                                 </form>
                             </div>
