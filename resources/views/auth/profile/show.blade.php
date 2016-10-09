@@ -6,10 +6,19 @@
 
 @section('content')
         @if(Auth::check())
-                    <div class="content">
+
+                        <div class="col-lg-12">
+                            <center>
+                                <h2 style="margin-bottom: 45px; margin-top: 0px;">Laatste bestellingen</h2>
+                            </center>
+                        </div>
+
                         <div class="col-md-12">
+                          <div class="row">
+                          <div class="panel panel-default">
+                            <div class="panel-body">
                             <table class="table table-striped custab">
-                                <h3>Laatste bestellingen</h3>
+                                <h3></h3>
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -31,12 +40,19 @@
                             </table>
                             <hr>
                         </div>
+                      </div>
+                      </div>
                     </div>
-
-                    <br>
-                    
+                    <div class="col-lg-12">
+                    <center>
+                        <h2 style="margin-bottom: 45px; margin-top: 25px;">Account info</h2>
+                    </center>
+                    </div>
                     <div class="content">
+                      <div class="row">
                         <div class="col-md-6">
+                      <div class="panel panel-default">
+                      <div class="panel-body">
                         <h3>Persoonlijke gegevens</h3>
                         <form class="form-horizontal" role="form">
                           <div class="form-group">
@@ -81,6 +97,9 @@
                               <input class="form-control" type="text" value="{{ $user->telThuis }} & {{ $user->telMobiel }}">
                             </div>
                           </div>
+
+                        </div>
+                          <div class="panel-footer o-hidden">
                           <div class="form-group">
                             <label class="col-md-3 control-label"></label>
                             <div class="col-md-8">
@@ -90,8 +109,12 @@
                             </div>
                           </div>
                         </form>
+                          </div>
+                        </div>
                         </div>
                     <div class="col-md-6">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
                         <h3>Account gegevens</h3>
                         <form class="form-horizontal" role="form">
                           <div class="form-group">
@@ -112,6 +135,8 @@
                               <input class="form-control" type="password" value="*******">
                             </div>
                           </div>
+                        </div>
+                        <div class="panel-footer o-hidden">
                           <div class="form-group">
                             <label class="col-md-3 control-label"></label>
                             <div class="col-md-8">
@@ -123,7 +148,9 @@
                         </form>
                         </div>
                     </div>
-                    <hr>
+                    </div>
+                    </div>
+                    </div>
 
         @endif()
 

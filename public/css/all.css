@@ -258,6 +258,10 @@ a, a:hover {
     left: 10px;
 }
 
+.o-hidden {
+    overflow: hidden;
+}
+
 .right-border {
     border-right: 1px #D5D4D4 solid;
 }
@@ -270,7 +274,6 @@ h2 {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 17px;
-    margin-bottom: 15px;
 }
 
 input:active,input:focus,textarea:active,textarea:hover,textarea:focus,button:focus,button:active,button:hover,select:hover,select:focus,select:active{outline:0px!important;}
