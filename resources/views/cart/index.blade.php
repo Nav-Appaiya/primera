@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <center>
-                        <h2 style="margin-bottom: 25px; margin-top: 0px;">Winkelwagen</h2>
+                        <h2>Winkelwagen</h2>
                     </center>
                 </div>
 

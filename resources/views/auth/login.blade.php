@@ -1,7 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-
+            <div class="row">
+                <div class="col-lg-12">
+                    <center>
+                        <h2>Inloggen</h2>
+                    </center>
+                </div>
     <div class="content">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
