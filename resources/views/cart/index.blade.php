@@ -18,7 +18,7 @@
                             @if(Session::has('cart'))
                                 {{--{{dd(Session::get('cart'))}}--}}
                                 @foreach($products->items as $product => $key)
-                                    {{($product)}}
+                                    {{--{{($product)}}--}}
                                     <div class="row">
                                         <div class="col-xs-2">
                                             <img class="img-responsive"
@@ -39,21 +39,26 @@
                                             </div>
                                             <div class="col-xs-6">
 
+                                                <form action="{{ route('cart.remove') }}" method="post">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-sm btn-default fa fa-minus pull-left" name="serialcode" {{$key['qty'] == 1 ? 'disabled' : '' }}
+                                                            id="serialcode" value="{{ $key['item']->serialNumber }}">
+                                                    </button>
+                                                </form>
+
+                                                <input type="text" style="width: 40px; margin-right: 4px;"
+                                                       class="form-control input-sm pull-left text-center"
+                                                       value="{{$key['qty']}}" disabled>
+
                                                 <form action="{{ route('cart.add') }}" method="post">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <button type="submit" class="btn btn-sm btn-default fa fa-plus pull-left" name="serialcode"
                                                             id="serialcode" value="{{ $key['item']->serialNumber }}">
                                                     </button>
                                                 </form>
-                                                <input type="text" style="width: 40px; margin-right: 4px;"
-                                                       class="form-control input-sm pull-left text-center"
-                                                       value="{{$key['qty']}}" disabled>
-                                                <form action="{{ route('cart.remove') }}" method="post">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <button type="submit" class="btn btn-sm btn-default fa fa-minus pull-left" name="serialcode"
-                                                            id="serialcode" value="{{ $key['item']->serialNumber }}">
-                                                    </button>
-                                                </form>
+
+
+
                                             </div>
                                             <div class="col-xs-2">
 

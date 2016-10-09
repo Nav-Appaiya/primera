@@ -13,7 +13,9 @@
             <div class="row">
                 {!! Form::model($user, array('route' => 'user.edit', 'method' => 'post', 'files' => true )) !!}
                 <fieldset>
-
+ss
+ss
+ss
                     <div class="form-group">
                         {!! Form::label('email', 'email') !!}
                         {!! Form::text('email', NULL, array('class' => 'form-control')) !!}

@@ -7,6 +7,8 @@
 
     <div class="row">
 
+        @include('errors.message')
+
         <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="content">
                 <div class="artst-pic pull-left">
@@ -42,14 +44,31 @@
                         @endif
                     </small>
 
+{{--                   {{dd($errors->has('serialcode'))}}--}}
+                    {{--<div class="form-group">--}}
+                        {{--<label for="password" class="col-md-4 control-label">Password</label>--}}
+
+                        {{--<div class="col-md-6">--}}
+                            {{--<input id="password" type="password" class="form-control" name="password">--}}
+
+                            {{--@if ($errors->has('serialcode'))--}}
+                                {{--<span class="help-block">--}}
+                                    {{--<strong>{{ $errors->get('serialcode') }}</strong>--}}
+                                {{--</span>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+
+
                     <div class="pull-right">
                         <div class="row center-block">
-                            <div class="btn-group wishlist">
+                            <div class="btn-group wishlist form-group  {{ $errors->has('serialcode') ? ' has-error has-feedback' : '' }}">
                                 {!! Form::model($product, array('route' => 'cart.add', 'method' => 'post', 'files' => true)) !!}
                                     @if($product->property()->first()->detail_id)
-                                        <label>{{$product->property()->first()->detail->type}}</label>
+                                        <label for="detail">{{$product->property()->first()->detail->type}}</label>
                                         @if($product->property()->first()->detail->type)
-                                            <select class="form-control" name="serialcode">
+                                            <select id="detail" class="form-control" name="serialcode" >
+                                                <option value="">Maak uw keuzen.</option>
                                                 @foreach($product->property as $property)
                                                     @if($property->stock == 0)
                                                         <option value="{{$property->serialNumber}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>

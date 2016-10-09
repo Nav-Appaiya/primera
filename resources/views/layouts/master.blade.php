@@ -136,7 +136,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <p class="text-right">
                          @if(Auth::check())
-                             <label class="pull-right">Welkom <a href="{{ route('cart') }}">{{Auth::user()->name}}, </a><a href="/logout">Uitloggen</a></label>
+                             <label class="pull-right">Welkom <a href="{{ route('user.show') }}">{{Auth::user()->name}}, </a><a href="/logout">Uitloggen</a></label>
                          @else
                              <a class="pull-right" href="{{route('register')}}">Registeren</a>
                             <small class="pull-right">&nbsp; | &nbsp;</small>
@@ -222,8 +222,6 @@
         </div>
     </div>
 </header>
-    {{--@section('sidebar')--}}
-       
 
     {{--@show--}}
 <section class="bread-crumb">

@@ -65,7 +65,6 @@ class ProductController extends Controller
             $min = Input::has('min') ? Input::get('min') : $min = 0;
 
             if($max || $min) {
-//                $price = explode(',', $price);
                 $q->where('price', '>=', $min);
                 $q->where('price', '<=', $max);
             }
@@ -76,15 +75,8 @@ class ProductController extends Controller
         ->groupBy('product_id')
         ->get();
 
-//dd(count($property));
-//        if(count($property) > 0){
-            $min_price = Property::first()->product->where('category_id', $id)->min('price');
-            $max_price = Property::first()->product->where('category_id', $id)->max('price');
-//        }else{
-//            $min_price = 0.00;
-//            $max_price = 0.00;
-//        }
-
+        $min_price = Property::first()->product->where('category_id', $id)->min('price');
+        $max_price = Property::first()->product->where('category_id', $id)->max('price');
         $max = Input::has('max') ? Input::get('max') : $max_price;
         $min = Input::has('min') ? Input::get('min') : $min_price;
 

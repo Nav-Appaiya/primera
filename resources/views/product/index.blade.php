@@ -183,7 +183,9 @@
                         <ul class="{{ $parent->id == $category->parent->id ? 'active' : '' }}">
                             @foreach($parent->children as $children)
                                <li class="{{$children->id == str_replace('c-', '', Request::segment(3)) ? 'active' : '' }}">
-                                    <a href="{{route('product.index', [ str_replace(' ', '-', $category->parent->title),  str_replace(' ', '-', $children->title), $children->id])}}">{{$children->title}}</a>
+                                    <a href="{{route('product.index', [ str_replace(' ', '-', $category->parent->title),  str_replace(' ', '-', $children->title), $children->id])}}">
+                                        > {{$children->title}}
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>
@@ -219,7 +221,11 @@
                 <input type="text" name="max" class="unibox-price-max" placeholder="Max Price" value="0">
 
                 <div id="sliderone" style="width: 100%"></div>
-                <input type="submit" >
+                <br>
+                <br>
+                <br>
+
+                <input class="btn btn-primary" type="submit" value="Zoeken">
 
             </form>
     </div>

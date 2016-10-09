@@ -122,13 +122,31 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'serialcode' => 'required'
+//            'asd' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+//            return redirect()->route('cart');
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+//        dd($request->all());
+
         $property = Property::where('serialNumber', $request->serialcode)->first();
 
         $cart = new Cart($this->oldCart);
         $cart->add($property, $property->id);
         $request->session()->put('cart', $cart);
+//
+        \Session::flash('succes_message','successfully.');
 
-        return redirect()->route('cart');
+        return redirect()->back();
     }
 
 
@@ -273,8 +291,6 @@ class CartController extends Controller
             //check mollie for status
         }
 
-
-
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -295,8 +311,6 @@ class CartController extends Controller
         \Session::flash('succes_message','successfully.');
 
         return redirect()->route('cart');
-
-//        return view('cart')->with('', );
     }
 
 }
