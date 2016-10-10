@@ -136,7 +136,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <p class="text-right">
                          @if(Auth::check())
-                             <label class="pull-right">Welkom <a href="{{ route('user.show') }}">{{Auth::user()->name}}, </a><a href="/logout">Uitloggen</a></label>
+                             <label class="pull-right">Welkom <a href="{{ route('user.show') }}">{{Auth::user()->name}}, </a><a href="{{route('logout')}}">Uitloggen</a></label>
                          @else
                              <a class="pull-right" href="{{route('register')}}">Registeren</a>
                             <small class="pull-right">&nbsp; | &nbsp;</small>
@@ -368,7 +368,13 @@ responsive: [
 
     <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
     <script type="text/javascript">
-        window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"light-top"};
+        window.cookieconsent_options = {
+            "message":"This website uses cookies to ensure you get the best experience on our website",
+            "dismiss":"Got it!",
+            "learnMore":"More info",
+            "link":null,
+            "theme":"light-top"
+        };
     </script>
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
@@ -376,7 +382,7 @@ responsive: [
 
     {{--<script src="{{ URL::asset('assets/js/slick.js') }}"></script>--}}
     @stack('script')
-    {{--<script src="{{ URL::asset('assets/js/script.js') }}"></script>--}}
+    <script src="{{ URL::asset('assets/js/script.js') }}"></script>
 
 
     </body>

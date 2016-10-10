@@ -83,16 +83,15 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/mijn-gegevens', ['as' => 'user.show', 'uses' => 'user\UserController@show']);
     Route::get('/mijn-gegevens/wijzigen', ['as' => 'user.edit', 'uses' => 'user\UserController@edit']);
     Route::patch('/mijn-gegevens', ['as' => 'user.update', 'uses' => 'user\UserController@update']);
-
-    Route::get('/mijn-bestelling', ['as' => 'user.order.index', 'uses' => 'Auth\OrderController@index']);
+    Route::get('/mijn-gegevens/wachtwoord', ['as' => 'user.password.edit', 'uses' => 'user\UserController@password_edit']);
+    Route::patch('/mijn-gegevens/wachtwoord', ['as' => 'user.password.update', 'uses' => 'user\UserController@password_update']);
+    //    Route::get('/mijn-bestelling', ['as' => 'user.order.index', 'uses' => 'Auth\OrderController@index']);
     //    Route::get('/mijn-bestelling/{order_id}', ['as' => 'user.order.show', 'uses' => 'Auth\OrderController@show']);
-
     Route::get('auth/logout', ['as' => 'logoff', 'uses' => 'Auth\AuthController@getLogout']);
 });
 
 // Admin authorisation only for admins, not authed users!
 Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
-//Route::group(['middlewareGroups' => ['web']], function () {
     Route::get('/', ['as' => 'admin_dashboard_index', 'uses' => 'admin\HomeController@index']);
 
     Route::get('product/create', ['as' => 'admin_product_create', 'uses' => 'admin\ProductController@create']);

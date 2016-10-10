@@ -27,6 +27,22 @@ Breadcrumbs::register('cart', function($breadcrumbs)
     $breadcrumbs->push('Winkelwagen', route('cart'));
 });
 
+Breadcrumbs::register('user.dashboard', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Account Paneel', route('user.show'));
+});
+Breadcrumbs::register('user.dashboard.wijzigen', function($breadcrumbs)
+{
+    $breadcrumbs->parent('user.dashboard');
+    $breadcrumbs->push('Persoonsgegevens Wijzigen', route('user.edit'));
+});
+Breadcrumbs::register('user.dashboard.password.wijzigen', function($breadcrumbs)
+{
+    $breadcrumbs->parent('user.dashboard');
+    $breadcrumbs->push('Wachtwoord Wijzigen', route('user.password.edit'));
+});
+
 
 /////////////
 
