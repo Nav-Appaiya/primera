@@ -200,8 +200,22 @@
                 </div>
             </div>
             <div class="search-button">
-                <i class="fa fa-search" aria-hidden="true"></i>
+                <div class="">
+                    <div class="dropdown">
+                        <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="{{ route('cart') }}">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </a>
+                        </a>
+                        <div class="dropdown-menu dropdown-to-right">
+                            <div class="form-group">
+                               <input type="email" class="form-control" id="email">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
