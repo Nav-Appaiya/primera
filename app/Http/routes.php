@@ -13,6 +13,7 @@
 
 //Route::auth();
 
+
 Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
 
 // Checkout & Payment routes
