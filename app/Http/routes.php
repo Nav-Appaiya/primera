@@ -13,30 +13,28 @@
 
 //Route::auth();
 
-
 Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
 
 // Checkout & Payment routes
-Route::get('/checkout', ['as' => 'checkout_index', 'uses' => 'CheckoutController@index']);
-Route::post('/checkout', ['as' => 'checkout', 'uses' => 'CheckoutController@checkout']);
+//Route::get('/checkout', ['as' => 'checkout_index', 'uses' => 'CheckoutController@index']);
+//Route::post('/checkout', ['as' => 'checkout', 'uses' => 'CheckoutController@checkout']);
 Route::get('/payment', ['as' => 'payment', 'uses' => 'MainController@payment']);
 Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'CheckoutController@payed']);
 
 Route::get('/winkelwagen', ['as' => 'cart', 'uses' => 'CartController@index']);
-Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@create']);
+//Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@create']);
 Route::get('/winkelwagen/legen', ['as' => 'cart.empty', 'uses' => 'CartController@destroy']);
 Route::post('/winkelwagen/toevoegen', ['as' => 'cart.add', 'uses' => 'CartController@store']);
 Route::post('/winkelwagen/verwijderen', ['as' => 'cart.remove', 'uses' => 'CartController@remove']);
 Route::post('/winkelwagen/verwijder/item', ['as' => 'cart.remove_key', 'uses' => 'CartController@remove_key']);
 Route::patch('/winkelwagen', ['as' => 'cart.update', 'uses' => 'CartController@update']);
-
-Route::get('/winkelwagen/stap/{number}', ['as' => 'product.check', 'uses' => 'CartController@check']);
+Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@edit']);
 
 // oAuth Routes for facebook
 Route::get('/redirect', 'SocialAuthController@redirect');
 Route::get('/callback', 'SocialAuthController@handleProviderCallback');
 
-//Route::group(['middleware' => 'web'], function () {
+// product & category routes
 Route::get('/{name}/c-{id}', ['as' => 'category.show', 'uses' => 'CategoryController@show']);
 Route::get('/{cate1}/{cate2}/c-{id}/', ['as' => 'product.index', 'uses' => 'ProductController@index']);
 Route::get('/{title}/p-{id}', ['as' => 'product.show', 'uses' => 'ProductController@show']);
@@ -56,29 +54,16 @@ Route::get('/faq', ['as' => 'faq', 'uses' => 'HomeController@faq']);
 // Start of contact routes
 Route::get('/contact', ['as' => 'contact', 'uses' => 'ContactController@index']);
 Route::post('contact', ['as' => 'contact_store', 'uses' => 'ContactController@store']);
-//    Route::get('/winkelwagen', ['as' => '', 'uses' => 'HomeController@']);
 
-// User authentication routes... Nav Appaiya 19 July 21:55
-Route::get('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
-//Route::get('/inloggen', ['uses' => 'Auth\AuthController@getLogin']);
-//Route::post('auth/login', 'Auth\AuthController@postLogin');
-//Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
-Route::post('auth/register', 'Auth\AuthController@postRegister');
-//Route::get('password/email', 'Auth\PasswordController@getEmail');/*
-//Route::post('password/email', 'Auth\PasswordController@postEmail');*/
-//Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-//Route::post('password/reset', 'Auth\PasswordController@postReset');
-//});
-
+// User authentication routes...
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+Route::get('password/reset', 'Auth\PasswordController@getReset');
+Route::post('password/reset/{token}', 'Auth\PasswordController@postReset');
 Route::get('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@postRegister']);
 Route::get('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
-Route::get('/uitloggen', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
-
-Route::get('/account-herstel', ['as' => 'forgot', 'uses' => 'Auth\PasswordController@postEmail']);
-//Route::get('/account-herstel/{token}', ['as' => 'forgot', 'uses' => 'Auth\AuthController@getLogin']);
-Route::post('/account-herstel', ['as' => 'forgot', 'uses' => 'Auth\PasswordController@postEmail']);
 
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/mijn-gegevens', ['as' => 'user.show', 'uses' => 'user\UserController@show']);
@@ -88,7 +73,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::patch('/mijn-gegevens/wachtwoord', ['as' => 'user.password.update', 'uses' => 'user\UserController@password_update']);
     //    Route::get('/mijn-bestelling', ['as' => 'user.order.index', 'uses' => 'Auth\OrderController@index']);
     //    Route::get('/mijn-bestelling/{order_id}', ['as' => 'user.order.show', 'uses' => 'Auth\OrderController@show']);
-    Route::get('auth/logout', ['as' => 'logoff', 'uses' => 'Auth\AuthController@getLogout']);
+    Route::get('/uitloggen', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 });
 
 // Admin authorisation only for admins, not authed users!

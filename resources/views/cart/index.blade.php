@@ -5,142 +5,131 @@
 
 @section('content')
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <center>
-                        <h2>Winkelwagen</h2>
-                    </center>
-                </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <center>
+                <h2>Winkelwagen</h2>
+            </center>
+        </div>
 
-                <div class="col-lg-9">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            @if(Session::has('cart'))
-                                {{--{{dd(Session::get('cart'))}}--}}
-                                @foreach($products->items as $product => $key)
-                                    {{--{{($product)}}--}}
-                                    <div class="row">
-                                        <div class="col-xs-2">
-                                            <img class="img-responsive"
-                                                 src="/images/product/{{$key['item']->product->productimages->first()->imagePath}}">
+        <div class="col-lg-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @if(Session::has('cart'))
+                        {{--{{dd(Session::get('cart'))}}--}}
+                        @foreach($products->items as $product => $key)
+                            {{--{{($product)}}--}}
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <img class="img-responsive"
+                                         src="/images/product/{{$key['item']->product->productimages->first()->imagePath}}">
 
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <h4 class="product-name">
-                                                <strong>{{$key['item']->product->name}} {{$key['item']->detail ? '- '.$key['item']->detail->value : ''}}</strong>
-                                                <br>
-                                                <small>{{str_limit($key['item']->product->description, 60, '...')}}</small>
-                                            </h4>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="col-xs-4 text-right">
-                                                <h6><strong>€{{number_format($key['price'], 2)}}<span
-                                                                class="text-muted"></span></strong></h6>
-                                            </div>
-                                            <div class="col-xs-6">
-
-                                                <form action="{{ route('cart.remove') }}" method="post">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <button type="submit" class="btn btn-sm btn-default fa fa-minus pull-left" name="serialcode" {{$key['qty'] == 1 ? 'disabled' : '' }}
-                                                            id="serialcode" value="{{ $key['item']->serialNumber }}">
-                                                    </button>
-                                                </form>
-
-                                                <input type="text" style="width: 40px; margin-right: 4px;"
-                                                       class="form-control input-sm pull-left text-center"
-                                                       value="{{$key['qty']}}" disabled>
-
-                                                <form action="{{ route('cart.add') }}" method="post">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <button type="submit" class="btn btn-sm btn-default fa fa-plus pull-left" name="serialcode"
-                                                            id="serialcode" value="{{ $key['item']->serialNumber }}">
-                                                    </button>
-                                                </form>
-
-
-
-                                            </div>
-                                            <div class="col-xs-2">
-
-                                                <form action="{{ route('cart.remove_key') }}" method="post">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <button type="submit" class="btn btn-sm btn-default pull-left" name="serialcode"
-                                                            id="serialcode" value="{{ $product }}">
-                                                        <span class="glyphicon glyphicon-trash"> </span>
-                                                    </button>
-                                                </form>
-
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h4 class="product-name">
+                                        <strong>{{$key['item']->product->name}} {{$key['item']->detail ? '- '.$key['item']->detail->value : ''}}</strong>
+                                        <br>
+                                        <small>{{str_limit($key['item']->product->description, 60, '...')}}</small>
+                                    </h4>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-4 text-right">
+                                        <h6><strong>€{{number_format($key['price'], 2)}}<span
+                                                        class="text-muted"></span></strong></h6>
                                     </div>
-                                    <hr>
-                                @endforeach
-                            @else
-                                Uw winkelwagen is leeg.
-                            @endif
-                        </div>
+                                    <div class="col-xs-6">
 
-                        <div class="panel-footer" style="overflow: hidden;">
-                            <div class="col-lg-offset-8 col-lg-4">
-                                <h4 class="text-right">Subtotaal excl. btw <strong>€ {{ Session::has('cart') ? 
-                                number_format($products['price'] - round( ($products['price'] / 100) * 21, 2), 2) : 0}}</strong>
-                                </h4>
-                                <h4 class="text-right">btw 21%
-                                    <strong>€ {{Session::has('cart') ? round( ($products['price'] / 100) * 21, 2) : 0}}</strong>
-                                </h4>
+                                        <form action="{{ route('cart.remove') }}" method="post">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="submit" class="btn btn-sm btn-default fa fa-minus pull-left" name="serialcode" {{$key['qty'] == 1 ? 'disabled' : '' }}
+                                                    id="serialcode" value="{{ $key['item']->serialNumber }}">
+                                            </button>
+                                        </form>
 
-                                <h4 class="text-right">Totaal incl. btw
-                                    € <strong id="totalprice">{{ Session::has('cart') ? number_format($products['price'], 
-                                    2) : 
-                                    0}}</strong>
-                                </h4>
+                                        <input type="text" style="width: 40px; margin-right: 4px;"
+                                               class="form-control input-sm pull-left text-center"
+                                               value="{{$key['qty']}}" disabled>
+
+                                        <form action="{{ route('cart.add') }}" method="post">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="submit" class="btn btn-sm btn-default fa fa-plus pull-left" name="serialcode"
+                                                    id="serialcode" value="{{ $key['item']->serialNumber }}">
+                                            </button>
+                                        </form>
+
+                                    </div>
+                                    <div class="col-xs-2">
+
+                                        <form action="{{ route('cart.remove_key') }}" method="post">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="submit" class="btn btn-sm btn-default pull-left" name="serialcode"
+                                                    id="serialcode" value="{{ $product }}">
+                                                <span class="glyphicon glyphicon-trash"> </span>
+                                            </button>
+                                        </form>
+
+                                    </div>
+                                </div>
                             </div>
-                            {!! Form::model(null, array('route' => array('cart.update'), 'method' => 'PATCH')) !!}
-                        </div>
-                    </div>
+                            <hr>
+                        @endforeach
+                    @else
+                        Uw winkelwagen is leeg.
+                    @endif
                 </div>
-                <div class="col-lg-3">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            
-                                <label>Levering</label><br>
 
-                                {{--{{ Form::text('text', null, ['class' => 'form']) }}--}}
-                                <input type="radio" name="levering" value="postnl" onclick="verzendkosten(this.value)" checked> 
-                                Verzenden met 
-                                PostNL<br>
-                                <small>+ €3.95</small>
-                                <br>
+                <div class="panel-footer" style="overflow: hidden;">
+                    <div class="col-lg-offset-8 col-lg-4">
+                        <h4 class="text-right">Subtotaal excl. btw <strong>€ {{ Session::has('cart') ?
+                        number_format($products['price'] - round( ($products['price'] / 100) * 21, 2), 2) : 0}}</strong>
+                        </h4>
+                        <h4 class="text-right">btw 21%
+                            <strong>€ {{Session::has('cart') ? round( ($products['price'] / 100) * 21, 2) : 0}}</strong>
+                        </h4>
 
-                                <input type="radio" name="levering" value="ophalen" onclick="verzendkosten(this.value)"> 
-                                Ophalen in
-                                Eindhoven <br>
-                                <small>+ €0.00</small>
-                            <hr/>
-                            {{--<label>Betaalmethoden</label>--}}
-                                {{--<select onchange="this.form.submit()" name="betaalmethode" id="betaalmethode">--}}
-                                    {{--@foreach ($methods as $method)--}}
-                                        {{--<option value="{{$method->id}}"--}}
-                                                {{--style="background-image:url({{$method->image->normal}});">--}}
-                                            {{--{{($method->description)}}--}}
-                                            {{--{{htmlspecialchars($method->id)}}--}}
-                                            {{--<small class="text-right" style="font-size: 6px !important;">--}}
-                                                {{--+ {{$method->amount->minimum}}</small>--}}
-                                        {{--</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                                {{--<hr/>--}}
-                                {!! Form::submit('afrekenen', ['class' => 'btn btn-success btn-block'])!!}
-
-                                <a href="{{URL::route('cart.empty')}}" class="btn btn-danger btn-block">
-                                    legen
-                                </a>
-
-                                {!! Form::close() !!}
-                        </div>
+                        <h4 class="text-right">Totaal incl. btw
+                            € <strong id="totalprice">{{ Session::has('cart') ? number_format($products['price'],
+                            2) :
+                            0}}</strong>
+                        </h4>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+{{--                    {!! Form::model(null, array('route' => array('cart.checkout'), 'method' => 'PATCH')) !!}--}}
+
+                        <label>Levering</label><br>
+
+                        {{--{{ Form::text('text', null, ['class' => 'form']) }}--}}
+                        <input type="radio" name="levering" value="postnl" onclick="verzendkosten(this.value)">
+                        Verzenden met
+                        PostNL<br>
+                        <small>+ €3.95</small>
+                        <br>
+
+                        <input type="radio" name="levering" value="ophalen" onclick="verzendkosten(this.value)">
+                        Ophalen in
+                        Eindhoven <br>
+                        <small>+ €0.00</small>
+                        <hr/>
+
+                        <a href="{{URL::route('cart.checkout')}}" class="btn btn-success btn-block">
+                            afrekenen
+                        </a>
+                        <a href="{{URL::route('cart.empty')}}" class="btn btn-danger btn-block">
+                            legen
+                        </a>
+
+{{--                    {!! Form::close() !!}--}}
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 @stop
 

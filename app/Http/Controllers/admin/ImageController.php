@@ -39,6 +39,5 @@ class ImageController extends Controller
         }
 
         return redirect()->back();
-//        return 'ok';
     }
 }

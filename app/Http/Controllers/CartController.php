@@ -37,6 +37,7 @@ class CartController extends Controller
     {
         $this->oldCart = Session::has('cart') ? Session::get('cart') : null;
         $this->product = Product::all();
+        $this->options = Session::has('options') ? Session::get('options') : null;
     }
 
     /**
@@ -46,14 +47,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = session()->get('cart', []);
-        $methods = Mollie::api()->methods()->all();
-        
         return view('cart.index')
-            ->with([
-                'products' => $cart,
-                'methods' => $methods
-            ]);
+            ->with('products', new Cart($this->oldCart));
     }
 
     /**
@@ -66,8 +61,6 @@ class CartController extends Controller
         $producten = [];
         $total = 0;
         $user = Auth::user();
-        
-        debug(session()->get('cart', []));
 
         return view('cart.checkout')->with([
             'cart' => session('cart'),
@@ -75,6 +68,13 @@ class CartController extends Controller
             'total' => $total,
             'user'=>$user
         ]);
+    }
+
+    public function edit()
+    {
+
+
+        return view('cart.checkout')->with('user', Auth::user());
     }
 
     public function update(Request $request)
@@ -87,7 +87,6 @@ class CartController extends Controller
         session([
             'options' => [
                 'levering' => $request->levering,
-                'betaalmethode' => $request->betaalmethode,
                 'gegevens' => [
                     'voornaam' => $user->voornaam,
                     'achternaam' => $user->achternaam,

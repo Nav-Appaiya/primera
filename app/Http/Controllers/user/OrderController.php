@@ -41,7 +41,9 @@ class OrderController extends Controller
      */
     public function edit()
     {
-        return view('auth.profile.edit')->with('user', $this->user);
+
+//        dd('asd');
+//        return view('cart.checkout');
     }
 
     /**
@@ -53,7 +55,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
 }
