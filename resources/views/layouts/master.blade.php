@@ -189,7 +189,9 @@
                                     </tbody>
                                 </table>
                             @else
-                                <div class="col-m-12">uw winkelwagen is leeg</div>
+                                <div class="col-m-12" style="width: 240px">
+                                    <center>uw winkelwagen is leeg</center>
+                                </div>
                             @endif
                         <center>
                             <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
