@@ -78,51 +78,34 @@
                     @endif
                 </div>
 
-                <div class="panel-footer" style="overflow: hidden;">
-                    <div class="col-lg-offset-8 col-lg-4">
-                        <h4 class="text-right">Subtotaal excl. btw <strong>€ {{ Session::has('cart') ?
-                        number_format($products['price'] - round( ($products['price'] / 100) * 21, 2), 2) : 0}}</strong>
-                        </h4>
-                        <h4 class="text-right">btw 21%
-                            <strong>€ {{Session::has('cart') ? round( ($products['price'] / 100) * 21, 2) : 0}}</strong>
-                        </h4>
-
-                        <h4 class="text-right">Totaal incl. btw
-                            € <strong id="totalprice">{{ Session::has('cart') ? number_format($products['price'],
-                            2) :
-                            0}}</strong>
-                        </h4>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-body">
 
-{{--                    {!! Form::model(null, array('route' => array('cart.checkout'), 'method' => 'PATCH')) !!}--}}
+                    <h5 class="text-right">Subtotaal excl. btw <strong>€ {{ Session::has('cart') ?
+                    number_format($products['price'] - round( ($products['price'] / 100) * 21, 2), 2) : 0}}</strong>
+                    </h5>
+                    <small class="pull-right">btw 21%
+                        <strong>€ {{Session::has('cart') ? round( ($products['price'] / 100) * 21, 2) : 0}}</strong>
+                    </small>
 
-                        <label>Levering</label><br>
+                    <br>
+                    <h4 class="text-right">Totaal incl. btw
+                        € <strong id="totalprice">{{ Session::has('cart') ? number_format($products['price'],
+                        2) :
+                        0}}</strong>
+                    </h4>
+                    <hr/>
 
-                        {{--{{ Form::text('text', null, ['class' => 'form']) }}--}}
-                        <input type="radio" name="levering" value="postnl" onclick="verzendkosten(this.value)">
-                        Verzenden met
-                        PostNL<br>
-                        <small>+ €3.95</small>
-                        <br>
 
-                        <input type="radio" name="levering" value="ophalen" onclick="verzendkosten(this.value)">
-                        Ophalen in
-                        Eindhoven <br>
-                        <small>+ €0.00</small>
-                        <hr/>
-
-                        <a href="{{URL::route('cart.checkout')}}" class="btn btn-success btn-block">
-                            afrekenen
-                        </a>
-                        <a href="{{URL::route('cart.empty')}}" class="btn btn-danger btn-block">
-                            legen
-                        </a>
+                    <a href="{{URL::route('cart.checkout')}}" class="btn btn-success btn-block">
+                        afrekenen
+                    </a>
+                    <a href="{{URL::route('cart.empty')}}" class="btn btn-danger btn-block">
+                        legen
+                    </a>
 
 {{--                    {!! Form::close() !!}--}}
 

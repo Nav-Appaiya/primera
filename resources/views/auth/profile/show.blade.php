@@ -21,6 +21,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Order datum</th>
+                        <th>Prijs</th>
+                        <th>Status</th>
                         <th>Adres gegevens</th>
                         <th>Laatste wijziging</th>
                     </tr>
@@ -30,6 +32,8 @@
                     <tr>
                         <td>{{ $order->id }}</td>
                         <td>{{ $order->created_at }}</td>
+                        <td>{{ $order->total_price }}</td>
+                        <td>{{ $order->status }}</td>
                         <td>{{ $order->adres }}  {{ $order->huisnummer }}, {{ $order->woonplaats }}
                         </td>
                         <td>{{ $order->updated_at }}</td>

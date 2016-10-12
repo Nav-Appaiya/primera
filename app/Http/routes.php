@@ -19,7 +19,10 @@ Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
 //Route::get('/checkout', ['as' => 'checkout_index', 'uses' => 'CheckoutController@index']);
 //Route::post('/checkout', ['as' => 'checkout', 'uses' => 'CheckoutController@checkout']);
 Route::get('/payment', ['as' => 'payment', 'uses' => 'MainController@payment']);
-Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'CheckoutController@payed']);
+
+//Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'CheckoutController@payed']);
+Route::get('/order/create/{id}', ['as' => 'order.create', 'uses' => 'MollieController@create']);
+Route::get('/order/payment/{id}', ['as' => 'order.get', 'uses' => 'MollieController@get']);
 
 Route::get('/winkelwagen', ['as' => 'cart', 'uses' => 'CartController@index']);
 //Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@create']);
@@ -29,6 +32,8 @@ Route::post('/winkelwagen/verwijderen', ['as' => 'cart.remove', 'uses' => 'CartC
 Route::post('/winkelwagen/verwijder/item', ['as' => 'cart.remove_key', 'uses' => 'CartController@remove_key']);
 Route::patch('/winkelwagen', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@edit']);
+Route::patch('/winkelwagen/checkout', ['as' => 'cart.checkout.check', 'uses' => 'CartController@check']);
+
 
 // oAuth Routes for facebook
 Route::get('/redirect', 'SocialAuthController@redirect');

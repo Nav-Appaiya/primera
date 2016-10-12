@@ -7,16 +7,9 @@
  */
 namespace App\Http\Controllers;
 
-//
-//use App\Category;
-//use App\Pages;
-//use App\Product;
-//use Illuminate\Http\Request;
-//
-//use Illuminate\Support\Facades\Redirect;
-//use Illuminate\Support\Facades\Session;
-
 use App\Cart;
+use App\Order;
+use App\OrderItem;
 use App\Product;
 use App\Property;
 
@@ -37,7 +30,6 @@ class CartController extends Controller
     {
         $this->oldCart = Session::has('cart') ? Session::get('cart') : null;
         $this->product = Product::all();
-        $this->options = Session::has('options') ? Session::get('options') : null;
     }
 
     /**
@@ -83,30 +75,12 @@ class CartController extends Controller
         if(!$user){
             return redirect()->route('login');
         }
-        
-        session([
-            'options' => [
-                'levering' => $request->levering,
-                'gegevens' => [
-                    'voornaam' => $user->voornaam,
-                    'achternaam' => $user->achternaam,
-                    'email' => $user->email,
-                    'geboortedatum' => $user->geboortedatum,
-                    'huisnummer' => $user->huisnummer,
-                    'postcode' => $user->postcode,
-                    'straatnaam' => $user->adres,
-                    'land' => 'Nederland',
-                    'plaats' => $user->woonplaats
-                ]
-            ]
-        ]);
-        
-        $cart = session('cart');
+
         $total = 0;
         
         
         return view('cart.checkout')->with([
-            'cart' => $cart,
+            'cart' => $this->oldCart,
             'total' => $total,
             'user'=>$user
         ]);
@@ -266,50 +240,45 @@ class CartController extends Controller
     }
 
 
-    public function check(Request $request, $id)
+    public function check(Request $request)
     {
-        $session = $request->Session('options');
+        $cart = new Cart($this->oldCart);
 
-        if(!$session){
-            // Uw gegevens
-            $rules = [
-                'value'          => 'required|unique:details,value',
-            ];
-        }elseif ($session){
-            //Verzendmethode
-            $rules = [
-                'value'          => 'required|unique:details,value',
-            ];
-        }elseif ($id == 3){
-            //Betaalmethode
-            $rules = [
-                'value'          => 'required|unique:details,value',
-            ];
-        }elseif ($id == 4){
-            //Bevestiging
-            //check mollie for status
-        }
+        $rules = [
+            'levering' => 'required',
+        ];
 
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
-                ->route('admin_property_create')
+                ->route('cart.checkout')
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        $details = $this->detail;
+        $order = new Order();
 
-        $details->type = $request->type;
-        $details->value = $request->value;
+        $order->user_id = Auth::user()->id;
+        $order->status = 'pending';
+        $order->total_price = $cart['price'];
+        $order->delivery_type = $request->levering;
 
-        $details->save();
+        $order->save();
 
+        foreach ($cart['items'] as $item => $value){
+            $product = Product::find($item);
+            $array[] = [
+                'product_id' => $product->id,
+                'order_id' => $order->id,
+                'selling_price' => $product->price - $product->discount,
+                'amount' => $value['qty']
+            ];
+        }
 
-        \Session::flash('succes_message','successfully.');
+        OrderItem::insert($array);
 
-        return redirect()->route('cart');
+        return redirect()->route('order.create', $order->id);
     }
 
 }
