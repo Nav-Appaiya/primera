@@ -208,8 +208,10 @@
                             </a>
                         </a>
                         <div class="dropdown-menu dropdown-to-right">
-                            <div class="form-group">
-                               <input type="email" class="form-control" id="email">
+                            <div style="padding: 10px;">
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                   <input style="width: 220px" type="email" class="form-control" id="email">
+                                </div>
                             </div>
                         </div>
                     </div>
