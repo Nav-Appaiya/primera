@@ -31,11 +31,12 @@ class Cart extends Model
                 $storedItem = $this->items[$id];
             }
         }
+        $total_price = $item->product->price - $item->product->discount;
         $storedItem['qty']++;
-        $storedItem['price'] = $item->product->price * $storedItem['qty'];
+        $storedItem['price'] = $total_price * $storedItem['qty'];
         $this->items[$id] = $storedItem;
         $this->qty++;
-        $this->price += $item->product->price;
+        $this->price += $total_price;
     }
 
     public function remove($item, $id)
@@ -50,11 +51,12 @@ class Cart extends Model
                 $storedItem = $this->items[$id];
             }
         }
+        $total_price = $item->product->price - $item->product->discount;
         $storedItem['qty']--;
-        $storedItem['price'] = $item->product->price * $storedItem['qty'];
+        $storedItem['price'] = $total_price * $storedItem['qty'];
         $this->items[$id] = $storedItem;
         $this->qty--;
-        $this->price -= $item->product->price;
+        $this->price -= $total_price;
     }
 
 }

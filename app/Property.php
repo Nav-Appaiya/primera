@@ -19,4 +19,11 @@ class Property extends Model
     {
         return $this->belongsTo('App\Details', 'detail_id');
     }
+
+    public function orderitem()
+    {
+        return $this->hasMany('App\OrderItem', 'order_id');
+    }
+
+
 }

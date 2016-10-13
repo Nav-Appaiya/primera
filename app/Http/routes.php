@@ -33,6 +33,7 @@ Route::post('/winkelwagen/verwijder/item', ['as' => 'cart.remove_key', 'uses' =>
 Route::patch('/winkelwagen', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@edit']);
 Route::patch('/winkelwagen/checkout', ['as' => 'cart.checkout.check', 'uses' => 'CartController@check']);
+Route::get('/winkelwagen/afrekenen/{id}', ['as' => 'order.show', 'uses' => 'MollieController@show']);
 
 
 // oAuth Routes for facebook

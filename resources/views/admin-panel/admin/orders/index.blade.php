@@ -14,6 +14,7 @@
                         <tr>
                             <th>order id</th>
                             <th>mollie id</th>
+                            <th>Aflevering</th>
                             <th>Revenue</th>
                             <th>status</th>
                             <th>date</th>
@@ -22,10 +23,11 @@
                     </thead>
                     <tbody>
                     @foreach($orders as $order)
-                        <tr class="table-row" data-href="{{route('admin_orders_edit', $order->id)}}">
-                            <td>{{$order->order_id}}</td>
-                            <td>{{$order->mollie_id}}</td>
-                            <td>{{number_format($order->price, 2)}}</td>
+                        <tr class="table-row" data-href="{{route('admin_order_edit', $order->id)}}">
+                            <td>{{$order->id}}</td>
+                            <td>{{$order->payment_id}}</td>
+                            <td>{{$order->delivery_type}}</td>
+                            <td>{{number_format($order->total_price, 2)}}</td>
                             <td>{{$order->status}}</td>
                             <td>{{$order->created_at}}</td>
                             <td>{{$order->updated_at}}</td>
@@ -33,7 +35,6 @@
                     @endforeach
                     </tbody>
                 </table>
-                {!! $orders->render() !!}
             </div>
         </div>
 
