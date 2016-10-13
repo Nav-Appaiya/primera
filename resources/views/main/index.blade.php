@@ -61,49 +61,7 @@
                             </font>
                         </div>
                     </div>
-
-                <div class="product">
-                    <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220px" class="">
-                    <div class="caption">
-                        <div class="row">
-                            <div class="col-md-6 col-xs-6">
-                                <h4>{!! $product->name !!}</h4>
-                            </div>
-                            <div class="col-md-6 col-xs-6 price">
-                                @if($product->discount == 0)
-                                    <h3 class="pull-right"><label>&euro;{{number_format($product->price, 2, '.', ',')}}</label></h3>
-                                @else
-                                    <h3 class="pull-right"><small style="text-decoration:line-through;">&euro;{{number_format($product->price, 2, '.', ',')}}</small></h3>
-                                    <h3 class="pull-right" style="margin-top: -16px;"><label style="color: red">&euro;{{number_format($product->price - $product->discount, 2, '.', ',')}}</label></h3>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row center-block">
-
-                            <div class="btn-group cart">
-                                <a href="{{ route('product.show', [str_replace(' ', '-', $product->name), $product->id]) }}" class="btn btn-info btn-product">
-                                    <span class="fa fa-question-circle"></span>
-                                </a>
-                            </div>
-                            @if($product->property()->sum('stock') == 0)
-                                uitverkocht
-                            @else
-                                op voorraad
-                            @endif
-                            <div class="btn-group wishlist">
-                                <form action="{{ route('cart.add') }}" method="post">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-                                    <button type="submit" class="btn btn-success btn-product" name="serialcode" 
-                                            id="serialcode" value="{{ $product->property()->first()->serialNumber }}">
-                                        <span class="fa fa-shopping-cart"></span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
         @endif
 
     @endforeach

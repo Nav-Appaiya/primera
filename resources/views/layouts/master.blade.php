@@ -212,7 +212,7 @@
                         <div class="dropdown-menu dropdown-to-right">
                             <div style="padding: 10px;">
                                 <div class="form-group" style="margin-bottom: 0px;">
-                                   <input style="width: 220px" type="email" class="form-control" id="email">
+                                   <input style="width: 220px" placeholder="Waar zoekt u naar?" type="email" class="form-control" id="email">
                                 </div>
                             </div>
                         </div>
@@ -289,6 +289,10 @@
                 <li><a href="{{route('sitemap')}}">sitemap</a></li>
                 <li><a href="{{route('garantie')}}">Garantie</a></li>
             </ul>
+            <p>
+                <img src="https://www.nix18.nl/media/images/logo.png">
+                <img src="https://www.ideal.nl/img/statisch/iDEAL-Payoff-2-groot.gif">
+            </p>
         </center>
     </div>
  </footer>
