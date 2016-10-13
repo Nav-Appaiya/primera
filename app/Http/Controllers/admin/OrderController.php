@@ -26,7 +26,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('admin-panel.admin.orders.index')->with('orders', $this->order->paginate(20));
+        return view('admin-panel.admin.orders.index')->with('orders', $this->order->all());
     }
 
     /**

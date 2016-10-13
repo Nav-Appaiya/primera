@@ -16,6 +16,12 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     @if(Session::has('cart'))
+                        <div class="row well">
+                            <div class="col-xs-2">Foto</div>
+                            <div class="col-xs-4">Naam</div>
+                            <div class="col-xs-2">korting</div>
+                            <div class="col-xs-4">Prijs</div>
+                        </div>
                         {{--{{dd(Session::get('cart'))}}--}}
                         @foreach($products->items as $product => $key)
                             {{--{{($product)}}--}}
@@ -33,11 +39,13 @@
                                     </h4>
                                 </div>
                                 <div class="col-xs-6">
-                                    <div class="col-xs-4 text-right">
-                                        <h6><strong>€{{number_format($key['price'], 2)}}<span
-                                                        class="text-muted"></span></strong></h6>
+                                    <div class="col-xs-4">
+                                        <h6><strong>{{$key['item']->product->discount != 0 ? '€'.$key['item']->product->discount : ''}}<span class="text-muted"></span></strong></h6>
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-4">
+                                        <h6><strong>€{{ number_format($key['price'], 2)}}<span class="text-muted"></span></strong></h6>
+                                    </div>
+                                    <div class="col-xs-4">
 
                                         <form action="{{ route('cart.remove') }}" method="post">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">

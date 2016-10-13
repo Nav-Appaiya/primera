@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
 {
+    protected $table = 'order_items';
 
     public function order()
     {
         return $this->belongsTo('App\Order');
     }
 
-    public function product()
+    public function property()
     {
-        return $this->hasOne('App\Product');
+        return $this->belongsTo('App\Property');
     }
-
 
     public function file()
     {

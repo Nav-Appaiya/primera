@@ -25,6 +25,14 @@ class MollieController extends Controller
         $this->order = new Order();
     }
 
+    public function show($id){
+        $order = $this->order->find($id);
+
+        return view('cart.show')->with('order', $order);
+
+    }
+
+
     public function create($id)
     {
         $order = $this->order->find($id);

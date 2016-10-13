@@ -10,7 +10,7 @@
 
             @include('errors.message')
 
-            {!! Form::model($order, array('route' => array('admin_orders_update', $order->id), 'class' => '', 'method' => 'post' )) !!}
+            {!! Form::model($order, array('route' => array('admin_order_update', $order->id), 'class' => '', 'method' => 'post' )) !!}
 
             <fieldset>
 
@@ -20,22 +20,10 @@
                     {!! Form::text('id', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
                 </div>
 
-                <!-- username -->
-                <div class="form-group">
-                    {!! Form::label('user_id', 'username') !!}
-                    {!! Form::text('user_id', $order->user->name, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
-                </div>
-
                 <!-- price -->
                 <div class="form-group">
                     {!! Form::label('price', 'price') !!}
                     {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
-                </div>
-
-                <!-- credits -->
-                <div class="form-group">
-                    {!! Form::label('credits', 'credits') !!}
-                    {!! Form::text('credits', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
                 </div>
 
                 <!-- order_id -->
@@ -53,7 +41,7 @@
                 <!-- status -->
                 <div class="form-group">
                     {!! Form::label('status', 'status') !!}
-                    {!! Form::select('status', \App\CreditOrder::lists('status', 'status'), null, ['class' => 'form-control'] ) !!}
+                    {{--{!! Form::select('status', \App\CreditOrder::lists('status', 'status'), null, ['class' => 'form-control'] ) !!}--}}
                 </div>
 
                 <!-- Submit Button -->

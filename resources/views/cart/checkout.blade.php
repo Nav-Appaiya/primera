@@ -92,7 +92,7 @@
 
                                             <small>Alle velden met een (*) zijn verplicht. </small><br>
 
-                                            <a href="{{route('user.show')}}" class="btn btn-default">Terug</a>
+                                            <a href="{{route('user.show')}}" class="btn">persoons gegevens wijzigen</a>
 
 
                                     </div>

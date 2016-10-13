@@ -29,13 +29,13 @@ class CartController extends Controller
     public function __construct()
     {
         $this->oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $this->product = Product::all();
+        $this->product = new Property();
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response\
      */
     public function index()
     {
@@ -97,19 +97,16 @@ class CartController extends Controller
     {
         $rules = [
             'serialcode' => 'required'
-//            'asd' => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-//            return redirect()->route('cart');
             return redirect()
                 ->back()
                 ->withErrors($validator)
                 ->withInput();
         }
-//        dd($request->all());
 
         $property = Property::where('serialNumber', $request->serialcode)->first();
 
@@ -119,7 +116,7 @@ class CartController extends Controller
 //
         \Session::flash('succes_message','successfully.');
 
-        return redirect()->back();
+        return redirect()->route('cart');
     }
 
 
@@ -260,25 +257,31 @@ class CartController extends Controller
         $order = new Order();
 
         $order->user_id = Auth::user()->id;
-        $order->status = 'pending';
+        $order->status = 'open';
         $order->total_price = $cart['price'];
         $order->delivery_type = $request->levering;
+        $order->delivery_price = $request->levering == 'verzenden' ? env('PACKAGE_POST_PRICE') : env('PACKAGE_GET_PRICE');
+        $order->adres = $request->adres;
+        $order->huisnummer = $request->huisnummer;
+        $order->postcode = $request->postcode;
+        $order->woonplaats = $request->woonplaats;
 
         $order->save();
 
         foreach ($cart['items'] as $item => $value){
-            $product = Product::find($item);
+            $property = $this->product->find($item);
+//            dd($product);
             $array[] = [
-                'product_id' => $product->id,
+                'property_id' => $property->id,
                 'order_id' => $order->id,
-                'selling_price' => $product->price - $product->discount,
+                'selling_price' => $property->product->price - $property->product->discount,
                 'amount' => $value['qty']
             ];
         }
 
         OrderItem::insert($array);
 
-        return redirect()->route('order.create', $order->id);
+        return redirect()->route('order.show', $order->id);
     }
 
 }
