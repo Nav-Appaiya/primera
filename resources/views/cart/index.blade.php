@@ -7,6 +7,9 @@
 
     <div class="row">
         <div class="col-lg-12">
+
+            @include('layouts.checkout-step')
+
             <center>
                 <h2>Winkelwagen</h2>
             </center>
@@ -29,7 +32,6 @@
                                 <div class="col-xs-2">
                                     <img class="img-responsive"
                                          src="/images/product/{{$key['item']->product->productimages->first()->imagePath}}">
-
                                 </div>
                                 <div class="col-xs-4">
                                     <h4 class="product-name">

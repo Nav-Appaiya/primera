@@ -30,6 +30,7 @@ class CartController extends Controller
     {
         $this->oldCart = Session::has('cart') ? Session::get('cart') : null;
         $this->product = new Property();
+        $this->mollie = Mollie::api();
     }
 
     /**
@@ -65,8 +66,11 @@ class CartController extends Controller
     public function edit()
     {
 
+        $methods = $this->mollie->methods()->all();
 
-        return view('cart.checkout')->with('user', Auth::user());
+        return view('cart.checkout')
+            ->with('user', Auth::user())
+            ->with('methods', $methods);
     }
 
     public function update(Request $request)

@@ -21,7 +21,7 @@ Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
 Route::get('/payment', ['as' => 'payment', 'uses' => 'MainController@payment']);
 
 //Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'CheckoutController@payed']);
-Route::get('/order/create/{id}', ['as' => 'order.create', 'uses' => 'MollieController@create']);
+Route::post('/order/create', ['as' => 'order.create', 'uses' => 'MollieController@create']);
 Route::get('/order/payment/{id}', ['as' => 'order.get', 'uses' => 'MollieController@get']);
 
 Route::get('/winkelwagen', ['as' => 'cart', 'uses' => 'CartController@index']);
@@ -33,6 +33,7 @@ Route::post('/winkelwagen/verwijder/item', ['as' => 'cart.remove_key', 'uses' =>
 Route::patch('/winkelwagen', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@edit']);
 Route::patch('/winkelwagen/checkout', ['as' => 'cart.checkout.check', 'uses' => 'CartController@check']);
+
 Route::get('/winkelwagen/afrekenen/{id}', ['as' => 'order.show', 'uses' => 'MollieController@show']);
 
 
@@ -146,5 +147,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
 
     //admin image delete
     Route::delete('image/{id}', ['as' => 'admin_image_destroy', 'uses' => 'Admin\ImageController@destroy']);
+
+    Route::get('settings', ['as' => 'dashboard.settings', 'uses' => 'Admin\SettingsController@index']);
+    Route::patch('settings', ['as' => 'dashboard.settings.update', 'uses' => 'Admin\SettingsController@update']);
+
 }); // End of authed route group.
 

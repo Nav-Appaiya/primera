@@ -7,6 +7,8 @@
     {!! Form::model($user, array('route' => 'cart.checkout.check', 'method' => 'PATCH', 'files' => true )) !!}
 
         <div class="container wrapper">
+            @include('layouts.checkout-step')
+
             <div class="row cart-head">
                 <h3 class="text-center">Betaalgegevens invullen</h3>
                 <p>
@@ -22,6 +24,7 @@
                             </ul>
                         </div>
                     @endif
+
                 </p>
             </div>
 
@@ -90,10 +93,9 @@
                                             </div>
                                         </div>
 
-                                            <small>Alle velden met een (*) zijn verplicht. </small><br>
+                                        <small>Alle velden met een (*) zijn verplicht. </small><br>
 
-                                            <a href="{{route('user.show')}}" class="btn">persoons gegevens wijzigen</a>
-
+                                        <a href="{{route('user.show')}}" class="btn">persoons gegevens wijzigen</a>
 
                                     </div>
                                 </div>
@@ -159,7 +161,7 @@
                                             <input type="radio" name="levering" value="verzenden" onclick="verzendkosten(this.value)">
                                             Verzenden met
                                             PostNL<br>
-                                            <small>+ €3.95</small>
+                                            <small>+ €{{env('PACKAGE_POST_PRICE')}}</small>
                                             <img width="100" src="http://cdn.prod.else4.nl/uploads/2016/02/PostNL-Logo.jpg">
                                             <hr>
                                         </div>

@@ -20,28 +20,64 @@
                     {!! Form::text('id', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
                 </div>
 
-                <!-- price -->
+                <!-- postcode -->
                 <div class="form-group">
-                    {!! Form::label('price', 'price') !!}
-                    {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                    {!! Form::label('postcode', 'postcode') !!}
+                    {!! Form::text('postcode', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
                 </div>
 
-                <!-- order_id -->
+                <!-- adres -->
                 <div class="form-group">
-                    {!! Form::label('order_id', 'order id') !!}
-                    {!! Form::text('order_id', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                    {!! Form::label('adres', 'adres') !!}
+                    {!! Form::text('adres', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
                 </div>
 
-                <!-- order_id -->
+                <!-- huisnummer -->
                 <div class="form-group">
-                    {!! Form::label('mollie_id', 'mollie id') !!}
-                    {!! Form::text('mollie_id', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                    {!! Form::label('huisnummer', 'huisnummer') !!}
+                    {!! Form::text('huisnummer', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                </div>
+
+                <!-- woonplaats -->
+                <div class="form-group">
+                    {!! Form::label('woonplaats', 'woonplaats') !!}
+                    {!! Form::text('woonplaats', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
                 </div>
 
                 <!-- status -->
                 <div class="form-group">
                     {!! Form::label('status', 'status') !!}
-                    {{--{!! Form::select('status', \App\CreditOrder::lists('status', 'status'), null, ['class' => 'form-control'] ) !!}--}}
+                    {!! Form::text('status', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                </div>
+
+                <!-- delivery_type -->
+                <div class="form-group">
+                    {!! Form::label('delivery_type', 'delivery_type') !!}
+                    {!! Form::text('delivery_type', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                </div>
+
+                <!-- delivery_price -->
+                <div class="form-group">
+                    {!! Form::label('delivery_price', 'delivery_price') !!}
+                    {!! Form::text('delivery_price', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                </div>
+
+                <!-- total_price -->
+                <div class="form-group">
+                    {!! Form::label('total_price', 'total_price') !!}
+                    {!! Form::text('total_price', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                </div>
+
+                <!-- total_price -->
+                <div class="form-group">
+                    {!! Form::label('payment_id', 'payment_id') !!}
+                    {!! Form::text('payment_id', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                </div>
+
+                <!-- notification -->
+                <div class="form-group">
+                    {!! Form::label('notification', 'notification') !!}
+                    {!! Form::text('notification', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
                 </div>
 
                 <!-- Submit Button -->
@@ -54,6 +90,24 @@
 
             {!! Form::close()  !!}
 
+        </div>
+
+        <div class="col-lg-6">
+            @foreach($order->orderitems as $item)
+                <div class="row">
+                    <div class="col-lg-2">
+                        <img src="/images/product/{{$item->property->product->productimages()->first()->imagePath}}">
+                    </div>
+                    <div class="col-lg-2">
+                        x{{$item->amount}}
+                    </div>
+                    <div class="col-lg-8">
+                        <span>{{$item->property->product->name}}</span> - <b>{{$item->property->detail->value}}</b><br>
+                        <small class="text-muted">SN: {{$item->property->serialNumber}}</small>
+                    </div>
+                </div>
+                <br>
+            @endforeach
         </div>
     </div>
 

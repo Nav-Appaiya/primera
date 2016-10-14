@@ -15,6 +15,8 @@
             <div id="user-chart" style="height: 250px;"></div>
         </div>
     </div>
+
+{{--    {{dd()}}--}}
     {{--{{$users = $user->all()->groupBy(function($date) {--}}
         {{--return Carbon::parse($date->created_at)->format('Y'); // grouping by years--}}
         {{--//return Carbon::parse($date->created_at)->format('m'); // grouping by months--}}
@@ -32,53 +34,60 @@
         {{$product}}<br><br>
     @endforeach
 
+    <?php
+
+    $orders = \DB::table('orders')
+            ->select(DB::raw('MONTHNAME(updated_at) as month'), DB::raw("DATE_FORMAT(updated_at,'%Y-%m') as monthNum"), DB::raw('count(*) as projects'))
+            ->groupBy('monthNum')
+            ->get();
+
+//    dd($orders);
+    ?>
+
 
 @stop
 
-@section('javascript')
-
+@push('scripts')
     <script>
-        new Morris.Line({
-            // ID of the element in which to draw the chart.
-            element: 'order-chart',
-            // Chart data records -- each entry in this array corresponds to a point on
-            // the chart.
-            data:
-                    [
-                { year: '2008', value: 20 },
-                { year: '2009', value: 10 },
-                { year: '2010', value: 11 },
-                { year: '2011', value: 5 },
-                { year: '2012', value: 20 }
-            ],
-            // The name of the data record attribute that contains x-values.
-            xkey: 'year',
-            // A list of names of data record attributes that contain y-values.
-            ykeys: ['value'],
-            // Labels for the ykeys -- will be displayed when you hover over the
-            // chart.
-            labels: ['Value']
-        });
-
         new Morris.Line({
             // ID of the element in which to draw the chart.
             element: 'user-chart',
             // Chart data records -- each entry in this array corresponds to a point on
             // the chart.
-            data: [
-                { year: '2008', value: 5 },
-                { year: '2009', value: 1 },
-                { year: '2010', value: 17 },
+            data:  [
+                { year: '2008', value: 20 },
+                { year: '2009', value: 10 },
+                { year: '2010', value: 5 },
                 { year: '2011', value: 5 },
-                { year: '2012', value: 14 }
+                { year: '2012', value: 20 }
             ],
-            // The name of the data record attribute that contains x-values.
-            xkey: 'year',
-            // A list of names of data record attributes that contain y-values.
-            ykeys: ['value'],
-            // Labels for the ykeys -- will be displayed when you hover over the
-            // chart.
-            labels: ['Value']
-        });
+        // The name of the data record attribute that contains x-values.
+        xkey: 'year',
+        // A list of names of data record attributes that contain y-values.
+        ykeys: ['value'],
+        // Labels for value ykeys -- will be displayed when you hover over the
+        // chart.
+        labels: ['value']
+    });
+
+    {{--new Morris.Line({--}}
+            {{--// ID of the element in which to draw the chart.--}}
+            {{--element: 'order-chart',--}}
+            {{--// Chart data records -- each entry in this array corresponds to a point on--}}
+            {{--// the chart.--}}
+            {{--data: {{json_encode(\DB::table('orders')--}}
+            {{--->select(DB::raw('MONTHNAME(updated_at) as month'), DB::raw("DATE_FORMAT(updated_at,'%Y-%m') as monthNum"), DB::raw('count(*) as projects'))--}}
+            {{--->groupBy('monthNum')--}}
+            {{--->get())}},--}}
+            {{--// The name of the data record attribute that contains x-values.--}}
+            {{--xkey: 'month',--}}
+            {{--// A list of names of data record attributes that contain y-values.--}}
+            {{--ykeys: ['monthNum'],--}}
+            {{--// Labels for the ykeys -- will be displayed when you hover over the--}}
+            {{--// chart.--}}
+            {{--labels: ['projects']--}}
+        {{--});--}}
+
+
     </script>
-@endsection
+@endpush

@@ -6,6 +6,8 @@
 
     <div class="row">
         <div class="col-lg-12">
+            @include('layouts.checkout-step')
+
             <center>
                 <h2>Bedankt voor uw bestelling het word nu verwerkt</h2>
             </center>
