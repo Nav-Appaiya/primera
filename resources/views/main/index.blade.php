@@ -9,10 +9,6 @@
             <div><img src="http://lorempixel.com/1140/300/sports/"></div>
             <div><img src="http://lorempixel.com/1140/300/sports/dummy-mage"></div>
         </div>
-    {{--<ol class="breadcrumb">--}}
-      {{--<li><a href="{{ route('homepage') }}">Homepage</a></li>--}}
-      {{--<li class="active">Products</li>--}}
-    {{--</ol>--}}
     <div class="col-lg-12">
         <h2>Nieuwste Producten</h2>
     </div>

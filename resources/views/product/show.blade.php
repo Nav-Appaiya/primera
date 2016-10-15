@@ -1,13 +1,11 @@
 @extends('layouts.master')
 
-@section('titel', 'Detail product')
+@section('titel', 'primera-'.$product->name)
 @section('breadcrumbs', Breadcrumbs::render('product.show', $product))
 
 @section('content')
 
     <div class="row">
-
-        @include('errors.message')
 
         <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="content">
@@ -36,36 +34,13 @@
                     @endif
 
                     <br>
-                    <small style="color: green; font-weight: 900;">
-                        @if($product->property->sum('stock') != 0)
-                            op voorraad
-                        @else
-                            uitverkocht
-                        @endif
-                    </small>
-
-{{--                   {{dd($errors->has('serialcode'))}}--}}
-                    {{--<div class="form-group">--}}
-                        {{--<label for="password" class="col-md-4 control-label">Password</label>--}}
-
-                        {{--<div class="col-md-6">--}}
-                            {{--<input id="password" type="password" class="form-control" name="password">--}}
-
-                            {{--@if ($errors->has('serialcode'))--}}
-                                {{--<span class="help-block">--}}
-                                    {{--<strong>{{ $errors->get('serialcode') }}</strong>--}}
-                                {{--</span>--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
 
                     <div class="pull-right">
                         <div class="row center-block">
-                            <div class="btn-group wishlist form-group  {{ $errors->has('serialcode') ? ' has-error has-feedback' : '' }}">
+                            <div class="btn-group wishlist form-group  {{ $errors->has('serialcode') ? ' has-error' : '' }}">
                                 {!! Form::model($product, array('route' => 'cart.add', 'method' => 'post', 'files' => true)) !!}
                                     @if($product->property()->first()->detail_id)
-                                        <label for="detail">{{$product->property()->first()->detail->type}}</label>
+                                        <label for="detail" class="{{ $errors->has('serialcode') ? ' text-danger' : '' }}">{{$product->property()->first()->detail->type}}</label>
                                         @if($product->property()->first()->detail->type)
                                             <select id="detail" class="form-control" name="serialcode" >
                                                 <option value="">Maak uw keuzen.</option>
@@ -77,6 +52,7 @@
                                                     @endif
                                                 @endforeach
                                             </select>
+                                            <p class="text-danger">{{ $errors->has('serialcode') ? 'Selecteer' : '' }}</p>
                                         @endif
                                     @else
                                         <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
@@ -126,7 +102,23 @@
         {{--@endforeach--}}
     </div>
 
+    <div class="row">
+        <div class="col-lg-12">
 
+            <h3>reviews</h3>
+            @foreach($product->review as $review)
+                <div class="well">
+                    <span>Naam: {{$review->user->voornaam}}</span><span class="pull-right">Rating: {{$review->rating}}</span><br><br>
+                    <p>Beschrijving: <br>{{$review->description}}</p>
+                </div>
+
+            @endforeach
+
+        </div>
+    </div>
+
+
+    {{--TODO antoine dit moet in css--}}
     <style>
         .art-title {
             color: #231f20;

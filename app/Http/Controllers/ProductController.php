@@ -13,6 +13,7 @@ use App\ProductImage;
 use App\Pages;
 use App\ProductProperty;
 use App\Property;
+use App\Review;
 use App\Seotags;
 use Illuminate\Http\Request;
 use App\Product;
@@ -35,7 +36,7 @@ class ProductController extends Controller
     private $product;
     private $category;
     private $image;
-    private $property;
+    private $reviews;
     /**
      * ProductController constructor.
      */
@@ -43,15 +44,8 @@ class ProductController extends Controller
     {
         $this->image = new ProductImage();
         $this->product = new Product();
-//        $this->property = Property::with(array('product' => function($query)
-//        {
-//            $query->where('orders.user_id', $customerID);
-//            $query->orderBy('orders.created_at', 'DESC');
-//        }));
-
+        $this->reviews = new Review();
         $this->category = new Category();
-        // Turned this off, because product userviews are here also used.
-        // $this->middleware('auth');
     }
 
     /**
@@ -93,6 +87,7 @@ class ProductController extends Controller
     {
         return view('product.show')
             ->with('product', $this->product->where('id', $id)->where('status', 'on')->first());
+//            ->with('reviews', $this->reviews->where('id'));
     }
 
 

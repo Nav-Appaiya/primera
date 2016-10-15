@@ -71,13 +71,6 @@ class MollieController extends Controller
 
         $order = $this->order->find($request->order_id);
 
-//        foreach ($order->orderitems as $item)
-//        {
-//            if($item->amount <= $item->property->stock){
-//
-//            }
-//        }
-
         $payment =  $this->mollie->payments()->create([
             "amount"      => $order->total_price + $order->delivery_price,
             "description" => "Order Nr. ". $request->order_id,

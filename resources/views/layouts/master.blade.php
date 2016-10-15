@@ -2,6 +2,38 @@
 <html>
     <head>
         <title>Primera e-Sigarets - @yield('titel')</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="language" content="NL">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="copyright" content="Mediaverse">
+        <meta name="googlebot" content="noodp">
+        <meta name="language" content="nederland">
+        <meta name="application-name" content="Primera Shop" />
+
+        <meta name="description" content="tekst">
+        <meta name="robots" content="noodp">
+        <meta name="revisit-after" content="1 days">
+
+        <!-- for Facebook -->
+        <meta property="og:title" content="" />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:description" content="" />
+
+        <meta property="article:section" content="product name" />
+        <meta property="article:published_time" content="date time" />
+        <meta property="article:modified_time" content="" />
+
+        <!-- for Twitter -->
+        <meta name="twitter:card" content="" />
+        <meta name="twitter:title" content="" />
+        <meta name="twitter:description" content="" />
+        <meta name="twitter:image" content="" />
+
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
