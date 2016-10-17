@@ -132,27 +132,27 @@ Breadcrumbs::register('dashboard.product.edit.property.edit', function($breadcru
 Breadcrumbs::register('dashboard.orders', function($breadcrumbs)
 {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('Orders', route('admin_orders_all'));
+    $breadcrumbs->push('Orders', route('admin_order_index'));
 });
 
 // dashboard > orders > edit
 Breadcrumbs::register('dashboard.orders.edit', function($breadcrumbs, $id)
 {
     $breadcrumbs->parent('dashboard.orders');
-    $breadcrumbs->push('Edit', route('admin_orders_edit', $id));
+    $breadcrumbs->push('Wijzigen', route('admin_order_edit', $id));
 });
 
 // dashboard > Users
 Breadcrumbs::register('dashboard.user', function($breadcrumbs)
 {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('Users', route('admin_profile_all'));
+    $breadcrumbs->push('Users', route('admin_user_index'));
 });
 
 // dashboard > Users > edit
-Breadcrumbs::register('dashboard.user.edit', function($breadcrumbs)
+Breadcrumbs::register('dashboard.user.edit', function($breadcrumbs, $id)
 {
     $breadcrumbs->parent('dashboard.user');
-    $breadcrumbs->push('Edit', route('admin_user_edit'));
+    $breadcrumbs->push('Wijzigen', route('admin_user_edit', $id));
 });
 

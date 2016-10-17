@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('titel', 'Primera shop')
+@section('description', 'test')
 @section('breadcrumbs', Breadcrumbs::render('home'))
 
 @section('content')

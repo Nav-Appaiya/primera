@@ -57,7 +57,48 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'voornaam' => 'max:50|alpha',
+            'voorletters' => 'max:6',
+            'achternaam' => 'max:50|regex:/^[\pL\s]+$/u',
+            'geslacht' => 'in:man,vrouw',
+            'geboortedatum' => 'date',
+            'adres' => 'max:70|regex:/^[\pL\s]+$/u',
+            'huisnummer' => 'max:7|alpha_num',
+            'postcode' => 'alpha_num|min:6',
+            'woonplaats' => 'max:50|alpha',
+            'telMobiel' => 'numeric|digits_between:10,10',
+            'telThuis' => 'numeric|digits_between:10,11'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('admin_user_edit', $id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = User::find($id);
+
+        $user->voornaam = $request->voornaam;
+        $user->voorletters = $request->voorletters;
+        $user->achternaam = $request->achternaam;
+        $user->geslacht = $request->geslacht;
+        $user->geboortedatum = $request->geboortedatum;
+        $user->adres = $request->adres;
+        $user->huisnummer = $request->huisnummer;
+        $user->postcode = $request->postcode;
+        $user->woonplaats = $request->woonplaats;
+        $user->telMobiel = $request->telMobiel;
+        $user->telThuis = $request->telThuis;
+
+        $user->save();
+
+        \Session::flash('succes_message','successfully.');
+
+        return redirect()->route('admin_user_index');
     }
 
     /**

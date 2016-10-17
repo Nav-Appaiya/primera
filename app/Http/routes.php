@@ -142,12 +142,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     //admin users
     Route::get('users', ['as' => 'admin_user_index', 'uses' => 'Admin\UserController@index']);
     Route::get('users/{id}/edit', ['as' => 'admin_user_edit', 'uses' => 'Admin\UserController@edit']);
-    Route::post('users/{id}', ['as' => 'admin_user_update', 'uses' => 'Admin\UserController@update']);
+    Route::patch('users/{id}', ['as' => 'admin_user_update', 'uses' => 'Admin\UserController@update']);
     Route::delete('users/{id}', ['as' => 'admin_user_destroy', 'uses' => 'Admin\UserController@destroy']);
+
+    Route::get('search-engine', ['as' => 'admin_seo_index', 'uses' => 'Admin\SearchEngineController@index']);
+    Route::patch('search-engine', ['as' => 'admin_seo_create', 'uses' => 'Admin\SearchEngineController@create']);
 
     //admin image delete
     Route::delete('image/{id}', ['as' => 'admin_image_destroy', 'uses' => 'Admin\ImageController@destroy']);
 
+    //admin panel settings
     Route::get('settings', ['as' => 'dashboard.settings', 'uses' => 'Admin\SettingsController@index']);
     Route::patch('settings', ['as' => 'dashboard.settings.update', 'uses' => 'Admin\SettingsController@update']);
 

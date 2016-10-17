@@ -12,27 +12,12 @@
         <meta name="googlebot" content="noodp">
         <meta name="language" content="nederland">
         <meta name="application-name" content="Primera Shop" />
-
-        <meta name="description" content="tekst">
         <meta name="robots" content="noodp">
         <meta name="revisit-after" content="1 days">
 
-        <!-- for Facebook -->
-        <meta property="og:title" content="" />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content="" />
-        <meta property="og:url" content="" />
-        <meta property="og:description" content="" />
+        <meta name="description" content="@yield('description')">
 
-        <meta property="article:section" content="product name" />
-        <meta property="article:published_time" content="date time" />
-        <meta property="article:modified_time" content="" />
-
-        <!-- for Twitter -->
-        <meta name="twitter:card" content="" />
-        <meta name="twitter:title" content="" />
-        <meta name="twitter:description" content="" />
-        <meta name="twitter:image" content="" />
+        @stack('meta')
 
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">

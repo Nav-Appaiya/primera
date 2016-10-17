@@ -1,7 +1,7 @@
 @extends('admin-panel.layouts.admin')
 
 @section('title', 'user')
-{{--@section('breadcrumb', Breadcrumbs::render('dashboard.user.edit'))--}}
+@section('breadcrumb', Breadcrumbs::render('dashboard.user.edit', $user->id))
 
 @section('content')
 
@@ -9,12 +9,19 @@
         <div class="col-lg-6">
             <div class="table-responsive">
                 <div class="panel panel-default">
-                    <div class="panel-heading">edit</div>
-
                     <div class="panel-body">
 
-                        {!! Form::model($user, array('route' => ['admin_user_edit', $user->id], 'method' => 'patch')) !!}
-                        {{--{!! Form::hidden('id', $property->id) !!}--}}
+                        {!! Form::model($user, array('route' => ['admin_user_update', $user->id], 'method' => 'patch')) !!}
+
+                        <div class="form-group">
+                            {!! Form::label('name', 'username') !!}
+                            {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('voorletters', 'voorletters') !!}
+                            {!! Form::text('voorletters', null, ['class' => 'form-control']) !!}
+                        </div>
 
                         <div class="form-group">
                             {!! Form::label('voornaam', 'voornaam') !!}
@@ -22,39 +29,46 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('tussenvoegsel', 'tussenvoegsel') !!}
-                            {!! Form::text('tussenvoegsel', null, ['class' => 'form-control']) !!}
-                        </div>
-
-                        <div class="form-group">
                             {!! Form::label('achternaam', 'achternaam') !!}
                             {!! Form::text('achternaam', null, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('geboortedatum', 'geboortedatum') !!}
+                            {!! Form::date('geboortedatum', null, ['class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('geslacht', 'geslacht') !!}<br>
-                            <label>male</label> {!! Form::radio('geslacht', 'male') !!}<br>
-                            <label>female</label> {!! Form::radio('geslacht', 'female') !!}
+                            <label>male</label> {!! Form::radio('geslacht', 'man') !!}<br>
+                            <label>female</label> {!! Form::radio('geslacht', 'vrouw') !!}
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('land', 'land') !!}
-                            {!! Form::text('land', null, ['class' => 'form-control']) !!}
+                            {!! Form::label('adres', 'adres') !!}
+                            {!! Form::text('adres', null, ['class' => 'form-control']) !!}
                         </div>
-
                         <div class="form-group">
-                            {!! Form::label('stad', 'stad') !!}
-                            {!! Form::text('stad', null, ['class' => 'form-control']) !!}
+                            {!! Form::label('huisnummer', 'huisnummer') !!}
+                            {!! Form::text('huisnummer', null, ['class' => 'form-control']) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('postcode', 'postcode') !!}
                             {!! Form::text('postcode', null, ['class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('straatnaam', 'straatnaam') !!}
-                            {!! Form::text('straatnaam', null, ['class' => 'form-control']) !!}
+                            {!! Form::label('woonplaats', 'woonplaats') !!}
+                            {!! Form::text('woonplaats', null, ['class' => 'form-control']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('telMobiel', 'telMobiel') !!}
+                            {!! Form::text('telMobiel', null, ['class' => 'form-control']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('telThuis', 'telThuis') !!}
+                            {!! Form::text('telThuis', null, ['class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group">
@@ -67,7 +81,7 @@
                             {!! Form::text('geboortedatum', null, array('id' => 'datepicker', 'class' => 'form-control')) !!}
                         </div>
 
-                        {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+                        {!! Form::submit('Wijzigen', ['class' => 'btn btn-primary']) !!}
 
                         <a href="{{ URL::route('admin_user_index') }}" class="btn btn-default">terug</a>
 

@@ -1,7 +1,27 @@
 @extends('layouts.master')
 
-@section('titel', 'primera-'.$product->name)
+@section('titel', 'primera - '.$product->name)
+@section('description', 'test')
 @section('breadcrumbs', Breadcrumbs::render('product.show', $product))
+
+@push('meta')
+    {{--<!-- for Facebook -->--}}
+    <meta property="og:title" content="{{$product->name}}" />
+    <meta property="og:type" content="company" />
+    <meta property="og:image" content="{{route('homepage')}}/images/product/{{$product->productimages()->first()->imagePath}}" />
+    <meta property="og:url" content="{{Request::url()}}" />
+    <meta property="og:description" content="{{$product->description}}" />
+
+    <meta property="article:section" content="{{$product->name}}" />
+    <meta property="article:published_time" content="{{$product->created_at}}" />
+    <meta property="article:modified_time" content="{{$product->updated_at}}" />
+    {{--<!-- for Twitter -->--}}
+    <meta name="twitter:card" content="product" />
+    <meta name="twitter:title" content="{{$product->name}}" />
+    <meta name="twitter:description" content="{{$product->description}}" />
+    <meta name="twitter:url" content="{{Request::url()}}" />
+    <meta name="twitter:image" content="{{route('homepage')}}/images/product/{{$product->productimages()->first()->imagePath}}" />
+@endpush
 
 @section('content')
 
