@@ -32,7 +32,7 @@
                 <div class="artst-pic pull-left">
                     @if($product->productimages()->exists())
                         @foreach($product->productimages()->get() as $image) 
-                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="/images/product/{{$image->imagePath}}">
+                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" alt="{{$product->name}}" src="/images/product/{{$image->imagePath}}">
                         @endforeach
                     @else
                         <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="/images/dummy.jpg">
@@ -57,28 +57,37 @@
 
                     <div class="pull-right">
                         <div class="row center-block">
-                            <div class="btn-group wishlist form-group  {{ $errors->has('serialcode') ? ' has-error' : '' }}">
-                                {!! Form::model($product, array('route' => 'cart.add', 'method' => 'post', 'files' => true)) !!}
+                            <div class="btn-group wishlist form-group  {{ $errors->has('product_id') ? ' has-error' : '' }}">
+                                {!! Form::model($product, array('route' => 'cart.add', 'method' => 'post')) !!}
                                     @if($product->property()->first()->detail_id)
-                                        <label for="detail" class="{{ $errors->has('serialcode') ? ' text-danger' : '' }}">{{$product->property()->first()->detail->type}}</label>
+                                        <label for="detail" class="{{ $errors->has('product_id') ? ' text-danger' : '' }}">{{$product->property()->first()->detail->type}}</label>
                                         @if($product->property()->first()->detail->type)
-                                            <select id="detail" class="form-control" name="serialcode" >
+                                            <select id="product_id" class="form-control" name="product_id" >
                                                 <option value="">Maak uw keuzen.</option>
                                                 @foreach($product->property as $property)
                                                     @if($property->stock == 0)
-                                                        <option value="{{$property->serialNumber}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>
+                                                        <option value="{{$property->id}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>
                                                     @else
-                                                        <option value="{{$property->serialNumber}}">{{$property->detail->value}}  -  <small>op voorraad</small></option>
+                                                        <option value="{{$property->id}}">{{$property->detail->value}}  -  <small>op voorraad</small></option>
                                                     @endif
                                                 @endforeach
                                             </select>
-                                            <p class="text-danger">{{ $errors->has('serialcode') ? 'Selecteer' : '' }}</p>
+                                            <p class="text-danger">{{ $errors->has('product_id') ? 'Selecteer' : '' }}</p>
                                         @endif
                                     @else
                                         <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
                                     @endif
                                     <br>
                                     {{ Form::submit('In winkelwagen', ['class' => 'btn btn-primary']) }}
+
+                                {{--<form method="POST" action="{{url('cart')}}">--}}
+                                    {{--<input type="hidden" name="product_id" value="{{$product->id}}">--}}
+                                    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+                                    {{--<button type="submit" class="btn btn-fefault add-to-cart">--}}
+                                        {{--<i class="fa fa-shopping-cart"></i>--}}
+                                        {{--Add to cart--}}
+                                    {{--</button>--}}
+                                {{--</form>--}}
 
                                 {{ Form::close() }}
                             </div>

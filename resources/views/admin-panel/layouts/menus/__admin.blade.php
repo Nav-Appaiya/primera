@@ -67,7 +67,7 @@
                     <a href="{{route('admin_review_index')}}" class="{{ Request::is('admin/reviews*') ? 'active' : null }}"><i class="fa fa-comments fa-fw"></i> Reviews</a>
                 </li>
                 <li>
-                    <a href="{{route('admin_seo_index')}}" class="{{ Request::is('admin/reviews*') ? 'active' : null }}"><i class="fa phpdebugbar-fa-search fa-fw"></i> seo</a>
+                    <a href="{{route('admin_seo_index')}}" class="{{ Request::is('admin/search-engine*') ? 'active' : null }}"><i class="fa phpdebugbar-fa-search fa-fw"></i> seo</a>
                 </li>
 
             </ul>

@@ -20,8 +20,6 @@
 
                 <div class="col-lg-8 well">
                     @foreach($order->orderItems as $product)
-                        <br>
-                        <br>
                         <div class="row">
                             <div class="col-lg-4">
 
@@ -36,10 +34,45 @@
                             <div class="col-lg-4">
                                 €{{$product->property->product->price - $product->property->product->discount}}
                             </div>
-                        </div>
 
-
+                        </div><hr>
                     @endforeach
+
+                    @if($order->delivery_type == 'verzenden')
+                        <div class="row">
+                            <div class="col-lg-4">
+                                Totaal prijs €{{ number_format($order->total_price + $order->delivery_price, 2)}}<br><small>Incl. verzending & btw </small>
+                                {{--<a class="pull-right" href="{{route('order.create', $order->id)}}"> Afrekenen</a>--}}
+
+                                {!! Form::model(null, array('route' => 'order.create', 'method' => 'POST')) !!}
+
+                                {!! Form::hidden('order_id', $order->id) !!}
+
+                                <select name="issuer_id">
+                                    @foreach ($issuers as $issuer)
+                                        @if ($issuer->method == Mollie_API_Object_Method::IDEAL)
+                                            <option value="{{$issuer->id}}">{{$issuer->name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+
+                                {!! Form::submit('Betalen', array('class' => 'form-control')) !!}
+
+
+                                {{ Form::close() }}
+                            </div>
+
+                            <div class="col-lg-4">
+                                verzendingskosten
+                            </div>
+                            <div class="col-lg-4">
+                                1x
+                            </div>
+                            <div class="col-lg-4">
+                                €{{$order->delivery_price}}
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="col-lg-4 well">
@@ -62,32 +95,7 @@
                     <br>
                 </div>
 
-                <div class="col-lg-6 well">
-                    Totaal prijs €{{ number_format($order->total_price + $order->delivery_price, 2)}}<br><small>Incl. verzending & btw </small>
-                    {{--<a class="pull-right" href="{{route('order.create', $order->id)}}"> Afrekenen</a>--}}
-
-                    {!! Form::model(null, array('route' => 'order.create', 'method' => 'POST')) !!}
-
-                        {!! Form::hidden('order_id', $order->id) !!}
-
-                        <select name="issuer_id">
-                            @foreach ($issuers as $issuer)
-                                @if ($issuer->method == Mollie_API_Object_Method::IDEAL)
-                                    <option value="{{$issuer->id}}">{{$issuer->name}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-
-                        {!! Form::submit('Betalen', array('class' => 'form-control')) !!}
-
-
-                    {{ Form::close() }}
-
-
-                </div>
             </div>
-
-
 
         </div>
 

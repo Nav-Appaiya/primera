@@ -160,6 +160,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         'Barryvdh\Debugbar\ServiceProvider',
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
     ],
 
     /*
@@ -212,6 +213,7 @@ return [
         'Socialize' => 'Laravel\Socialite\Facades\Socialite',
         'Debugbar' => \Barryvdh\Debugbar\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Cart'    => Gloudemans\Shoppingcart\Facades\Cart::class,
     ],
 
 ];

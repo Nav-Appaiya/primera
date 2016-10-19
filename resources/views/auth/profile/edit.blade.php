@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('geboortedatum', 'geboortedatum *') !!}
-                        {!! Form::text('geboortedatum', NULL, array('class' => 'form-control')) !!}
+                        {!! Form::date('geboortedatum', NULL, array('class' => 'form-control')) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('adres', 'adres *') !!}

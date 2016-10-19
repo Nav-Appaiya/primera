@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Order;
 use App\OrderItem;
-use App\Pages;
 
 use App\Http\Requests;
 use App\Product;
@@ -23,15 +22,10 @@ class MainController extends Controller
 {
     public function index()
     {
-//        $products = Product::where('status', 'on')->with('productimages')->get();
         $products = new Property();
-        $categories = Category::all();
-        $pages = Pages::all();
-        
+
         return view('main.index',[
             'products' => $products,
-            'categories' => $categories,
-            'pages' => $pages
         ]);
     }
 
@@ -60,35 +54,7 @@ class MainController extends Controller
         ]);
     }
 
-    
 
-    
-
-    public function testing(Request $request)
-    {
-        header('Content-Type: text/plain');
-        $products = Product::find(1124);
-        $sessionCart = $request->getSession()->get('cart.items');
-
-//        $request->session()->forget('cart.items', $products);
-        exit;
-        $session = $request->session();
-        $cart = $session->get('cart.items');
-        $count = count($session->get('cart.items'));
-
-
-        foreach ($cart as $item) {
-            $session->forget('cart.items', $item);
-        }
-
-        var_dump($cart);
-
-        $user = Auth::check();
-        print_r($user);
-
-        exit;
-    }
-    
     /**
      * @throws \Mollie_API_Exception
      */

@@ -7,19 +7,18 @@
  */
 namespace App\Http\Controllers;
 
-use App\Cart;
+//use App\Cart;
 use App\Order;
 use App\OrderItem;
-use App\Product;
 use App\Property;
-
-use DB;
 
 use Illuminate\Support\Facades\Auth;
 use Mollie\Laravel\Facades\Mollie;
+
 use Session;
 use Redirect;
 use Validator;
+use Cart;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -28,82 +27,24 @@ class CartController extends Controller
 {
     public function __construct()
     {
-        $this->oldCart = Session::has('cart') ? Session::get('cart') : null;
         $this->product = new Property();
         $this->mollie = Mollie::api();
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response\
-     */
     public function index()
     {
-        return view('cart.index')
-            ->with('products', new Cart($this->oldCart));
+        $cart = Cart::content();
+
+        return view('cart.index', array('cart' => $cart));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $producten = [];
-        $total = 0;
-        $user = Auth::user();
+    public function add(){
 
-        return view('cart.checkout')->with([
-            'cart' => session('cart'),
-            'producten' => $producten,
-            'total' => $total,
-            'user'=>$user
-        ]);
-    }
-
-    public function edit()
-    {
-
-        $methods = $this->mollie->methods()->all();
-
-        return view('cart.checkout')
-            ->with('user', Auth::user())
-            ->with('methods', $methods);
-    }
-
-    public function update(Request $request)
-    {
-        $user = Auth::user();
-        if(!$user){
-            return redirect()->route('login');
-        }
-
-        $total = 0;
-        
-        
-        return view('cart.checkout')->with([
-            'cart' => $this->oldCart,
-            'total' => $total,
-            'user'=>$user
-        ]);
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
         $rules = [
-            'serialcode' => 'required'
+            'product_id' => 'required'
         ];
 
-        $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make(Request()->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
@@ -112,141 +53,66 @@ class CartController extends Controller
                 ->withInput();
         }
 
-        $property = Property::where('serialNumber', $request->serialcode)->first();
-
-        $cart = new Cart($this->oldCart);
-        $cart->add($property, $property->id);
-        $request->session()->put('cart', $cart);
-//
-        \Session::flash('succes_message','successfully.');
+        $product_id = Request()->get('product_id');
+        $product = $this->product->find($product_id);
+        Cart::add(array('id' => $product_id, 'name' => $product->product->name, 'qty' => 1, 'options' => [$product], 'price' => ($product->product->price - $product->product->discount)));
 
         return redirect()->route('cart');
     }
 
-
-    public function remove(Request $request)
-    {
-        $property = Property::where('serialNumber', $request->serialcode)->first();
-
-        $cart = new Cart($this->oldCart);
-        $cart->remove($property, $property->id);
-        $request->session()->put('cart', $cart);
+    public function remove(){
+        $rowId = Cart::search(array('id' => Request()->get('product_id')));
+        Cart::remove($rowId[0]);
 
         return redirect()->route('cart');
     }
 
-    public function remove_key(Request $request)
-    {
+    public function decrease(){
+        $rowId = Cart::search(array('id' => Request()->get('product_id')));
+        $item = Cart::get($rowId[0]);
 
-
-//        $property = Property::where('id', $request->serialcode)->first();
-//        dd($property);
-
-//        $asd = $request->session()->pull('cart.items', array_diff($request->session()->get('cart.items'), [$request->serialcode]));
-//        $request->session()->forget('cart.items.'.$request->serialcode);
-//
-//        unset($this->oldCart['items'][$request->serialcode]);
-
-        $items = array_except($this->oldCart['items'], $request->serialcode);
-
-        dd($items);
-
-        foreach ($items as $item){
-
-            $property = Property::find($item->id)->first();
-
-            $cart = new Cart($this->oldCart);
-            $cart->add($property, $property->id);
-        }
-
-
-        $request->session()->put('cart', $cart);
-
-
-//        $newCart = $this->oldCart;
-//        $request->session()->forget('cart.items.3');
-//        $newCart = $request->session()->get('cart')['items'];
-
-         $newCart = array_except($this->oldCart['items'], $request->serialcode);
-
-        dd(Session::get('cart'));
-//        $cart = new Cart($newCart);
-
-//        $request->session()->put('cart', $cart);
-
-
-//        Session::forget('cart.items.3');
-//        dd($newCart);
-//        dd((int)$request->serialcode);
-
-//        foreach ($cart as $index => $product) {
-//            if ($product['productId'] == $id) {
-//                unset($newCart[$request->serialcode]);
-//            }
-//        }
-//        session(['cart' => $cart]);
-
-//        dd($request->serialcode);
-//
-//        dd($request->session()->get('cart'));
-
-//        $request->session()->put('cart', $cart);
-
-//        if($request->session()->get('cart') == NULL){
-//            Session::forget('cart');
-//        }
-
-
-
-//        $newCart =;
-
-//        return new Cart($newCart);
-//        unset($cart['items'][$request->serialcode]);
-
-//        return dd($cart);
-
-
-
-//        if(Session::has('cart')) {
-//            $classes = Session::get('cart.items');
-//            foreach($classes as $index => $class) {
-//                if($data['class'] === $class) {
-//                    unset($classes[$index]);
-//                    $newClass = array_values($classes);
-//                    Session::put('class', $newClass);
-//                    return Response::json(array(
-//                            'success' => true,
-//                            'code' => 1,
-//                            'class' => $classes,
-//                            'message' => $data['class'] . ' removed from cart'
-//                        )
-//                    );
-//                }
-//            }
-//        }
+        Cart::update($rowId[0], $item->qty - 1);
 
         return redirect()->route('cart');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function increase(){
+        $rowId = Cart::search(array('id' => Request()->get('product_id')));
+        $item = Cart::get($rowId[0]);
+
+        Cart::update($rowId[0], $item->qty + 1);
+
+        return redirect()->route('cart');
+    }
+
     public function destroy()
     {
-        Session::forget('cart');
-        return redirect()->back();
+        Cart::destroy();
+        return redirect()->route('cart');
     }
 
+    public function edit()
+    {
+        $methods = $this->mollie->methods()->all();
+        return view('cart.checkout')
+            ->with('user', Auth::user())
+            ->with('methods', $methods);
+    }
 
     public function check(Request $request)
     {
-        $cart = new Cart($this->oldCart);
-
         $rules = [
             'levering' => 'required',
+            'voornaam' => 'required|max:50|alpha',
+            'achternaam' => 'required|max:50|regex:/^[\pL\s]+$/u',
+            'geslacht' => 'in:man,vrouw',
+            'geboortedatum' => 'required|date',
+            'adres' => 'required|max:70|regex:/^[\pL\s]+$/u',
+            'huisnummer' => 'required|max:7|alpha_num',
+            'postcode' => 'required|alpha_num|min:6',
+            'woonplaats' => 'required|max:50|alpha',
+            'telMobiel' => 'numeric|digits_between:10,10',
+            'telThuis' => 'numeric|digits_between:10,11'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -260,11 +126,25 @@ class CartController extends Controller
 
         $order = new Order();
 
+        if($request->levering == 'verzenden')
+        {
+            if (Cart::total() >= env('FREE_SHIPPING_FORM'))
+            {
+                $shipping_price = env('PACKAGE_GET_PRICE');
+            }else{
+                $shipping_price = $request->levering == 'verzenden' ? env('PACKAGE_POST_PRICE') : env('PACKAGE_GET_PRICE');
+            }
+        }else{
+            $shipping_price = env('PACKAGE_GET_PRICE');
+        }
+
         $order->user_id = Auth::user()->id;
+        $order->email = Auth::user()->email;
         $order->status = 'open';
-        $order->total_price = $cart['price'];
+        $order->total_price = Cart::total();
+        $order->name = $request->voornaam.' '.$request->achternaam;
         $order->delivery_type = $request->levering;
-        $order->delivery_price = $request->levering == 'verzenden' ? env('PACKAGE_POST_PRICE') : env('PACKAGE_GET_PRICE');
+        $order->delivery_price = $shipping_price;
         $order->adres = $request->adres;
         $order->huisnummer = $request->huisnummer;
         $order->postcode = $request->postcode;
@@ -272,89 +152,21 @@ class CartController extends Controller
 
         $order->save();
 
-        foreach ($cart['items'] as $item => $value){
-            $property = $this->product->find($item);
-//            dd($product);
+        foreach (Cart::content() as $item){
+            $property = $this->product->find($item->id);
             $array[] = [
                 'property_id' => $property->id,
                 'order_id' => $order->id,
                 'selling_price' => $property->product->price - $property->product->discount,
-                'amount' => $value['qty']
+                'amount' => $item['qty']
             ];
         }
 
         OrderItem::insert($array);
 
+        Cart::destroy();
+
         return redirect()->route('order.show', $order->id);
     }
 
 }
-
-
-//    public function index(Request $request)
-//    {
-//        $cart = $request->session()->get('cart.items');
-//        $products = [];
-//        $total = 0;
-//
-//        if(count($cart) >= 1){
-//            foreach ($cart as $item) {
-//                $product = Product::find($item);
-//                if($product){
-//                    $total += $product->price;
-//                    $products[] = $product;
-//                }
-//            }
-//        }
-//
-//        return view('main.cart', [
-//            'categories' => Category::all(),
-//            'pages' => Pages::all(),
-//            'products' => $products,
-//            'cart' => $cart,
-//            'total' => $total
-//        ]);
-//    }
-//
-//    // Toevoegen middels post request POST: /cart/add [product[props]]
-//    public function addCart(Request $request)
-//    {
-//        $product = json_decode($request->get('product'));
-//        $request->session()->push('cart.items', $product->id);
-//
-//        $request->session()->flash('status', 'Het product is toegevoegd aan je winkelwagentje!');
-//        return Redirect::back();
-//    }
-//
-//    public function removeCart(Request $request, $id)
-//    {
-//        //  Bij meerdere items moet er 1 verwijderd worden uit de cart.items
-//        $pulled = $request->session()->pull('cart.items', $id);
-//
-//        if(count($pulled) > 1){
-//            // more than 1 in cart, add remaining back
-//            foreach ($pulled as $key => $value) {
-//                if($key==0) continue;
-//                $request->session()->push('cart.items', $value);
-//            }
-//        }
-//
-//        $request->session()->flash('status', 'Het product is verwijderd uit je winkelwagentje!');
-//
-//        return Redirect::back();
-//    }
-//
-//    private function getTotal(Request $request)
-//    {
-//        $cartItems = $request->session()->get('cart.items');
-//
-//        $total = 0;
-//        if(count($cartItems) !== 0){
-//            foreach ($cartItems as $cartItem) {
-//                $total += $cartItem->price;
-//            }
-//        }
-//
-//        return $total;
-//    }
-//}

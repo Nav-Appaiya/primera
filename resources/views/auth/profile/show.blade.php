@@ -77,7 +77,7 @@
           </div>
           <div class="form-group col-lg-12">
               {!! Form::label('geboortedatum', 'geboortedatum') !!}
-              {!! Form::text('geboortedatum', null, ['class' => 'form-control', 'disabled']) !!}
+              {!! Form::date('geboortedatum', null, ['class' => 'form-control', 'disabled']) !!}
           </div>
           <div class="form-group col-lg-9">
               {!! Form::label('adres', 'adres') !!}

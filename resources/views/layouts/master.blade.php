@@ -178,7 +178,7 @@
                             <a href="{{ route('cart') }}">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span style="margin-top: 17px; margin-left: -4px; position: absolute;" class="badge">
-                                    {{ Session::has('cart') ? Session::get('cart')['qty'] : 0 }}
+                                    € {{Cart::total()}}
                                 </span>
                             </a>
                         </a>
@@ -186,7 +186,7 @@
                         <center>
                             <h3>Winkelwagen</h3>
                         </center>
-                            @if(Session::has('cart'))
+                            @if(Cart::content())
                                 <table class="table table-striped">
                                     <tbody>
                                         <tr>
@@ -195,12 +195,15 @@
                                             <th>Aantal</th>
                                             <th>Prijs</th>
                                         </tr>
-                                        @foreach($cart_items->items as $product)
+                                        @foreach(Cart::content() as $product)
                                             <tr>
-                                                <td><img class="img-responsive" src="/images/product/{{$product['item']->product->productimages->first()->imagePath}}"></td>
-                                                <td>{{$product['item']->product->name}} {{$product['item']->detail ? '- '.$product['item']->detail->value : ''}}</td>
-                                                <td>{{$product['qty']}} x</td>
-                                                <td>€ {{number_format($product['price'], 2)}}</td>
+                                                {{--{{$product}}--}}
+                                                <td><img class="img-responsive" src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>
+                                                <td>{{$product->options[0]->product->name}}
+                                                    {{--{{$product->item->detail ? '- '.$product->item->detail->value : ''}}--}}
+                                                </td>
+                                                <td>{{$product->qty}} x</td>
+                                                <td>€ {{number_format($product->price, 2)}}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -210,6 +213,7 @@
                                     <center>uw winkelwagen is leeg</center>
                                 </div>
                             @endif
+
                         <center>
                             <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
 {{--                            <a href="{{route('')}}" style="margin: 0;" type="button" class="btn btn-default">Afrekenen</a>--}}

@@ -15,27 +15,19 @@
 
 Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
 
-// Checkout & Payment routes
-//Route::get('/checkout', ['as' => 'checkout_index', 'uses' => 'CheckoutController@index']);
-//Route::post('/checkout', ['as' => 'checkout', 'uses' => 'CheckoutController@checkout']);
-Route::get('/payment', ['as' => 'payment', 'uses' => 'MainController@payment']);
-
-//Route::get('/order/payment/{id}', ['as' => 'order.payment', 'uses' => 'CheckoutController@payed']);
-Route::post('/order/create', ['as' => 'order.create', 'uses' => 'MollieController@create']);
-Route::get('/order/payment/{id}', ['as' => 'order.get', 'uses' => 'MollieController@get']);
-
 Route::get('/winkelwagen', ['as' => 'cart', 'uses' => 'CartController@index']);
-//Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@create']);
-Route::get('/winkelwagen/legen', ['as' => 'cart.empty', 'uses' => 'CartController@destroy']);
-Route::post('/winkelwagen/toevoegen', ['as' => 'cart.add', 'uses' => 'CartController@store']);
-Route::post('/winkelwagen/verwijderen', ['as' => 'cart.remove', 'uses' => 'CartController@remove']);
-Route::post('/winkelwagen/verwijder/item', ['as' => 'cart.remove_key', 'uses' => 'CartController@remove_key']);
-Route::patch('/winkelwagen', ['as' => 'cart.update', 'uses' => 'CartController@update']);
+Route::post('/winkelwagen/toevoegen', ['as' => 'cart.add', 'uses' => 'CartController@add']);
+Route::post('/winkelwagen/verwijder', ['as' => 'cart.remove', 'uses' => 'CartController@remove']);
+Route::post('/winkelwagen/plus', ['as' => 'cart.increase', 'uses' => 'CartController@increase']);
+Route::post('/winkelwagen/min', ['as' => 'cart.decrease', 'uses' => 'CartController@decrease']);
+Route::post('/winkelwagen/legen', ['as' => 'cart.destroy', 'uses' => 'CartController@destroy']);
 Route::get('/winkelwagen/checkout', ['as' => 'cart.checkout', 'uses' => 'CartController@edit']);
 Route::patch('/winkelwagen/checkout', ['as' => 'cart.checkout.check', 'uses' => 'CartController@check']);
-
 Route::get('/winkelwagen/afrekenen/{id}', ['as' => 'order.show', 'uses' => 'MollieController@show']);
 
+// Checkout & Payment routes
+Route::post('/order/create', ['as' => 'order.create', 'uses' => 'MollieController@create']);
+Route::get('/order/payment/{id}', ['as' => 'order.get', 'uses' => 'MollieController@get']);
 
 // oAuth Routes for facebook
 Route::get('/redirect', 'SocialAuthController@redirect');
