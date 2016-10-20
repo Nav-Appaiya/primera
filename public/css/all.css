@@ -123,9 +123,9 @@ header .head ul.nav .dropdown-menu li {
 
 section.bread-crumb {
     width: 100%;
-    height: 80px;
+    height: 50px;
     background: #f6f6f6;
-    line-height: 79px;
+    line-height: 49px;
     border-bottom: 1px #D5D4D4 solid;
 }
 

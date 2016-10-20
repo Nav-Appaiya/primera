@@ -57,33 +57,8 @@
                         <small style="text-decoration:line-through;">&euro;{{ $product->price }}</small>
                     @endif
                 </div>
-            </div>
-        </div>
-
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            <div class="content">
-                
-                <div class="artst-prfle pull-right col-md-12 col-xs-12 col-sm-12">
-
-                    <h1>{{$product->name}}</h1>
-
-                    <label>beschrijving</label><br>
-                    <span class="byname">{{ $product->description }}</span>
-                    {{--<h1 class="pull-right"><span class="daysago"></span>--}}
-
-                    @if($product->discount == 0)
-                        <h2>&euro;{{ $product->price }}</h2>
-                    @else
-                        <h2>&euro;{{ $product->price - $product->discount }}</h2>
-                        <small style="text-decoration:line-through;">&euro;{{ $product->price }}</small>
-                    @endif
-
-                    <br>
-
-                    <div class="pull-right">
-                        <div class="row center-block">
-                            <div class="btn-group wishlist form-group  {{ $errors->has('product_id') ? ' has-error' : '' }}">
-                                {!! Form::model($product, array('route' => 'cart.add', 'method' => 'post')) !!}
+                <div class="panel-footer">
+                    {!! Form::model($product, array('route' => 'cart.add', 'method' => 'post')) !!}
                                     @if($product->property()->first()->detail_id)
                                         <label for="detail" class="{{ $errors->has('product_id') ? ' text-danger' : '' }}">{{$product->property()->first()->detail->type}}</label>
                                         @if($product->property()->first()->detail->type)
@@ -102,33 +77,15 @@
                                     @else
                                         <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
                                     @endif
-                                    <br>
-                                    {{ Form::submit('In winkelwagen', ['class' => 'btn btn-primary']) }}
-
-                                {{--<form method="POST" action="{{url('cart')}}">--}}
-                                    {{--<input type="hidden" name="product_id" value="{{$product->id}}">--}}
-                                    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
-                                    {{--<button type="submit" class="btn btn-fefault add-to-cart">--}}
-                                        {{--<i class="fa fa-shopping-cart"></i>--}}
-                                        {{--Add to cart--}}
-                                    {{--</button>--}}
-                                {{--</form>--}}
-
-                                {{ Form::close() }}
-                            </div>
-                        </div>
-                    </div>
-
+                                    {{ Form::submit('In winkelwagen', ['class' => 'btn btn-primary']) }}        
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-        <h4 class="text-center">Andere aanbiedingen</h4>
+                <h3>Andere aanbiedingen</h3>
         <br>
         {{--@foreach ($related as $relate)--}}
         {{--<div class="col-xs-12 col-sm-6 col-md-3 wrapper">--}}

@@ -310,10 +310,6 @@
                 <li><a href="{{route('sitemap')}}">sitemap</a></li>
                 <li><a href="{{route('garantie')}}">Garantie</a></li>
             </ul>
-            <p>
-                <img src="https://www.nix18.nl/media/images/logo.png">
-                <img src="https://www.ideal.nl/img/statisch/iDEAL-Payoff-2-groot.gif">
-            </p>
         </center>
     </div>
  </footer>
