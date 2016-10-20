@@ -26,18 +26,43 @@
 @section('content')
 
     <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                     @if($product->productimages()->exists())
+                        @foreach($product->productimages()->get() as $image) 
+                            <img width="100%" alt="{{$product->name}}" src="/images/product/{{$image->imagePath}}">
+                        @endforeach
+                    @else
+                        <img width="100%" src="/images/dummy.jpg">
+                    @endif
+                </div>
+                <div class="panel-footer"></div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3 style="font-size: 17px">{{$product->name}}</h3>
+
+                    <label>beschrijving</label><br>
+                    <span class="byname">{{ $product->description }}</span>
+                    {{--<h1 class="pull-right"><span class="daysago"></span>--}}
+
+                    @if($product->discount == 0)
+                        <h2>&euro;{{ $product->price }}</h2>
+                    @else
+                        <h2>&euro;{{ $product->price - $product->discount }}</h2>
+                        <small style="text-decoration:line-through;">&euro;{{ $product->price }}</small>
+                    @endif
+                </div>
+            </div>
+        </div>
 
         <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="content">
-                <div class="artst-pic pull-left">
-                    @if($product->productimages()->exists())
-                        @foreach($product->productimages()->get() as $image) 
-                            <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" alt="{{$product->name}}" src="/images/product/{{$image->imagePath}}">
-                        @endforeach
-                    @else
-                        <img style="height: 200px; width: 200px; margin: 10px; border: 1px solid #777;" src="/images/dummy.jpg">
-                    @endif
-                </div>
+                
                 <div class="artst-prfle pull-right col-md-12 col-xs-12 col-sm-12">
 
                     <h1>{{$product->name}}</h1>
@@ -100,6 +125,9 @@
     </div>
 
     <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
         <h4 class="text-center">Andere aanbiedingen</h4>
         <br>
         {{--@foreach ($related as $relate)--}}
@@ -130,9 +158,14 @@
         {{--</div>--}}
         {{--@endforeach--}}
     </div>
+    </div>
+    </div>
+    </div>
 
     <div class="row">
         <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
 
             <h3>reviews</h3>
             @foreach($product->review as $review)
@@ -142,7 +175,8 @@
                 </div>
 
             @endforeach
-
+            </div>
+            </div>
         </div>
     </div>
 
