@@ -97,7 +97,7 @@ header .head ul.nav {
 
 header .head ul.nav li {
     float: left;
-    padding: 0px 2px;
+    padding: 0px 0px;
     font-weight: 600;
 }
 
@@ -117,8 +117,6 @@ header .head ul.nav .dropdown-menu li {
     left: inherit;
     right: 0;
 }
-
-
 
 section.bread-crumb {
     width: 100%;
@@ -255,6 +253,10 @@ a, a:hover {
     left: 10px;
 }
 
+.test {
+    margin-left: 10px;
+}
+
 .o-hidden {
     overflow: hidden;
 }
@@ -273,6 +275,8 @@ a, a:hover {
     margin-top: 0px;
     margin-right: -1px;
 }
+
+
 
 h2 {
     font-weight: bold;

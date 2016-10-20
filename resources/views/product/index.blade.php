@@ -26,9 +26,6 @@
             <label>CATEGORIEËN</label>
 
             <style>
-                .active > a{
-                    color: green;
-                }
                 .list > li > .active{
                     display: block !important;
                 }
@@ -183,8 +180,8 @@
                         <ul class="{{ $parent->id == $category->parent->id ? 'active' : '' }}">
                             @foreach($parent->children as $children)
                                <li class="{{$children->id == str_replace('c-', '', Request::segment(3)) ? 'active' : '' }}">
-                                    <a href="{{route('product.index', [ str_replace(' ', '-', $category->parent->title),  str_replace(' ', '-', $children->title), $children->id])}}">
-                                        > {{$children->title}}
+                                    <a class="test" href="{{route('product.index', [ str_replace(' ', '-', $category->parent->title),  str_replace(' ', '-', $children->title), $children->id])}}">
+                                        <b>></b> {{$children->title}}
                                     </a>
                                 </li>
                             @endforeach
@@ -241,7 +238,7 @@
         @endif
         <hr>
         @foreach($property as $product)
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">

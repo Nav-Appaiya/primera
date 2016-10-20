@@ -177,7 +177,7 @@
                         <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <a href="{{ route('cart') }}">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span style="margin-top: 17px; margin-left: -4px; position: absolute;" class="badge">
+                                <span style="margin-top: 17px; margin-left: -10px; position: absolute;" class="badge">
                                     € {{Cart::total()}}
                                 </span>
                             </a>
