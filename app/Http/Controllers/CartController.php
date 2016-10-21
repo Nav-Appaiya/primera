@@ -35,7 +35,7 @@ class CartController extends Controller
     {
         $cart = Cart::content();
 
-        return view('cart.index', array('cart' => $cart));
+        return view('cart.index', ['cart' => $cart, 'product' => $this->product]);
     }
 
     public function add(){

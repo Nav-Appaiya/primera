@@ -20,11 +20,9 @@ class CategoryController extends Controller
         $this->category = new Category();
     }
 
-   public function show($name)
+   public function show($name, $id)
    {
-       $str_category = str_replace('-', ' ', $name);
-
-       $cate = $this->category->where('title', $str_category)->first();
+       $cate = $this->category->find($id)->first();
 
        return view('category.show')->with('category', $cate);
    }

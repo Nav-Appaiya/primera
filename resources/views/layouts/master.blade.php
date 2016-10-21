@@ -244,17 +244,20 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+
                     @foreach($main_categories->where('category_id', 0) as $category)
-                        <li class="dropdown">
-                            <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                @foreach($category->children as $child)
-                                    <li class="">
-                                        <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
+                        @if(count($category->children) != 0)
+                            <li class="dropdown">
+                                <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach($category->children as $child)
+                                        <li class="">
+                                            <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>

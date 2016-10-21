@@ -23,11 +23,11 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr class="cart_menu">
-                                        <td class="image">Item</td>
-                                        <td class="description"></td>
+                                        <td class="image">Foto</td>
+                                        <td class="description">Product</td>
                                         <td class="price">Price</td>
-                                        <td class="quantity">Quantity</td>
-                                        <td class="total">Total</td>
+                                        <td class="quantity">Aantal</td>
+                                        <td class="total">Totaal</td>
                                         <td></td>
                                     </tr>
                                 </thead>
@@ -37,46 +37,54 @@
                                             <td class="cart_product">
                                                 <a href="{{$item->options[0]}}"><img height="150" width="150" src="/images/product/{{$item->options[0]->product->productimages->first()->imagePath}}" alt=""></a>
                                             </td>
-                                            <td class="cart_description">
+                                            <td class="cart_description"><br>
                                                 <h4>
                                                     <a href="{{route('product.show', [str_replace(' ', '-', $item->name), $item->id])}}">
                                                         {{$item->name}} - {{$item->options[0]->detail->value}}
                                                     </a>
                                                 </h4>
-                                                <p>Web ID: {{$item->id}}</p>
+                                                <p>Product Nr: {{$item->id}}</p>
                                             </td>
-                                            <td class="cart_price">
-                                                <p>${{$item->price}}</p>
+                                            <td class="cart_price"><br>
+                                                <p>€{{$item->price}}</p>
                                             </td>
-                                            <td class="cart_quantity">
+                                            <td class="cart_quantity"><br>
                                                 <div class="cart_quantity_button">
-
-                                                    <form method="POST" action="{{route('cart.increase')}}">
-                                                        <input type="hidden" name="product_id" value="{{$item->id}}">
-                                                        <input type="hidden" name="increment" value="1">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <button type="submit" class="btn btn-fefault add-to-cart">
+                                                    @if($product->find($item->id)->stock > $item->qty)
+                                                        <form method="POST" action="{{route('cart.increase')}}" style="display: inline-block">
+                                                            <input type="hidden" name="product_id" value="{{$item->id}}">
+                                                            <input type="hidden" name="increment" value="1">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <button type="submit" class="btn btn-fefault add-to-cart">
+                                                                <i class="fa phpdebugbar-fa-plus"></i>
+                                                            </button>
+                                                        </form>
+                                                    @else
+                                                        <button type="submit" class="btn btn-fefault add-to-cart" disabled>
                                                             <i class="fa phpdebugbar-fa-plus"></i>
                                                         </button>
-                                                    </form>
-
+                                                    @endif
                                                     <input class="cart_quantity_input" type="text" name="quantity" value="{{$item->qty}}" autocomplete="off" size="2">
-
-                                                    <form method="POST" action="{{route('cart.decrease')}}">
-                                                        <input type="hidden" name="product_id" value="{{$item->id}}">
-                                                        <input type="hidden" name="decrease" value="0">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <button type="submit" class="btn btn-fefault add-to-cart">
+                                                    @if($item->qty > 1)
+                                                        <form method="POST" action="{{route('cart.decrease')}}" style="display: inline-block">
+                                                            <input type="hidden" name="product_id" value="{{$item->id}}">
+                                                            <input type="hidden" name="decrease" value="0">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <button type="submit" class="btn btn-fefault add-to-cart">
+                                                                <i class="fa phpdebugbar-fa-minus"></i>
+                                                            </button>
+                                                        </form>
+                                                    @else
+                                                        <button type="submit" class="btn btn-fefault add-to-cart" disabled>
                                                             <i class="fa phpdebugbar-fa-minus"></i>
                                                         </button>
-                                                    </form>
-
+                                                    @endif
                                                 </div>
                                             </td>
-                                            <td class="cart_total">
-                                                <p class="cart_total_price">${{$item->subtotal}}</p>
+                                            <td class="cart_total"><br>
+                                                <p class="cart_total_price">€{{$item->subtotal}}</p>
                                             </td>
-                                            <td class="cart_delete">
+                                            <td class="cart_delete"><br>
                                                 <form method="POST" action="{{route('cart.remove')}}">
                                                     <input type="hidden" name="product_id" value="{{$item->id}}">
                                                     <input type="hidden" name="remove" value="true">

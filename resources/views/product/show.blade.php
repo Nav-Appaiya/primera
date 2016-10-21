@@ -59,25 +59,25 @@
                 </div>
                 <div class="panel-footer">
                     {!! Form::model($product, array('route' => 'cart.add', 'method' => 'post')) !!}
-                                    @if($product->property()->first()->detail_id)
-                                        <label for="detail" class="{{ $errors->has('product_id') ? ' text-danger' : '' }}">{{$product->property()->first()->detail->type}}</label>
-                                        @if($product->property()->first()->detail->type)
-                                            <select id="product_id" class="form-control" name="product_id" >
-                                                <option value="">Maak uw keuzen.</option>
-                                                @foreach($product->property as $property)
-                                                    @if($property->stock == 0)
-                                                        <option value="{{$property->id}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>
-                                                    @else
-                                                        <option value="{{$property->id}}">{{$property->detail->value}}  -  <small>op voorraad</small></option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                            <p class="text-danger">{{ $errors->has('product_id') ? 'Selecteer' : '' }}</p>
+                        @if($product->property()->first()->detail_id)
+                            <label for="detail" class="{{ $errors->has('product_id') ? ' text-danger' : '' }}">{{$product->property()->first()->detail->type}}</label>
+                            @if($product->property()->first()->detail->type)
+                                <select id="product_id" class="form-control" name="product_id" >
+                                    <option value="">Maak uw keuzen.</option>
+                                    @foreach($product->property as $property)
+                                        @if($property->stock < 1)
+                                            <option value="{{$property->id}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>
+                                        @else
+                                            <option value="{{$property->id}}">{{$property->detail->value}}  -  <small>op voorraad</small></option>
                                         @endif
-                                    @else
-                                        <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
-                                    @endif
-                                    {{ Form::submit('In winkelwagen', ['class' => 'btn btn-primary']) }}        
+                                    @endforeach
+                                </select>
+                                <p class="text-danger">{{ $errors->has('product_id') ? 'Selecteer' : '' }}</p>
+                            @endif
+                        @else
+                            <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
+                        @endif
+                    {{ Form::submit('In winkelwagen', ['class' => 'btn btn-primary']) }}
                 </div>
             </div>
         </div>
