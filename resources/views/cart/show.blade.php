@@ -56,6 +56,10 @@
                                     @endforeach
                                 </select>
 
+                                {!! Form::checkbox('voorwaarden', $order->id) !!}
+                                <p style="{{$errors->has('voorwaarden') ? 'font-weight: bold; color: #a94442;' : '' }}"> Gaat u akkoord met de <a href="{{route('voorwaarde')}}">algemene voorwaarden</a> van http://www.esigareteindhoven.com/</p>
+{{--todo: catch error and display--}}
+
                                 {!! Form::submit('Betalen', array('class' => 'form-control')) !!}
 
 

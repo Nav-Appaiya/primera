@@ -6,6 +6,7 @@
 @section('content')
 
     <div class="row">
+
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -69,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{route('admin_review_index')}}">
+                <a href="{{route('admin_product_index')}}">
                     <div class="panel-footer">
                         <span class="pull-left">Bekijk Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

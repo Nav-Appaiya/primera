@@ -58,6 +58,7 @@ class MollieController extends Controller
         $rules = [
             'order_id' => 'required',
             'issuer_id' => 'required',
+            'voorwaarden' => 'required'
         ];
 
         $validator = Validator::make($request->all(), $rules);

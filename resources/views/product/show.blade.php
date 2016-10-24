@@ -47,7 +47,7 @@
                     <h3 style="font-size: 17px">{{$product->name}}</h3>
 
                     <label>beschrijving</label><br>
-                    <span class="byname">{{ $product->description }}</span>
+                    <p class="byname">{!! nl2br($product->description) !!}</p>
                     {{--<h1 class="pull-right"><span class="daysago"></span>--}}
 
                     @if($product->discount == 0)

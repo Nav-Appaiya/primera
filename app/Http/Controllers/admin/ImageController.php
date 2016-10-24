@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin;
-
-
-use Illuminate\Http\Request;
+namespace App\Http\Controllers\Admin;
 
 use App\ProductImage;
 use File;
+
+use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -26,7 +25,7 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function remove($id)
     {
         $image = $this->image->find($id);
 
@@ -34,10 +33,7 @@ class ImageController extends Controller
 
         File::delete($full_path);
 
-        if (!File::exists($full_path)){
-            $image->delete();
-        }
-
+        $image->delete();
         return redirect()->back();
     }
 }

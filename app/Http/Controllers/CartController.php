@@ -93,7 +93,12 @@ class CartController extends Controller
 
     public function edit()
     {
+        if(!count(Cart::content())){
+            return redirect()->route('cart');
+        }
+
         $methods = $this->mollie->methods()->all();
+
         return view('cart.checkout')
             ->with('user', Auth::user())
             ->with('methods', $methods);

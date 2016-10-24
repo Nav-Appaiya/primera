@@ -75,6 +75,8 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/uitloggen', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 });
 
+Route::get('/images/{filename}', ['as' => 'image.show', 'uses' => 'ImageController@show']);
+
 // Admin authorisation only for admins, not authed users!
 Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     Route::get('/', ['as' => 'admin_dashboard_index', 'uses' => 'admin\HomeController@index']);
@@ -131,33 +133,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     Route::get('orders/{id}/edit', ['as' => 'admin_order_edit', 'uses' => 'Admin\OrderController@edit']);
     Route::post('orders/{id}', ['as' => 'admin_order_update', 'uses' => 'Admin\OrderController@update']);
 //    Route::patch('orders/{id}/levering', ['as' => 'admin_order_store', 'uses' => 'Admin\OrderController@store']);
-//    <div class="col-lg-6">
-//
-//            <div>
-//                {{--{!! Form::open($order, array('route' => array('admin_order_store', $order->id), 'method' => 'patch' )) !!}--}}
-//
-//                    {{--@if($order->status == 'paid' && $order->delivery_type = 'verzenden')--}}
-//                        {{--verzenden--}}
-//                    {{--@else--}}
-//                        {{--niet verzenden--}}
-//                    {{--@endif--}}
-//
-//                    {{--<div class="form-group">--}}
-//                        {{--{!! Form::label('notification', 'notification') !!}--}}
-//                        {{--{!! Form::text('notification', null, ['class' => 'form-control', 'placeholder' => '']) !!}--}}
-//                    {{--</div>--}}
-//
-//                    {{--<!-- Submit Button -->--}}
-//                    {{--<div class="form-group">--}}
-//                        {{--{!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right'] ) !!}--}}
-//                        {{--<a href="{{route('admin_order_index')}}" class="btn btn-default pull-right">terug</a>--}}
-//                    {{--</div>--}}
-//                {{--{{Form::close()}}--}}
-//
-//            </div>
-//
-//
-//        </div>
 
     //admin users
     Route::get('users', ['as' => 'admin_user_index', 'uses' => 'Admin\UserController@index']);
@@ -169,7 +144,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     Route::patch('search-engine', ['as' => 'admin_seo_create', 'uses' => 'Admin\SearchEngineController@create']);
 
     //admin image delete
-    Route::delete('image/{id}', ['as' => 'admin_image_destroy', 'uses' => 'Admin\ImageController@destroy']);
+    Route::delete('image/{id}',
+        ['as' => 'admin_image_destroy', 'uses' => 'admin\ImageController@remove']);
 
     //admin panel settings
     Route::get('settings', ['as' => 'dashboard.settings', 'uses' => 'Admin\SettingsController@index']);

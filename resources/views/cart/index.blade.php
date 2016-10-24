@@ -25,7 +25,7 @@
                                     <tr class="cart_menu">
                                         <td class="image">Foto</td>
                                         <td class="description">Product</td>
-                                        <td class="price">Price</td>
+                                        <td class="price">Prijs</td>
                                         <td class="quantity">Aantal</td>
                                         <td class="total">Totaal</td>
                                         <td></td>
@@ -99,7 +99,7 @@
                                 </tbody>
                             </table>
                         @else
-                            <p>You have no items in the shopping cart</p>
+                            <p>Uw winkelwagen is leeg.</p>
                         @endif
 
                     </div>
