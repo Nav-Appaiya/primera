@@ -303,7 +303,6 @@
         <center>
             <ul class="list-group">
                 <li><a href="{{route('voorwaarde')}}">Algemene voorwaarden</a></li>
-                <li><a href="{{route('cookies')}}">Cookies</a></li>
                 <li><a href="{{route('policy')}}">Privacy policy</a></li>
                 <li><a href="{{route('contact')}}">Contact</a></li>
                 <li><a href="{{route('retour')}}">Retourneren</a></li>

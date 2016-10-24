@@ -143,8 +143,17 @@ class CartController extends Controller
             $shipping_price = env('PACKAGE_GET_PRICE');
         }
 
-        $order->user_id = Auth::user()->id;
-        $order->email = Auth::user()->email;
+        if (Auth::check()) {
+            $user = Auth::user()->id;
+            $email = Auth::user()->email;
+        }else{
+            $user = NULL;
+            $email = 'asdasdasd';
+//            $email = $request->email;
+        }
+
+        $order->user_id = $user;
+        $order->email = $email;
         $order->status = 'open';
         $order->total_price = Cart::total();
         $order->name = $request->voornaam.' '.$request->achternaam;

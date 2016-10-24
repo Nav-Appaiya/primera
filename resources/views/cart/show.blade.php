@@ -83,13 +83,13 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1>Uw gegevens</h1>
-                            {{Auth::user()->email}}<br>
-                            {{Auth::user()->voornaam}} {{Auth::user()->achternaam}}
+                            {{--{{Auth::user()->email}}<br>--}}
+{{--                            {{Auth::user()->voornaam}} {{Auth::user()->achternaam}}--}}
                         </div>
                         <div class="col-lg-6">
                             {{--TODO als verzendmethode ophalen is moet het afleveradres vervangen worden met afhaaladres--}}
                             <h3>Afleveradres</h3>
-                            <p>{{Auth::user()->adres}} {{Auth::user()->huisnummer}}, <br>{{Auth::user()->postcode}} {{Auth::user()->woonplaats}}</p>
+{{--                            <p>{{Auth::user()->adres}} {{Auth::user()->huisnummer}}, <br>{{Auth::user()->postcode}} {{Auth::user()->woonplaats}}</p>--}}
                         </div>
                         <div class="col-lg-6">
                             <h3>Factuuradres</h3>

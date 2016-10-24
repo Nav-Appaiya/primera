@@ -44,7 +44,6 @@ Route::get('/algemene-voorwaarde', ['as' => 'voorwaarde', 'uses' => 'HomeControl
 Route::get('/over-ons', ['as' => 'about', 'uses' => 'HomeController@about']);
 Route::get('/privacy-policy', ['as' => 'policy', 'uses' => 'HomeController@policy']);
 Route::get('/verzending', ['as' => 'verzending', 'uses' => 'HomeController@verzending']);
-Route::get('/cookie-beleid', ['as' => 'cookies', 'uses' => 'HomeController@cookie']);
 Route::get('/garantie', ['as' => 'garantie', 'uses' => 'HomeController@garantie']);
 Route::get('/sitemap', ['as' => 'sitemap', 'uses' => 'HomeController@sitemap']);
 Route::get('/retouren', ['as' => 'retour', 'uses' => 'HomeController@retour']);

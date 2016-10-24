@@ -52,11 +52,6 @@ class HomeController extends Controller
         return view('main.verzending');
     }
 
-    public function cookie()
-    {
-        return view('main.cookie');
-    }
-
     public function garantie()
     {
         return view('main.garantie');
