@@ -46,43 +46,46 @@
                                                 <p>Product Nr: {{$item->id}}</p>
                                             </td>
                                             <td class="cart_price"><br>
-                                                <p>€{{$item->price}}</p>
+                                                <p>€{{number_format($item->price, 2)}}</p>
                                             </td>
                                             <td class="cart_quantity"><br>
                                                 <div class="cart_quantity_button">
-                                                    @if($product->find($item->id)->stock > $item->qty)
-                                                        <form method="POST" action="{{route('cart.increase')}}" style="display: inline-block">
-                                                            <input type="hidden" name="product_id" value="{{$item->id}}">
-                                                            <input type="hidden" name="increment" value="1">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                            <button type="submit" class="btn btn-fefault add-to-cart">
-                                                                <i class="fa phpdebugbar-fa-plus"></i>
-                                                            </button>
-                                                        </form>
-                                                    @else
-                                                        <button type="submit" class="btn btn-fefault add-to-cart" disabled>
-                                                            <i class="fa phpdebugbar-fa-plus"></i>
-                                                        </button>
-                                                    @endif
-                                                    <input class="cart_quantity_input" type="text" name="quantity" value="{{$item->qty}}" autocomplete="off" size="2">
                                                     @if($item->qty > 1)
                                                         <form method="POST" action="{{route('cart.decrease')}}" style="display: inline-block">
                                                             <input type="hidden" name="product_id" value="{{$item->id}}">
                                                             <input type="hidden" name="decrease" value="0">
                                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                             <button type="submit" class="btn btn-fefault add-to-cart">
-                                                                <i class="fa phpdebugbar-fa-minus"></i>
+                                                                <i class="fa fa-minus"></i>
                                                             </button>
                                                         </form>
                                                     @else
                                                         <button type="submit" class="btn btn-fefault add-to-cart" disabled>
-                                                            <i class="fa phpdebugbar-fa-minus"></i>
+                                                            <i class="fa fa-minus"></i>
                                                         </button>
                                                     @endif
+
+                                                    <input class="cart_quantity_input" type="text" name="quantity" value="{{$item->qty}}" autocomplete="off" size="2">
+
+                                                    @if($product->find($item->id)->stock > $item->qty)
+                                                        <form method="POST" action="{{route('cart.increase')}}" style="display: inline-block">
+                                                            <input type="hidden" name="product_id" value="{{$item->id}}">
+                                                            <input type="hidden" name="increment" value="1">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <button type="submit" class="btn btn-fefault add-to-cart">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        </form>
+                                                    @else
+                                                        <button type="submit" class="btn btn-fefault add-to-cart" disabled>
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    @endif
+
                                                 </div>
                                             </td>
                                             <td class="cart_total"><br>
-                                                <p class="cart_total_price">€{{$item->subtotal}}</p>
+                                                <p class="cart_total_price">€{{number_format($item->subtotal, 2)}}</p>
                                             </td>
                                             <td class="cart_delete"><br>
                                                 <form method="POST" action="{{route('cart.remove')}}">
@@ -179,7 +182,6 @@
         <div class="col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-
                     <h5 class="text-right">Subtotaal excl. btw <strong>€ {{ Session::has('cart') ? number_format(Cart::total() - round( (Cart::total() / 100) * 21, 2), 2) : 0}}</strong>
                     </h5>
                     <small class="pull-right">btw 21%

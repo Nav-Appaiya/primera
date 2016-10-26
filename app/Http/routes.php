@@ -11,7 +11,7 @@
 |
 */
 
-//Route::auth();
+Route::auth();
 
 Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
 
@@ -54,10 +54,13 @@ Route::get('/contact', ['as' => 'contact', 'uses' => 'ContactController@index'])
 Route::post('contact', ['as' => 'contact_store', 'uses' => 'ContactController@store']);
 
 // User authentication routes...
+Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@showResetForm']);
+Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@reset']);
+
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
-Route::get('password/reset', 'Auth\PasswordController@getReset');
-Route::post('password/reset/{token}', 'Auth\PasswordController@postReset');
+//Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+//Route::post('password/reset/{token}', 'Auth\PasswordController@postReset');
 Route::get('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@postRegister']);
 Route::get('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);

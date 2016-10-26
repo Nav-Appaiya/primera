@@ -5,6 +5,7 @@
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="refresh" content="300">
         <meta http-equiv="language" content="NL">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -178,7 +179,7 @@
                             <a href="{{ route('cart') }}">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span style="margin-top: 17px; margin-left: -10px; position: absolute;" class="badge">
-                                    € {{Cart::total()}}
+                                    € {{number_format(Cart::total(), 2)}}
                                 </span>
                             </a>
                         </a>
@@ -320,20 +321,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     {{--<script type="text/javascript" src="http://localhost:8080/assets/slick.js"></script>--}}
-   
-    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
-    <script type="text/javascript">
-        window.cookieconsent_options = {
-            "message":"This website uses cookies to ensure you get the best experience on our website",
-            "dismiss":"Got it!",
-            "learnMore":"More info",
-            "link":null,
-            "theme":"light-top"
-        };
-    </script>
-
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
-    <!-- End Cookie Consent plugin -->
 
     {{--<script src="{{ URL::asset('assets/js/slick.js') }}"></script>--}}
     @stack('script')

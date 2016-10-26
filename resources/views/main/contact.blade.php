@@ -105,7 +105,27 @@
                 <h3>Bedrijfsgegevens</h3><hr>
                 <h3>Adres</h3><hr>
 
+                E-Sigareteindhoven
 
+                Bedrijf: van Schaik Domenie VOF
+
+                Handelsnaam: Primera Blixembosch
+
+                Handelsnaam: Primera Strijp
+
+                Adres
+
+                hoofdvest.: Ouverture 228
+
+                5629PX Eindhoven
+
+                KvK: 57876576
+
+                BTWnr.: 852774801B01
+
+                IBAN: NL79RABO 0311163866
+
+                BIC code: RABONL2U
 
             </div>
 

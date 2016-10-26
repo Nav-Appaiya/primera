@@ -108,6 +108,8 @@ class CartController extends Controller
     {
         $rules = [
             'levering' => 'required',
+            'payment_method' => 'required',
+            'email' => Auth::check() ? 'email' : 'required|email' ,
             'voornaam' => 'required|max:50|alpha',
             'achternaam' => 'required|max:50|regex:/^[\pL\s]+$/u',
             'geslacht' => 'in:man,vrouw',
@@ -148,8 +150,7 @@ class CartController extends Controller
             $email = Auth::user()->email;
         }else{
             $user = NULL;
-            $email = 'asdasdasd';
-//            $email = $request->email;
+            $email = $request->email;
         }
 
         $order->user_id = $user;
@@ -159,13 +160,14 @@ class CartController extends Controller
         $order->name = $request->voornaam.' '.$request->achternaam;
         $order->delivery_type = $request->levering;
         $order->delivery_price = $shipping_price;
+        $order->payment_method = $request->payment_method;
         $order->adres = $request->adres;
         $order->huisnummer = $request->huisnummer;
         $order->postcode = $request->postcode;
         $order->woonplaats = $request->woonplaats;
 
         $order->save();
-
+        $array = [];
         foreach (Cart::content() as $item){
             $property = $this->product->find($item->id);
             $array[] = [

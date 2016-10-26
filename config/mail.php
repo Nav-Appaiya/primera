@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => array('address' => 'navarajh@gmail.com', 'name' => 'Admin'),
+    'from' => array('address' => 'no-reply@esigareteindhoven.com', 'name' => 'Esigareteindhoven'),
 
     /*
     |--------------------------------------------------------------------------
