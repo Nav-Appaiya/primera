@@ -26,6 +26,9 @@
             <label>CATEGORIEËN</label>
 
             <style>
+                a:active {
+                    color: grey;
+                }
                 .list > li > .active{
                     display: block !important;
                 }
