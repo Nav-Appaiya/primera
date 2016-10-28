@@ -35,7 +35,7 @@ class CartController extends Controller
     {
         $cart = Cart::content();
 
-        return view('cart.index', array('cart' => $cart));
+        return view('cart.index', ['cart' => $cart, 'product' => $this->product]);
     }
 
     public function add(){
@@ -93,7 +93,12 @@ class CartController extends Controller
 
     public function edit()
     {
+        if(!count(Cart::content())){
+            return redirect()->route('cart');
+        }
+
         $methods = $this->mollie->methods()->all();
+
         return view('cart.checkout')
             ->with('user', Auth::user())
             ->with('methods', $methods);
@@ -103,6 +108,8 @@ class CartController extends Controller
     {
         $rules = [
             'levering' => 'required',
+            'payment_method' => 'required',
+            'email' => Auth::check() ? 'email' : 'required|email' ,
             'voornaam' => 'required|max:50|alpha',
             'achternaam' => 'required|max:50|regex:/^[\pL\s]+$/u',
             'geslacht' => 'in:man,vrouw',
@@ -138,20 +145,29 @@ class CartController extends Controller
             $shipping_price = env('PACKAGE_GET_PRICE');
         }
 
-        $order->user_id = Auth::user()->id;
-        $order->email = Auth::user()->email;
+        if (Auth::check()) {
+            $user = Auth::user()->id;
+            $email = Auth::user()->email;
+        }else{
+            $user = NULL;
+            $email = $request->email;
+        }
+
+        $order->user_id = $user;
+        $order->email = $email;
         $order->status = 'open';
         $order->total_price = Cart::total();
         $order->name = $request->voornaam.' '.$request->achternaam;
         $order->delivery_type = $request->levering;
         $order->delivery_price = $shipping_price;
+        $order->payment_method = $request->payment_method;
         $order->adres = $request->adres;
         $order->huisnummer = $request->huisnummer;
         $order->postcode = $request->postcode;
         $order->woonplaats = $request->woonplaats;
 
         $order->save();
-
+        $array = [];
         foreach (Cart::content() as $item){
             $property = $this->product->find($item->id);
             $array[] = [

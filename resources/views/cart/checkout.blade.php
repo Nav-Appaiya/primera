@@ -4,7 +4,7 @@
 @section('seotags', 'seotags')
 
 @section('content')
-    {!! Form::model($user, array('route' => 'cart.checkout.check', 'method' => 'PATCH', 'files' => true )) !!}
+    {!! Form::model($user, array('route' => 'cart.checkout.check', 'method' => 'PATCH')) !!}
 
         <div class="container wrapper">
             @include('layouts.checkout-step')
@@ -32,6 +32,17 @@
                                         <h2>PERSOONLIJKE GEGEVENS</h2>
 
                                         <div class="row">
+
+                                            @if(!Auth::check())
+                                                <div class="form-group col-lg-12 {{$errors->has('email') ? 'has-error' : ''}}">
+                                                    {!! Form::label('email', 'email *') !!}
+                                                    {!! Form::text('email', NULL, ['class' => 'form-control']) !!}
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                </div>
+                                            @endif
+
                                             <div class="form-group col-lg-6 {{$errors->has('voornaam') ? 'has-error' : ''}}">
                                                 {!! Form::label('voornaam', 'voornaam *') !!}
                                                 {!! Form::text('voornaam', NULL, ['class' => 'form-control']) !!}
@@ -125,10 +136,8 @@
                                             </tr>
                                             @foreach(Cart::content() as $product)
                                                 <tr>
-                                                    {{--{{$product}}--}}
                                                     <td><img style="height: 70px;" class="img-responsive" src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>
-                                                    <td>{{$product->options[0]->product->name}} -
-                                                        {{$product->options[0]->detail->value }}
+                                                    <td>{{$product->options[0]->product->name}} - {{$product->options[0]->detail->value }}
                                                     </td>
                                                     <td>{{$product->qty}} x</td>
                                                     <td>€ {{number_format($product->price, 2)}}</td>
@@ -181,6 +190,29 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 ">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        Betaalmethode
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="col-lg-12 {{$errors->has('payment_method') ? 'has-error' : ''}}">
+                                           <span class="help-block">
+                                                <strong>{{ $errors->first('payment_method') }}</strong>
+                                            </span>
+                                        </div>
+                                        @foreach($methods as $method)
+                                            <div class="col-lg-3 table-bordered">
+                                                <label>{!! $method->id !!}</label><br>
+                                                <input type="radio" name="payment_method" value="{!! $method->id !!}">
+                                                <img class="pull-right" src="{{$method->image->normal}}"><br>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 

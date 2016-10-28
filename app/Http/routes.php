@@ -11,7 +11,7 @@
 |
 */
 
-//Route::auth();
+Route::auth();
 
 Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
 
@@ -44,7 +44,6 @@ Route::get('/algemene-voorwaarde', ['as' => 'voorwaarde', 'uses' => 'HomeControl
 Route::get('/over-ons', ['as' => 'about', 'uses' => 'HomeController@about']);
 Route::get('/privacy-policy', ['as' => 'policy', 'uses' => 'HomeController@policy']);
 Route::get('/verzending', ['as' => 'verzending', 'uses' => 'HomeController@verzending']);
-Route::get('/cookie-beleid', ['as' => 'cookies', 'uses' => 'HomeController@cookie']);
 Route::get('/garantie', ['as' => 'garantie', 'uses' => 'HomeController@garantie']);
 Route::get('/sitemap', ['as' => 'sitemap', 'uses' => 'HomeController@sitemap']);
 Route::get('/retouren', ['as' => 'retour', 'uses' => 'HomeController@retour']);
@@ -55,10 +54,13 @@ Route::get('/contact', ['as' => 'contact', 'uses' => 'ContactController@index'])
 Route::post('contact', ['as' => 'contact_store', 'uses' => 'ContactController@store']);
 
 // User authentication routes...
+Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@showResetForm']);
+Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@reset']);
+
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
-Route::get('password/reset', 'Auth\PasswordController@getReset');
-Route::post('password/reset/{token}', 'Auth\PasswordController@postReset');
+//Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+//Route::post('password/reset/{token}', 'Auth\PasswordController@postReset');
 Route::get('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@postRegister']);
 Route::get('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
@@ -74,6 +76,8 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     //    Route::get('/mijn-bestelling/{order_id}', ['as' => 'user.order.show', 'uses' => 'Auth\OrderController@show']);
     Route::get('/uitloggen', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 });
+
+Route::get('/images/{filename}', ['as' => 'image.show', 'uses' => 'ImageController@show']);
 
 // Admin authorisation only for admins, not authed users!
 Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
@@ -130,6 +134,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     Route::get('orders', ['as' => 'admin_order_index', 'uses' => 'Admin\OrderController@index']);
     Route::get('orders/{id}/edit', ['as' => 'admin_order_edit', 'uses' => 'Admin\OrderController@edit']);
     Route::post('orders/{id}', ['as' => 'admin_order_update', 'uses' => 'Admin\OrderController@update']);
+//    Route::patch('orders/{id}/levering', ['as' => 'admin_order_store', 'uses' => 'Admin\OrderController@store']);
 
     //admin users
     Route::get('users', ['as' => 'admin_user_index', 'uses' => 'Admin\UserController@index']);
@@ -141,7 +146,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     Route::patch('search-engine', ['as' => 'admin_seo_create', 'uses' => 'Admin\SearchEngineController@create']);
 
     //admin image delete
-    Route::delete('image/{id}', ['as' => 'admin_image_destroy', 'uses' => 'Admin\ImageController@destroy']);
+    Route::delete('image/{id}',
+        ['as' => 'admin_image_destroy', 'uses' => 'admin\ImageController@remove']);
 
     //admin panel settings
     Route::get('settings', ['as' => 'dashboard.settings', 'uses' => 'Admin\SettingsController@index']);

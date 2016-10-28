@@ -50,7 +50,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app/public/product'),
             'visibility' => 'public',
         ],
 

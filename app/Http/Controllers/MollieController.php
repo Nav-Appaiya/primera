@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 
 use App\Property;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 
 use Illuminate\Http\Request;
@@ -55,9 +56,12 @@ class MollieController extends Controller
 
     public function create(Request $request)
     {
+        $order = $this->order->find($request->order_id);
+
         $rules = [
             'order_id' => 'required',
-            'issuer_id' => 'required',
+            'voorwaarden' => 'required',
+            'issuer_id' => $order->payment_method == 'ideal' ? 'required' : ''
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -69,8 +73,6 @@ class MollieController extends Controller
                 ->withInput();
         }
 
-        $order = $this->order->find($request->order_id);
-
         $payment =  $this->mollie->payments()->create([
             "amount"      => $order->total_price + $order->delivery_price,
             "description" => "Order Nr. ". $request->order_id,
@@ -78,8 +80,8 @@ class MollieController extends Controller
             'metadata'    => array(
                 'order_id' => $request->order_id,
             ),
-            "method" => 'ideal',
-            "issuer" => $request->issuer_id,
+            "method" => $order->payment_method,
+            "issuer" => $order->payment_method == 'ideal' ? $request->issuer_id : '',
         ]);
 
         $order->payment_id = $payment->id;
@@ -87,8 +89,12 @@ class MollieController extends Controller
 
         $order->save();
 
-        header("Location: " . $payment->getPaymentUrl());
-        exit;
+        Mail::send('emails.bedankt', ['order' => $order], function($m) use ($order){
+            $m->from('info@esigareteindhoven.com');
+            $m->to($order->email, $order->name)->subject('Bedankt voor uw bestelling!');
+        });
+
+        return redirect($payment->getPaymentUrl());
     }
 
     public function get($id)
@@ -107,6 +113,11 @@ class MollieController extends Controller
                 }
             }
             $order->status = self::STATUS_COMPLETED;
+
+            Mail::send('emails.payment', ['order' => $order], function($m) use ($order){
+                $m->from('info@esigareteindhoven.com');
+                $m->to($order->email, $order->name)->subject('Bedankt voor uw bestelling!');
+            });
         }
         elseif (! $payment->isOpen())
         {

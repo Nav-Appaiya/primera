@@ -5,20 +5,6 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-12">
-        {{--@if(!$property->isEmpty())--}}
-        {{--@if(count($property) != 1)--}}
-            {{--<p>--}}
-                {{--<h1></h1>--}}
-                {{--Er zijn {{count($property)}} producten gevonden--}}
-            {{--</p>--}}
-             {{--<hr>--}}
-        {{--@else--}}
-            {{--<p>Er is één product gevonden</p>--}}
-            {{--<hr>--}}
-        {{--@endif--}}
-
-    </div>
 
     <div class="col-md-3">
     {{--{{()}}aa--}}
@@ -177,18 +163,20 @@
 
             <ul class="list">
 
-                @foreach(\App\Category::where('category_id', 0)->get() as $parent)
+                @foreach($category->where('category_id', 0)->get() as $parent)
                     <li>
-                        <a href="{{route('product.index', [str_replace(' ', '-', $category->parent->title), str_replace(' ', '-', $parent->children()->first()->title), $parent->children()->first()->id])}}">{{$parent->title}}</a>
-                        <ul class="{{ $parent->id == $category->parent->id ? 'active' : '' }}">
-                            @foreach($parent->children as $children)
-                               <li class="{{$children->id == str_replace('c-', '', Request::segment(3)) ? 'active' : '' }}">
-                                    <a class="test" href="{{route('product.index', [ str_replace(' ', '-', $category->parent->title),  str_replace(' ', '-', $children->title), $children->id])}}">
-                                        <b>></b> {{$children->title}}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
+                        @if(count($parent->children) != 0)
+                            <a href="{{route('product.index', [str_replace(' ', '-', $parent->title), str_replace(' ', '-', $parent->children()->first()['title']), $parent->children()->first()['id']])}}">{{$parent->title}}</a>
+                            <ul class="{{ $parent->id == $category->where('id', str_replace('c-', '', Request::segment(3)))->first()['category_id'] ? 'active' : '' }}">
+                                @foreach($parent->children as $children)
+                                   <li class="{{$children->id == str_replace('c-', '', Request::segment(3)) ? 'active' : '' }}">
+                                        <a class="test" href="{{route('product.index', [str_replace(' ', '-', $parent->title), str_replace(' ', '-', $children->title), $children->id])}}">
+                                            <b>></b> {{$children->title}}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </li>
                 @endforeach
             </ul>

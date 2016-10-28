@@ -5,6 +5,7 @@
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="refresh" content="300">
         <meta http-equiv="language" content="NL">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -178,7 +179,7 @@
                             <a href="{{ route('cart') }}">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span style="margin-top: 17px; margin-left: -10px; position: absolute;" class="badge">
-                                    € {{Cart::total()}}
+                                    € {{number_format(Cart::total(), 2)}}
                                 </span>
                             </a>
                         </a>
@@ -244,17 +245,20 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+
                     @foreach($main_categories->where('category_id', 0) as $category)
-                        <li class="dropdown">
-                            <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                @foreach($category->children as $child)
-                                    <li class="">
-                                        <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
+                        @if(count($category->children) != 0)
+                            <li class="dropdown">
+                                <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach($category->children as $child)
+                                        <li class="">
+                                            <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>
@@ -300,7 +304,6 @@
         <center>
             <ul class="list-group">
                 <li><a href="{{route('voorwaarde')}}">Algemene voorwaarden</a></li>
-                <li><a href="{{route('cookies')}}">Cookies</a></li>
                 <li><a href="{{route('policy')}}">Privacy policy</a></li>
                 <li><a href="{{route('contact')}}">Contact</a></li>
                 <li><a href="{{route('retour')}}">Retourneren</a></li>
@@ -318,20 +321,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     {{--<script type="text/javascript" src="http://localhost:8080/assets/slick.js"></script>--}}
-   
-    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
-    <script type="text/javascript">
-        window.cookieconsent_options = {
-            "message":"This website uses cookies to ensure you get the best experience on our website",
-            "dismiss":"Got it!",
-            "learnMore":"More info",
-            "link":null,
-            "theme":"light-top"
-        };
-    </script>
-
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
-    <!-- End Cookie Consent plugin -->
 
     {{--<script src="{{ URL::asset('assets/js/slick.js') }}"></script>--}}
     @stack('script')

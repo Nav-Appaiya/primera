@@ -31,7 +31,7 @@
                 <div class="panel panel-default">
 
                     <div class="panel-body">
-
+                        {{--{{public_path()}}--}}
                         <label>Foto's</label>
                         <div class="row">
                             @foreach($product->productimages as $image)

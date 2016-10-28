@@ -84,7 +84,6 @@
 
                             <!-- Submit Button -->
                             <div class="form-group">
-                                {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right'] ) !!}
                                 <a href="{{route('admin_order_index')}}" class="btn btn-default pull-right">terug</a>
                             </div>
 
@@ -96,6 +95,35 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-6">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @if($order->status == 'paid' && $order->delivery_type == 'verzenden')
+
+                        {!! Form::model($order, array('route' => array('admin_order_update', $order->id), 'method' => 'post' )) !!}
+
+                            <!-- notification -->
+                            <div class="form-group">
+                                {!! Form::label('track_trace', 'track & trace') !!}
+                                {!! Form::text('track_trace', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-group">
+                                {!! Form::submit('Bestelling verzenden', ['class' => 'btn btn-primary pull-right'] ) !!}
+                            </div>
+                        {{Form::close()}}
+                    @else
+                        Deze bestelling word afgehaald.
+                    @endif
+                </div>
+            </div>
+
+
+        </div>
+
 
         <div class="col-lg-6">
             @foreach($order->orderitems as $item)
