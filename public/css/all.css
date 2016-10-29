@@ -2,13 +2,58 @@
 html, body {
     margin: 0;
     padding: 0px;
-    padding-top: 50px;
+    padding-top: 91px;
     background: #fff;
     font-family: "Open Sans", sans-serif;
     color: #000;
 }
 
 header {
+    width: 100%;
+    display: block;
+    background: #fff;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+header .user-menu {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    background: #363C3F;
+    border-bottom: 1px #565860 solid;
+}
+
+header .user-menu p {
+    margin-bottom: 0;
+    padding: 0;
+    color: #fff;
+}
+
+header .user-menu a {
+    color: #fff;
+}
+
+header .head {
+    width: 100%;
+    background: #F6F6F6;
+    height: auto;
+    border-bottom: 1px #D5D4D4 solid;
+    padding: 25px 0px;
+    text-align: center;
+}
+
+header .menu {
+    width: 100%;
+    height: 51px;
+    border-bottom: 1px #D5D4D4 solid;
+}
+
+/* header {
     width: 100%;
     display: block;
     background: #fff;
@@ -28,8 +73,8 @@ header .usr-inf {
     width: 100%;
     border-bottom: 1px #D5D4D4 solid;
 }
-
-header .usr-inf p {
+*/
+header .user-menu p {
     margin: 0;
     padding: 0;
     color: #fff;
@@ -39,10 +84,10 @@ header .usr-inf p {
     overflow: hidden;
 }
 
-header .usr-inf p a {
+header .usr-menu p a {
     color: #fff;
 }
-
+/*
 header .head {
     width: 100%;
     height: 70px;
@@ -55,6 +100,7 @@ header .head .bv-logo {
     line-height: 70px;
     width: auto;
 }
+*/
 
 header .head .usr-button {
     float: left;
@@ -67,52 +113,38 @@ header .head .usr-button {
     font-size: 20px;
 }
 
-header .head .search-button {
-    float: right;
-    width: 70px;
-    height: 70px;
-    line-height: 70px;
-    border-right: 1px #D5D4D4 solid;
-    border-left: 1px #D5D4D4 solid;
-    text-align: center;
-    font-size: 20px;
+.search-button {
+    font-size: 18px;
 }
 
-header .head .cart-button {
-    float: right;
-    width: 70px;
-    height: 70px;
-    line-height: 70px;
-    border-right: 1px #D5D4D4 solid;
-    text-align: center;
-    font-size: 20px;
+.cart-button {
+    font-size: 18px;
 }
 
-header .head ul.nav {
-    float: right;
+header .menu ul.nav {
+    float: left;
     list-style-type: none;
-    height: 70px;
-    line-height: 70px;
-    margin-right: 20px;
+    height: 49px;
+    line-height: 50px;
 }
 
-header .head ul.nav li {
+header .menu ul.nav li {
     float: left;
     padding: 0px 0px;
     font-weight: 600;
 }
 
-header .head ul.nav li a {
+header .menu ul.nav li a {
     font-size: 13px;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
-    line-height: 40px;
 }
 
-header .head ul.nav .dropdown-menu li {
+header .menu ul.nav .dropdown-menu li {
     width: 100%;
 }
+
 
 .dropdown-to-right {
     left: inherit;
