@@ -39,6 +39,13 @@ class SocialAccountService
                 $user = User::create([
                     'email' => $providerUser->getEmail(),
                     'name' => $providerUser->getName(),
+//                    'geboortedatum' => $providerUser->getBirthday(),
+//                    'woonplaats' => $providerUser->getCity(),
+//                    'adres' => $providerUser->getStreet(),
+//                    'postcode' => $providerUser->getZip(),
+//                    'voornaam' => $providerUser->getFirstName(),
+//                    'achternaam' => $providerUser->getLastName(),
+//                    'woonplaats' => $providerUser->getHometown(),
                 ]);
             }
 

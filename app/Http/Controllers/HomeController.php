@@ -8,6 +8,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Product;
+use App\Property;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -20,6 +22,7 @@ class HomeController extends Controller
     public function __construct()
     {
 //        $this->middleware('auth');
+        $this->product = new Product();
     }
 
     /**
@@ -29,7 +32,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('main.index')
+            ->with('products', $this->product->where('status', 'on')->skip(0)->take(10)->get());
     }
 
     public function voorwaarde()

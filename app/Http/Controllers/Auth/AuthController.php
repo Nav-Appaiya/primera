@@ -60,6 +60,17 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'voornaam' => 'required|max:50|alpha',
+            'voorletters' => 'required|max:6',
+            'achternaam' => 'required|max:50|regex:/^[\pL\s]+$/u',
+            'geslacht' => 'in:man,vrouw',
+            'geboortedatum' => 'required|date',
+            'adres' => 'required|max:70|regex:/^[\pL\s]+$/u',
+            'huisnummer' => 'required|max:7|alpha_num',
+            'postcode' => 'required|alpha_num|min:6',
+            'woonplaats' => 'required|max:50|alpha',
+            'telMobiel' => 'numeric|digits_between:10,10',
+            'telThuis' => 'numeric|digits_between:10,11'
         ]);
     }
 
@@ -75,6 +86,16 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'voornaam' => $data['voornaam'],
+            'achternaam' => $data['achternaam'],
+            'geslacht' => $data['geslacht'],
+            'geboortedatum' => $data['geboortedatum'],
+            'adres' => $data['adres'],
+            'huisnummer' => $data['huisnummer'],
+            'postcode' => $data['postcode'],
+            'woonplaats' => $data['woonplaats'],
+            'telMobiel' => $data['telMobiel'],
+            'telThuis' => $data['telThuis']
         ]);
     }
 }

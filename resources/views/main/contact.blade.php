@@ -1,13 +1,8 @@
-
-
 @extends('layouts.master')
 
-@section('titel', 'Primera shop')
-@section('seotags', 'seotags')
-
-@section('sidebar')
-    @parent
-@endsection
+@section('titel', ' Contact')
+@section('description', '')
+@section('breadcrumbs', Breadcrumbs::render('contact'))
 
 @section('content')
     <div class="container">
@@ -54,7 +49,7 @@
             </div>
 
             <div class="col-md-6">
-                <h3>Contact met ons opnemen</h3><hr>
+                <h3>Contact met <span>E-Sigareteindhoven</span> opnemen</h3><hr>
 
                 <ul>
                     @foreach($errors->all() as $error)
@@ -103,29 +98,32 @@
 
             <div class="col-lg-6">
                 <h3>Bedrijfsgegevens</h3><hr>
+
+                <label>Bedrijf:</label>
+                <span> van Schaik Domenie VOF</span><br>
+
+                <label>Handelsnaam:</label>
+                <span> Primera Blixembosch</span><br>
+
+                <label>Handelsnaam:</label>
+                <span> Primera Strijp</span><br>
+
+                <label>KvK:</label>
+                <span> 57876576</span><br>
+
+                <label>BTWnr:</label>
+                <span> 852774801B01</span><br>
+
+                <label>IBAN:</label>
+                <span> NL79RABO 0311163866</span><br>
+
+                <label>BIC code:</label>
+                <span> RABONL2U</span><br><br>
+
                 <h3>Adres</h3><hr>
 
-                E-Sigareteindhoven
-
-                Bedrijf: van Schaik Domenie VOF
-
-                Handelsnaam: Primera Blixembosch
-
-                Handelsnaam: Primera Strijp
-
-                Adres
-
-                hoofdvest.: Ouverture 228
-
-                5629PX Eindhoven
-
-                KvK: 57876576
-
-                BTWnr.: 852774801B01
-
-                IBAN: NL79RABO 0311163866
-
-                BIC code: RABONL2U
+                <label>hoofdvest:</label><br>
+                <span> Ouverture 228, <br>5629PX Eindhoven</span><br>
 
             </div>
 

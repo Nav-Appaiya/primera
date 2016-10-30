@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('titel', 'Primera shop')
+@section('titel', $category->title)
 @section('breadcrumbs', Breadcrumbs::render('category', $category))
 
 @section('content')
