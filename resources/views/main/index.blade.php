@@ -86,7 +86,7 @@
     </div>
     @foreach($products->first()->product->where('status', 'on')->skip(0)->take(10)->get() as $product)
         @if(!$product->property->isEmpty())
-            <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220px" class="">

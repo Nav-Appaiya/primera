@@ -141,7 +141,6 @@
         @stack('css')
     </head>
     <body>
-
 <header>
     <div class="user-menu">
         <div class="container">
@@ -165,80 +164,83 @@
             </div>
         </div>
     </div>
-    <div class="head">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2" style="height: 50px; line-height: 50px">
-            <div class="search-button">
-                <div class="">
-                    <div class="dropdown">
-                        <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <a href="{{ route('cart') }}">
-                                <i class="fa fa-search" aria-hidden="true"></i>
+    
+    <div class="hidde">
+        <div class="head">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2" style="height: 50px; line-height: 50px">
+                <div class="search-button">
+                    <div class="">
+                        <div class="dropdown" style="height: 60px">
+                            <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a href="{{ route('cart') }}">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </a>
                             </a>
-                        </a>
-                        <div class="dropdown-menu">
-                            <div style="padding: 10px;">
-                                <div class="form-group" style="margin-bottom: 0px;">
-                                   <input style="width: 220px" placeholder="Waar zoekt u naar?" type="email" class="form-control" id="email">
+                            <div class="dropdown-menu">
+                                <div style="padding: 10px;">
+                                    <div class="form-group" style="margin-bottom: 0px;">
+                                       <input style="width: 220px" placeholder="Waar zoekt u naar?" type="email" class="form-control" id="email">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                </div>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
-                    <img src="http://antoinecroes.nl/Artboard%201.png" height="50px">
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2" style="height: 50px; line-height: 50px">
-                    <div class="cart-button">
-                        <div class="">
-                            <div class="dropdown">
-                                <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <a href="{{ route('cart') }}">
-                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                        <span style="margin-top: -5px; margin-left: -30px; position: absolute;" class="badge">
-                                            € {{number_format(Cart::total(), 2)}}
-                                        </span>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
+                        <a href="{{route('homepage')}}"><img src="http://antoinecroes.nl/Artboard%201.png" height="50px"></a>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2" style="height: 50px; line-height: 50px">
+                        <div class="cart-button">
+                            <div class="">
+                                <div class="dropdown" style="height: 60px">
+                                    <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <a href="{{ route('cart') }}">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            <span style="margin-top: 4px; margin-left: -10px; position: absolute;" class="badge">
+                                                € {{number_format(Cart::total(), 2)}}
+                                            </span>
+                                        </a>
                                     </a>
-                                </a>
-                            <div class="dropdown-menu dropdown-to-right">
-                                <center>
-                                    <h3>Winkelwagen</h3>
-                                </center>
-                                    @if(Cart::content())
-                                        <table class="table table-striped">
-                                            <tbody>
-                                                <tr>
-                                                    <th>Afbeelding</th>
-                                                    <th>Naam</th>
-                                                    <th>Aantal</th>
-                                                    <th>Prijs</th>
-                                                </tr>
-                                                @foreach(Cart::content() as $product)
+                                <div class="dropdown-menu dropdown-to-right">
+                                    <center>
+                                        <h3>Winkelwagen</h3>
+                                    </center>
+                                        @if(Cart::content())
+                                            <table class="table table-striped">
+                                                <tbody>
                                                     <tr>
-                                                        {{--{{$product}}--}}
-                                                        <td><img class="img-responsive" src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>
-                                                        <td>{{$product->options[0]->product->name}}
-                                                            {{--{{$product->item->detail ? '- '.$product->item->detail->value : ''}}--}}
-                                                        </td>
-                                                        <td>{{$product->qty}} x</td>
-                                                        <td>€ {{number_format($product->price, 2)}}</td>
+                                                        <th>Afbeelding</th>
+                                                        <th>Naam</th>
+                                                        <th>Aantal</th>
+                                                        <th>Prijs</th>
                                                     </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    @else
-                                        <div class="col-m-12" style="width: 240px">
-                                            <center>uw winkelwagen is leeg</center>
-                                        </div>
-                                    @endif
+                                                    @foreach(Cart::content() as $product)
+                                                        <tr>
+                                                            {{--{{$product}}--}}
+                                                            <td><img class="img-responsive" src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>
+                                                            <td>{{$product->options[0]->product->name}}
+                                                                {{--{{$product->item->detail ? '- '.$product->item->detail->value : ''}}--}}
+                                                            </td>
+                                                            <td>{{$product->qty}} x</td>
+                                                            <td>€ {{number_format($product->price, 2)}}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        @else
+                                            <div class="col-m-12" style="width: 240px">
+                                                <center>uw winkelwagen is leeg</center>
+                                            </div>
+                                        @endif
 
-                                <center>
-                                    <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
-        {{--                            <a href="{{route('')}}" style="margin: 0;" type="button" class="btn btn-default">Afrekenen</a>--}}
-                                </center>
+                                    <center>
+                                        <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
+            {{--                            <a href="{{route('')}}" style="margin: 0;" type="button" class="btn btn-default">Afrekenen</a>--}}
+                                    </center>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -247,6 +249,7 @@
             </div>
         </div>
     </div>
+
     <div class="menu">
         <div class="container">
             <div class="row">
@@ -451,6 +454,25 @@
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script type="text/javascript">
+        var mywindow = $(window);
+        var mypos = mywindow.scrollTop();
+        var up = false;
+        var newscroll;
+        mywindow.scroll(function () {
+            newscroll = mywindow.scrollTop();
+            if (newscroll > mypos && !up) {
+                $('.hidde').stop().slideToggle();
+                up = !up;
+                console.log(up);
+            } else if(newscroll < mypos && up) {
+                $('.hidde').stop().slideToggle();
+                up = !up;
+            }
+            mypos = newscroll;
+        });
+    </script>
     {{--<script type="text/javascript" src="http://localhost:8080/assets/slick.js"></script>--}}
 
     {{--<script src="{{ URL::asset('assets/js/slick.js') }}"></script>--}}
