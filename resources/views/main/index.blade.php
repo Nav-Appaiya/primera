@@ -7,9 +7,34 @@
 @section('content')
 
     <div class="your-class col-lg-12">
-        <div><img src="http://lorempixel.com/1140/300/sports/"></div>
-        <div><img src="http://lorempixel.com/1140/300/sports/"></div>
-        <div><img src="http://lorempixel.com/1140/300/sports/dummy-mage"></div>
+        <div class="col-lg-12">
+            <div class="row">
+                <img class="img-responsive" src="/images/slider/shutterstock_166848608.jpg">
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+
+            <img class="img-responsive" src="/images/slider/shutterstock_349225046.jpg">
+        </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+
+            <img class="img-responsive" src="/images/slider/shutterstock_166848608.jpg">
+        </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+
+            <img class="img-responsive" src="/images/slider/shutterstock_490274650.jpg">
+        </div>
+        </div>
+        <div class="col-lg-12">            <div class="row">
+
+            <img class="img-responsive" src="/images/slider/shutterstock_490891624.jpg">
+        </div>
+        </div>
     </div>
 
     <div class="col-lg-12">

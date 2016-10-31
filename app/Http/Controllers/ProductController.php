@@ -66,6 +66,9 @@ class ProductController extends Controller
             $q->where('status', 'on');
             $q->where('category_id', $id);
         })
+        ->whereHas('detail', function($q) use ($id){
+//           $q->where('value', 'wit');
+        })
         ->groupBy('product_id')
         ->get();
 

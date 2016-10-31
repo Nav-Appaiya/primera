@@ -11,8 +11,6 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
 
-                        @include('errors.message')
-
                         {!! Form::model($order, array('route' => array('admin_order_update', $order->id), 'class' => '', 'method' => 'post' )) !!}
 
                         <fieldset>
@@ -100,24 +98,34 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    @if($order->status == 'paid' && $order->delivery_type == 'verzenden')
 
-                        {!! Form::model($order, array('route' => array('admin_order_update', $order->id), 'method' => 'post' )) !!}
+                    {!! Form::model($order, array('route' => array('admin_order_update', $order->id), 'method' => 'post', 'onsubmit' => "return confirm('Are you sure you want to delete?')")) !!}
 
+                        @if($order->status == 'paid' && $order->delivery_type == 'verzenden')
                             <!-- notification -->
-                            <div class="form-group">
+                            <div class="form-group {{$errors->has('track_trace') ?  'has-error' : ''}}">
                                 {!! Form::label('track_trace', 'track & trace') !!}
                                 {!! Form::text('track_trace', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                             </div>
 
                             <!-- Submit Button -->
                             <div class="form-group">
-                                {!! Form::submit('Bestelling verzenden', ['class' => 'btn btn-primary pull-right'] ) !!}
+                                {!! Form::submit('Bestelling verzenden', ['class' => 'btn btn-primary pull-right', 'onsubmit' => "return confirm('Are you sure you want to delete?')"] ) !!}
                             </div>
-                        {{Form::close()}}
-                    @else
-                        Deze bestelling word afgehaald.
-                    @endif
+
+                        @elseif($order->status == 'paid' && $order->delivery_type == 'ophalen')
+
+                            Deze bestelling word afgehaald.
+                            {!! Form::hidden('track_trace', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+
+                            <!-- Submit Button -->
+                            <div class="form-group">
+                                {!! Form::submit('Bestelling afgehaald', ['class' => 'btn btn-primary pull-right'] ) !!}
+                            </div>
+
+                        @endif
+
+                    {{Form::close()}}
                 </div>
             </div>
 

@@ -181,6 +181,7 @@
             </div>
 
         <div class="filter-sec">
+            @if($min_price < $max_price)
             <label>Prijs</label>
             <form action="{{URL::current()}}">
 
@@ -214,6 +215,7 @@
                 <input class="btn btn-primary" type="submit" value="Zoeken">
 
             </form>
+            @endif
         </div>
 
     </div>

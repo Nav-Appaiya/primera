@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 class OrderController extends Controller
 {
     const STATUS_VERZONDEN = 'verzonden';
+    const STATUS_AFGEHAALD = 'afgehaald';
     const STATUS_ = 'verzonden';
 
     protected $order;
@@ -68,15 +69,13 @@ class OrderController extends Controller
 
         $order = $this->order->find($id);
 
-        $order->status =  SELF::STATUS_VERZONDEN;
-        $order->track_trace =  $request->track_trace;
+        $order->delivery_type = $order->delivery_type == 'verzenden' ? SELF::STATUS_VERZONDEN : SELF::STATUS_AFGEHAALD;
+        $order->track_trace = $request->track_trace;
         $order->save();
 
-//        Mail::send('emails.delivery_status', ['orders' => $order], function ($message) use ($order)
-//        {
-//            $message->from('noreply@esigareteindhoven.com', 'test mail');
-//
-//            $message->to($order->email);
+//        Mail::send('emails.delivery_status', ['order' => $order], function($m) use ($order){
+//            $m->from('noreply@esigareteindhoven.com');
+//            $m->to($order->email, $order->name)->subject('Uw pakket is verzonden.');
 //        });
 
         \Session::flash('succes_message','successfully.');
