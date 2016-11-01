@@ -89,10 +89,10 @@ class MollieController extends Controller
 
         $order->save();
 
-        Mail::send('emails.bedankt', ['order' => $order], function($m) use ($order){
-            $m->from('info@esigareteindhoven.com');
-            $m->to($order->email, $order->name)->subject('Bedankt voor uw bestelling!');
-        });
+//        Mail::send('emails.bedankt', ['order' => $order], function($m) use ($order){
+//            $m->from('info@esigareteindhoven.com');
+//            $m->to($order->email, $order->name)->subject('Bedankt voor uw bestelling!');
+//        });
 
         return redirect($payment->getPaymentUrl());
     }
@@ -114,10 +114,10 @@ class MollieController extends Controller
             }
             $order->status = self::STATUS_COMPLETED;
 
-            Mail::send('emails.payment', ['order' => $order], function($m) use ($order){
-                $m->from('info@esigareteindhoven.com');
-                $m->to($order->email, $order->name)->subject('Bedankt voor uw bestelling!');
-            });
+//            Mail::send('emails.payment', ['order' => $order], function($m) use ($order){
+//                $m->from('info@esigareteindhoven.com');
+//                $m->to($order->email, $order->name)->subject('Bedankt voor uw bestelling!');
+//            });
         }
         elseif (! $payment->isOpen())
         {

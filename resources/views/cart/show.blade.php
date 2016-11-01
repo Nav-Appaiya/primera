@@ -19,27 +19,61 @@
             <div class="row">
 
                 <div class="col-lg-8 well">
-                    @foreach($order->orderItems as $product)
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Artikel</th>
+                                <th>Aantal</th>
+                                {{--<th>Prijs P.st.</th>--}}
+                                <th>Prijs Totaal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($order->orderItems as $product)
+                                <tr>
+                                    <td>
+                                        <img width="70" alt="" src="/images/product/{{($product->property->product->productimages->first()->imagePath)}}">
+                                    </td>
+                                    <td> {{($product->property->product->name )}} - {{$product->property->detail->value}}</td>
+                                        {{--{{$product->product->name}}--}}
+
+                                    <td>x{{$product->amount}}</td>
+{{--                                    <td> €{{$product->property->product->price - $product->property->product->discount}}</td>--}}
+                                    <td> €{{$product->amount * $product->property->product->price - $product->property->product->discount}}</td>
+                                </tr>
+                            @endforeach
+
+                            @if($order->delivery_type == 'verzenden')
+                                <tr>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        verzendingskosten
+                                    </td>
+                                    <td>
+                                        x1
+                                    </td>
+                                    <td>
+                                        €{{env('PACKAGE_POST_PRICE')}}
+                                    </td>
+                                </tr>
+                            @endif
+
+                        </tbody>
+                    </table>
+
+
+                    @if($order)
+                        <br>
+                        <br>
+                        <br>
                         <div class="row">
                             <div class="col-lg-4">
-                                <img width="70" alt="" src="/images/product/{{($product->property->product->productimages->first()->imagePath)}}">
-                                {{($product->property->product->name)}}
-                                {{--{{$product->product->name}}--}}
-                            </div>
-                            <div class="col-lg-4">
-                                x{{$product->amount}}
-                            </div>
-                            <div class="col-lg-4">
-                                €{{$product->property->product->price - $product->property->product->discount}}
-                            </div>
-
-                        </div><hr>
-                    @endforeach
-
-                    @if($order->delivery_type == 'verzenden')
-                        <div class="row">
-                            <div class="col-lg-4">
-                                Totaal prijs €{{ number_format($order->total_price + $order->delivery_price, 2)}}<br><small>Incl. verzending & btw </small>
+                                <b>Totaal prijs €{{ number_format($order->total_price + $order->delivery_price, 2)}}</b><br>
+                                <small>Incl. verzending & btw </small>
                                 {{--<a class="pull-right" href="{{route('order.create', $order->id)}}"> Afrekenen</a>--}}
 
                                 {!! Form::model(null, array('route' => 'order.create', 'method' => 'POST')) !!}
@@ -47,6 +81,9 @@
                                 {!! Form::hidden('order_id', $order->id) !!}
 
                                 @if($order->payment_method == 'ideal')
+                                    <br>
+
+                                    <label>Selecteer uw bank</label>
                                     <select name="issuer_id">
                                         @foreach ($issuers as $issuer)
                                             @if ($issuer->method == Mollie_API_Object_Method::IDEAL)
@@ -56,9 +93,12 @@
                                     </select>
                                 @endif
 
+                                <br>
                                 {!! Form::checkbox('voorwaarden', $order->id) !!}
-                                <p style="{{$errors->has('voorwaarden') ? 'font-weight: bold; color: #a94442;' : '' }}"> Gaat u akkoord met de <a href="{{route('voorwaarde')}}">algemene voorwaarden</a> van http://www.esigareteindhoven.com/</p>
+                                <small style="{{$errors->has('voorwaarden') ? 'font-weight: bold; color: #a94442;' : '' }}"> Gaat u akkoord met de <a style="text-decoration: underline" href="{{route('voorwaarde')}}">algemene voorwaarden</a> van esigaret eindhoven</small>
 {{--todo: catch error and display--}}
+                                <br>
+                                <br>
 
                                 {!! Form::submit('Betalen', array('class' => 'form-control')) !!}
 
@@ -66,16 +106,9 @@
                                 {{ Form::close() }}
                             </div>
 
-                            <div class="col-lg-4">
-                                verzendingskosten
-                            </div>
-                            <div class="col-lg-4">
-                                1x
-                            </div>
-                            <div class="col-lg-4">
-                                €{{$order->delivery_price}}
-                            </div>
                         </div>
+                    @else
+                        ssad
                     @endif
                 </div>
 

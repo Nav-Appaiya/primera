@@ -66,6 +66,9 @@ class ProductController extends Controller
             $q->where('status', 'on');
             $q->where('category_id', $id);
         })
+        ->whereHas('detail', function($q) use ($id){
+//           $q->where('value', 'wit');
+        })
         ->groupBy('product_id')
         ->get();
 
@@ -87,7 +90,6 @@ class ProductController extends Controller
     {
         return view('product.show')
             ->with('product', $this->product->where('id', $id)->where('status', 'on')->first());
-//            ->with('reviews', $this->reviews->where('id'));
     }
 
 }

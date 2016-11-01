@@ -211,7 +211,7 @@ return [
         'Html' => \Collective\Html\HtmlFacade::class,
         'Mollie' => \Mollie\Laravel\Facades\Mollie::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
-        'Socialize' => 'Laravel\Socialite\Facades\Socialite',
+        'Socialize' => Laravel\Socialite\Facades\Socialite::class,
         'Debugbar' => \Barryvdh\Debugbar\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Cart'    => Gloudemans\Shoppingcart\Facades\Cart::class,

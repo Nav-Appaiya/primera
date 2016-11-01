@@ -156,3 +156,17 @@ Breadcrumbs::register('dashboard.user.edit', function($breadcrumbs, $id)
     $breadcrumbs->push('Wijzigen', route('admin_user_edit', $id));
 });
 
+// home > algemenevoorwaarden
+Breadcrumbs::register('algemenevoorwaarden', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Algemene voorwaarde', route('voorwaarde'));
+});
+
+// home > contact
+Breadcrumbs::register('contact', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Contact', route('contact'));
+});
+

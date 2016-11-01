@@ -99,16 +99,9 @@ class ProductController extends Controller
         $images = Input::file('images');
         if (Input::hasFile('images')){
             foreach ($images as $image){
-//                $extension = $image->getClientOriginalExtension();
-//                $new_filename = str_random(10) . '.' . $extension;
-//                $image->move(public_path() . '/images/product', $new_filename);
-//                Storage::disk('public')->put($new_filename, $image);
-
-//                dd($image);
-                $path = storage_path() . '\app\public\product\CtUg7JnkPC.jpg';
-                $img = Image::make('public/'.$image);
-                $img->insert('public/'.$image);
-
+                $extension = $image->getClientOriginalExtension();
+                $new_filename = str_random(10) . '.' . $extension;
+                $image->move(public_path().'/images/product/', $new_filename);
                 $this->image->insert([
                     [
                         'imagePath' => $new_filename,
@@ -178,7 +171,6 @@ class ProductController extends Controller
         $product->save();
 
         $images = Input::file('images');
-//        dd($images[0]);
         if (Input::hasFile('images')){
             foreach ($images as $image){
                 $extension = $image->getClientOriginalExtension();

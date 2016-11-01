@@ -13,3 +13,4 @@ composer.lock
 resources/views/admin-panel/layouts/menus/__admin.blade.php
 **/.DS_Store
 !public/uploads/img/default.jpg
+*.DS_Store

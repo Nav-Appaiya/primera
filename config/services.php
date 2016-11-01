@@ -39,9 +39,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'facebook' => [
-        'client_id' => '742672149203912',
-        'client_secret' => '38f721d658659a9abcdd274bf0288b81',
-        'redirect' => 'http://localhost:8000/callback',
+        'client_id' => '1604113266560407',
+        'client_secret' => 'a4a5b56e7a7e69bfd49b4710c399b0a2',
+        'redirect' => 'http://www.esigareteindhoven.com/callback',
     ],
     'mollie' => [
          'client_id'     => env('MOLLIE_CLIENT_ID', 'app_xxx'),

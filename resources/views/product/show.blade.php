@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('titel', 'primera - '.$product->name)
-@section('description', 'test')
+@section('titel', $product->name)
+@section('description', '')
 @section('breadcrumbs', Breadcrumbs::render('product.show', $product))
 
 @push('meta')
@@ -24,7 +24,6 @@
 @endpush
 
 @section('content')
-
     <div class="row">
         <div class="col-md-5">
             <div class="panel panel-default">

@@ -11,10 +11,21 @@
 |
 */
 
+//auth routes for users
 Route::auth();
 
-Route::get('/', ['as' => 'homepage', 'uses' => 'MainController@index']);
+//base routes
+Route::get('/', ['as' => 'homepage', 'uses' => 'HomeController@index']);
+Route::get('/algemene-voorwaarde', ['as' => 'voorwaarde', 'uses' => 'HomeController@voorwaarde']);
+Route::get('/over-ons', ['as' => 'about', 'uses' => 'HomeController@about']);
+Route::get('/privacy-policy', ['as' => 'policy', 'uses' => 'HomeController@policy']);
+Route::get('/verzending', ['as' => 'verzending', 'uses' => 'HomeController@verzending']);
+Route::get('/garantie', ['as' => 'garantie', 'uses' => 'HomeController@garantie']);
+Route::get('/sitemap', ['as' => 'sitemap', 'uses' => 'HomeController@sitemap']);
+Route::get('/retouren', ['as' => 'retour', 'uses' => 'HomeController@retour']);
+Route::get('/faq', ['as' => 'faq', 'uses' => 'HomeController@faq']);
 
+//shopping cart routes
 Route::get('/winkelwagen', ['as' => 'cart', 'uses' => 'CartController@index']);
 Route::post('/winkelwagen/toevoegen', ['as' => 'cart.add', 'uses' => 'CartController@add']);
 Route::post('/winkelwagen/verwijder', ['as' => 'cart.remove', 'uses' => 'CartController@remove']);
@@ -38,17 +49,6 @@ Route::get('/{name}/c-{id}', ['as' => 'category.show', 'uses' => 'CategoryContro
 Route::get('/{cate1}/{cate2}/c-{id}/', ['as' => 'product.index', 'uses' => 'ProductController@index']);
 Route::get('/{title}/p-{id}', ['as' => 'product.show', 'uses' => 'ProductController@show']);
 
-Route::get('mollie/status/{paymentid}', ['as' => 'payment.status', 'uses' => 'MainController@paymentStatus']);
-
-Route::get('/algemene-voorwaarde', ['as' => 'voorwaarde', 'uses' => 'HomeController@voorwaarde']);
-Route::get('/over-ons', ['as' => 'about', 'uses' => 'HomeController@about']);
-Route::get('/privacy-policy', ['as' => 'policy', 'uses' => 'HomeController@policy']);
-Route::get('/verzending', ['as' => 'verzending', 'uses' => 'HomeController@verzending']);
-Route::get('/garantie', ['as' => 'garantie', 'uses' => 'HomeController@garantie']);
-Route::get('/sitemap', ['as' => 'sitemap', 'uses' => 'HomeController@sitemap']);
-Route::get('/retouren', ['as' => 'retour', 'uses' => 'HomeController@retour']);
-Route::get('/faq', ['as' => 'faq', 'uses' => 'HomeController@faq']);
-
 // Start of contact routes
 Route::get('/contact', ['as' => 'contact', 'uses' => 'ContactController@index']);
 Route::post('contact', ['as' => 'contact_store', 'uses' => 'ContactController@store']);
@@ -56,16 +56,14 @@ Route::post('contact', ['as' => 'contact_store', 'uses' => 'ContactController@st
 // User authentication routes...
 Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@showResetForm']);
 Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@reset']);
-
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
-//Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-//Route::post('password/reset/{token}', 'Auth\PasswordController@postReset');
 Route::get('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('/registreren', ['as' => 'register', 'uses' => 'Auth\AuthController@postRegister']);
 Route::get('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('/inloggen', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
 
+//user account info routes
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/mijn-gegevens', ['as' => 'user.show', 'uses' => 'user\UserController@show']);
     Route::get('/mijn-gegevens/wijzigen', ['as' => 'user.edit', 'uses' => 'user\UserController@edit']);
@@ -77,12 +75,14 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/uitloggen', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 });
 
+//product images route
 Route::get('/images/{filename}', ['as' => 'image.show', 'uses' => 'ImageController@show']);
 
 // Admin authorisation only for admins, not authed users!
 Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     Route::get('/', ['as' => 'admin_dashboard_index', 'uses' => 'admin\HomeController@index']);
 
+//  admin product routes
     Route::get('product/create', ['as' => 'admin_product_create', 'uses' => 'admin\ProductController@create']);
     Route::get('product', ['as' => 'admin_product_index', 'uses' => 'admin\ProductController@index']);
     Route::get('product/{id}/edit', ['as' => 'admin_product_edit', 'uses' => 'admin\ProductController@edit']);
@@ -92,6 +92,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     Route::delete('product/destroy/{id}',
         ['as' => 'admin_product_destroy', 'uses' => 'admin\ProductController@destroy']);
 
+//  admin product details routes
     Route::get('detail/create', ['as' => 'admin_property_create', 'uses' => 'admin\DetailController@create']);
     Route::get('detail', ['as' => 'admin_property_index', 'uses' => 'admin\DetailController@index']);
     Route::get('detail/{id}/edit', ['as' => 'admin_property_edit', 'uses' => 'admin\DetailController@edit']);
@@ -100,6 +101,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     Route::delete('detail/destroy/{id}',
         ['as' => 'admin_property_destroy', 'uses' => 'admin\DetailController@destroy']);
 
+    //admin product properties routes
     Route::get('product-property/{id}/create',
         ['as' => 'admin_product_property_create', 'uses' => 'admin\PropertyController@create']);
     Route::get('product-property/{id}/edit',
@@ -127,7 +129,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminRole']], function () {
     Route::post('reviews/{id}', ['as' => 'admin_review_update', 'uses' => 'Admin\ReviewController@update']);
     Route::get('reviews/{id}/edit', ['as' => 'admin_review_edit', 'uses' => 'Admin\ReviewController@edit']);
     Route::post('reviews', ['as' => 'admin_review_update', 'uses' => 'Admin\CategoryController@update']);
-
     Route::delete('reviews/{id}', ['as' => 'admin_review_destroy', 'uses' => 'Admin\ReviewController@destroy']);
 
     //admin orders

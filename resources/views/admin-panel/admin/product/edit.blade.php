@@ -47,10 +47,10 @@
                         {!! Form::model($product, array('route' => 'admin_product_update', 'method' => 'patch', 'files' => true)) !!}
 
                         {!! Form::hidden('_id', $product->id) !!}
-<br>
+                        <br>
                         <label class="control-label">Select File</label>
                         {!! Form::file('images[]', array('multiple' => true, 'data-show-caption' => 'true', 'data-show-upload' => 'false')) !!}
-<br>
+                        <br>
 
                         <div class="form-group">
                             {!! Form::label('name', 'name') !!}
