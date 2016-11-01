@@ -14,9 +14,12 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h3 class="text-center">Onze policy</h3>
-
-                <p class="text-center">Lees hier over onze privacy policy.</p>
+            	<div class="panel panel-default">
+            		<div class="panel-heading">Over ons</div>
+            		<div class="panel-body">
+                	<p class="text-center">Lees hier over onze privacy policy.</p>
+                	</div>
+                </div>
             </div>
         </div>
     </div>
