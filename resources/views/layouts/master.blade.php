@@ -169,33 +169,19 @@
         <div class="head">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2" style="height: 50px; line-height: 50px">
-                <div class="search-button">
-                    <div class="">
-                        <div class="dropdown" style="height: 60px">
-                            <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <a href="{{ route('cart') }}">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </a>
-                            </a>
-                            <div class="dropdown-menu">
-                                <div style="padding: 10px;">
-                                    <div class="form-group" style="margin-bottom: 0px;">
-                                       <input style="width: 220px" placeholder="Waar zoekt u naar?" type="email" class="form-control" id="email">
-                                    </div>
-                                </div>
-                            </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <a href="{{route('homepage')}}"><img src="http://antoinecroes.nl/Artboard%201.png" height="38px"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+                        <div class="form-group">
+                            <input style="width: 100%; margin-top: 23px" placeholder="Waar zoekt u naar?" type="email" class="form-control" id="email">
                         </div>
                     </div>
-                </div>
-                    </div>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
-                        <a href="{{route('homepage')}}"><img src="http://antoinecroes.nl/Artboard%201.png" height="50px"></a>
-                    </div>
-                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2" style="height: 50px; line-height: 50px">
-                        <div class="cart-button">
+
+                    <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2" style="height: 80px; line-height: 80px">
+                        <div class="cart-button pull-right">
                             <div class="">
-                                <div class="dropdown" style="height: 60px">
+                                <div class="dropdown" style="height: 80px">
                                     <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         <a href="{{ route('cart') }}">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
