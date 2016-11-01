@@ -33,7 +33,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('main.index')
-            ->with('products', $this->product->where('status', 'on')->skip(0)->take(10)->get());
+            ->with('products', $this->product->where('status', 'on')->skip(0)->take(7)->get());
     }
 
     public function voorwaarde()

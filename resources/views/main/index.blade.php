@@ -6,43 +6,45 @@
 
 @section('content')
 
-    <div class="your-class col-lg-12">
-        <div class="col-lg-12">
-            <div class="row">
-                <img class="img-responsive" src="/images/slider/shutterstock_166848608.jpg">
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="row">
-
-            <img class="img-responsive" src="/images/slider/shutterstock_349225046.jpg">
-        </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="row">
-
-            <img class="img-responsive" src="/images/slider/shutterstock_166848608.jpg">
-        </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="row">
-
-            <img class="img-responsive" src="/images/slider/shutterstock_490274650.jpg">
-        </div>
-        </div>
-        <div class="col-lg-12">            <div class="row">
-
-            <img class="img-responsive" src="/images/slider/shutterstock_490891624.jpg">
-        </div>
-        </div>
+    <div class="col-lg-12">
+        <h1>Nieuwste Producten</h1>
     </div>
 
-    <div class="col-lg-12">
-        <h2>Nieuwste Producten</h2>
-    </div>
-
-    <div class="col-lg-12">
+    <div class="col-lg-12" >
         <div class="row">
+            <div class="your-class col-xs-6 col-sm-6 col-md-6" style="margin-top: -0px">
+
+                <img class="img-responsive" style="height: 350px;" src="/images/slider/shutterstock_166848608.jpg">
+
+
+                {{--<div>--}}
+                <img class="img-responsive" style="height: 350px;" src="/images/slider/shutterstock_166848608.jpg">
+
+                {{--</div>--}}
+                {{--<div class="col-lg-12">--}}
+                    {{--<div class="row">--}}
+
+                <img class="img-responsive" style="height: 350px;" src="/images/slider/shutterstock_349225046.jpg">
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-lg-12">--}}
+                    {{--<div class="row">--}}
+
+                <img class="img-responsive" style="height: 350px;" src="/images/slider/shutterstock_166848608.jpg">
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-lg-12">--}}
+                    {{--<div class="row">--}}
+
+                <img class="img-responsive" style="height: 350px;" src="/images/slider/shutterstock_490274650.jpg">
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-lg-12">            <div class="row">--}}
+
+                <img class="img-responsive" style="height: 350px;" src="/images/slider/shutterstock_490891624.jpg">
+                    {{--</div>--}}
+                {{--</div>--}}
+            </div>
 
 
             @foreach($products as $product)
