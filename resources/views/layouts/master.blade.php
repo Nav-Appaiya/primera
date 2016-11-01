@@ -438,14 +438,14 @@
         <center>
             <ul class="list-group">
                 <li><a href="{{route('voorwaarde')}}">Algemene voorwaarden</a></li>
-                <li><a href="{{route('policy')}}">Privacy policy</a></li>
+                <li><a href="{{route('policy')}}">Privacy policy & Cookiebeleid</a></li>
                 <li><a href="{{route('contact')}}">Contact</a></li>
-                <li><a href="{{route('retour')}}">Retourneren</a></li>
+                {{--<li><a href="{{route('retour')}}">Retourneren</a></li>--}}
                 {{--<li><a href="{{route('retour')}}">faq</a></li>--}}
                 <li><a href="{{route('about')}}">Over ons</a></li>
-                <li><a href="{{route('verzending')}}">Verzending</a></li>
+                <li><a href="{{route('verzending')}}">Verzenden & Ontangen</a></li>
                 <li><a href="{{route('sitemap')}}">sitemap</a></li>
-                <li><a href="{{route('garantie')}}">Garantie</a></li>
+                {{--<li><a href="{{route('garantie')}}">Garantie</a></li>--}}
             </ul>
         </center>
     </div>
