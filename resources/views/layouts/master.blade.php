@@ -169,19 +169,27 @@
         <div class="head">
             <div class="container">
                 <div class="row">
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <a href="{{route('homepage')}}"><img src="http://antoinecroes.nl/Artboard%201.png" height="38px"></a>
+                  <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+                        <a href="{{route('homepage')}}"><img src="http://antoinecroes.nl/E-sigaret-logo.png" height="38px"></a>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-                        <div class="form-group">
-                            <input style="width: 100%; margin-top: 23px" placeholder="Waar zoekt u naar?" type="email" class="form-control" id="email">
+                    <div class="col-lg-4 col-md-4 hidden-xs hidden-sm">
+
+                        <div class="input-group">
+                            <input  style="width: 100%; margin-top: 28px" type="text" class="form-control" placeholder="Zoekopdracht">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2" style="height: 80px; line-height: 80px">
+
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="height: 90px; line-height: 90px">
                         <div class="cart-button pull-right">
                             <div class="">
-                                <div class="dropdown" style="height: 80px">
+                                <div class="dropdown" style="height: 90px">
                                     <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         <a href="{{ route('cart') }}">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
