@@ -2,7 +2,7 @@
 html, body {
     margin: 0;
     padding: 0px;
-    padding-top: 76px;
+    padding-top: 92.5px;
     background: #fff;
     font-family: "Open Sans", sans-serif;
     color: #000;
@@ -339,10 +339,13 @@ footer h3 {
     width: 100%;
     background: #333;
     color: #fff;
-    font-size: 12px;
+    font-size: 11px;
     text-align: right;
 }
 
+.fa-home {
+    font-size: 18px;
+}
 
 h2 {
     font-weight: bold;
