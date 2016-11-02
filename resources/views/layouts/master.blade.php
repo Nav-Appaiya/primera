@@ -408,7 +408,7 @@
     </div>
 </section>
 
-<section class="brands">
+<!--<section class="brands">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -424,12 +424,43 @@
             </div>
         </div>
     </div>
-</section>
+</section>-->
 
 
 <footer>
     <div class="container">
+        <div class="col-md-3">
+            <h3>Service</h3>
+                <a href="{{route('voorwaarde')}}">Algemene voorwaarden</a><br/>
+                <a href="{{route('garantie')}}">Garantie</a><br/>
+                <a href="{{route('policy')}}">Privacy policy & Cookiebeleid</a><br/>
+                <a href="{{route('retour')}}">faq</a><br/>
+        </div>
+        <div class="col-md-3">
+            <h3>Verzenden</h3>
+                <a href="{{route('verzending')}}">Verzenden & Ontangen</a><br/>
+                <a href="{{route('retour')}}">Retourneren</a>
+        </div>
+        <div class="col-md-3">
+            <h3>Website</h3>
+                <a href="{{route('sitemap')}}">sitemap</a><br/>
+                <a href="{{route('about')}}">Over ons</a><br/>
+                <a href="{{route('contact')}}">Contact</a>
+        </div>
+        <div class="col-md-3">
+            <div class="col-md-4">
+                <img src="https://www.ideal.nl/img/statisch/iDEAL-groot.gif" class="img-responsive">
+            </div>
+            <div class="col-md-7">
+                <img src="https://www.nix18.nl/media/images/logo.png" width="100%" style="margin-top: 4px">
+            </div>
+            <div class="col-md-12"><br/>&copy; Esigaret 2016</div>
+        </div>
+    </div>
+<!--
+    <div class="container">
         <center>
+
             <ul class="list-group">
                 <li><a href="{{route('voorwaarde')}}">Algemene voorwaarden</a></li>
                 <li><a href="{{route('policy')}}">Privacy policy & Cookiebeleid</a></li>
@@ -442,7 +473,7 @@
                 {{--<li><a href="{{route('garantie')}}">Garantie</a></li>--}}
             </ul>
         </center>
-    </div>
+    </div>-->
  </footer>
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
