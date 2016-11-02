@@ -54,8 +54,10 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $order = $this->order->find($id);
+
         $rules = [
-            'track_trace' => 'required',
+            'track_trace' => $order->delivery_type == 'verzenden' ? 'required' : '',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -66,8 +68,6 @@ class OrderController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
-        $order = $this->order->find($id);
 
         $order->delivery_type = $order->delivery_type == 'verzenden' ? SELF::STATUS_VERZONDEN : SELF::STATUS_AFGEHAALD;
         $order->track_trace = $request->track_trace;
@@ -83,39 +83,5 @@ class OrderController extends Controller
 //        return view('emails.delivery_status')->with('order', $order);
         return redirect()->route('admin_order_index');
     }
-
-//    /**
-//     * Store a newly created resource in storage.
-//     *
-//     * @param  \Illuminate\Http\Request  $request
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function store(Request $request, $id)
-//    {
-//        $rules = [
-//            'value'          => 'required|unique:details,value',
-//        ];
-//
-//        $validator = Validator::make($request->all(), $rules);
-//
-//        if ($validator->fails()) {
-//            return redirect()
-//                ->route('admin_order_edit', $id)
-//                ->withErrors($validator)
-//                ->withInput();
-//        }
-////
-////        $details = $this->detail;
-////
-////        $details->type = $request->type;
-////        $details->value = $request->value;
-////
-////        $details->save();
-////
-////
-//        \Session::flash('succes_message','successfully.');
-////
-//        return redirect()->route('admin_order_edit', $id);
-//    }
 
 }

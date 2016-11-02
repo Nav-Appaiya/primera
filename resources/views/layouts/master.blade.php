@@ -5,7 +5,7 @@
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta http-equiv="refresh" content="300">
+        <meta http-equiv="refresh" content="3600">
         <meta http-equiv="language" content="NL">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -456,6 +456,12 @@
             <div class="col-md-12" style="overflow: hidden;"><br/>Website door mediaverse.nl &copy; Esigaret-</div>
         </div>
     </div>
+
+    <a href="#" class="back-to-top text-center" style="display: inline;">
+        <i class="fa fa-arrow-circle-up"></i>
+    </a>
+
+    {{--<a class=”back-to-top” style=”display: inline;” href=”#”>Back to Top</a>--}}
 <!--
     <div class="container">
         <center>
@@ -503,6 +509,57 @@
     @stack('script')
     <script src="{{ URL::asset('assets/js/script.js') }}"></script>
 
+    <style type="text/css">
 
+        .back-to-top {
+            background: none;
+            margin: 0;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            width: 80px;
+            height: 80px;
+            z-index: 100;
+            display: none;
+            text-decoration: none;
+            color: #ffffff;
+            /*background-color: #333;*/
+            /*opacity: 0.2;*/
+        }
+        .back-to-top i {
+            font-size: 80px;
+            color: #333;
+            opacity: 0.1;
+        }
+        .back-to-top i:hover {
+            color: #333;
+            opacity: 0.3;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+
+            var offset = 250;
+            var duration = 300;
+
+            jQuery(window).scroll(function() {
+                if (jQuery(this).scrollTop() > offset) {
+                    jQuery('.back-to-top').fadeIn(duration);
+                } else {
+                    jQuery('.back-to-top').fadeOut(duration);
+                }
+            });
+
+            jQuery('.back-to-top').click(function(event) {
+                event.preventDefault();
+                jQuery('html, body').animate({scrollTop: 0}, duration);
+                return false;
+            })
+
+        });
+
+    </script>
     </body>
 </html>

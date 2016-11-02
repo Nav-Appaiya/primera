@@ -20,6 +20,12 @@
                                 {!! Form::text('id', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
                             </div>
 
+                            <!-- email -->
+                            <div class="form-group">
+                                {!! Form::label('email', 'email') !!}
+                                {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                            </div>
+
                             <!-- postcode -->
                             <div class="form-group">
                                 {!! Form::label('postcode', 'postcode') !!}
@@ -98,8 +104,8 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-
-                    {!! Form::model($order, array('route' => array('admin_order_update', $order->id), 'method' => 'post', 'onsubmit' => "return confirm('Are you sure you want to delete?')")) !!}
+                    <label>Bestelling: </label>
+                    {!! Form::model($order, array('route' => array('admin_order_update', $order->id), 'method' => 'post', 'onsubmit' => "return confirm('Weet je zeker dat je deze bestelling wilt doorvoeren? ')")) !!}
 
                         @if($order->status == 'paid' && $order->delivery_type == 'verzenden')
                             <!-- notification -->
@@ -123,12 +129,20 @@
                                 {!! Form::submit('Bestelling afgehaald', ['class' => 'btn btn-primary pull-right'] ) !!}
                             </div>
 
+                        @else
+
+                            @if( $order->delivery_type == 'verzonden')
+                                    deze bestelling is verzonden met; <br>
+                                <a href="https://jouw.postnl.nl/#!/track-en-trace/{{$order->track_trace}}/NL/{{$order->postcode}}">postnl</a>
+                            @elseif( $order->delivery_type == 'afgehaald')
+                                    deze bestelling is afgehaald
+                            @endif
+
                         @endif
 
                     {{Form::close()}}
                 </div>
             </div>
-
 
         </div>
 
