@@ -5,7 +5,7 @@
 @section('breadcrumbs', Breadcrumbs::render('home'))
 
 @section('content')
-
+    <div class="row">
     <div class="col-lg-12">
         <h1>Nieuwste Producten</h1>
     </div>
@@ -49,6 +49,7 @@
 
             @foreach($products as $product)
                 @if(!$product->property->isEmpty())
+                <a href="{{ route('product.show', [str_replace(' ', '-', $product->name), $product->id]) }}">
                     <div class="col-xs-3 col-sm-3 col-md-3">
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -89,11 +90,12 @@
                                 </font>
                             </div>
                         </div>
-                    </div>
+                    </div></a>
 
                 @endif
             @endforeach
         </div>
+    </div>
     </div>
 @endsection
 

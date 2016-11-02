@@ -141,123 +141,125 @@
         @stack('css')
     </head>
     <body>
-<header>
-    <div class="user-menu">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <p class="text-left">
-                        Op werkdagen besteld voor 18:00 uur, de volgende dag in huis!
-                    </p>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <p class="text-right">
-                        @if(Auth::check())
-                            <label class="pull-right">Welkom <a href="{{ route('user.show') }}">{{Auth::user()->name}}, </a><a href="{{route('logout')}}">Uitloggen</a></label>
-                        @else
-                            <a class="pull-right" href="{{route('register')}}">Registeren</a>
-                            <small class="pull-right">&nbsp; | &nbsp;</small>
-                            <a class="pull-right" href="{{route('login')}}">Inloggen</a>
-                        @endif
-                    </p>
+<div id="wrap">
+    <header>
+        <div class="user-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <p class="text-left">
+                            Op werkdagen besteld voor 18:00 uur, de volgende dag in huis!
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <p class="text-right">
+                            @if(Auth::check())
+                                <label class="pull-right">Welkom <a href="{{ route('user.show') }}">{{Auth::user()->name}}, </a><a href="{{route('logout')}}">Uitloggen</a></label>
+                            @else
+                                <a class="pull-right" href="{{route('register')}}">Registeren</a>
+                                <small class="pull-right">&nbsp; | &nbsp;</small>
+                                <a class="pull-right" href="{{route('login')}}">Inloggen</a>
+                            @endif
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="hidde">
-        <div class="head">
-            <div class="container">
-                <div class="row">
-                  <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10">
-                        <a href="{{route('homepage')}}"><img src="http://antoinecroes.nl/E-sigaret-logo.png" height="38px"></a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 hidden-xs hidden-sm">
+        
+        <div class="hidde">
+            <div class="head">
+                <div class="container">
+                    <div class="row">
+                      <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10">
+                            <a href="{{route('homepage')}}"><img src="http://antoinecroes.nl/E-sigaret-logo.png" height="38px"></a>
+                        </div>
+                        <div class="col-lg-4 col-md-4 hidden-xs hidden-sm">
 
-                        <div class="input-group">
-                            <input  style="width: 100%; margin-top: 28px" type="text" class="form-control" placeholder="Zoekopdracht">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="glyphicon glyphicon-search"></i>
-                                </button>
-                            </span>
+                            <div class="input-group">
+                                <input  style="width: 100%; margin-top: 28px" type="text" class="form-control" placeholder="Zoekopdracht">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="menu">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div style="padding-left: 0px; padding-right: 0px;" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+        <div class="menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div style="padding-left: 0px; padding-right: 0px;" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
 
-                            @foreach($main_categories->where('category_id', 0) as $category)
-                                @if(count($category->children) != 0)
-                                    <li class="dropdown">
-                                        <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            @foreach($category->children as $child)
-                                                <li class="">
-                                                    <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
-                        <div class="cart-button pull-right">
-                            <div class="">
-                                <div class="dropdown" style="height: 44px; line-height: 44px">
-                                    <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <a href="{{ route('cart') }}">
-                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                            <span style="margin-top: -30px; margin-left: -65px; position: absolute;" class="badge">
-                                                € {{number_format(Cart::total(), 2)}}
-                                            </span>
+                                @foreach($main_categories->where('category_id', 0) as $category)
+                                    @if(count($category->children) != 0)
+                                        <li class="dropdown">
+                                            <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                @foreach($category->children as $child)
+                                                    <li class="">
+                                                        <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                            <div class="cart-button pull-right">
+                                <div class="">
+                                    <div class="dropdown" style="height: 44px; line-height: 44px">
+                                        <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <a href="{{ route('cart') }}">
+                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                <span style="margin-top: -30px; margin-left: -65px; position: absolute;" class="badge">
+                                                    € {{number_format(Cart::total(), 2)}}
+                                                </span>
+                                            </a>
                                         </a>
-                                    </a>
-                                <div class="dropdown-menu dropdown-to-right">
-                                    <center>
-                                        <h3>Winkelwagen</h3>
-                                    </center>
-                                        @if(Cart::content())
-                                            <table class="table table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Afbeelding</th>
-                                                        <th>Naam</th>
-                                                        <th>Aantal</th>
-                                                        <th>Prijs</th>
-                                                    </tr>
-                                                    @foreach(Cart::content() as $product)
+                                    <div class="dropdown-menu dropdown-to-right">
+                                        <center>
+                                            <h3>Winkelwagen</h3>
+                                        </center>
+                                            @if(Cart::content())
+                                                <table class="table table-striped">
+                                                    <tbody>
                                                         <tr>
-                                                            {{--{{$product}}--}}
-                                                            <td><img class="img-responsive" src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>
-                                                            <td>{{$product->options[0]->product->name}}
-                                                                {{--{{$product->item->detail ? '- '.$product->item->detail->value : ''}}--}}
-                                                            </td>
-                                                            <td>{{$product->qty}} x</td>
-                                                            <td>€ {{number_format($product->price, 2)}}</td>
+                                                            <th>Afbeelding</th>
+                                                            <th>Naam</th>
+                                                            <th>Aantal</th>
+                                                            <th>Prijs</th>
                                                         </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        @else
-                                            <div class="col-m-12" style="width: 240px">
-                                                <center>uw winkelwagen is leeg</center>
-                                            </div>
-                                        @endif
+                                                        @foreach(Cart::content() as $product)
+                                                            <tr>
+                                                                {{--{{$product}}--}}
+                                                                <td><img class="img-responsive" src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>
+                                                                <td>{{$product->options[0]->product->name}}
+                                                                    {{--{{$product->item->detail ? '- '.$product->item->detail->value : ''}}--}}
+                                                                </td>
+                                                                <td>{{$product->qty}} x</td>
+                                                                <td>€ {{number_format($product->price, 2)}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @else
+                                                <div class="col-m-12" style="width: 240px">
+                                                    <center>uw winkelwagen is leeg</center>
+                                                </div>
+                                            @endif
 
-                                    <center>
-                                        <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
-            {{--                            <a href="{{route('')}}" style="margin: 0;" type="button" class="btn btn-default">Afrekenen</a>--}}
-                                    </center>
+                                        <center>
+                                            <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
+                {{--                            <a href="{{route('')}}" style="margin: 0;" type="button" class="btn btn-default">Afrekenen</a>--}}
+                                        </center>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -266,8 +268,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
 <!--<header>
     <div class="usr-inf">
@@ -395,17 +396,17 @@
 
     {{--@show--}}
 
-<section class="bread-crumb">
-    <div class="container">
-        @yield('breadcrumbs')
-    </div>
-</section>
+    <section class="bread-crumb">
+        <div class="container">
+            @yield('breadcrumbs')
+        </div>
+    </section>
 
-<section class="content">
-    <div class="container">
-        @yield('content')
-    </div>
-</section>
+    <section class="content">
+        <div class="container">
+            @yield('content')
+        </div>
+    </section>
 
 <!--<section class="brands">
     <div class="container">
@@ -424,8 +425,8 @@
         </div>
     </div>
 </section>-->
-
-
+<div id="spacer"></div>
+</div>
 <footer>
     <div class="container">
         <div class="col-md-3 col-sm-3 col-xs-4">

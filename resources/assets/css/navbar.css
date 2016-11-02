@@ -7,6 +7,24 @@ html, body {
     color: #000;
 }
 
+html, body { height: 100%; }
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin-bottom: -182px; /* hoogte footer */
+}
+
+#spacer {
+    display: block !important;
+    height: 182px; /* hoogte footer */
+}
+    
+#footer {
+    clear: both;
+    height: 182px; /* hoogte footer */
+}
+
 header {
     width: 100%;
     display: block;
@@ -111,7 +129,7 @@ section.content {
     min-height: 400px;
     overflow: hidden;
     background: #fff;
-    padding: 45px 0px;
+    padding: 15px 0px;
 }
 
 section.content .product {
