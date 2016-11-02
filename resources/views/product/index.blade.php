@@ -188,6 +188,8 @@
                 <style>
                     .sliderone{
                         margin-top: 10px;
+                        width: 85%;
+                        margin-left: 7.5px;
                     }
                     .unibox-price-min{
                         display: inline-block;
@@ -207,7 +209,7 @@
                 <input type="text" name="min" onchange="this.form.submit()" class="unibox-price-min" placeholder="Min Price" onfocus="uniboxResetHint('Min Price',false,this);" onblur="uniboxResetHint('Min Price',true,this);" value="Min Price" onkeyup="uniboxKeyUp(event,this)" onkeydown="uniboxKeyDown(event,this)" />
                 <input type="text" name="max" class="unibox-price-max" placeholder="Max Price" value="0">
 
-                <div id="sliderone" style="width: 100%"></div>
+                <div id="sliderone" style="width: 85%; margin-left: 7.5%"></div>
                 <br>
                 <br>
                     <br>

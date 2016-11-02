@@ -55,6 +55,7 @@
         </div>
         <div class="panel-footer">
                         <div class="form-group">
+                            <center>
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-sign-in"></i> Login
                                 </button>
@@ -67,6 +68,7 @@
                                 <br/>
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Wachtwoord vergeten?</a>
                                 <a class="btn btn-link" href="{{ route('register') }}">Nog geen account?</a>
+                            </center>
                     </form>
         </div>
         </div>
