@@ -448,8 +448,8 @@
             </div>
             <div class="col-md-7 col-sm-7 col-xs-7">
                 <img src="https://www.nix18.nl/media/images/logo.png" width="100%" style="margin-top: 4px">
-            </div><br/><br/><br/>
-            <div class="col-md-12"><br/>Website door mediaverse.nl &copy; Esigaret-</div>
+            </div>
+            <div class="col-md-12" style="overflow: hidden;"><br/>Website door mediaverse.nl &copy; Esigaret-</div>
         </div>
     </div>
 <!--
