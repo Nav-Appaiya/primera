@@ -43,7 +43,7 @@
                                                         {{$item->name}} - {{$item->options[0]->detail->value}}
                                                     </a>
                                                 </h4>
-                                                <p>Product Nr: {{$item->id}}</p>
+                                                <p>Product Nr: {{$item->options[0]->serialNumber}}</p>
                                             </td>
                                             <td class="cart_price"><br>
                                                 <p>€{{number_format($item->price, 2)}}</p>
@@ -185,7 +185,7 @@
                     <h5 class="text-right">Subtotaal excl. btw <strong>€ {{ Session::has('cart') ? number_format(Cart::total() - round( (Cart::total() / 100) * 21, 2), 2) : 0}}</strong>
                     </h5>
                     <small class="pull-right">btw 21%
-                        <strong>€ {{Session::has('cart') ? round( (Cart::total() / 100) * 21, 2) : 0}}</strong>
+                        <strong>€ {{Session::has('cart') ? number_format(round( (Cart::total() / 100) * 21, 2), 2) : 0}}</strong>
                     </small>
 
                     <br>

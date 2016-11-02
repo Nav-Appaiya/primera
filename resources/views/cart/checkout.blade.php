@@ -146,7 +146,14 @@
                                         </table>
 
                                         <div class="panel-body">
-                                            <div class="text-center pull-right">
+                                            <div class=" pull-right">
+                                                <div class="form-group {{$errors->has('telThuis') ? 'has-error' : ''}}">
+                                                    {!! Form::label('payment_method', 'betaalmethode') !!}
+                                                    {{Form::select('payment_method', collect($methods)->pluck('id', 'id'), '')}}
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('telMobiel') }}</strong>
+                                                    </span>
+                                                </div>
                                                 <h4>Totaal bedrag: <span>&euro;</span> {{Cart::total()}}</h4>
 
                                                 {{ Form::submit('Bestelling afronden', ['class' => 'btn btn-primary']) }}
@@ -187,28 +194,6 @@
 
                                         </div>
 
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 ">
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                        Betaalmethode
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="col-lg-12 {{$errors->has('payment_method') ? 'has-error' : ''}}">
-                                           <span class="help-block">
-                                                <strong>{{ $errors->first('payment_method') }}</strong>
-                                            </span>
-                                        </div>
-                                        @foreach($methods as $method)
-                                            <div class="col-lg-3 table-bordered">
-                                                <label>{!! $method->id !!}</label><br>
-                                                <input type="radio" name="payment_method" value="{!! $method->id !!}">
-                                                <img class="pull-right" src="{{$method->image->normal}}"><br>
-                                            </div>
-                                        @endforeach
                                     </div>
                                 </div>
                             </div>

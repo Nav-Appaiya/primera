@@ -38,10 +38,42 @@
             </div>
         </div>
 
-        <div class="col-lg-6">
-            asdasd
+        <div class="col-lg-6" >
+            <div id="donut-status" class="col-lg-3" style="height: 200px !important; width:200px;"><label class="text-center">Orders status</label></div>
+            <div id="donut-methode" class="col-lg-3" style="height: 200px !important; width:200px;"></div>
         </div>
 
     </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+        /*
+         * Play with this code and it'll update in the panel opposite.
+         *
+         * Why not try some of the options above?
+         */
+        Morris.Donut({
+            element: 'donut-status',
+            data: {!! json_encode(\Illuminate\Support\Facades\DB::table('orders')
+                ->groupBy('status')
+                ->orderBy('status', 'ASC')
+                ->get([
+                  \Illuminate\Support\Facades\DB::raw('COUNT(*) as value'),
+                  \Illuminate\Support\Facades\DB::raw('status as label')
+                ])) !!}
+        });
+
+        Morris.Donut({
+            element: 'donut-methode',
+            data: {!! json_encode(\Illuminate\Support\Facades\DB::table('orders')
+                ->groupBy('status')
+                ->orderBy('status', 'ASC')
+                ->get([
+                  \Illuminate\Support\Facades\DB::raw('COUNT(*) as value'),
+                  \Illuminate\Support\Facades\DB::raw('status as label')
+                ])) !!}
+        });
+    </script>
+@endpush
