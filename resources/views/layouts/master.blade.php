@@ -169,7 +169,7 @@
         <div class="head">
             <div class="container">
                 <div class="row">
-                  <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+                  <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10">
                         <a href="{{route('homepage')}}"><img src="http://antoinecroes.nl/E-sigaret-logo.png" height="38px"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 hidden-xs hidden-sm">
@@ -183,17 +183,41 @@
                             </span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="menu">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div style="padding-left: 0px; padding-right: 0px;" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
 
-
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="height: 90px; line-height: 90px">
+                            @foreach($main_categories->where('category_id', 0) as $category)
+                                @if(count($category->children) != 0)
+                                    <li class="dropdown">
+                                        <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            @foreach($category->children as $child)
+                                                <li class="">
+                                                    <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
                         <div class="cart-button pull-right">
                             <div class="">
-                                <div class="dropdown" style="height: 90px">
+                                <div class="dropdown" style="height: 44px; line-height: 44px">
                                     <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         <a href="{{ route('cart') }}">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                            <span style="margin-top: 4px; margin-left: -10px; position: absolute;" class="badge">
+                                            <span style="margin-top: -30px; margin-left: -65px; position: absolute;" class="badge">
                                                 € {{number_format(Cart::total(), 2)}}
                                             </span>
                                         </a>
@@ -238,35 +262,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="menu">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div style="padding-left: 0px; padding-right: 0px;" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-
-                            @foreach($main_categories->where('category_id', 0) as $category)
-                                @if(count($category->children) != 0)
-                                    <li class="dropdown">
-                                        <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            @foreach($category->children as $child)
-                                                <li class="">
-                                                    <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -429,32 +424,32 @@
 
 <footer>
     <div class="container">
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3 col-xs-4">
             <h3>Service</h3>
                 <a href="{{route('voorwaarde')}}">Algemene voorwaarden</a><br/>
                 <a href="{{route('garantie')}}">Garantie</a><br/>
                 <a href="{{route('policy')}}">Privacy policy & Cookiebeleid</a><br/>
                 <a href="{{route('retour')}}">faq</a><br/>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3 col-xs-4">
             <h3>Verzenden</h3>
                 <a href="{{route('verzending')}}">Verzenden & Ontangen</a><br/>
                 <a href="{{route('retour')}}">Retourneren</a>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3 col-xs-4">
             <h3>Website</h3>
                 <a href="{{route('sitemap')}}">sitemap</a><br/>
                 <a href="{{route('about')}}">Over ons</a><br/>
                 <a href="{{route('contact')}}">Contact</a>
         </div>
-        <div class="col-md-3">
-            <div class="col-md-4">
+        <div class="col-md-3 col-sm-3 col-xs-12"><br/><br/>
+            <div class="col-md-4 col-sm-4 col-xs-4">
                 <img src="https://www.ideal.nl/img/statisch/iDEAL-groot.gif" class="img-responsive">
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 col-sm-7 col-xs-7">
                 <img src="https://www.nix18.nl/media/images/logo.png" width="100%" style="margin-top: 4px">
-            </div>
-            <div class="col-md-12"><br/>&copy; Esigaret 2016</div>
+            </div><br/><br/><br/>
+            <div class="col-md-12"><br/>Website door mediaverse.nl &copy; Esigaret-</div>
         </div>
     </div>
 <!--
