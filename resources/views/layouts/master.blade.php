@@ -395,7 +395,11 @@
 
     {{--@show--}}
 
-
+<section class="bread-crumb">
+    <div class="container">
+        @yield('breadcrumbs')
+    </div>
+</section>
 
 <section class="content">
     <div class="container">
