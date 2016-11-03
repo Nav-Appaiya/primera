@@ -27,6 +27,11 @@
                      * http://www.apache.org/licenses/LICENSE-2.0
                      *
                      */
+
+                     .actives {
+                        color: black;
+                        font-weight: bold;
+                     }
                     .slider {
                         display: inline-block;
                         vertical-align: middle;
@@ -167,7 +172,7 @@
                                 <a href="{{route('product.index', [str_replace(' ', '-', $parent->title), str_replace(' ', '-', $parent->children()->first()['title']), $parent->children()->first()['id']])}}">{{$parent->title}}</a>
                                 <ul class="{{ $parent->id == $category->where('id', str_replace('c-', '', Request::segment(3)))->first()['category_id'] ? 'active' : '' }}">
                                     @foreach($parent->children as $children)
-                                        <li class="{{$children->id == str_replace('c-', '', Request::segment(3)) ? 'active' : '' }}">
+                                        <li class="{{$children->id == str_replace('c-', '', Request::segment(3)) ? 'actives' : '' }}">
                                             <a class="test" href="{{route('product.index', [str_replace(' ', '-', $parent->title), str_replace(' ', '-', $children->title), $children->id])}}">
                                                 <b>></b> {{$children->title}}
                                             </a>
