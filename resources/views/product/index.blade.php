@@ -227,6 +227,7 @@
 
     </div>
     <div class="col-lg-9">
+        
         {{--asd--}}
         @if(count($property) > 0)
             @if(count($property) == 1)
@@ -236,7 +237,25 @@
             @endif
             <hr>
             @foreach($property as $product)
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                <div class="card">
+                    <img src="{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" class="img-responsive" alt="Card image">
+                    <div class="card-block" style="border-top: 1px solid rgba(0,0,0,.125);">
+                        <div class="row">
+                            <div class="col-lg-8"><h6 class="card-subtitle text-muted">{{$product->product->name}}</h6></div>
+                            <div class="col-lg-4 text-right">&euro; 
+                            @if($product->product->discount != 0)
+                                    <span class="label label-danger"><small style="text-decoration:line-through;">&euro; {{$product->product->price}}</small></span>
+                                    <b style="">&euro; {{$product->product->price - $product->product->discount}}</b>
+                                @else
+                                    &euro; {{$product->product->price}}
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+               <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">
@@ -254,7 +273,7 @@
                             <a href="{{route('product.show', [str_replace(' ', '-', $product->product->name), $product->product->id])}}">bekijken</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             @endforeach
         @else
             <p>Er is <b>geen</b> product gevonden.</p>
