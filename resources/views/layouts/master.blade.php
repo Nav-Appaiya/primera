@@ -218,9 +218,9 @@
                                         <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <a href="{{ route('cart') }}">
                                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                <span style="margin-top: -30px; margin-left: -65px; position: absolute;" class="badge">
+                                                <!--<span style="margin-top: -30px; margin-left: 05px; position: absolute;" class="badge">
                                                     € {{number_format(Cart::total(), 2)}}
-                                                </span>
+                                                </span>-->
                                             </a>
                                         </a>
                                     <div class="dropdown-menu dropdown-to-right">

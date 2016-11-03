@@ -238,10 +238,10 @@
                             <p class="text">{{$product->product->name}}</p>
                             <p class="text">
                                 @if($product->product->discount != 0)
-                                    <small style="text-decoration:line-through;">{{$product->product->price}}</small>
-                                    <b style="">{{$product->product->price - $product->product->discount}}</b>
+                                    <span class="label label-danger"><small style="text-decoration:line-through;">{{$product->product->price}}</small></span>
+                                    <b style="">&euro; {{$product->product->price - $product->product->discount}}</b>
                                 @else
-                                    {{$product->product->price}}
+                                    &euro; {{$product->product->price}}
                                 @endif
                             </p>
                         </div>

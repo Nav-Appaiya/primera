@@ -11,7 +11,7 @@
             @include('layouts.checkout-step')
 
             <center>
-                <h2>Winkelwagen</h2>
+                <h2>&nbsp;</h2>
             </center>
         </div>
 
@@ -195,7 +195,7 @@
                     <hr/>
                     <a href="{{count(Cart::content()) ? URL::route('cart.checkout') : ''}}" class="btn btn-success btn-block" {{count(Cart::content()) ? '': 'disabled'}}>
                         afrekenen
-                    </a>
+                    </a><hr>
                     {{Form::open(['route' => 'cart.destroy'])}}
                         {{Form::submit('legen', ['class' => 'btn btn-danger btn-block', count(Cart::content()) ? '': 'disabled'])}}
                     {{Form::close()}}

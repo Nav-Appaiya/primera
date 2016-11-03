@@ -174,7 +174,7 @@
                                             <strong style="color: #a94442">{{ $errors->first('levering') }}</strong>
                                         </span>
 
-                                        <div class="well col-lg-6 ">
+                                        <div class="well col-lg-5">
                                             <div class="form-group">
                                                 {{--<label for="a">Answer A</label>--}}
                                                 <input type="radio" name="levering" value="verzenden">
@@ -185,8 +185,8 @@
                                             <img width="100" src="http://cdn.prod.else4.nl/uploads/2016/02/PostNL-Logo.jpg">
                                             <hr>
                                         </div>
-
-                                        <div class="well col-lg-6">
+                                        <div class="col-lg-2"></div>
+                                        <div class="well col-lg-5">
                                             <input type="radio" name="levering" value="ophalen">
                                             Ophalen in Eindhoven <br>
                                             <small>+ €0.00</small>

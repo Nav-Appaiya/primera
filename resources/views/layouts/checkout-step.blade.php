@@ -33,30 +33,13 @@
 </style>
 
 {{--TODO design --}}
-
-<div class="row cart-arrow-box">
-   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-       <div class="cart-arrow text-center {{ Request::is('winkelwagen') ? 'active' : null }}">
-           <span>Winkelwagen</span>
-       </div>
-   </div>
-   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-       <div class="cart-arrow text-center {{ Request::is('winkelwagen/checkout') ? 'active' : null }}">
-           <span>Gegevens</span>
-
-       </div>
-   </div>
-   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-       <div class="cart-arrow text-center {{ Request::is('winkelwagen/afrekenen/*') ? 'active' : null }}">
-           <span>Overzicht</span>
-       </div>
-   </div>
-   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-       <div class="cart-arrow text-center {{ Request::is('order/payment/*') ? 'active' : null }}">
-           <span>Bedankt</span>
-       </div>
-   </div>
+<div class="row">
+  <div id="crouton">
+      <ul>
+          <li><a href="#" class="{{ Request::is('winkelwagen') ? 'active' : null }}">Winkelwagen</a></li>
+          <li><a href="#" class="{{ Request::is('winkelwagen/checkout') ? 'active' : null }}">Gegevens</a></li>
+          <li><a href="#" class="{{ Request::is('winkelwagen/afrekenen/*') ? 'active' : null }}">Overzicht</a></li>
+          <li><a href="#" class="{{ Request::is('order/payment/*') ? 'active' : null }}">Bedankt</a></li>
+      </ul>
+  </div>
 </div>
-
-<br>
-<br>
