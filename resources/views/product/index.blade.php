@@ -243,7 +243,7 @@
                             <p class="text">{{$product->product->name}}</p>
                             <p class="text">
                                 @if($product->product->discount != 0)
-                                    <span class="label label-danger"><small style="text-decoration:line-through;">{{$product->product->price}}</small></span>
+                                    <span class="label label-danger"><small style="text-decoration:line-through;">&euro; {{$product->product->price}}</small></span>
                                     <b style="">&euro; {{$product->product->price - $product->product->discount}}</b>
                                 @else
                                     &euro; {{$product->product->price}}
