@@ -1,41 +1,23 @@
-html, body {
-    margin: 0;
-    padding: 0px;
-    padding-top: 92.5px;
-    background: #fff;
-    font-family: "Open Sans", sans-serif;
-    color: #000;
-}
-
-html, body { height: 100%; }
-#wrap {
+html {
+    position: relative;
     min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin-bottom: -182px; /* hoogte footer */
 }
-
-#spacer {
-    display: block !important;
-    height: 182px; /* hoogte footer */
+body {
+    margin: 0;
+    padding: 0;
+    margin: 185px 0px 215px 0px;
+    font-family: "Open Sans", sans-serif;
 }
-    
-#footer {
-    clear: both;
-    height: 182px; /* hoogte footer */
-}
-
 header {
+    height: auto;
     width: 100%;
-    display: block;
-    background: #363C3F;
     position: fixed;
-    z-index: 1;
     top: 0;
     left: 0;
+    overflow: hidden;
+    z-index: 999;
 }
-
-header .user-menu {
+header .-head-top {
     width: 100%;
     height: 50px;
     line-height: 50px;
@@ -43,68 +25,141 @@ header .user-menu {
     background: #333;
     color: #fff;
 }
-
-header .user-menu p {
-    margin-bottom: 0;
-    padding: 0;
-    color: #fff;
-}
-
-header .user-menu a {
-    color: #fff;
-}
-
-header .head {
+header .-head-inf {
     width: 100%;
     height: 90px;
     background: #fff;
-    height: auto;
     line-height: 90px;
     color: #fff !important;
 }
-
-header .menu {
+header .-head-nav {
     background: #e8e8e8;
     width: 100%;
     height: 45px;
 }
-
-header .user-menu p {
+header .-head-inf .-head-logo img.logo {
+    max-height: 40px !important;
+}
+header .-head-top p {
     margin: 0;
     padding: 0;
     color: #fff;
-    height: 50px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+section.content {
+    width: 100%;
+    height: auto;
+    padding: 30px 0px;
+}
+section.content .-product-card {
+    border: 1px #E3E3E3 solid;
+    overflow: hidden;
+    border-radius: 5px;
+}
+section.content .-product-label {
+    width: 100%;
+    padding: 5px;
+    border-top: #E3E3E3 1px solid;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+section.content .-product-card .-product-img {
+    height: 200px;
+    padding: 5px;
+    line-height: 200px;
+    text-align: center;
+    margin-bottom: 2px;
+}
+section.content .-product-card .-product-img img {
+    max-height: 200px;
+}
+footer {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 215px;
+}
+#-footer {
+    height: 180px;
+    background: #f5f5f5;
+    padding: 40px 0px;
+}
+#-footer .-footer-label {
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin: 0px 0px 8px 0px;
+    padding: 0;
+}
+#-footer .-footer-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-size: 13px;
+}
+#-footer .-footer-list li {
+    padding: 2px 0px;
+}
+#-subfooter {
+    background-color: #333;
+    width: 100%;
+    height: 35px;
+    line-height: 34px;
+    color: #fff;
+    font-size: 11px;
+}
+.card-block {
+    padding: 12p;
+}
+.card-subtitle {
+    margin-top: 0 !important;
+    margin-bottom: 0;
+    padding-top: 3px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
-header .usr-menu p a {
-    color: #fff;
-}
-
-header .menu ul.nav {
+header .-head-nav ul.nav {
     float: left;
     list-style-type: none;
     height: 44px;
     line-height: 45px;
 }
 
-header .menu ul.nav li {
+header .-head-nav ul.nav li {
     float: left;
     padding: 0px 0px;
     font-weight: 300;
 }
 
-header .menu ul.nav li a {
+header .-head-nav ul.nav li a {
     font-size: 11px;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-header .menu ul.nav .dropdown-menu li {
+header .-head-nav ul.nav .dropdown-menu li {
     width: 100%;
+}
+
+.white {
+    color: #fff;
+}
+
+.white:hover {
+    color: #fff;
 }
 
 section.bread-crumb {

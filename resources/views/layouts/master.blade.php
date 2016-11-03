@@ -19,7 +19,7 @@
         <meta name="description" content="@yield('description')">
 
         @stack('meta')
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
@@ -140,10 +140,9 @@
 
         @stack('css')
     </head>
-    <body>
-<div id="wrap">
+<body>
     <header>
-        <div class="user-menu">
+        <div class="-head-top">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -156,9 +155,9 @@
                             @if(Auth::check())
                                 <label class="pull-right">Welkom <a href="{{ route('user.show') }}">{{Auth::user()->name}}, </a><a href="{{route('logout')}}">Uitloggen</a></label>
                             @else
-                                <a class="pull-right" href="{{route('register')}}">Registeren</a>
+                                <a class="pull-right white" href="{{route('register')}}">Registeren</a>
                                 <small class="pull-right">&nbsp; | &nbsp;</small>
-                                <a class="pull-right" href="{{route('login')}}">Inloggen</a>
+                                <a class="pull-right white" href="{{route('login')}}">Inloggen</a>
                             @endif
                         </p>
                     </div>
@@ -167,7 +166,7 @@
         </div>
         
         <div class="hidde">
-            <div class="head">
+            <div class="-head-inf">
                 <div class="container">
                     <div class="row">
                       <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10">
@@ -189,7 +188,7 @@
             </div>
         </div>
 
-        <div class="menu">
+        <div class="-head-nav">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -426,9 +425,56 @@
         </div>
     </div>
 </section>-->
-<div id="spacer"></div>
-</div>
+
 <footer>
+    <div id="-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-4">
+                    <label class="-footer-label">Service</label>
+                    <ul class="-footer-list">
+                        <li><a href="{{route('voorwaarde')}}">Algemene voorwaarden</a></li>
+                        <li><a href="{{route('garantie')}}">Garantie</a></li>
+                        <li><a href="{{route('policy')}}">Privacy policy & Cookiebeleid</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <label class="-footer-label">Verzending</label>
+                    <ul class="-footer-list">
+                        <li><a href="{{route('verzending')}}">Verzenden & Ontangen</a></li>
+                        <li><a href="{{route('retour')}}">Retourneren</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <label class="-footer-label">Bedrijf</label>
+                    <ul class="-footer-list">
+                        <li><a href="{{route('sitemap')}}">sitemap</a></li>
+                        <li><a href="{{route('about')}}">Over ons</a></li>
+                        <li><a href="{{route('contact')}}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="-subfooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <img src="https://www.nix18.nl/media/images/logo.png" height="20px">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"></div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
+                    <img src="https://www.ideal.nl/img/statisch/iDEAL-groot.gif" height="20px">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--<footer>
     <div class="container">
         <div class="col-md-3 col-sm-3 col-xs-4">
             <h3>Service</h3>
@@ -463,7 +509,7 @@
         <i class="fa fa-arrow-circle-up"></i>
     </a>
 
- </footer>
+ </footer>-->
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
