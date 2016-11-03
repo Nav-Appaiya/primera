@@ -6,10 +6,6 @@
 
 @section('content')
     <div class="row">
-    <div class="col-lg-12">
-        <h1>Nieuwste Producten</h1>
-    </div>
-
     <div class="col-lg-12" >
         <div class="row">
             <div class="your-class col-xs-6 col-sm-6 col-md-6" style="margin-top: -0px">

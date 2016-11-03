@@ -8,16 +8,7 @@
     <div class="container">
 
         <div class="row">
-<<<<<<< HEAD
-            <div class="col-md-12">
-            	<div class="panel panel-default">
-            		<div class="panel-heading">Over ons</div>
-            		<div class="panel-body">
-                	<p class="text-center">Lees hier over onze privacy policy.</p>
-                	</div>
-                </div>
-=======
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <h1>Privacy Policy &amp; Cookiebeleid</h1>
                 <hr>
                 <p>&nbsp;</p>
