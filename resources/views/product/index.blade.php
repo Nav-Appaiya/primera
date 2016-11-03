@@ -227,7 +227,7 @@
 
     </div>
     <div class="col-lg-9">
-        
+
         {{--asd--}}
         @if(count($property) > 0)
             @if(count($property) == 1)
@@ -237,24 +237,40 @@
             @endif
             <hr>
             @foreach($property as $product)
+            <a href="{{ route('product.show', [str_replace(' ', '-', $product->name), $product->id]) }}">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                <div class="card">
-                    <img src="{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" class="img-responsive" alt="Card image">
-                    <div class="card-block" style="border-top: 1px solid rgba(0,0,0,.125);">
-                        <div class="row">
-                            <div class="col-lg-8"><h6 class="card-subtitle text-muted">{{$product->product->name}}</h6></div>
-                            <div class="col-lg-4 text-right">&euro; 
+                <div class="product">
+                    <div class="col-lg-12">
+                        <div class="image">
+                            <center>
+                                <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%">
+                            </center>
+                        </div>
+                        <div class="title">
+                            <h3>{{$product->product->name}}</h3>
+                        </div>
+                        <div class="vooraad">2 op vooraad</div>
+                        <div class="prijs">
                             @if($product->product->discount != 0)
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-5">
                                     <span class="label label-danger"><small style="text-decoration:line-through;">&euro; {{$product->product->price}}</small></span>
+                                    </div>
+                                    <div class="col-md-5">
                                     <b style="">&euro; {{$product->product->price - $product->product->discount}}</b>
+                                    </div>
+                                    <div class="col-md-1"></div>
                                 @else
-                                    &euro; {{$product->product->price}}
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">&euro; {{$product->product->price}}</div>
+                            <div class="col-md-3"></div>
+                                    
                                 @endif
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </a>
                <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
