@@ -20,17 +20,18 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 ">
                             <div class="panel panel-info">
-                                <div class="panel-heading">Je persoonlijke gegevens invullen</div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <h5>Waar kunnen we je bestelling naartoe sturen?</h5>
+                                <div class="panel-heading">
+                                    Je persoonlijke gegevens
+                                    @if(Auth::check())
+                                        <div class="pull-right">
+                                            <small><a class="afix-1" href="{{ route('user.edit') }}">Wijzig persoonsgegevens</a></small>
                                         </div>
-                                    </div>
+                                    @endif
+                                </div>
+                                <div class="panel-body">
                                     <div class="col-md-12 col-xs-12">
-
-                                        <h2>PERSOONLIJKE GEGEVENS</h2>
-
+                                        <h2>PERSOONLIJKE GEGEVENS</h2><hr>
+                                        <p>Waar kunnen we je bestelling naartoe sturen?</p>
                                         <div class="row">
 
                                             @if(!Auth::check())
@@ -110,8 +111,6 @@
 
                                         <small>Alle velden met een (*) zijn verplicht. </small><br>
 
-                                        <a href="{{route('user.show')}}" class="btn">persoons gegevens wijzigen</a>
-
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +123,7 @@
                             <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 ">
                                 <div class="panel panel-info">
                                     <div class="panel-heading">
-                                        Jouw bestelling <div class="pull-right"><small><a class="afix-1" href="{{ url('cart') }}">Terug naar je winkelwagentje</a></small></div>
+                                        Jouw bestelling <div class="pull-right"><small><a class="afix-1" href="{{ route('cart') }}">Terug naar je winkelwagentje</a></small></div>
                                     </div>
                                     <div class="panel-body">
                                         <table class="table">
@@ -148,7 +147,7 @@
                                         <div class="panel-body">
                                             <div class=" pull-right">
                                                 <div class="form-group {{$errors->has('telThuis') ? 'has-error' : ''}}">
-                                                    {!! Form::label('payment_method', 'betaalmethode') !!}
+                                                    {!! Form::label('payment_method', 'Betaalwijze') !!}
                                                     {{Form::select('payment_method', collect($methods)->pluck('id', 'id'), '')}}
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('telMobiel') }}</strong>
@@ -167,7 +166,7 @@
                             <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 ">
                                 <div class="panel panel-info">
                                     <div class="panel-heading">
-                                        Levering <div class="pull-right"><small><a class="afix-1" href="{{ route('cart') }}">Terug naar je winkelwagentje</a></small></div>
+                                        Verzendwijze
                                     </div>
                                     <div class="panel-body">
                                         <span class="help-block form-group has-error col-lg-12">
@@ -191,7 +190,6 @@
                                             Ophalen in Eindhoven <br>
                                             <small>+ €0.00</small>
                                             <hr/>
-
                                         </div>
 
                                     </div>

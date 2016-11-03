@@ -268,8 +268,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
     <script type="text/javascript">
-
-        jQuery(document).ready(function() {
+    @if($min_price < $max_price)
+            jQuery(document).ready(function() {
 
             var min = {!! $min_price !!};
             var max = {!! $max_price !!};
@@ -301,11 +301,11 @@
 //                alert('cake!');
             });
         });
+        @endif
     </script>
 @endpush
 
 @push('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.css">
-
 @endpush
 

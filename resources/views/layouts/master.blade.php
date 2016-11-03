@@ -227,7 +227,8 @@
                                         <center>
                                             <h3>Winkelwagen</h3>
                                         </center>
-                                            @if(Cart::content())
+                                            @if(empty(Cart::content()))
+                                                {{Cart::content()}}
                                                 <table class="table table-striped">
                                                     <tbody>
                                                         <tr>
@@ -434,12 +435,12 @@
                 <a href="{{route('voorwaarde')}}">Algemene voorwaarden</a><br/>
                 <a href="{{route('garantie')}}">Garantie</a><br/>
                 <a href="{{route('policy')}}">Privacy policy & Cookiebeleid</a><br/>
-                <a href="{{route('retour')}}">faq</a><br/>
+                {{--<a href="{{route('retour')}}">faq</a><br/>--}}
         </div>
         <div class="col-md-3 col-sm-3 col-xs-4">
             <h3>Verzenden</h3>
                 <a href="{{route('verzending')}}">Verzenden & Ontangen</a><br/>
-                <a href="{{route('retour')}}">Retourneren</a>
+{{--                <a href="{{route('retour')}}">Retourneren</a>--}}
         </div>
         <div class="col-md-3 col-sm-3 col-xs-4">
             <h3>Website</h3>
@@ -462,24 +463,6 @@
         <i class="fa fa-arrow-circle-up"></i>
     </a>
 
-    {{--<a class=”back-to-top” style=”display: inline;” href=”#”>Back to Top</a>--}}
-<!--
-    <div class="container">
-        <center>
-
-            <ul class="list-group">
-                <li><a href="{{route('voorwaarde')}}">Algemene voorwaarden</a></li>
-                <li><a href="{{route('policy')}}">Privacy policy & Cookiebeleid</a></li>
-                <li><a href="{{route('contact')}}">Contact</a></li>
-                {{--<li><a href="{{route('retour')}}">Retourneren</a></li>--}}
-                {{--<li><a href="{{route('retour')}}">faq</a></li>--}}
-                <li><a href="{{route('about')}}">Over ons</a></li>
-                <li><a href="{{route('verzending')}}">Verzenden & Ontangen</a></li>
-                <li><a href="{{route('sitemap')}}">sitemap</a></li>
-                {{--<li><a href="{{route('garantie')}}">Garantie</a></li>--}}
-            </ul>
-        </center>
-    </div>-->
  </footer>
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
