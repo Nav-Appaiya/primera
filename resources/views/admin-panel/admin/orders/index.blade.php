@@ -39,7 +39,7 @@
         </div>
 
         <div class="col-lg-6" >
-            <div id="donut-status" class="col-lg-3" style="height: 200px !important; width:200px;"><label class="text-center">Orders status</label></div>
+            <div id="donut-status" class="col-lg-3" style="height: 200px !important; width:200px;"><label class="tex">Orders status</label></div>
             <div id="donut-methode" class="col-lg-3" style="height: 200px !important; width:200px;"></div>
         </div>
 
@@ -68,11 +68,11 @@
         Morris.Donut({
             element: 'donut-methode',
             data: {!! json_encode(\Illuminate\Support\Facades\DB::table('orders')
-                ->groupBy('status')
-                ->orderBy('status', 'ASC')
+                ->groupBy('payment_method')
+                ->orderBy('payment_method', 'ASC')
                 ->get([
                   \Illuminate\Support\Facades\DB::raw('COUNT(*) as value'),
-                  \Illuminate\Support\Facades\DB::raw('status as label')
+                  \Illuminate\Support\Facades\DB::raw('payment_method as label')
                 ])) !!}
         });
     </script>
