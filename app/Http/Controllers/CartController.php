@@ -38,7 +38,7 @@ class CartController extends Controller
         return view('cart.index', ['cart' => $cart, 'product' => $this->product]);
     }
 
-    public function add(){
+    public function add(Request $request){
 
         $rules = [
             'product_id' => 'required'
@@ -55,7 +55,7 @@ class CartController extends Controller
 
         $product_id = Request()->get('product_id');
         $product = $this->product->find($product_id);
-        Cart::add(array('id' => $product_id, 'name' => $product->product->name, 'qty' => 1, 'options' => [$product], 'price' => ($product->product->price - $product->product->discount)));
+        Cart::add(array('id' => $product_id, 'name' => $product->product->name, 'qty' => $request->qty ? $request->qty : 1, 'options' => [$product], 'price' => ($product->product->price - $product->product->discount)));
 
         return redirect()->route('cart');
     }

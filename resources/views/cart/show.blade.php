@@ -18,7 +18,7 @@
 
             <div class="row">
 
-                <div class="col-lg-8 well">
+                <div class="col-lg-7 well">
 
                     <table class="table">
                         <thead>
@@ -116,29 +116,28 @@
                     @endif
                 </div>
 
-                <div class="col-lg-4">
-                    <div class="">
-                        <div class="col-lg-12">
-                            <h1>Uw gegevens</h1>
-                            @if(Auth::check())
-                                email: {{Auth::user()->email}}<br>
-                                Naam: {{$order->name}}
-                            @else
-                                email: {{$order->email}}<br>
-                                Naam: {{$order->name}} {{$order->achternaam}}
-                            @endif
-                        </div>
-                        <div class="col-lg-6">
-                            {{--TODO als verzendmethode ophalen is moet het afleveradres vervangen worden met afhaaladres--}}
-                            <h3>Afleveradres</h3>
-                            <p>{{$order->adres}} {{$order->huisnummer}}, <br>{{$order->postcode}} {{$order->woonplaats}}</p>
-                        </div>
-                        <div class="col-lg-6">
-                            <h3>Factuuradres</h3>
-                            <p>{{$order->adres}} {{$order->huisnummer}}, <br>{{$order->postcode}} {{$order->woonplaats}}</p>
-                        </div>
+                <div class="col-lg-5">
+                    <div class="col-lg-12">
+                        <h1>UW GEGEVENS</h1>
+                        @if(Auth::check())
+                            email: {{Auth::user()->email}}<br>
+                            Naam: {{$order->name}}
+                        @else
+                            email: {{$order->email}}<br>
+                            Naam: {{$order->name}} {{$order->achternaam}}
+                        @endif
                     </div>
-                    <br>
+
+                    <div class="col-lg-6">
+                        {{--TODO als verzendmethode ophalen is moet het afleveradres vervangen worden met afhaaladres--}}
+                        <h3>Afleveradres</h3>
+                        <p>{{$order->adres}} {{$order->huisnummer}}, <br>{{$order->postcode}} {{$order->woonplaats}}</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3>Factuuradres</h3>
+                        <p>{{$order->adres}} {{$order->huisnummer}}, <br>{{$order->postcode}} {{$order->woonplaats}}</p>
+                    </div>
+
                 </div>
 
             </div>

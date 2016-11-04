@@ -10,15 +10,14 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
+                    {!! Form::open(array('route' => 'register', 'method' => 'post', 'class' => 'form-horizontal' )) !!}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Gebruikersnaam</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
-
+                                {{--{{Form::text('name', null, ['class' => 'form-control'])}}--}}
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -45,7 +44,7 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
+                                <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}">
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -73,7 +72,7 @@
                             <label for="voornaam" class="col-md-4 control-label">Voornaam</label>
 
                             <div class="col-md-6">
-                                <input id="voornaam" type="text" class="form-control" name="voornaam">
+                                <input id="voornaam" type="text" class="form-control" name="voornaam" value="{{ old('voornaam') }}">
 
                                 @if ($errors->has('voornaam'))
                                     <span class="help-block">
@@ -87,7 +86,7 @@
                             <label for="achternaam" class="col-md-4 control-label">Achternaam</label>
 
                             <div class="col-md-6">
-                                <input id="achternaam" type="text" class="form-control" name="achternaam">
+                                <input id="achternaam" type="text" class="form-control" name="achternaam" value="{{ old('achternaam') }}">
 
                                 @if ($errors->has('achternaam'))
                                     <span class="help-block">
@@ -102,7 +101,7 @@
 
                             <div class="col-md-6">
                                 <label for="geslacht" class="col-md-3 control-label">vrouw: </label>
-                                <input id="geslacht" type="radio" class="col-md-3" name="geslacht" value="female">
+                                <input id="geslacht" type="radio" class="col-md-3" name="geslacht" value="vrouw">
 
                                 <label for="geslacht" class="col-md-3 control-label">man: </label>
                                 <input id="geslacht" type="radio" class="col-md-3" name="geslacht" value="man">
@@ -119,7 +118,7 @@
                             <label for="geboortedatum" class="col-md-4 control-label">geboortedatum</label>
 
                             <div class="col-md-6">
-                                <input id="geboortedatum" type="date" class="form-control" name="geboortedatum">
+                                <input id="geboortedatum" type="date" class="form-control" name="geboortedatum" value="{{ old('geboortedatum') }}">
 
                                 @if ($errors->has('geboortedatum'))
                                     <span class="help-block">
@@ -133,7 +132,7 @@
                             <label for="adres" class="col-md-4 control-label">adres</label>
 
                             <div class="col-md-6">
-                                <input id="adres" type="text" class="form-control" name="adres">
+                                <input id="adres" type="text" class="form-control" name="adres" value="{{ old('adres') }}">
 
                                 @if ($errors->has('adres'))
                                     <span class="help-block">
@@ -147,7 +146,7 @@
                             <label for="huisnummer" class="col-md-4 control-label">huisnummer</label>
 
                             <div class="col-md-6">
-                                <input id="huisnummer" type="text" class="form-control" name="huisnummer">
+                                <input id="huisnummer" type="text" class="form-control" name="huisnummer" value="{{ old('huisnummer') }}">
 
                                 @if ($errors->has('huisnummer'))
                                     <span class="help-block">
@@ -161,7 +160,7 @@
                             <label for="postcode" class="col-md-4 control-label">postcode</label>
 
                             <div class="col-md-6">
-                                <input id="postcode" type="text" class="form-control" name="postcode">
+                                <input id="postcode" type="text" class="form-control" name="postcode" value="{{ old('postcode') }}">
 
                                 @if ($errors->has('postcode'))
                                     <span class="help-block">
@@ -175,7 +174,7 @@
                             <label for="woonplaats" class="col-md-4 control-label">woonplaats</label>
 
                             <div class="col-md-6">
-                                <input id="woonplaats" type="text" class="form-control" name="woonplaats">
+                                <input id="woonplaats" type="text" class="form-control" name="woonplaats" value="{{ old('woonplaats') }}">
 
                                 @if ($errors->has('woonplaats'))
                                     <span class="help-block">
@@ -189,7 +188,7 @@
                             <label for="telMobiel" class="col-md-4 control-label">telMobiel</label>
 
                             <div class="col-md-6">
-                                <input id="telMobiel" type="text" class="form-control" name="telMobiel">
+                                <input id="telMobiel" type="text" class="form-control" name="telMobiel" value="{{ old('telMobiel') }}">
 
                                 @if ($errors->has('telMobiel'))
                                     <span class="help-block">
@@ -203,7 +202,7 @@
                             <label for="telThuis" class="col-md-4 control-label">telThuis</label>
 
                             <div class="col-md-6">
-                                <input id="telThuis" type="text" class="form-control" name="telThuis">
+                                <input id="telThuis" type="text" class="form-control" name="telThuis" value="{{ old('telThuis') }}">
 
                                 @if ($errors->has('telThuis'))
                                     <span class="help-block">
@@ -220,8 +219,8 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+            {!! Form::close() !!}
+       </div>
+   </div>
+</div>
 @endsection

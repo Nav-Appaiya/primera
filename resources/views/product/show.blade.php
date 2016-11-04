@@ -25,7 +25,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
                      @if($product->productimages()->exists())
@@ -40,42 +40,58 @@
             </div>
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3 style="font-size: 17px">{{$product->name}}</h3>
-                    <label>beschrijving</label><br />
-                    {!! str_replace(array("\r\n", "\r", "\n"), "<br />", $product->description) !!}
-                    {{--<h1 class="pull-right"><span class="daysago"></span>--}}
-
+                    <h1 style="">{{$product->name}}</h1>
+                    <br>
                     @if($product->discount == 0)
-                        <h2>&euro;{{ $product->price }}</h2>
+                        <b style="font-size: 20px;">&euro;{{ number_format($product->price, 2) }}</b>
                     @else
-                        <h2>&euro;{{ $product->price - $product->discount }}</h2>
-                        <small style="text-decoration:line-through;">&euro;{{ $product->price }}</small>
+                        <span style="text-decoration:line-through;">&euro;{{ $product->price }}</span>
+                        <b style="font-size: 20px;">&euro;{{ number_format( $product->price - $product->discount, 2) }}</b>
                     @endif
-                </div>
-                <div class="panel-footer">
+                    <br>
+                    <br>
+
                     {!! Form::model($product, array('route' => 'cart.add', 'method' => 'post')) !!}
+                        <label>Aantal</label>
+                        <select id="qty" class="form-control" name="qty" >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+
                         @if($product->property()->first()->detail_id)
-                            <label for="detail" class="{{ $errors->has('product_id') ? ' text-danger' : '' }}">{{$product->property()->first()->detail->type}}</label>
-                            @if($product->property()->first()->detail->type)
-                                <select id="product_id" class="form-control" name="product_id" >
-                                    <option value="">Maak uw keuzen.</option>
-                                    @foreach($product->property as $property)
-                                        @if($property->stock < 1)
-                                            <option value="{{$property->id}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>
-                                        @else
-                                            <option value="{{$property->id}}">{{$property->detail->value}}  -  <small>op voorraad</small></option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                                <p class="text-danger">{{ $errors->has('product_id') ? 'Selecteer' : '' }}</p>
-                            @endif
+                            <div class="form-group {{$errors->has('product_id') ? ' has-error' : ''}}">
+                                <label for="detail" style="{{ $errors->has('product_id') ? ' color: #A94442' : '' }}">{{$product->property()->first()->detail->type}}</label>
+                                @if($product->property()->first()->detail->type)
+                                    <select id="product_id" class="form-control" name="product_id" >
+                                        <option value="">Maak uw keuzen.</option>
+                                        @foreach($product->property as $property)
+                                            @if($property->stock < 1)
+                                                <option value="{{$property->id}}" disabled>{{$property->detail->value}}  -  <small>uitverkocht</small></option>
+                                            @else
+                                                <option value="{{$property->id}}">{{$property->detail->value}}  -  <small>op voorraad</small></option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                @endif
+                            </div>
                         @else
                             <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
                         @endif
-                    {{ Form::submit('In winkelwagen', ['class' => 'btn btn-primary']) }}
+                        {{ Form::submit('Toevoegen aan winkelwagen', ['class' => 'col-md-12 btn btn-lg btn-primary', 'style' => 'background: #3270B4; border-radius: 1px !important;']) }}
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    {{ Form::close() }}
+
+                    <label>beschrijving</label><br />
+                    {!! nl2br($product->description) !!}
+
                 </div>
             </div>
         </div>
