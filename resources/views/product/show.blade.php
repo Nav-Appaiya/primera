@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('titel', $product->name)
-@section('description', '')
+@section('description', wordwrap($product->description, 500))
 @section('breadcrumbs', Breadcrumbs::render('product.show', $product))
 
 @push('meta')
@@ -82,7 +82,11 @@
                         @else
                             <input type="hidden" value="{{$product->property()->first()->serialNumber}}" name="serialcode">
                         @endif
-                        {{ Form::submit('Toevoegen aan winkelwagen', ['class' => 'col-md-12 btn btn-lg btn-primary', 'style' => 'background: #3270B4; border-radius: 1px !important;']) }}
+
+                        <button class="col-md-12 btn btn-lg btn-primary" style="background: #3270B4; border-radius: 1px !important;" type="submit">
+                            <i class="fa fa-plus" style="margin-right: 20px;" aria-hidden="true"></i>
+                            Toevoegen aan winkelwagen
+                        </button>
                         <br>
                         <br>
                         <br>
