@@ -185,7 +185,7 @@ section.bread-crumb .breadcrumb {
 }
 
 .product .image {
-    max-height: 220px;
+    height: 220px;
     overflow: hidden;
     margin-top: 10px;
 }
