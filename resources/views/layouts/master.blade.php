@@ -153,7 +153,9 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <p class="text-right">
                             @if(Auth::check())
-                                <label class="pull-right">Welkom <a href="{{ route('user.show') }}">{{Auth::user()->name}}, </a><a href="{{route('logout')}}">Uitloggen</a></label>
+                                <a class="white">Welkom</a>,
+                                <a href="{{ route('user.show') }}">{{Auth::user()->name}}</a>
+                                <a href="{{route('logout')}}" class="white">Uitloggen</a>
                             @else
                                 <a class="pull-right white" href="{{route('register')}}">Registeren</a>
                                 <small class="pull-right">&nbsp; | &nbsp;</small>
@@ -257,7 +259,6 @@
 
                                         <center>
                                             <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
-                {{--                            <a href="{{route('')}}" style="margin: 0;" type="button" class="btn btn-default">Afrekenen</a>--}}
                                         </center>
                                         </div>
                                     </div>
@@ -269,132 +270,6 @@
             </div>
         </div>
     </header>
-
-<!--<header>
-    <div class="usr-inf">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <p class="text-left">
-                        Op werkdagen besteld voor 18:00 uur, de volgende dag in huis!
-                    </p>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <p class="text-right">
-                         @if(Auth::check())
-                             <label class="pull-right">Welkom <a href="{{ route('user.show') }}">{{Auth::user()->name}}, </a><a href="{{route('logout')}}">Uitloggen</a></label>
-                         @else
-                             <a class="pull-right" href="{{route('register')}}">Registeren</a>
-                            <small class="pull-right">&nbsp; | &nbsp;</small>
-                            <a class="pull-right" href="{{route('login')}}">Inloggen</a>
-                         @endif
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="head">
-
-            <div class="bv-logo">
-                <img src="https://p37-mailws.icloud.com/wm/messagepart/Artboard%201.png?guid=messagepart%3AINBOX%2F6981-3&type=image%2Fpng&uniq=antoinehd&name=Artboard+1.png&size=55136&dsid=8451028842" height="150px">
-            </div>
-
-            <div class="cart-button">
-                <div class="">
-                    <div class="dropdown">
-                        <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <a href="{{ route('cart') }}">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span style="margin-top: 17px; margin-left: -10px; position: absolute;" class="badge">
-                                    € {{number_format(Cart::total(), 2)}}
-                                </span>
-                            </a>
-                        </a>
-                    <div class="dropdown-menu dropdown-to-right">
-                        <center>
-                            <h3>Winkelwagen</h3>
-                        </center>
-                            @if(Cart::content())
-                                <table class="table table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <th>Afbeelding</th>
-                                            <th>Naam</th>
-                                            <th>Aantal</th>
-                                            <th>Prijs</th>
-                                        </tr>
-                                        @foreach(Cart::content() as $product)
-                                            <tr>
-                                                {{--{{$product}}--}}
-                                                <td><img class="img-responsive" src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>
-                                                <td>{{$product->options[0]->product->name}}
-                                                    {{--{{$product->item->detail ? '- '.$product->item->detail->value : ''}}--}}
-                                                </td>
-                                                <td>{{$product->qty}} x</td>
-                                                <td>€ {{number_format($product->price, 2)}}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            @else
-                                <div class="col-m-12" style="width: 240px">
-                                    <center>uw winkelwagen is leeg</center>
-                                </div>
-                            @endif
-
-                        <center>
-                            <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
-{{--                            <a href="{{route('')}}" style="margin: 0;" type="button" class="btn btn-default">Afrekenen</a>--}}
-                        </center>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="search-button">
-                <div class="">
-                    <div class="dropdown">
-                        <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <a href="{{ route('cart') }}">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </a>
-                        </a>
-                        <div class="dropdown-menu dropdown-to-right">
-                            <div style="padding: 10px;">
-                                <div class="form-group" style="margin-bottom: 0px;">
-                                   <input style="width: 220px" placeholder="Waar zoekt u naar?" type="email" class="form-control" id="email">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-
-                    @foreach($main_categories->where('category_id', 0) as $category)
-                        @if(count($category->children) != 0)
-                            <li class="dropdown">
-                                <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    @foreach($category->children as $child)
-                                        <li class="">
-                                            <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @endif
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
-</header>-->
-
-    {{--@show--}}
 
     <section class="bread-crumb">
         <div class="container">

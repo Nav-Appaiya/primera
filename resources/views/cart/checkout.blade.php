@@ -1,17 +1,33 @@
 @extends('layouts.master')
 
-@section('titel', 'Primera shop')
-@section('seotags', 'seotags')
+@section('titel', 'Winkelwagen shop')
+@section('breadcrumbs', Breadcrumbs::render('cart'))
 
 @section('content')
-    {!! Form::model($user, array('route' => 'cart.checkout.check', 'method' => 'PATCH')) !!}
 
-        <div class="container wrapper">
+    <div class="row">
+
+        <div class="col-lg-12">
             @include('layouts.checkout-step')
+            <hr>
+            <center>
+                <h2>Betaalgegevens invullen</h2>
+            </center>
+        </div>
 
-            <div class="row cart-head">
-                <h3 class="text-center">Betaalgegevens invullen</h3>
-            </div>
+        <style>
+            .bottom-align-text {
+                position: absolute;
+                bottom: 40px;
+                left: 20px;
+            }
+
+            .panel-default > .panel-heading{
+                background-color: #E8E8E8;
+            }
+        </style>
+
+        {!! Form::model($user, array('route' => 'cart.checkout.check', 'method' => 'PATCH')) !!}
 
             <div class="col-lg-12 cart-body">
                 <div class="row">
@@ -19,7 +35,7 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 ">
-                            <div class="panel panel-info">
+                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     Je persoonlijke gegevens
                                     @if(Auth::check())
@@ -30,11 +46,23 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="col-md-12 col-xs-12">
-                                        <h2>PERSOONLIJKE GEGEVENS</h2><hr>
                                         <p>Waar kunnen we je bestelling naartoe sturen?</p>
                                         <div class="row">
 
                                             @if(!Auth::check())
+                                                <div class="col-lg-12">
+                                                    <hr>
+                                                    <a class="btn btn-default" href="{{route('login')}}">inloggen</a>
+
+                                                    <a class="btn btn-primary" style="background-color: #3B5998" href="/redirect">
+                                                        <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                                                        Facebook Login
+                                                    </a>
+
+                                                    <span>of als gast.</span>
+                                                    <hr>
+                                                </div>
+
                                                 <div class="form-group col-lg-12 {{$errors->has('email') ? 'has-error' : ''}}">
                                                     {!! Form::label('email', 'email *') !!}
                                                     {!! Form::text('email', NULL, ['class' => 'form-control']) !!}
@@ -121,7 +149,7 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 ">
-                                <div class="panel panel-info">
+                                <div class="panel panel-default">
                                     <div class="panel-heading">
                                         Jouw bestelling <div class="pull-right"><small><a class="afix-1" href="{{ route('cart') }}">Terug naar je winkelwagentje</a></small></div>
                                     </div>
@@ -146,16 +174,18 @@
 
                                         <div class="panel-body">
                                             <div class=" pull-right">
-                                                <div class="form-group {{$errors->has('telThuis') ? 'has-error' : ''}}">
+                                                <b style="font-size: 18px;">Totaal bedrag: &euro; {{number_format(Cart::total(), 2)}} </b><br>
+                                                <small class="text-muted">Incl. 21% btw</small>
+                                                <br>
+                                                <br>
+                                                <div class="form-group {{$errors->has('payment_method') ? 'has-error' : ''}}">
                                                     {!! Form::label('payment_method', 'Betaalwijze') !!}
-                                                    {{Form::select('payment_method', collect($methods)->pluck('id', 'id'), '')}}
+                                                    {{ Form::select('payment_method', collect($methods)->pluck('id', 'id'), '')}}
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('telMobiel') }}</strong>
+                                                        <strong>{{ $errors->first('payment_method') }}</strong>
                                                     </span>
+                                                    {{ Form::submit('Bestelling afronden', ['class' => 'btn btn-primary col-lg-12', 'style' => 'background: #3270B4;']) }}
                                                 </div>
-                                                <h4>Totaal bedrag: <span>&euro;</span> {{Cart::total()}}</h4>
-
-                                                {{ Form::submit('Bestelling afronden', ['class' => 'btn btn-primary']) }}
 
                                             </div>
                                         </div>
@@ -164,7 +194,7 @@
                             </div>
 
                             <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 ">
-                                <div class="panel panel-info">
+                                <div class="panel panel-default">
                                     <div class="panel-heading">
                                         Verzendwijze
                                     </div>
@@ -172,24 +202,23 @@
                                         <span class="help-block form-group has-error col-lg-12">
                                             <strong style="color: #a94442">{{ $errors->first('levering') }}</strong>
                                         </span>
+{{--                                        {{Form::select('levering', ['' => '', '' => 'maak uw keuzen', 'verzenden' => 'Verzending met PostNL'], '')}}--}}
 
-                                        <div class="well col-lg-5">
+                                        <div class="well col-lg-12">
                                             <div class="form-group">
-                                                {{--<label for="a">Answer A</label>--}}
                                                 <input type="radio" name="levering" value="verzenden">
+                                                <label>Verzenden met PostNL</label>
+                                                <img width="100" class="pull-right" style="" src="http://cdn.prod.else4.nl/uploads/2016/02/PostNL-Logo.jpg">
                                             </div>
-                                            Verzenden met
-                                            PostNL<br>
                                             <small>+ €{{Cart::total() >= env('FREE_SHIPPING_FORM') ? env('PACKAGE_GET_PRICE') : env('PACKAGE_POST_PRICE')  }}</small>
-                                            <img width="100" src="http://cdn.prod.else4.nl/uploads/2016/02/PostNL-Logo.jpg">
-                                            <hr>
                                         </div>
-                                        <div class="col-lg-2"></div>
-                                        <div class="well col-lg-5">
-                                            <input type="radio" name="levering" value="ophalen">
-                                            Ophalen in Eindhoven <br>
-                                            <small>+ €0.00</small>
-                                            <hr/>
+
+                                        <div class="well col-lg-12">
+                                            <div class="form-group">
+                                                <input type="radio" name="levering" value="ophalen">
+                                                <label> Ophalen in Eindhoven</label>
+                                            </div><br><br>
+                                            <small class="bottom-align-text">+ €0.00</small>
                                         </div>
 
                                     </div>

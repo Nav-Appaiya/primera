@@ -8,14 +8,14 @@
     <div class="row">
         <div class="col-lg-12">
             @include('layouts.checkout-step')
-
+            <hr>
             <center>
                 <h2>Winkelwagen Betalen</h2>
             </center>
         </div>
 
         <div class="col-lg-12">
-            {{--{{dd($order)}}--}}
+
             <div class="row">
 
                 <div class="col-lg-8 well">
@@ -26,7 +26,6 @@
                                 <th>Foto</th>
                                 <th>Artikel</th>
                                 <th>Aantal</th>
-                                {{--<th>Prijs P.st.</th>--}}
                                 <th>Prijs Totaal</th>
                             </tr>
                         </thead>
@@ -41,7 +40,7 @@
 
                                     <td>x{{$product->amount}}</td>
 {{--                                    <td> €{{$product->property->product->price - $product->property->product->discount}}</td>--}}
-                                    <td> €{{$product->amount * $product->property->product->price - $product->property->product->discount}}</td>
+                                    <td> €{{number_format($product->amount * $product->property->product->price - $product->property->product->discount, 2)}}</td>
                                 </tr>
                             @endforeach
 
@@ -67,21 +66,16 @@
 
 
                     @if($order)
-                        <br>
-                        <br>
+
                         <br>
                         <div class="row">
-                            <div class="col-lg-4">
-                                <b>Totaal prijs €{{ number_format($order->total_price + $order->delivery_price, 2)}}</b><br>
-                                <small>Incl. verzending & btw </small>
-                                {{--<a class="pull-right" href="{{route('order.create', $order->id)}}"> Afrekenen</a>--}}
+                            <div class="col-lg-6">
 
                                 {!! Form::model(null, array('route' => 'order.create', 'method' => 'POST')) !!}
 
                                 {!! Form::hidden('order_id', $order->id) !!}
 
                                 @if($order->payment_method == 'ideal')
-                                    <br>
 
                                     <label>Selecteer uw bank</label>
                                     <select name="issuer_id">
@@ -91,19 +85,29 @@
                                             @endif
                                         @endforeach
                                     </select>
+
                                 @endif
 
-                                <br>
-                                {!! Form::checkbox('voorwaarden', $order->id) !!}
-                                <small style="{{$errors->has('voorwaarden') ? 'font-weight: bold; color: #a94442;' : '' }}"> Gaat u akkoord met de <a style="text-decoration: underline" href="{{route('voorwaarde')}}">algemene voorwaarden</a> van esigaret eindhoven</small>
-{{--todo: catch error and display--}}
-                                <br>
                                 <br>
 
                                 {!! Form::submit('Betalen', array('class' => 'form-control')) !!}
 
+                                <br>
+                                {!! Form::checkbox('voorwaarden', $order->id) !!}
+                                <small style="{{$errors->has('voorwaarden') ? 'font-weight: bold; color: #a94442;' : '' }}"> Gaat u akkoord met de <a style="text-decoration: underline" href="{{route('voorwaarde')}}">algemene voorwaarden</a> van esigaret eindhoven</small>
 
                                 {{ Form::close() }}
+                            </div>
+
+                            <div class="col-lg-6">
+                                @if($order->payment_method == 'ideal')
+                                    <img src="{{$ideal->image->bigger}}">
+                                @endif
+                                <div class="pull-right">
+                                    <b style="font-size: 18px;">Totaal prijs €{{ number_format($order->total_price + $order->delivery_price, 2)}}</b><br>
+                                    <small>Incl. verzending & 21% btw </small>
+                                </div>
+
                             </div>
 
                         </div>
@@ -112,8 +116,8 @@
                     @endif
                 </div>
 
-                <div class="col-lg-4 well">
-                    <div class="row">
+                <div class="col-lg-4">
+                    <div class="">
                         <div class="col-lg-12">
                             <h1>Uw gegevens</h1>
                             @if(Auth::check())

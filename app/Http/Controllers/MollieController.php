@@ -37,8 +37,8 @@ class MollieController extends Controller
     public function show($id)
     {
         $issuers =  $this->mollie->issuers()->all();
-
         $order = $this->order->find($id);
+        $ideal = $this->mollie->methods()->get('ideal');
 
         $date = new \DateTime();
         $date->modify('15 minutes');
@@ -51,6 +51,7 @@ class MollieController extends Controller
 
         return view('cart.show')
             ->with('order', $order)
+            ->with('ideal', $ideal)
             ->with('issuers', $issuers);
     }
 
