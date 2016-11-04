@@ -53,16 +53,16 @@
          *
          * Why not try some of the options above?
          */
-        Morris.Donut({
-            element: 'donut-status',
-            data: {!! json_encode(\Illuminate\Support\Facades\DB::table('users')
-                    ->groupBy('status')
-                    ->orderBy('status', 'ASC')
-                    ->get([
-                      \Illuminate\Support\Facades\DB::raw('COUNT(*) as value'),
-                      \Illuminate\Support\Facades\DB::raw('status as label')
-                    ])) !!}
-        });
+        {{--Morris.Donut({--}}
+            {{--element: 'donut-status',--}}
+            {{--data: {!! json_encode(\Illuminate\Support\Facades\DB::table('users')--}}
+                    {{--->groupBy('status')--}}
+                    {{--->orderBy('status', 'ASC')--}}
+                    {{--->get([--}}
+                      {{--\Illuminate\Support\Facades\DB::raw('COUNT(*) as value'),--}}
+                      {{--\Illuminate\Support\Facades\DB::raw('status as label')--}}
+                    {{--])) !!}--}}
+        {{--});--}}
 
     </script>
 @endpush

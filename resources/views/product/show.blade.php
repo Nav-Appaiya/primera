@@ -44,9 +44,8 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3 style="font-size: 17px">{{$product->name}}</h3>
-
-                    <label>beschrijving</label><br>
-                    <p class="byname">{!! nl2br($product->description) !!}</p>
+                    <label>beschrijving</label><br />
+                    {!! str_replace(array("\r\n", "\r", "\n"), "<br />", $product->description) !!}
                     {{--<h1 class="pull-right"><span class="daysago"></span>--}}
 
                     @if($product->discount == 0)

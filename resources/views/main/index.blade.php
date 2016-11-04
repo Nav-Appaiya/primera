@@ -45,80 +45,38 @@
 
             @foreach($products as $product)
                 @if(!$product->property->isEmpty())
-                <a href="{{ route('product.show', [str_replace(' ', '-', $product->name), $product->id]) }}">
-                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
-                    <div class="product">
-                        <div class="col-lg-12">
-                            <div class="image">
-                                <center>
-                                    <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" class="img-responsive" alt="Card image">
-                                </center>
-                            </div>
-                            <div class="title">
-                                <h3>{!! $product->name !!}</h3>
-                            </div>
-                            <div class="vooraad">2 op vooraad</div>
-                            <div class="prijs">
-                                @if($product->discount == 0)
-                                        <div class="col-md-3"></div>
-                                            <div class="col-md-6">&euro; {{number_format($product->price, 2, '.', ',')}}</div>
-                                        <div class="col-md-3"></div>
-                                @else
-                                   <div class="col-md-1"></div>
-                                    <div class="col-md-5">
-                                    <span class="label label-danger"><small style="text-decoration:line-through;">&euro; {{number_format($product->price, 2, '.', ',')}}</small></span>
-                                    </div>
-                                    <div class="col-md-5">
-                                    <b style="">&euro;{{number_format($product->price - $product->discount, 2, '.', ',')}}</b>
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                @endif                            
-                            </div>
-                       </div>
-                    </div>
-                </div>
-            </a>
-                    <!--<div class="col-xs-3 col-sm-3 col-md-3">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220px" class="">
-                                <div class="row">
-                                <div class="col-md-6 col-xs-6">
-                                    <h4>{!! $product->name !!}</h4>
-                                </div>
 
-                                <div class="col-md-6 col-xs-6">
-                                @if($product->discount == 0)
-                                    <h3 class="pull-right"><label>&euro;{{number_format($product->price, 2, '.', ',')}}</label></h3>
-                                @else
-                                    <h3 class="pull-right"><small style="text-decoration:line-through;">&euro;{{number_format($product->price, 2, '.', ',')}}</small></h3>
-                                    <div class="sale"></div>
-                                    <h3 class="pull-right" style="margin-top: -16px;"><label style="color: red">&euro;{{number_format($product->price - $product->discount, 2, '.', ',')}}</label></h3>
-                                @endif
+                    <a href="{{ route('product.show', [str_replace(' ', '-', $product->name), $product->id]) }}">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+                            <div class="product">
+                                <div class="col-lg-12">
+                                    <div class="image">
+                                        <img src="{{$product->productimages->first() ? '/images/product/'.$product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%">
+                                    </div>
+                                    <div class="title">
+                                        <h3>{{$product->name}}</h3>
+                                    </div>
+                                    <div class="vooraad text-muted">
+                                        @if($product->property->sum('stock') > 1)
+                                            op vooraad
+                                        @else
+                                            Uitverkocht
+                                        @endif
+                                    </div>
+                                    <div class="prijs">
+                                        @if($product->discount != 0)
+                                            <div class="text-center">
+                                                <small style="text-decoration:line-through;">&euro; {{$product->price}}</small>
+                                                <b style=""> &euro; {{number_format($product->price - $product->discount, 2)}}</b>
+                                            </div>
+                                        @else
+                                            <div class="text-center">&euro; {{number_format($product->price, 2)}}</div>
+                                        @endif
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
-                            <div class="panel-footer">
-                                <div class="btn-group cart">
-                                    <a href="{{ route('product.show', [str_replace(' ', '-', $product->name), $product->id]) }}" class="btn btn-info btn-product">
-                                        bekijken
-                                    </a>
-                                </div>
-                                <div class="btn-group wishlist">
-                                    <form action="{{ route('cart.add') }}" method="post">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    </form>
-                                </div>
-                                <font class="pull-right">
-                                    @if($product->property()->sum('stock') == 0)
-                                        uitverkocht
-                                    @else
-                                        op voorraad
-                                    @endif
-                                </font>
                             </div>
                         </div>
-                    </div></a>-->
+                    </a>
 
                 @endif
             @endforeach

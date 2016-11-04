@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Details;
 use App\ProductImage;
 use App\Pages;
 use App\ProductProperty;
@@ -72,6 +73,27 @@ class ProductController extends Controller
         ->groupBy('product_id')
         ->get();
 
+//        dd($this->product->property->detail);
+//        dd(
+//
+//            $details = Product::whereHas('property', function ($q) use ($id) {} )->whereHas('detail', function ($q) use ($id) { } )
+////            ->whereHas('product', function ($q) use ($id) {
+////                $q->where('category_id', $id);
+////            })
+////            ->select('value', DB::raw('count(*) as total'))
+////            ->groupBy('value')
+//            ->get()
+//
+////            $details = Property::with(['detail' => function ($d){
+////               $d->groupBy('value');
+////               $d->count('value');
+////            }])
+////            ->whereHas('product', function ($q) use ($id) {
+////                $q->where('category_id', $id);
+////            })
+////            ->get()
+//        );
+
         $min_price = Property::first()->product->where('category_id', $id)->min('price');
         $max_price = Property::first()->product->where('category_id', $id)->max('price');
         $max = Input::has('max') ? Input::get('max') : $max_price;
@@ -88,8 +110,14 @@ class ProductController extends Controller
 
     public function show($title, $id)
     {
+        $product = $this->product->where('id', $id)->where('status', 'on')->first();
+
+        if(empty($product)){
+            abort(404);
+        }
+
         return view('product.show')
-            ->with('product', $this->product->where('id', $id)->where('status', 'on')->first());
+            ->with('product', $product);
     }
 
 }

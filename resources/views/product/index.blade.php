@@ -183,6 +183,9 @@
                         </li>
                     @endforeach
                 </ul>
+
+                {{--{{dd($property->detail())}}--}}
+
             </div>
 
         <div class="filter-sec">
@@ -228,7 +231,6 @@
     </div>
     <div class="col-lg-9">
 
-        {{--asd--}}
         @if(count($property) > 0)
             @if(count($property) == 1)
                 <p>Er is <b>één</b> product gevonden.</p>
@@ -237,59 +239,39 @@
             @endif
             <hr>
             @foreach($property as $product)
-            <a href="{{ route('product.show', [str_replace(' ', '-', $product->name), $product->id]) }}">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                <div class="product">
-                    <div class="col-lg-12">
-                        <div class="image">
-                            <center>
-                                <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%">
-                            </center>
-                        </div>
-                        <div class="title">
-                            <h3>{{$product->product->name}}</h3>
-                        </div>
-                        <div class="vooraad">2 op vooraad</div>
-                        <div class="prijs">
-                            @if($product->product->discount != 0)
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-5">
-                                    <span class="label label-danger"><small style="text-decoration:line-through;">&euro; {{$product->product->price}}</small></span>
-                                    </div>
-                                    <div class="col-md-5">
-                                    <b style="">&euro; {{$product->product->price - $product->product->discount}}</b>
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                @else
-                            <div class="col-md-3"></div>
-                            <div class="col-md-6">&euro; {{$product->product->price}}</div>
-                            <div class="col-md-3"></div>
-                                    
-                                @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </a>
-               <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%" height="220xp" class="">
-                            <p class="text">{{$product->product->name}}</p>
-                            <p class="text">
-                                @if($product->product->discount != 0)
-                                    <span class="label label-danger"><small style="text-decoration:line-through;">&euro; {{$product->product->price}}</small></span>
-                                    <b style="">&euro; {{$product->product->price - $product->product->discount}}</b>
-                                @else
-                                    &euro; {{$product->product->price}}
-                                @endif
-                            </p>
-                        </div>
-                        <div class="panel-footer">
-                            <a href="{{route('product.show', [str_replace(' ', '-', $product->product->name), $product->product->id])}}">bekijken</a>
+                <a href="{{ route('product.show', [str_replace(' ', '-', $product->product->name), $product->product->id]) }}">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                        <div class="product">
+                            <div class="col-lg-12">
+                                <div class="image">
+                                    <center>
+                                        <img src="{{$product->product->productimages->first() ? '/images/product/'.$product->product->productimages->first()->imagePath : 'http://www.inforegionordest.ro/assets/images/default.jpg' }}" width="100%">
+                                    </center>
+                                </div>
+                                <div class="title">
+                                    <h3>{{$product->product->name}}</h3>
+                                </div>
+                                <div class="vooraad text-muted">
+                                    @if($product->product->property->sum('stock') > 1)
+                                        op vooraad
+                                    @else
+                                        Uitverkocht
+                                    @endif
+                                </div>
+                                <div class="prijs">
+                                    @if($product->product->discount != 0)
+                                        <div class="text-center">
+                                            <small style="text-decoration:line-through;">&euro; {{$product->product->price}}</small>
+                                            <b style=""> &euro; {{number_format($product->product->price - $product->product->discount, 2)}}</b>
+                                        </div>
+                                    @else
+                                        <div class="text-center">&euro; {{number_format($product->product->price, 2)}}</div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>-->
+                </a>
             @endforeach
         @else
             <p>Er is <b>geen</b> product gevonden.</p>
