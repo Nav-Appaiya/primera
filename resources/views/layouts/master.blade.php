@@ -19,7 +19,8 @@
         <meta name="description" content="@yield('description')">
 
         @stack('meta')
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
@@ -218,22 +219,22 @@
                                     <div class="dropdown" style="height: 44px; line-height: 44px">
                                         <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <a href="{{ route('cart') }}">
+                                                <b style="font-family: 'Open Sans', sans-serif;">{{Cart::count()}}</b>
+
                                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                <!--<span style="margin-top: -30px; margin-left: 05px; position: absolute;" class="badge">
-                                                    € {{number_format(Cart::total(), 2)}}
-                                                </span>-->
+
                                             </a>
                                         </a>
                                     <div class="dropdown-menu dropdown-to-right">
                                         <center>
                                             <h3>Winkelwagen</h3>
                                         </center>
-                                            @if(empty(Cart::content()))
-                                                {{Cart::content()}}
-                                                <table class="table table-striped">
-                                                    <tbody>
+                                            @if(Cart::content())
+                                                {{--{{Cart::content()}}--}}
+                                                <table class="table table-striped" style="width: 300px;">
+                                                    <tbody >
                                                         <tr>
-                                                            <th>Afbeelding</th>
+                                                            {{--<th>Afbeelding</th>--}}
                                                             <th>Naam</th>
                                                             <th>Aantal</th>
                                                             <th>Prijs</th>
@@ -241,7 +242,7 @@
                                                         @foreach(Cart::content() as $product)
                                                             <tr>
                                                                 {{--{{$product}}--}}
-                                                                <td><img class="img-responsive" src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>
+                                                                {{--<td><img class="img-responsive" style="width: 100px !important; " src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>--}}
                                                                 <td>{{$product->options[0]->product->name}}
                                                                     {{--{{$product->item->detail ? '- '.$product->item->detail->value : ''}}--}}
                                                                 </td>

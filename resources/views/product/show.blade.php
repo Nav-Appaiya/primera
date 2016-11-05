@@ -104,37 +104,10 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                 <h3>Andere aanbiedingen</h3>
-        <br>
-        {{--@foreach ($related as $relate)--}}
-        {{--<div class="col-xs-12 col-sm-6 col-md-3 wrapper">--}}
-        {{--<div class="rlisting">--}}
-        {{--<div class="col-md-12 nopad">--}}
-        {{--<img src="{{ $relate->imageurl }}" class="img-responsive">--}}
-        {{--</div>--}}
-        {{--<div class="col-md-12 nopad">--}}
-        {{--<h5>{{ $relate->name }}</h5>--}}
-        {{--<p>{{ $relate->description }}</p>--}}
-        {{--<div class="rfooter">--}}
-        {{--<div class="row center-block">--}}
-        {{--<div class="btn-group cart btn-block">--}}
-        {{--<a href="/product/{{  $relate->id }}" class="btn btn-warning btn-product">--}}
-        {{--Meer weten <span class="fa fa-question-circle"></span>--}}
-        {{--</a>--}}
-        {{--</div>--}}
-        {{--<div class="btn-group wishlist btn-block">--}}
-        {{--<a href="{{ URL::route('cart.add', $relate) }}" class="btn btn-success btn-product">--}}
-        {{--In winkelwagen<span class="fa fa-shopping-cart"></span>--}}
-        {{--</a>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--@endforeach--}}
-    </div>
-    </div>
-    </div>
+                <br>
+            </div>
+        </div>
+
     </div>
 
     <div class="row">
