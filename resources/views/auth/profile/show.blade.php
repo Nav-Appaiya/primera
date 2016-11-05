@@ -60,10 +60,6 @@
       {!! Form::model($user) !!}
 
           <div class="form-group col-lg-12">
-              {!! Form::label('voorletters', 'voorletters') !!}
-              {!! Form::text('voorletters', null, ['class' => 'form-control', 'disabled']) !!}
-          </div>
-          <div class="form-group col-lg-12">
               {!! Form::label('voornaam', 'voornaam') !!}
               {!! Form::text('voornaam', null, ['class' => 'form-control', 'disabled']) !!}
           </div>

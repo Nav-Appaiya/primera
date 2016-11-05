@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('titel', 'Primera shop')
+@section('titel', 'Account wijzigen')
 @section('breadcrumbs', Breadcrumbs::render('user.dashboard.wijzigen'))
 
 @section('content')
@@ -15,8 +15,8 @@
                     <h1>PERSOONLIJKE GEGEVENS</h1>
 
                     <div class="form-group">
-                        {!! Form::label('voorletters', 'voorletters *') !!}
-                        {!! Form::text('voorletters', NULL, array('class' => 'form-control')) !!}
+                        {!! Form::label('voornaam', 'voornaam *') !!}
+                        {!! Form::text('voornaam', NULL, array('class' => 'form-control')) !!}
                     </div>
 
                     <div class="form-group">
@@ -24,10 +24,6 @@
                         {!! Form::text('achternaam', NULL, array('class' => 'form-control')) !!}
                     </div>
 
-                    <div class="form-group">
-                        {!! Form::label('voornaam', 'voornaam *') !!}
-                        {!! Form::text('voornaam', NULL, array('class' => 'form-control')) !!}
-                    </div>
                     <div class="form-group">
                         {!! Form::label('geslacht', 'geslacht') !!}<br>
                         {!! Form::label('geslacht', 'man') !!}

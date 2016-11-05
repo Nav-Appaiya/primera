@@ -49,35 +49,35 @@
                                                 <p>€{{number_format($item->price, 2)}}</p>
                                             </td>
                                             <td class="cart_quantity"><br>
-                                                <div class="cart_quantity_button">
+                                                <div class="cart_quantity_button" style="margin-top: -7px;">
                                                     @if($item->qty > 1)
                                                         <form method="POST" action="{{route('cart.decrease')}}" style="display: inline-block">
                                                             <input type="hidden" name="product_id" value="{{$item->id}}">
                                                             <input type="hidden" name="decrease" value="0">
                                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                            <button type="submit" class="btn btn-fefault add-to-cart">
+                                                            <button type="submit" class="btn btn-fefault btn-xs add-to-cart">
                                                                 <i class="fa fa-minus"></i>
                                                             </button>
                                                         </form>
                                                     @else
-                                                        <button type="submit" class="btn btn-fefault add-to-cart" disabled>
+                                                        <button type="submit" class="btn-fefault btn-xs add-to-cart" disabled>
                                                             <i class="fa fa-minus"></i>
                                                         </button>
                                                     @endif
 
-                                                    <input class="cart_quantity_input" type="text" name="quantity" value="{{$item->qty}}" autocomplete="off" size="2">
+                                                    <input class="cart_quantity_input form-control" style="width: 50px; display: inline-block" type="text" name="quantity" value="x{{$item->qty}}" autocomplete="off" size="2" disabled>
 
                                                     @if($product->find($item->id)->stock > $item->qty)
                                                         <form method="POST" action="{{route('cart.increase')}}" style="display: inline-block">
                                                             <input type="hidden" name="product_id" value="{{$item->id}}">
                                                             <input type="hidden" name="increment" value="1">
                                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                            <button type="submit" class="btn btn-fefault add-to-cart">
+                                                            <button type="submit" class="btn btn-fefault btn-xs add-to-cart">
                                                                 <i class="fa fa-plus"></i>
                                                             </button>
                                                         </form>
                                                     @else
-                                                        <button type="submit" class="btn btn-fefault add-to-cart" disabled>
+                                                        <button type="submit" class="btn btn-fefault btn-xs add-to-cart" disabled>
                                                             <i class="fa fa-plus"></i>
                                                         </button>
                                                     @endif
@@ -92,7 +92,7 @@
                                                     <input type="hidden" name="product_id" value="{{$item->id}}">
                                                     <input type="hidden" name="remove" value="true">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <button type="submit" class="btn btn-fefault add-to-cart">
+                                                    <button type="submit" class="btn btn-fefault  btn-xs add-to-cart">
                                                         <i class="fa fa-times"></i>
                                                     </button>
                                                 </form>
