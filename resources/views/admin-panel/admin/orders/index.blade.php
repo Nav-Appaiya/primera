@@ -39,8 +39,18 @@
         </div>
 
         <div class="col-lg-6" >
-            <div id="donut-status" class="col-lg-3" style="height: 200px !important; width:200px;"><label class="tex">Orders status</label></div>
-            <div id="donut-methode" class="col-lg-3" style="height: 200px !important; width:200px;"></div>
+            <label class="col-lg-4 text-center">
+                Orders status
+                <div id="donut-status" style="height: 223px !important; width:223px;"></div>
+            </label>
+            <label class="col-lg-4 text-center">
+                Betaal methodes
+                <div id="donut-methode" style="height: 223px !important; width:223px;"></div>
+            </label>
+            <label class="col-lg-4 text-center"> </label>
+
+
+
         </div>
 
     </div>

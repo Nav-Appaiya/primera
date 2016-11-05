@@ -203,7 +203,7 @@
                                         <li class="dropdown">
                                             <a href="{{ route('category.show', [str_replace(' ','-', $category->title), $category->id])  }}">{{ $category->title }}<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                @foreach($category->children as $child)
+                                                @foreach($category->children()->orderBy('title', 'ASC')->get() as $child)
                                                     <li class="">
                                                         <a href="{{ route('product.index', [str_replace(' ', '-', $category->title), str_replace(' ', '-', $child->title), $child->id ]) }}">{{$child->title}}</a>
                                                     </li>
