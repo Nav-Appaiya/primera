@@ -229,7 +229,7 @@
                                         <center>
                                             <h3>Winkelwagen</h3>
                                         </center>
-                                            @if(Cart::content())
+                                            @if(Cart::count() != 0)
                                                 {{--{{Cart::content()}}--}}
                                                 <table class="table table-striped" style="width: 300px;">
                                                     <tbody >

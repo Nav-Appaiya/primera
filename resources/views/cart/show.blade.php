@@ -39,8 +39,7 @@
                                         {{--{{$product->product->name}}--}}
 
                                     <td>x{{$product->amount}}</td>
-{{--                                    <td> €{{$product->property->product->price - $product->property->product->discount}}</td>--}}
-                                    <td> €{{number_format($product->amount * $product->property->product->price - $product->property->product->discount, 2)}}</td>
+                                    <td> €{{number_format($product->amount * $product->selling_price, 2)}}</td>
                                 </tr>
                             @endforeach
 
@@ -126,14 +125,26 @@
                             email: {{$order->email}}<br>
                             Naam: {{$order->name}} {{$order->achternaam}}
                         @endif
+                        <br>
+                        <br>
                     </div>
 
-                    <div class="col-lg-6">
-                        {{--TODO als verzendmethode ophalen is moet het afleveradres vervangen worden met afhaaladres--}}
-                        <h3>Afleveradres</h3>
-                        <p>{{$order->adres}} {{$order->huisnummer}}, <br>{{$order->postcode}} {{$order->woonplaats}}</p>
-                    </div>
-                    <div class="col-lg-6">
+                    @if($order->delivery_type == 'verzenden')
+                        <div class="col-lg-6">
+                            <h3>Afleveradres</h3>
+                            <p>{{$order->adres}} {{$order->huisnummer}}, <br>{{$order->postcode}} {{$order->woonplaats}}</p>
+                        </div>
+                    @else
+                        <div class="col-lg-6">
+                            <h3>Afhalen</h3>
+                            <p>
+                                Ouverture 228,<br>
+                                5629PX Eindhoven
+                            </p>
+                        </div>
+                    @endif
+
+                    <div class="col-lg-7">
                         <h3>Factuuradres</h3>
                         <p>{{$order->adres}} {{$order->huisnummer}}, <br>{{$order->postcode}} {{$order->woonplaats}}</p>
                     </div>

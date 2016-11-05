@@ -74,14 +74,14 @@
 
                                             <div class="form-group col-lg-6 {{$errors->has('voornaam') ? 'has-error' : ''}}">
                                                 {!! Form::label('voornaam', 'voornaam *') !!}
-                                                {!! Form::text('voornaam', NULL, ['class' => 'form-control']) !!}
+                                                {!! Form::text('voornaam', NULL, ['class' => 'form-control', 'placeholder' => 'Kees']) !!}
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('voornaam') }}</strong>
                                                 </span>
                                             </div>
                                             <div class="form-group col-lg-6 {{$errors->has('achternaam') ? 'has-error' : ''}}">
                                                 {!! Form::label('achternaam', 'achternaam *') !!}
-                                                {!! Form::text('achternaam', NULL, array('class' => 'form-control')) !!}
+                                                {!! Form::text('achternaam', NULL, array('class' => 'form-control' , 'placeholder' => 'Willums')) !!}
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('voornaam') }}</strong>
                                                 </span>
@@ -95,42 +95,42 @@
                                             </div>
                                             <div class="form-group col-lg-9 {{$errors->has('adres') ? 'has-error' : ''}}">
                                                 {!! Form::label('adres', 'adres *') !!}
-                                                {!! Form::text('adres', NULL, array('class' => 'form-control')) !!}
+                                                {!! Form::text('adres', NULL, array('class' => 'form-control', 'placeholder' => 'Ouverture ')) !!}
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('adres') }}</strong>
                                                 </span>
                                             </div>
                                             <div class="form-group col-lg-3 {{$errors->has('huisnummer') ? 'has-error' : ''}}">
                                                 {!! Form::label('huisnummer', 'huis nr. *') !!}
-                                                {!! Form::text('huisnummer', NULL, array('class' => 'form-control')) !!}
+                                                {!! Form::text('huisnummer', NULL, array('class' => 'form-control', 'placeholder' => '228')) !!}
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('huisnummer') }}</strong>
                                                 </span>
                                             </div>
                                             <div class="form-group col-lg-4 {{$errors->has('postcode') ? 'has-error' : ''}}">
                                                 {!! Form::label('postcode', 'postcode *') !!}
-                                                {!! Form::text('postcode', NULL, array('class' => 'form-control')) !!}
+                                                {!! Form::text('postcode', NULL, array('class' => 'form-control' , 'placeholder' => '5629PX ')) !!}
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('postcode') }}</strong>
                                                 </span>
                                             </div>
                                             <div class="form-group col-lg-8 {{$errors->has('woonplaats') ? 'has-error' : ''}}">
                                                 {!! Form::label('woonplaats', 'woonplaats *') !!}
-                                                {!! Form::text('woonplaats', NULL, array('class' => 'form-control')) !!}
+                                                {!! Form::text('woonplaats', NULL, array('class' => 'form-control' , 'placeholder' => 'Eindhoven')) !!}
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('woonplaats') }}</strong>
                                                 </span>
                                             </div>
                                             <div class="form-group col-lg-6 {{$errors->has('telMobiel') ? 'has-error' : ''}}">
                                                 {!! Form::label('telMobiel', 'telMobiel') !!}
-                                                {!! Form::text('telMobiel', NULL, array('class' => 'form-control')) !!}
+                                                {!! Form::text('telMobiel', NULL, array('class' => 'form-control' , 'placeholder' => '0612345678 ')) !!}
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('telMobiel') }}</strong>
                                                 </span>
                                             </div>
                                             <div class="form-group col-lg-6 {{$errors->has('telThuis') ? 'has-error' : ''}}">
                                                 {!! Form::label('telThuis', 'telThuis') !!}
-                                                {!! Form::text('telThuis', NULL, array('class' => 'form-control')) !!}
+                                                {!! Form::text('telThuis', NULL, array('class' => 'form-control', 'placeholder' => '04012345678 ')) !!}
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('telThuis') }}</strong>
                                                 </span>

@@ -8,7 +8,7 @@
     <div class="row">
 
         <div class="col-md-3">
-            {{--{{()}}aa--}}
+            <br>
             <div class="filter-sec">
                 <label>CATEGORIEËN</label>
 
@@ -165,7 +165,6 @@
                 </style>
 
                 <ul class="list">
-
                     @foreach($category->where('category_id', 0)->get() as $parent)
                         <li>
                             @if(count($parent->children) != 0)
@@ -230,6 +229,8 @@
 
     </div>
     <div class="col-lg-9">
+
+        <h1>{{$category->title}}</h1>
 
         @if(count($property) > 0)
             @if(count($property) == 1)

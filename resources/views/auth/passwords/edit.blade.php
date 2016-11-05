@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('titel', 'Primera shop')
+@section('titel', '')
 @section('breadcrumbs', Breadcrumbs::render('user.dashboard.password.wijzigen'))
 
 @section('content')

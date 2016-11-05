@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
    public function show($name, $id)
    {
-       $cate = $this->category->find($id)->first();
+       $cate = $this->category->find($id);
 
        return view('category.show')->with('category', $cate);
    }

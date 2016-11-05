@@ -1,15 +1,18 @@
 @extends('layouts.master')
 
+@section('titel', 'Registeren')
+@section('description', '')
+@section('breadcrumbs', Breadcrumbs::render('home'))
+
 @section('content')
-            <div class="row">
-                <div class="col-lg-12">
-                    <center>
-                        <h2>Registreren</h2>
-                    </center>
-                </div>
+    <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <center>
+                        <h1>Registreren</h1>
+                    </center>
+                    <br>
                     {!! Form::open(array('route' => 'register', 'method' => 'post', 'class' => 'form-horizontal' )) !!}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

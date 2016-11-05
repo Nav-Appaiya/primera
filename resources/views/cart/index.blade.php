@@ -9,9 +9,9 @@
         <div class="col-lg-12">
 
             @include('layouts.checkout-step')
-
+            <hr>
             <center>
-                <h2>&nbsp;</h2>
+                <h2>Winkelwagen</h2>
             </center>
         </div>
 
