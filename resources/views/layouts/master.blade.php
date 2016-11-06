@@ -67,21 +67,25 @@
                 <div class="container">
                     <div class="row">
                       <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10">
-                            <a href="{{route('homepage')}}"><img src="http://antoinecroes.nl/E-sigaret-logo.png" height="38px"></a>
+                            <a href="{{route('homepage')}}"><img src="http://antoinecroes.nl/E-sigaret-logo.png" height="50px" style="margin-top: 20px;"></a>
                         </div>
                         <div class="col-lg-4 col-md-4 hidden-xs hidden-sm">
 
-                            <div class="input-group" style="width: 100% !important; margin-top: -15px">
+                            <div class="input-group" style="width: 100%; !important; padding-top: 25px;">
                                 {{--<input  style="width: 100%; margin-top: 28px" type="text" class="form-control" placeholder="">--}}
 
                                 <style>
                                     .twitter-typeahead{
                                         width: 100%;
-                                        margin-bottom: -30px;
+                                        /*margin-bottom: -30px;*/
                                     }
 
                                     .tt-dataset-search-input{
                                         margin-top: -20px;
+                                        width: 350px;
+                                    }
+                                    .-head-inf{
+                                        line-height: 0px !important;
                                     }
                                 </style>
 
@@ -278,7 +282,7 @@
                         '<div class="list-group search-results-dropdown">'
                     ],
                     suggestion: function (data) {
-                        return '<a href="/' + data.name.replace(/ /g,"-") + '/p-' + data.id + '" class="list-group-item" style="height: 100px;">' + data.name + '<br>' + data.price + '</a>'
+                        return '<a href="/' + data.name.replace(/ /g,"-") + '/p-' + data.id + '" class="list-group-item" style="height: 50px; line-height: 25px">' + data.name + '<label class="pull-right">€ ' + data.price + '</label></a>'
                     }
                 }
             });
