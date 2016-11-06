@@ -119,6 +119,5 @@ class ProductController extends Controller
         return view('product.show')
             ->with('product', $product);
     }
-
 }
 

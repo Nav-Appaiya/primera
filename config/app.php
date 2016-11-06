@@ -162,6 +162,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
     ],
 
     /*
@@ -216,6 +217,8 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Cart'    => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Analytics' => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
+
     ],
 
 ];

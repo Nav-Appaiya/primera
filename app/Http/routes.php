@@ -25,6 +25,9 @@ Route::get('/sitemap', ['as' => 'sitemap', 'uses' => 'HomeController@sitemap']);
 Route::get('/retouren', ['as' => 'retour', 'uses' => 'HomeController@retour']);
 Route::get('/faq', ['as' => 'faq', 'uses' => 'HomeController@faq']);
 
+//searching products
+Route::get('/find', 'SearchController@find');
+
 //shopping cart routes
 Route::get('/winkelwagen', ['as' => 'cart', 'uses' => 'CartController@index']);
 Route::post('/winkelwagen/toevoegen', ['as' => 'cart.add', 'uses' => 'CartController@add']);

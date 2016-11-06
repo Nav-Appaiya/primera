@@ -4,13 +4,30 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Nicolaslopezj\Searchable\SearchableTrait;
+
+
 class Product extends Model
 {
+    use SearchableTrait;
+
     protected $table = 'products';
 
     protected $guarded = ['id'];
 
     protected $fillable = [
+    ];
+
+    protected $searchable = [
+        'columns' => [
+            'products.id' => 4,
+            'products.name' => 3,
+            'products.price' => 2,
+            'products.discount' => 1,
+        ],
+//        'joins' => [
+//            'profiles' => ['users.id','profiles.user_id'],
+//        ],
     ];
 
     public function seotags()

@@ -63,7 +63,7 @@ class HomeController extends Controller
 
     public function sitemap()
     {
-        return view('main.cookie');
+        return view('main.sitemap');
     }
 
     public function retour()
