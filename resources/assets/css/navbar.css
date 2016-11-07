@@ -404,4 +404,28 @@ h2 {
     margin-top: 0px;
 }
 
+/* Gallery */
+.gallery .featured img {
+  width: 100%;
+}
+.gallery .thumbnails {
+  padding-top: 3%;
+}
+.gallery .thumbnails img:nth-child(2) {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.gallery .thumbnails img {
+  width: 31%;
+  cursor: pointer;
+  height: 85px;
+}
+.gallery .selected-img {
+  border: 1px solid black;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+
 input:active,input:focus,textarea:active,textarea:hover,textarea:focus,button:focus,button:active,button:hover,select:hover,select:focus,select:active{outline:0px!important;}
