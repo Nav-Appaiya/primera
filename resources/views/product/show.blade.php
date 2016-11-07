@@ -36,7 +36,7 @@
                             </div>
                         @endforeach
                     @else
-                        <img width="100%" src="/images/dummy.jpg">
+                        <img width="100%" src="/images/dummy.jpsg">
                     @endif
                 </div>
                 <div class="panel-footer">
