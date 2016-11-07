@@ -261,8 +261,6 @@
                 queryTokenizer: Bloodhound.tokenizers.whitespace
             });
 
-            console.log(engine);
-
             $(".search-input").typeahead({
                 hint: true,
                 highlight: true,

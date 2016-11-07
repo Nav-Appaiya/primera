@@ -8,7 +8,10 @@
     {{--<!-- for Facebook -->--}}
     <meta property="og:title" content="{{$product->name}}" />
     <meta property="og:type" content="company" />
-    <meta property="og:image" content="{{route('homepage')}}/images/product/{{$product->productimages()->first()->imagePath}}" />
+    @if($product->productimages()->exists())
+        <meta property="og:image" content="{{route('homepage')}}/images/product/{{$product->productimages()->first()->imagePath}}" />
+    @endif
+
     <meta property="og:url" content="{{Request::url()}}" />
     <meta property="og:description" content="{{$product->description}}" />
 
@@ -20,46 +23,77 @@
     <meta name="twitter:title" content="{{$product->name}}" />
     <meta name="twitter:description" content="{{$product->description}}" />
     <meta name="twitter:url" content="{{Request::url()}}" />
-    <meta name="twitter:image" content="{{route('homepage')}}/images/product/{{$product->productimages()->first()->imagePath}}" />
+    @if($product->productimages()->exists())
+        <meta name="twitter:image" content="{{route('homepage')}}/images/product/{{$product->productimages()->first()->imagePath}}" />
+    @endif
 @endpush
 
 @section('content')
     <div class="row">
         <div class="col-md-6">
+
             <div class="panel panel-default">
-            <div class="gallery">
-                <div class="panel-body">
-                     @if($product->productimages()->exists())
-                        @foreach($product->productimages()->get() as $image) 
-                            <div class="featured">
-                                <img src="/images/product/{{$image->imagePath}}">
-                            </div>
-                        @endforeach
-                    @else
-                        <img width="100%" src="/images/dummy.jpsg">
-                    @endif
-                </div>
-                <div class="panel-footer">
-                    <div class="thumbnails">
-                        <img src="/images/product/{{$image->imagePath}}" class="selected-img">
-                        <img src="http://placehold.it/350x150&text=Slide+Two">
-                        <img src="http://placehold.it/350x150&text=Slide+Three">
+                <div class="gallery">
+                    <div class="panel-body">
+
+                        <div class="slider-for" style="width: 100%; ">
+                            @if($product->productimages()->exists())
+                                @foreach($product->productimages()->get() as $image)
+                                    <div class="featured">
+                                        <img src="/images/product/{{$image->imagePath}}" class="img-responsive">
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="featured">
+                                    <img src="http://placehold.it/350x150&text=Slide+Two" class="img-responsive">
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="slider-nav">
+                            @if($product->productimages()->exists())
+                                @foreach($product->productimages()->get() as $image)
+                                    <div class="featured">
+                                        <img src="/images/product/{{$image->imagePath}}" class="img-responsive">
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="featured">
+                                    <img src="http://placehold.it/350x150&text=Slide+Two" class="img-responsive">
+                                </div>
+                            @endif
+                        </div>
+                         {{--@if($product->productimages()->exists())--}}
+                            {{--@foreach($product->productimages()->get() as $image) --}}
+                                {{--<div class="featured">--}}
+                                    {{--<img src="/images/product/{{$image->imagePath}}">--}}
+                                {{--</div>--}}
+                            {{--@endforeach--}}
+                        {{--@else--}}
+                            {{--<img width="100%" src="/images/dummy.jpsg">--}}
+                        {{--@endif--}}
                     </div>
-                </div>
+                    {{--<div class="panel-footer">--}}
+                        {{--<div class="thumbnails">--}}
+                            {{--<img src="/images/product/{{$image->imagePath}}" class="selected-img">--}}
+                            {{--<img src="http://placehold.it/350x150&text=Slide+Two">--}}
+                            {{--<img src="http://placehold.it/350x150&text=Slide+Three">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
             </div>
-<div class="panel panel-default">
+            <div class="panel panel-default">
                 <div class="panel-body">
 
-            <h3>reviews</h3>
-            @foreach($product->review as $review)
-                <div class="well">
-                    <span>Naam: {{$review->user->voornaam}}</span><span class="pull-right">Rating: {{$review->rating}}</span><br><br>
-                    <p>Beschrijving: <br>{{$review->description}}</p>
-                </div>
+                <h3>reviews</h3>
+                @foreach($product->review as $review)
+                    <div class="well">
+                        <span>Naam: {{$review->user->voornaam}}</span><span class="pull-right">Rating: {{$review->rating}}</span><br><br>
+                        <p>Beschrijving: <br>{{$review->description}}</p>
+                    </div>
 
-            @endforeach
-            </div>
+                @endforeach
+                </div>
             </div>
         </div>
 
@@ -265,14 +299,46 @@
 
 </style>
 <script type="text/javascript">
-    $('.thumbnails img').click(function() {
-  // if not already selected then
-  if(!$(this).hasClass('selected-img')) {
-    $('.thumbnails img').removeClass('selected-img');
-    $(this).addClass('selected-img');
-    $(".featured img").fadeOut(0);
-    $('.featured img').attr('src', $(this).attr('src')).fadeIn(1000);
-  }
-});
+
+//    $('.thumbnails img').click(function() {
+//  // if not already selected then
+//  if(!$(this).hasClass('selected-img')) {
+//    $('.thumbnails img').removeClass('selected-img');
+//    $(this).addClass('selected-img');
+//    $(".featured img").fadeOut(0);
+//    $('.featured img').attr('src', $(this).attr('src')).fadeIn(1000);
+//  }
+//});
 </script>
 @endsection
+
+
+
+@push('script')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+        <script>
+            $(document).ready(function(){
+
+                $('.slider-for').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    fade: true,
+                    asNavFor: '.slider-nav'
+                });
+                $('.slider-nav').slick({
+                    slidesToShow: 6,
+                    slidesToScroll: 2,
+                    asNavFor: '.slider-for',
+                    dots: true,
+                    centerMode: true,
+                    focusOnSelect: true
+                });
+            });
+        </script>
+@endpush
+
+@push('css')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.css"/>
+@endpush
