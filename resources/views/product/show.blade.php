@@ -27,16 +27,39 @@
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
+            <div class="gallery">
                 <div class="panel-body">
                      @if($product->productimages()->exists())
                         @foreach($product->productimages()->get() as $image) 
-                            <img width="100%" alt="{{$product->name}}" src="/images/product/{{$image->imagePath}}">
+                            <div class="featured">
+                                <img src="/images/product/{{$image->imagePath}}">
+                            </div>
                         @endforeach
                     @else
                         <img width="100%" src="/images/dummy.jpg">
                     @endif
                 </div>
-                <div class="panel-footer"></div>
+                <div class="panel-footer">
+                    <div class="thumbnails">
+                        <img src="/images/product/{{$image->imagePath}}" class="selected-img">
+                        <img src="http://placehold.it/350x150&text=Slide+Two">
+                        <img src="http://placehold.it/350x150&text=Slide+Three">
+                    </div>
+                </div>
+                </div>
+            </div>
+<div class="panel panel-default">
+                <div class="panel-body">
+
+            <h3>reviews</h3>
+            @foreach($product->review as $review)
+                <div class="well">
+                    <span>Naam: {{$review->user->voornaam}}</span><span class="pull-right">Rating: {{$review->rating}}</span><br><br>
+                    <p>Beschrijving: <br>{{$review->description}}</p>
+                </div>
+
+            @endforeach
+            </div>
             </div>
         </div>
 
@@ -110,23 +133,6 @@
 
     </div>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-
-            <h3>reviews</h3>
-            @foreach($product->review as $review)
-                <div class="well">
-                    <span>Naam: {{$review->user->voornaam}}</span><span class="pull-right">Rating: {{$review->rating}}</span><br><br>
-                    <p>Beschrijving: <br>{{$review->description}}</p>
-                </div>
-
-            @endforeach
-            </div>
-            </div>
-        </div>
-    </div>
 
 
     {{--TODO antoine dit moet in css--}}
@@ -233,6 +239,40 @@
         .artst-pic:hover img.play-icon, .artst-pic:hover span a {
             display: block;
         }
+</style>
+<style type="text/css">
+    .gallery {
+}
+.gallery .featured img {
+  width: 100%;
+}
+.gallery .thumbnails {
+  padding-top: 3%;
+}
+.gallery .thumbnails img:nth-child(2) {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.gallery .thumbnails img {
+  width: 31%;
+  cursor: pointer;
+  height: 85px;
+}
+.gallery .selected-img {
+  border: 3px solid red;
+  background-color: rgba(0, 0, 0, 0.7);
+}
 
-    </style>
+</style>
+<script type="text/javascript">
+    $('.thumbnails img').click(function() {
+  // if not already selected then
+  if(!$(this).hasClass('selected-img')) {
+    $('.thumbnails img').removeClass('selected-img');
+    $(this).addClass('selected-img');
+    $(".featured img").fadeOut(0);
+    $('.featured img').attr('src', $(this).attr('src')).fadeIn(1000);
+  }
+});
+</script>
 @endsection

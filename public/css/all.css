@@ -199,6 +199,7 @@ section.bread-crumb .breadcrumb {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    height: 40px;
 }
 
 .product .vooraad {

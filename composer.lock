@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f7e7a64ff2542eab56006c5680725601",
+    "hash": "2f4b4298b3b79e7188196b47cc081b45",
     "content-hash": "056233956ca4214f246d66ae0df7a7b5",
     "packages": [
         {
@@ -851,12 +851,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "b71f878364677bfcf45f5c229819f0b9940e024a"
+                "reference": "17a8821c20885c4d736ba77d02446c2632230eb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/b71f878364677bfcf45f5c229819f0b9940e024a",
-                "reference": "b71f878364677bfcf45f5c229819f0b9940e024a",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/17a8821c20885c4d736ba77d02446c2632230eb5",
+                "reference": "17a8821c20885c4d736ba77d02446c2632230eb5",
                 "shasum": ""
             },
             "type": "library",
@@ -896,7 +896,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2016-10-13 08:29:11"
+            "time": "2016-10-31 17:55:53"
         },
         {
             "name": "laravel/framework",
@@ -1030,16 +1030,16 @@
         },
         {
             "name": "laravel/socialite",
-            "version": "v2.0.19",
+            "version": "v2.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/socialite.git",
-                "reference": "4efbdb1e9e45ee0d21d1bc1ad35370c0eee5adb2"
+                "reference": "aca8de9a93a28a119714e289c8bc599bd81aa88d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/socialite/zipball/4efbdb1e9e45ee0d21d1bc1ad35370c0eee5adb2",
-                "reference": "4efbdb1e9e45ee0d21d1bc1ad35370c0eee5adb2",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/aca8de9a93a28a119714e289c8bc599bd81aa88d",
+                "reference": "aca8de9a93a28a119714e289c8bc599bd81aa88d",
                 "shasum": ""
             },
             "require": {
@@ -1080,7 +1080,7 @@
                 "laravel",
                 "oauth"
             ],
-            "time": "2016-10-24 13:06:51"
+            "time": "2016-11-01 18:49:10"
         },
         {
             "name": "laravelcollective/html",
@@ -1423,16 +1423,16 @@
         },
         {
             "name": "mollie/mollie-api-php",
-            "version": "1.7.1",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mollie/mollie-api-php.git",
-                "reference": "92004ffc38859c57ddcb93a933c493a4edaa25a6"
+                "reference": "faf5c2b014c6f47f01dc9b935ee62489a3fa8e32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mollie/mollie-api-php/zipball/92004ffc38859c57ddcb93a933c493a4edaa25a6",
-                "reference": "92004ffc38859c57ddcb93a933c493a4edaa25a6",
+                "url": "https://api.github.com/repos/mollie/mollie-api-php/zipball/faf5c2b014c6f47f01dc9b935ee62489a3fa8e32",
+                "reference": "faf5c2b014c6f47f01dc9b935ee62489a3fa8e32",
                 "shasum": ""
             },
             "require": {
@@ -1493,7 +1493,7 @@
                 "sofortbanking",
                 "subscriptions"
             ],
-            "time": "2016-10-05 12:28:16"
+            "time": "2016-10-31 12:25:51"
         },
         {
             "name": "monolog/monolog",
