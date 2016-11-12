@@ -103,12 +103,19 @@
         </div>
 
         <div class="-head-nav">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div style="padding-left: 0px; padding-right: 0px;" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav">
-                                <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                        <nav class="navbar navbar-default navbar-static-top">
+                              <div class="container">
+                                <div class="navbar-header">
+                                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                  </button>
+                                </div>
+                                <div id="navbar" class="navbar-collapse collapse">
+                                  <ul class="nav navbar-nav">
+                                    <li><a href="{{route('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
 
                                 @foreach($main_categories->where('category_id', 0) as $category)
                                     @if(count($category->children) != 0)
@@ -124,57 +131,11 @@
                                         </li>
                                     @endif
                                 @endforeach
-                            </ul>
-                            <div class="cart-button pull-right">
-                                <div class="">
-                                    <div class="dropdown" style="height: 44px; line-height: 44px">
-                                        <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <a href="{{ route('cart') }}">
-                                                <b style="font-family: 'Open Sans', sans-serif;">{{Cart::count()}}</b>
-
-                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-                                            </a>
-                                        </a>
-                                    <div class="dropdown-menu dropdown-to-right">
-                                        <center>
-                                            <h3>Winkelwagen</h3>
-                                        </center>
-                                            @if(Cart::count() != 0)
-                                                <table class="table table-striped" style="width: 300px;">
-                                                    <tbody >
-                                                        <tr>
-                                                            {{--<th>Afbeelding</th>--}}
-                                                            <th>Naam</th>
-                                                            <th>Aantal</th>
-                                                            <th>Prijs</th>
-                                                        </tr>
-                                                        @foreach(Cart::content() as $product)
-                                                            <tr>
-                                                                {{--<td><img class="img-responsive" style="width: 100px !important; " src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>--}}
-                                                                <td>{{$product->options[0]->product->name}}
-                                                                    {{--{{$product->item->detail ? '- '.$product->item->detail->value : ''}}--}}
-                                                                </td>
-                                                                <td>{{$product->qty}} x</td>
-                                                                <td>€ {{number_format($product->price, 2)}}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            @else
-                                                <div class="col-m-12" style="width: 240px">
-                                                    <center>uw winkelwagen is leeg</center>
-                                                </div>
-                                            @endif
-
-                                        <center>
-                                            <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
-                                        </center>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                  </ul>
+                                </div><!--/.nav-collapse -->
+                              </div>
+                            </nav>
+                        
                     </div>
                 </div>
             </div>

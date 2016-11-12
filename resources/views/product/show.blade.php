@@ -84,7 +84,26 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-
+                <!-- accordion toepassen waar je wilt! -->
+                    <button type="button" class="-acc-total-w " data-toggle="collapse" data-target="#col">
+                        <div class="pull-right">+</div>
+                        <div class="pull-left">Uitklappen</div>
+                    </button>
+                    <div id="col" class="collapse -acc-total-p">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                    <button type="button" class="-acc-total-w " data-toggle="collapse" data-target="#col2">
+                        <div class="pull-right">+</div>
+                        <div class="pull-left">Uitklappen</div>
+                    </button>
+                    <div id="col2" class="collapse -acc-total-p">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                    <!-- einde accordion -->
                 <h3>reviews</h3>
                 @foreach($product->review as $review)
                     <div class="well">
@@ -170,146 +189,7 @@
 
 
     {{--TODO antoine dit moet in css--}}
-    <style>
-        .art-title {
-            color: #231f20;
-            font-size: 20px;
-            font-weight: 700;
-        }
 
-        .artist-data {
-            width: 100%;
-            padding-bottom: 25px;
-        }
-
-        .artst-pic {
-            width: 33%;
-            position: relative;
-        }
-
-        .artst-pic span a {
-            color: #fff;
-            font-size: 16px;
-            display: none;
-        }
-
-        .artst-pic span.artst-like {
-            position: absolute;
-            left: 11%;
-            bottom: 10px;
-        }
-
-        .artst-pic span.artst-share {
-            position: absolute;
-            left: 46%;
-            bottom: 10px;
-        }
-
-        .artst-pic span.artst-plus {
-            position: absolute;
-            right: 9%;
-            bottom: 10px;
-        }
-
-        .artst-prfle {
-            width: 63%;
-        }
-
-        .artst-prfle span.artst-sub {
-            font-size: 15px;
-            color: #bbb;
-            float: left;
-            width: 100%;
-            font-weight: normal;
-            padding: 5px 0;
-        }
-
-        .artst-prfle span.artst-sub span.byname {
-            font-weight: 700;
-            color: #aaa;
-        }
-
-        .artst-prfle span.artst-sub span.daysago {
-            float: right;
-            font-size: 12px;
-        }
-
-        .counter-tab {
-            float: left;
-            width: 100%;
-            padding-top: 45px;
-        }
-
-        .counter-tab div {
-            float: left;
-            width: 33%;
-            color: #aaa;
-            font-size: 12px;
-        }
-
-        .bot-links {
-            float: left;
-            width: 100%;
-            padding-top: 10px;
-        }
-
-        .bot-links a {
-            display: inline-block;
-            padding: 5px;
-            background: #ccc;
-            font-size: 12px;
-            margin-bottom: 5px;
-            color: #9c9c9c;
-            text-decoration: none;
-        }
-
-        span.play-icon {
-            position: absolute;
-            left: 31%;
-            top: 32%;
-            display: none;
-        }
-
-        .artst-pic:hover img.play-icon, .artst-pic:hover span a {
-            display: block;
-        }
-</style>
-<style type="text/css">
-    .gallery {
-}
-.gallery .featured img {
-  width: 100%;
-}
-.gallery .thumbnails {
-  padding-top: 3%;
-}
-.gallery .thumbnails img:nth-child(2) {
-  margin-left: 2%;
-  margin-right: 2%;
-}
-.gallery .thumbnails img {
-  width: 31%;
-  cursor: pointer;
-  height: 85px;
-}
-.gallery .selected-img {
-  border: 3px solid red;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-</style>
-<script type="text/javascript">
-
-//    $('.thumbnails img').click(function() {
-//  // if not already selected then
-//  if(!$(this).hasClass('selected-img')) {
-//    $('.thumbnails img').removeClass('selected-img');
-//    $(this).addClass('selected-img');
-//    $(".featured img").fadeOut(0);
-//    $('.featured img').attr('src', $(this).attr('src')).fadeIn(1000);
-//  }
-//});
-</script>
 @endsection
 
 
