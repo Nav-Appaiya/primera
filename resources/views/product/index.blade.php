@@ -270,6 +270,9 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="information">
+                                <span class="product-hover">Bekijken</span>
+                            </div>
                         </div>
                     </div>
                 </a>
