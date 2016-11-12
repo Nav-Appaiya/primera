@@ -132,7 +132,57 @@
                                     @endif
                                 @endforeach
                                   </ul>
+                            <div class="cart-button pull-right">
+                                <div class="">
+                                    <div class="dropdown" style="height: 44px; line-height: 44px">
+                                        <a href="{{ route('cart') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <a href="{{ route('cart') }}">
+                                                <b style="font-family: 'Open Sans', sans-serif;">{{Cart::count()}}</b>
+
+                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+                                            </a>
+                                        </a>
+                                    <div class="dropdown-menu dropdown-to-right">
+                                        <center>
+                                            <h3>Winkelwagen</h3>
+                                        </center>
+                                            @if(Cart::count() != 0)
+                                                <table class="table table-striped" style="width: 300px;">
+                                                    <tbody >
+                                                        <tr>
+                                                            {{--<th>Afbeelding</th>--}}
+                                                            <th>Naam</th>
+                                                            <th>Aantal</th>
+                                                            <th>Prijs</th>
+                                                        </tr>
+                                                        @foreach(Cart::content() as $product)
+                                                            <tr>
+                                                                {{--<td><img class="img-responsive" style="width: 100px !important; " src="/images/product/{{$product->options[0]->product->productimages->first()->imagePath}}"></td>--}}
+                                                                <td>{{$product->options[0]->product->name}}
+                                                                    {{--{{$product->item->detail ? '- '.$product->item->detail->value : ''}}--}}
+                                                                </td>
+                                                                <td>{{$product->qty}} x</td>
+                                                                <td>€ {{number_format($product->price, 2)}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @else
+                                                <div class="col-m-12" style="width: 240px">
+                                                    <center>uw winkelwagen is leeg</center>
+                                                </div>
+                                            @endif
+
+                                        <center>
+                                            <a href="{{route('cart')}}" style="margin: 0;" type="button" class="btn btn-default">Bekijken</a>
+                                        </center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                                 </div><!--/.nav-collapse -->
+
                               </div>
                             </nav>
                         
@@ -271,7 +321,7 @@
                 $('.hidde').stop().slideToggle();
                 up = !up;
                 console.log(up);
-            } else if(newscroll < mypos && up) {
+            } else if(newscroll < up) {
                 $('.hidde').stop().slideToggle();
                 up = !up;
             }
@@ -283,35 +333,6 @@
     {{--<script src="{{ URL::asset('assets/js/slick.js') }}"></script>--}}
     @stack('script')
     <script src="{{ URL::asset('assets/js/script.js') }}"></script>
-
-    <style type="text/css">
-
-        .back-to-top {
-            background: none;
-            margin: 0;
-            position: fixed;
-            bottom: 50px;
-            right: 50px;
-            width: 80px;
-            height: 80px;
-            z-index: 100;
-            display: none;
-            text-decoration: none;
-            color: #ffffff;
-            /*background-color: #333;*/
-            /*opacity: 0.2;*/
-        }
-        .back-to-top i {
-            font-size: 80px;
-            color: #333;
-            opacity: 0.1;
-        }
-        .back-to-top i:hover {
-            color: #333;
-            opacity: 0.3;
-        }
-
-    </style>
 
     <script type="text/javascript">
         jQuery(document).ready(function() {
