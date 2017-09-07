@@ -1,5 +1,5 @@
 # Primera webshop (esigareteindhoven.com)
-===
+
 A Laravel webshop for e-sigarets, with backend and fully working checkout process. Build with Laravel 5.2 and has a nice bootstrapped backend interface for managing/updating/creating products and content. 
 
 - Mollie API client wrapper for Laravel as payment provider, and can be configured.
